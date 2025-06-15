@@ -7,7 +7,7 @@ import {
   streamText,
   UIMessage,
 } from 'ai';
-import { kcAgent } from '../agents/kc-agent';
+import { baseAgent } from '../agents/base';
 import { generateUUID, getTrailingMessageId } from '@/lib/utils';
 import { saveMessages } from '../db/queries';
 import { isProductionEnvironment } from '../constants';
@@ -28,7 +28,7 @@ export function createToolCallingStream(modelConfig: BaseStreamConfig) {
       const { messages, model, userId, chatId, message } = modelConfig;
 
       // Select the agent based on the model
-      const agentConfig = kcAgent({ messages, model, dataStream });
+      const agentConfig = baseAgent({ messages, model, dataStream });
 
       const result = streamText({
         ...agentConfig,

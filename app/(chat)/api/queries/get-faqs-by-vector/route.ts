@@ -1,7 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { getEmbedding } from '@/lib/utils/embedding'; // 이 함수도 Edge 호환되어야 함
-import { KcCertification } from '@/lib/db/schema';
 
 export const runtime = 'edge';
 
@@ -54,7 +53,7 @@ export async function GET(request: NextRequest) {
         { status: 500 }
       );
     }
-    return NextResponse.json(data as KcCertification[]);
+    return NextResponse.json(data as any[]);
   } catch (error: any) {
     console.error('Error in /api/queries/get_faqs_by_vector:', error);
     return NextResponse.json(

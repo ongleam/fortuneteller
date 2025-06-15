@@ -1,6 +1,6 @@
 import { streamText, Message, generateText } from 'ai';
 import { NextResponse } from 'next/server';
-import { kakaoKcAgent } from '@/lib/agents/kakao-kc-agent';
+import { baseAgent } from '@/lib/agents/base';
 import { nanoid } from 'nanoid';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -113,7 +113,7 @@ export async function POST(request: Request) {
     ];
 
     // kcAgent 설정
-    const agentConfig = kakaoKcAgent({
+    const agentConfig = baseAgent({
       messages,
       model,
     });

@@ -4,7 +4,11 @@ export const siteConfig = {
   name: 'NomadLink Korea | Your Guide to Digital Nomad Life in Korea',
   description:
     'Discover everything you need for your digital nomad journey in South Korea: visa information (F-1-D), cost of living, co-working spaces, community, and travel tips. Your essential resource for working remotely in Korea.',
-  url: 'https://nomadlink.co.kr',
+  urls: {
+    production: 'https://nomadlink.co.kr',
+    development: 'https://dev.nomadlink.co.kr',
+    local: 'http://localhost:3000',
+  },
   keywords: [
     'Digital Nomad Korea',
     'Korea Remote Work',
@@ -38,10 +42,10 @@ export const siteConfig = {
 const siteOpenGraph = {
   title: siteConfig.name,
   description: siteConfig.description,
-  url: siteConfig.url,
+  url: siteConfig.urls.production,
   images: [
     {
-      url: 'https://nomadlink.co.kr/images/nomadlink-og-image.png',
+      url: `${siteConfig.urls.production}/images/nomadlink-og-image.png`,
     },
   ],
   locale: 'en_US',
@@ -49,7 +53,7 @@ const siteOpenGraph = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
+  metadataBase: new URL(siteConfig.urls.production),
   title: {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,

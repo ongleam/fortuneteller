@@ -1,25 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { inngest } from '@/lib/inngest/client';
 import { getKSTDateTime } from '@/lib/utils';
 import { KakaoRequestBody, KakaoSkillResponse } from '@/lib/types/kakao';
 import axios from 'axios';
+import { siteConfig } from '@/config/site';
 
 // Vercel 환경에 따른 콜백 URL 설정
 const getCallbackUrl = () => {
   // 로컬 개발 환경
   if (process.env.NODE_ENV === 'development') {
-    return 'http://localhost:3000/api/callback';
+    return `${siteConfig.urls.local}/api/callback`;
   }
 
   // Vercel 환경
   switch (process.env.VERCEL_ENV) {
     case 'production':
-      return 'https://chat.factoreal.site/api/callback'; // 실제 프로덕션 도메인
+      return `${siteConfig.urls.production}/api/callback`; // 실제 프로덕션 도메인
     case 'preview':
-      return 'https://dev.chat.factoreal.site/api/callback'; // 프리뷰/개발 도메인
+      return `${siteConfig.urls.development}/api/callback`; // 프리뷰/개발 도메인
     default:
       // VERCEL_ENV가 없는 경우 (로컬 환경 등)
-      return 'http://localhost:3000/api/callback';
+      return `${siteConfig.urls.local}/api/callback`;
   }
 };
 

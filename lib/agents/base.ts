@@ -17,7 +17,7 @@ export function baseAgent({
     system: systemPrompts.BASE_AGENT,
     messages,
     tools: {
-      searchFaq: searchFaq({ dataStream }),
+      // searchFaq: searchFaq({ dataStream }),
     },
   };
 }

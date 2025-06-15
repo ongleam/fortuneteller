@@ -6,7 +6,7 @@ import {
   Message,
   UIMessage,
 } from 'ai';
-import { kakaoKcAgent } from '@/lib/agents/kakao-kc-agent';
+import { baseAgent } from '@/lib/agents/base';
 import {
   getKSTDateTime,
   measureExecutionTime,
@@ -21,9 +21,9 @@ import { preprocessXmlText } from '@/lib/utils/textPreprocess';
 import { getMessagesByChatId, getOrCreateKakaoChatByUserId, saveMessages } from '@/lib/db/queries';
 import { getOrCreateProfileByUserKakaoId } from '@/lib/db/queries';
 import { getCachedData, setCachedData } from '@/lib/actions/redis';
-import { createCarouselItemsFromLlmResponse } from '@/lib/inngest/carousel';
+import { createCarouselItemsFromLlmResponse } from '@/lib/utils/carousel';
 import { notifySlackOnError } from '@/lib/utils/errorHandler';
-import * as Sentry from '@sentry/nextjs';
+// import * as Sentry from '@sentry/nextjs';
 import axios from 'axios';
 
 // 상수 정의
@@ -64,7 +64,7 @@ async function generateLLMResponse(messages: Message[]): Promise<GenerateTextRes
   console.log(`[${getKSTDateTime()}] [API] LLM 처리 시작`);
 
   // 에이전트 설정
-  const agentConfig = kakaoKcAgent({ model: 'kakao-chat-model', messages });
+  const agentConfig = baseAgent({ model: 'kakao-chat-model', messages });
   try {
     // 타임아웃과 함께 텍스트 생성
     const result = await measureExecutionTime('Promise.race', async () => {
@@ -332,7 +332,7 @@ export async function POST(req: Request) {
     }
 
     await notifySlackOnError(error, 'app/(chat)/api/callback/route.ts:POST');
-    Sentry.captureException(error);
+    // Sentry.captureException(error);
 
     return Response.json({ success: false }, { status: 500 });
   }

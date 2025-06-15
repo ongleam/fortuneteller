@@ -18,8 +18,7 @@
     "test:playwright": "export PLAYWRIGHT=True && pnpm exec playwright test",
     "test:promptfoo": "npx tsx ./tests/promptfoo/generate_config.ts && GOOGLE_APPLICATION_CREDENTIALS=./google_auth_key.json npx promptfoo eval --no-cache -c ./tests/promptfoo/generated_config.yaml -j 20",
     "test:promptfoo:view": "npx promptfoo view -y",
-    "test:promptfoo:save": "tsx ./tests/promptfoo/parse_notion.ts",
-    "inngest": "npx inngest-cli dev"
+    "test:promptfoo:save": "tsx ./tests/promptfoo/parse_notion.ts"
   },
   "dependencies": {
     "@ai-sdk/google": "^1.2.18",
@@ -56,7 +55,6 @@
     "framer-motion": "^11.3.19",
     "geist": "^1.3.1",
     "import-in-the-middle": "^1.14.0",
-    "inngest": "^3.35.1",
     "lucide-react": "^0.446.0",
     "nanoid": "^5.0.8",
     "next": "15.3.0-canary.31",

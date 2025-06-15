@@ -2,12 +2,12 @@ import { Toaster } from 'sonner';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { ThemeProvider } from '@/components/theme-provider';
-import ClarityScript from '@/components/scripts/Clarity';
+// import ClarityScript from '@/components/scripts/Clarity';
 import './globals.css';
 import { metadata } from '@/config/site';
 import { AuthStateListener } from '@/components/auth/auth-state-listener';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Analytics } from '@vercel/analytics/next';
+// import { Analytics } from '@vercel/analytics/next';
 
 export { metadata };
 
@@ -74,7 +74,7 @@ export default async function RootLayout({
             __html: THEME_COLOR_SCRIPT,
           }}
         />
-        <ClarityScript />
+        {/* <ClarityScript /> */}
       </head>
       <body className="antialiased">
         <SpeedInsights />
@@ -89,7 +89,7 @@ export default async function RootLayout({
           {children}
         </ThemeProvider>
         {isProduction && gaMeasurementId && <GoogleAnalytics gaId={gaMeasurementId} />}
-        <Analytics />
+        {/* <Analytics /> */}
       </body>
     </html>
   );
