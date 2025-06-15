@@ -1,8 +1,8 @@
-import type { ChatModel } from '@/config/models';
+import type { chatModels } from '@/config/models';
 
 interface Entitlements {
   maxMessagesPerDay: number;
-  availableChatModelIds: Array<ChatModel['id']>;
+  availableChatModelIds: Array<(typeof chatModels)[number]['id']>;
 }
 
 export const entitlementsByUserType: Record<string, Entitlements> = {

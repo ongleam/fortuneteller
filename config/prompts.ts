@@ -18,14 +18,14 @@ export const systemPrompts = {
 };
 
 export const tools = {
-  // searchFaq: {
-  //   description: `This tool searches the FAQ database for information related to South Korean VISA applications, requirements, procedures, and common inquiries. Use it when a user asks any question about Korean VISAs.`,
-  //   parameters: {
-  //     query: {
-  //       type: 'string',
-  //       description:
-  //         "The user's question or a search query derived from it, related to Korean VISAs.",
-  //     },
-  //   },
-  // },
+  searchFaq: {
+    description: `This tool searches the FAQ database for information related to South Korean VISA applications, requirements, procedures, and common inquiries. Use it when a user asks any question about Korean VISAs.`,
+    parameters: {
+      query: {
+        type: 'string',
+        description:
+          "The user's question or a search query derived from it, related to Korean VISAs.",
+      },
+    },
+  },
 };

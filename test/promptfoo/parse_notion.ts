@@ -23,7 +23,7 @@ import {
 } from './utils';
 import { parseResultsByProvider, ParsedResultsByProvider, ParsedProviderData } from './parser'; // 새로 만든 파서 import
 import { TEST_SYSTEM_PROMPTS } from './prompts';
-import { baseModels } from '@/config/environments';
+import { modelConfig } from '@/config/models';
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
 // 기본 설정 및 환경 변수
@@ -114,8 +114,8 @@ async function sendDataToNotion(
     const testCases = overallConfigData.tests;
     const modelName =
       overallConfigData.providers?.[0]?.config?.body?.selectedChatModel || 'chat-model';
-    const model = modelName as keyof typeof baseModels;
-    const selectedChatModel = baseModels[model].modelName;
+    const model = modelName as keyof typeof modelConfig;
+    const selectedChatModel = modelConfig[model].model;
     const version = overallConfigData.tags?.version || 'unknown';
     console.log('selectedChatModel: ', selectedChatModel);
     console.log('version: ', version);
