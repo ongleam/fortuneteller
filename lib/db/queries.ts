@@ -277,7 +277,7 @@ export async function saveMessages({ messages }: { messages: Array<DBMessage> })
   }
 }
 
-export async function getMessagesByChatId({ id }: { id: string }) {
+export async function getMessagesByChatId({ id, limit }: { id: string; limit?: number }) {
   try {
     return await db
       .select()

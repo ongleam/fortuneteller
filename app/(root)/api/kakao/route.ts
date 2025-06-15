@@ -1,10 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getKSTDateTime } from '@/lib/utils';
+import { generateUUID, getKSTDateTime } from '@/lib/utils';
 import { KakaoRequestBody, KakaoSkillResponse } from '@/lib/types/kakao';
 import { normalizeText } from '@/lib/utils/text';
-import axios from 'axios';
+import { appendClientMessage, UIMessage } from 'ai';
 import { siteConfig } from '@/config/site';
-import { getAgentResponse } from '@/lib/actions/agent';
+import { getContextResponse, getSingleResponse } from '@/lib/actions/agent';
+import {
+  getOrCreateKakaoChatByUserId,
+  getOrCreateProfileByUserKakaoId,
+  saveMessages,
+  getMessagesByChatId,
+} from '@/lib/db/queries';
 
 // Vercel 환경에 따른 콜백 URL 설정
 const getCallbackUrl = () => {
@@ -24,6 +30,8 @@ const getCallbackUrl = () => {
       return `${siteConfig.urls.local}/api/kakao/callback`;
   }
 };
+
+const MAX_MESSAGE_COUNT = 20;
 
 const callbackBackgroundTaskUrl = getCallbackUrl();
 
@@ -65,9 +73,45 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  // process user utterance
+  const profile = await getOrCreateProfileByUserKakaoId({ user_kakao_id: userId });
+  const chat = await getOrCreateKakaoChatByUserId({
+    userId: profile.user_id,
+    title: 'Kakao Chat',
+  });
+
+  const userMessage: UIMessage = {
+    id: generateUUID(),
+    role: 'user',
+    parts: [{ type: 'text', text: userUtterance }],
+    content: userUtterance,
+  };
+
+  await saveMessages({
+    messages: [
+      {
+        chat_id: chat.id,
+        id: userMessage.id,
+        role: 'user',
+        parts: userMessage.parts,
+        attachments: [],
+        created_at: new Date(),
+      },
+    ],
+  });
+
+  const previousMessages = await getMessagesByChatId({ id: chat.id, limit: MAX_MESSAGE_COUNT });
+
+  const messages = appendClientMessage({
+    // @ts-ignore
+    messages: previousMessages,
+    message: userMessage,
+  });
+
+  console.log('previousMessages: ', JSON.stringify(previousMessages, null, 2));
   console.log(`[${getKSTDateTime()}] [INFO] User Utterance: "${userUtterance}"`);
 
-  const agentResponse = await getAgentResponse(userUtterance);
+  const agentResponse = await getContextResponse(messages.slice(0, MAX_MESSAGE_COUNT));
   // try {
   //   console.log(
   //     `[${getKSTDateTime()}] [INFO] Sending event: ${callbackUrlFromKakao}/ ${callbackBackgroundTaskUrl}`
