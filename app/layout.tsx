@@ -6,7 +6,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
 import { metadata } from '@/config/site';
 import { AuthStateListener } from '@/components/auth/auth-state-listener';
-import { SpeedInsights } from '@vercel/speed-insights/next';
+// import { SpeedInsights } from '@vercel/speed-insights/next';
 // import { Analytics } from '@vercel/analytics/next';
 
 export { metadata };
@@ -50,6 +50,9 @@ const THEME_COLOR_SCRIPT = `\
   updateThemeColor();
 })();`;
 
+
+
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -77,7 +80,7 @@ export default async function RootLayout({
         {/* <ClarityScript /> */}
       </head>
       <body className="antialiased">
-        <SpeedInsights />
+        {/* <SpeedInsights /> */}
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
