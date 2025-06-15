@@ -1,0 +1,44 @@
+declare interface CertificationDetail {
+  id: string;
+  idx: number;
+  item: {
+    cate1?: string;
+    cate2?: string;
+    cate3?: string;
+    cate3_1?: string;
+    gubun1?: string;
+    gubun2?: string;
+    ic_btween?: string;
+    ic_com?: string;
+    ic_ea?: string;
+    ic_law?: string;
+    ic_org?: string;
+    ic_pagent?: string;
+    ic_pagent_con?: string;
+    ic_pay?: string;
+    ic_req?: string;
+    ic_sdate?: string;
+    ic_tip?: string;
+    ic_tip1?: string;
+    ic_tip2?: string;
+    lc_cate1_con?: string;
+    lc_cate2_con?: string;
+    lc_cate2_qu?: string;
+    lc_cate3_con?: string;
+    lc_cate3_qu?: string;
+    lc_code?: string;
+    lc_content1?: string;
+    lc_content2?: string;
+    lc_content3?: string;
+    lc_content4?: string;
+    lc_content5?: string;
+    lc_hc?: string;
+    lc_kc?: string;
+    lc_ori?: string;
+    lc_uc?: string;
+    lc_wc?: string;
+    [key: string]: any;
+  };
+  created_at?: Date;
+  [key: string]: any;
+}

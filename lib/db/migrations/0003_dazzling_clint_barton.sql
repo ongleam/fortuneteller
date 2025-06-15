@@ -1,0 +1,1 @@
+ALTER TABLE "chats" ADD COLUMN "channel" varchar DEFAULT 'web' NOT NULL;
