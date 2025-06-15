@@ -21,7 +21,7 @@ import { preprocessXmlText } from '@/lib/utils/textPreprocess';
 import { getMessagesByChatId, getOrCreateKakaoChatByUserId, saveMessages } from '@/lib/db/queries';
 import { getOrCreateProfileByUserKakaoId } from '@/lib/db/queries';
 import { getCachedData, setCachedData } from '@/lib/actions/redis';
-import { createCarouselItemsFromLlmResponse } from '@/lib/utils/carousel';
+// import { createCarouselItemsFromLlmResponse } from '@/lib/utils/carousel';
 import { notifySlackOnError } from '@/lib/utils/errorHandler';
 // import * as Sentry from '@sentry/nextjs';
 import axios from 'axios';
@@ -185,10 +185,10 @@ async function processKakaoMessage(
   } else {
     console.log('[Cache miss] Generating new response');
     const llmResponse = await generateLLMResponse(messages.slice(-MAX_PREVIOUS_MESSAGES));
-    const { items, showCarousel: newShowCarousel } =
-      createCarouselItemsFromLlmResponse(llmResponse);
-    carouselItems = items;
-    showCarousel = newShowCarousel;
+    // const { items, showCarousel: newShowCarousel } =
+    //   createCarouselItemsFromLlmResponse(llmResponse);
+    // carouselItems = items;
+    // showCarousel = newShowCarousel;
 
     const responseMessages = llmResponse.response.messages as ResponseMessage[];
     const faqQuestions = extractFaqQuestions(responseMessages);
@@ -212,17 +212,17 @@ async function processKakaoMessage(
     assistantMessage = newAssistantMessage;
 
     // 응답 캐싱
-    await setCachedData(cacheKey, {
-      text: llmText,
-      kakaoQuickReplies,
-      kakaoCarouselItems: carouselItems,
-      showCarousel,
-      assistantMessage: {
-        role: assistantMessage.role,
-        parts: assistantMessage.parts,
-        experimental_attachments: assistantMessage.experimental_attachments,
-      },
-    });
+    // await setCachedData(cacheKey, {
+    //   text: llmText,
+    //   kakaoQuickReplies,
+    //   kakaoCarouselItems: carouselItems,
+    //   showCarousel,
+    //   assistantMessage: {
+    //     role: assistantMessage.role,
+    //     parts: assistantMessage.parts,
+    //     experimental_attachments: assistantMessage.experimental_attachments,
+    //   },
+    // });
   }
 
   // 어시스턴트 메시지 저장
@@ -252,14 +252,14 @@ async function processKakaoMessage(
     },
   };
 
-  if (showCarousel && carouselItems && carouselItems.length > 0) {
-    processedResponse.template!.outputs.push({
-      carousel: {
-        type: 'textCard',
-        items: carouselItems.slice(0, MAX_CAROUSEL_ITEMS),
-      },
-    });
-  }
+  // if (showCarousel && carouselItems && carouselItems.length > 0) {
+  //   processedResponse.template!.outputs.push({
+  //     carousel: {
+  //       type: 'textCard',
+  //       items: carouselItems.slice(0, MAX_CAROUSEL_ITEMS),
+  //     },
+  //   });
+  // }
 
   if (kakaoQuickReplies) {
     processedResponse.template!.quickReplies = [

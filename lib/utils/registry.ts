@@ -1,28 +1,22 @@
-import { customProvider, extractReasoningMiddleware, wrapLanguageModel } from 'ai';
-import { vertex } from '@ai-sdk/google-vertex/edge';
 import { google } from '@ai-sdk/google';
-import { isTestEnvironment } from '../constants';
-import { environments } from '../../config/environments';
-import type { ModelConfig } from '../types/models';
+import { modelConfig } from '@/config/models';
+import { customProvider, extractReasoningMiddleware, wrapLanguageModel } from 'ai';
 
-const getModelProvider = (config: ModelConfig) => {
-  const { provider, modelName } = config;
+const getModelProvider = (config: any) => {
+  const { provider, model } = config;
 
   switch (provider) {
-    case 'vertex':
-      return vertex(modelName);
     case 'google':
-      return google(modelName);
+      return google(model);
     default:
       throw new Error(`Unsupported provider: ${provider}`);
   }
 };
 
-const createModelRegistry = (environment: string) => {
-  const envConfig = environments[environment];
+const createModelRegistry = () => {
   const registry: any = {};
 
-  Object.entries(envConfig.models).forEach(([key, config]) => {
+  Object.entries(modelConfig).forEach(([key, config]) => {
     const model = getModelProvider(config);
 
     if (key.includes('reasoning')) {
@@ -34,14 +28,11 @@ const createModelRegistry = (environment: string) => {
       registry[key] = model;
     }
   });
-
   return registry;
 };
 
-const currentEnvironment = isTestEnvironment ? 'test' : process.env.NODE_ENV || 'development';
-const modelRegistry = createModelRegistry(currentEnvironment);
-
-console.log(modelRegistry);
+const modelRegistry = createModelRegistry();
+// console.log(JSON.stringify(modelRegistry, null, 2));
 
 export const myProvider = customProvider({
   languageModels: modelRegistry,
