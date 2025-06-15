@@ -27,7 +27,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
         strategy="beforeInteractive"
       />
       <SidebarProvider defaultOpen={!isCollapsed}>
-        {/* AppSidebar handles the case where user can be null */}
+        {/* user가 null일 수 있음을 AppSidebar가 처리하도록 함 */}
         <AppSidebar user={user ?? undefined} />
         <SidebarInset>{children}</SidebarInset>
       </SidebarProvider>

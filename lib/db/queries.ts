@@ -20,6 +20,8 @@ import postgres from 'postgres';
 import {
   chat,
   faq,
+  kc_certification,
+  kc_certification_detail,
   message,
   profile,
   vote,
@@ -399,6 +401,120 @@ export async function getMessageCountByUserId({
     throw error;
   }
 }
+
+// Certification Queries
+const DEFAULT_CATEGORY_SIMILARITY_THRESHOLD = 0.5;
+
+export async function getCertificationsByCategory(category: string) {
+  try {
+    return await db
+      .select({
+        category: kc_certification.category,
+        factor: kc_certification.factor,
+        certifications: kc_certification.certifications,
+      })
+      .from(kc_certification)
+      .where(ilike(kc_certification.category, `%${category}%`));
+  } catch (error) {
+    console.error(`Failed to get certifications by category: ${category} from database`, error);
+    throw error;
+  }
+}
+
+export async function getCertificationsByCategorySimilarity(
+  category: string,
+  threshold: number = DEFAULT_CATEGORY_SIMILARITY_THRESHOLD,
+  limit?: number
+) {
+  try {
+    const similarityScore = sql<number>`similarity(category, ${category})`;
+
+    const results = await db
+      .select({
+        idx: kc_certification.idx,
+        category: kc_certification.category,
+        factor: kc_certification.factor,
+        certifications: kc_certification.certifications,
+        similarity: similarityScore,
+        detail_ids: kc_certification.detail_ids,
+        purchase_agency: kc_certification.purchase_agency,
+      })
+      .from(kc_certification)
+      .where(gt(similarityScore, threshold))
+      .orderBy(desc(similarityScore));
+
+    console.log(
+      `[INFO] Found ${results.length} similar certifications for category "${category}" (threshold: ${threshold})`
+    );
+    return results;
+  } catch (error) {
+    console.error(
+      `Failed to get similar certifications by category: ${category} from database`,
+      error
+    );
+    throw error; // 오류 전파
+  }
+}
+
+export async function getCertificationsByVector(
+  query: string,
+  threshold = DEFAULT_MATCH_THRESHOLD,
+  count = DEFAULT_MATCH_COUNT
+) {
+  let queryEmbedding: number[] | null;
+
+  try {
+    queryEmbedding = await getEmbedding(query);
+  } catch (error) {
+    console.error('Failed to get Vertex AI embedding:', error);
+    throw error;
+  }
+
+  try {
+    const similarity = sql<number>`1 - (${cosineDistance(
+      kc_certification.embedding,
+      queryEmbedding
+    )})`;
+
+    const certifications = await db
+      .select({
+        idx: kc_certification.idx,
+        category: kc_certification.category,
+        factor: kc_certification.factor,
+        certifications: kc_certification.certifications,
+        detail_ids: kc_certification.detail_ids,
+        purchase_agency: kc_certification.purchase_agency,
+      })
+      .from(kc_certification)
+      .where(gte(similarity, threshold))
+      .orderBy(desc(similarity))
+      .limit(count);
+
+    return certifications;
+  } catch (error) {
+    console.error(`Failed to get vector search certifications: ${query} from database`, error);
+    throw error;
+  }
+}
+
+// Certification Detail Queries
+export const getCertificationDetailsByIds = async (ids: string[]) => {
+  if (!ids || ids.length === 0) {
+    return [];
+  }
+  const limitedIds = ids.slice(0, 10);
+
+  try {
+    return await db
+      .select()
+      .from(kc_certification_detail)
+      .where(inArray(kc_certification_detail.id, limitedIds))
+      .limit(10);
+  } catch (error) {
+    console.error('Failed to get certification details:', error);
+    throw error;
+  }
+};
 
 // FAQ Queries
 export async function getFaqsByVector(

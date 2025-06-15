@@ -41,6 +41,8 @@ const createModelRegistry = (environment: string) => {
 const currentEnvironment = isTestEnvironment ? 'test' : process.env.NODE_ENV || 'development';
 const modelRegistry = createModelRegistry(currentEnvironment);
 
+console.log(modelRegistry);
+
 export const myProvider = customProvider({
   languageModels: modelRegistry,
 });

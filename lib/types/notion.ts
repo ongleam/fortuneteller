@@ -19,7 +19,7 @@ export interface NotionReportData extends ReportFormData {
 
 // 노션 데이터베이스 ID 및 API 키 설정
 export const NOTION_CONFIG = {
-  databaseId: process.env.NOTION_FEEDBACK_DATABASE_ID || '',
+  databaseId: process.env.NEXT_PUBLIC_NOTION_DATABASE_ID || '',
   apiKey: process.env.NOTION_API_KEY || '',
 };
 

@@ -5,16 +5,16 @@ import { generateUUID } from '@/lib/utils';
 // import { DataStreamHandler } from '@/components/data-stream-handler';
 import { redirect } from 'next/navigation';
 import { userAgent } from 'next/server';
-import { createServerClient } from '@/lib/supabase/server'; // Import server client
+import { createServerClient } from '@/lib/supabase/server'; // 서버용 클라이언트 import
 
 export default async function Page() {
   const requestHeaders = await headers();
   const { isBot } = userAgent({ headers: requestHeaders });
-  const supabase = await createServerClient(); // Create server client
+  const supabase = await createServerClient(); // 서버용 클라이언트 생성
 
   const {
     data: { user },
-  } = await supabase.auth.getUser(); // Modified getUser call
+  } = await supabase.auth.getUser(); // 수정된 getUser 호출
 
   const isGuest = user && user.is_anonymous;
 

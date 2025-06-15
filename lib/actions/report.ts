@@ -43,11 +43,11 @@ export async function submitReport(
       reportId,
     };
   } catch (error: any) {
-    console.error('Error submitting report:', error);
+    console.error('리포트 제출 실패:', error);
 
     return {
       success: false,
-      error: error.message || 'Error submitting report.',
+      error: error.message || '리포트 제출 중 오류가 발생했습니다.',
     };
   }
 }

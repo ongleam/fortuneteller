@@ -79,6 +79,29 @@ export const vote = pgTable(
 );
 export type Vote = InferSelectModel<typeof vote>;
 
+// 인증 테이블
+export const kc_certification = pgTable('kc_certifications', {
+  id: uuid('id').primaryKey().notNull().defaultRandom(),
+  idx: integer('idx').notNull(),
+  category: text('category').notNull(),
+  factor: text('factor').notNull(),
+  certifications: text('certifications').array().notNull(),
+  keywords: text('keywords').array(),
+  purchase_agency: text('purchase_agency').array(),
+  embedding: vector('embedding', { dimensions: 768 }).notNull(),
+  detail_ids: uuid('detail_ids').array(),
+  created_at: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+});
+export type KcCertification = InferSelectModel<typeof kc_certification>;
+
+// 인증 상세 테이블
+export const kc_certification_detail = pgTable('kc_certification_details', {
+  id: uuid('id').primaryKey().notNull().defaultRandom(),
+  idx: integer('idx').notNull(),
+  item: jsonb('item').notNull(),
+  created_at: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+});
+export type KcCertificationDetail = InferSelectModel<typeof kc_certification_detail>;
 
 // FAQ 테이블
 export const faq = pgTable('faqs', {

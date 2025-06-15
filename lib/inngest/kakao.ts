@@ -8,7 +8,7 @@ import {
   Message,
   UIMessage,
 } from 'ai';
-import { kakaoAgent } from '@/lib/agents/kakao';
+import { kakaoKcAgent } from '@/lib/agents/kakao-kc-agent';
 import {
   getKSTDateTime,
   measureExecutionTime,
@@ -25,6 +25,7 @@ import { getOrCreateProfileByUserKakaoId } from '../db/queries';
 import { getCachedData, setCachedData } from '../actions/redis';
 import { createCarouselItemsFromLlmResponse } from './carousel';
 import { notifySlackOnError } from '@/lib/utils/errorHandler';
+import * as Sentry from '@sentry/nextjs';
 
 // 상수 정의
 const LLM_TIMEOUT = 20000;
@@ -66,7 +67,7 @@ async function generateLLMResponse(messages: Message[]): Promise<GenerateTextRes
   // console.log('messages:', messages);
 
   // 에이전트 설정
-  const agentConfig = kakaoAgent({ model: 'kakao-chat-model', messages });
+  const agentConfig = kakaoKcAgent({ model: 'kakao-chat-model', messages });
   // console.log('agentConfig:', JSON.stringify(agentConfig, null, 2));
   try {
     // 타임아웃과 함께 텍스트 생성
@@ -296,6 +297,7 @@ export const processKakaoMessage = inngest.createFunction(
     } catch (error: any) {
       console.error(`[${getKSTDateTime()}] [Inngest] 오류: ${error.message}`);
       // await notifySlackOnError(error, '@/lib/inngest/kakao.ts:processKakaoMessage');
+      Sentry.captureException(error);
       return { success: false, error: error.message };
     }
   }

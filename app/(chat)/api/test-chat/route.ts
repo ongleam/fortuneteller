@@ -1,6 +1,6 @@
 import { streamText, Message, generateText } from 'ai';
 import { NextResponse } from 'next/server';
-import { kakaoAgent } from '@/lib/agents/kakao';
+import { kakaoKcAgent } from '@/lib/agents/kakao-kc-agent';
 import { nanoid } from 'nanoid';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -10,13 +10,13 @@ import { preprocessXmlText } from '@/lib/utils/textPreprocess';
 interface ParsedToolCall {
   toolCallId?: string;
   toolName: string;
-  args: any; // Parsed args
+  args: any; // 파싱된 args
 }
 
 interface ParsedToolResult {
   toolCallId?: string;
   toolName: string;
-  result: any; // Parsed result
+  result: any; // 파싱된 result
 }
 
 // MessagePart 타입 정의
@@ -27,7 +27,7 @@ interface ParsedMessagePart {
   text?: string;
   toolCall?: ParsedToolCall;
   toolResult?: ParsedToolResult;
-  // Add other types like image if needed
+  // 이미지 등 다른 타입도 필요시 추가
 }
 
 interface ParsedMessage {
@@ -51,59 +51,59 @@ interface ParsedStep {
   // responseBodyCandidates?: any; // 스텝별 응답 내용 요약
 }
 
-// Function to save results to a JSON file
+// 결과를 JSON 파일로 저장하는 함수
 async function saveResponseToJson(
   data: any,
   filename: string = `response_${Date.now()}.json`
 ): Promise<string> {
   try {
-    // Set save directory (logs folder)
+    // 저장 디렉토리 설정 (logs 폴더)
     const logDir = path.join(process.cwd(), 'tests/debug');
 
-    // Create directory if it doesn't exist
+    // 디렉토리가 없으면 생성
     if (!fs.existsSync(logDir)) {
       fs.mkdirSync(logDir, { recursive: true });
     }
 
-    // Set file path
+    // 파일 경로 설정
     const filePath = path.join(logDir, filename);
 
-    // Convert data to JSON and save to file
+    // 데이터를 JSON으로 변환하여 파일에 저장
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
 
-    console.log(`[INFO] Response data saved to ${filePath}.`);
+    console.log(`[INFO] 응답 데이터가 ${filePath}에 저장되었습니다.`);
     return filePath;
   } catch (error) {
-    console.error('[ERROR] Error saving file:', error);
+    console.error('[ERROR] 파일 저장 중 오류 발생:', error);
     return '';
   }
 }
 
-// API endpoint for testing
+// 테스트용 API 엔드포인트
 export async function POST(request: Request) {
   try {
-    // Parse request body
+    // 요청 본문 파싱
     const body = await request.json();
     const { message, selectedChatModel, systemPromptId } = body;
     const question = message.content;
 
-    console.log(`[TEST] Received question: ${question}`);
+    console.log(`[테스트] 수신된 질문: ${question}`);
 
-    // Check for empty text parameter
+    // 빈 텍스트 파라미터 체크
     if (!question || question.trim() === '') {
       return NextResponse.json(
         {
-          error: 'Question content is empty.',
-          errorDetail: 'Please enter a question.',
+          error: '질문 내용이 비어있습니다.',
+          errorDetail: '질문을 입력해주세요.',
           errorCode: 'EMPTY_TEXT_PARAMETER',
         },
         { status: 500 }
       );
     }
 
-    // Model settings
+    // 모델 설정
     const model = selectedChatModel || 'chat-model';
-    // Simple message list containing only user messages
+    // 사용자 메시지만 포함하는 간단한 메시지 목록
     const messages: Message[] = [
       {
         id: message.id || nanoid(),
@@ -112,8 +112,8 @@ export async function POST(request: Request) {
       },
     ];
 
-    // kcAgent settings
-    const agentConfig = kakaoAgent({
+    // kcAgent 설정
+    const agentConfig = kakaoKcAgent({
       messages,
       model,
     });
@@ -122,29 +122,29 @@ export async function POST(request: Request) {
     if (systemPrompt) {
       agentConfig.system = systemPrompt;
     }
-    // console.log(`[TEST] System prompt: ${JSON.stringify(agentConfig, null, 2)}`);
+    // console.log(`[테스트] 시스템 프롬프트: ${JSON.stringify(agentConfig, null, 2)}`);
 
     try {
-      // Generate text (without streaming)
+      // 텍스트 생성 (스트리밍 없이)
       const result = await generateText({
         ...agentConfig,
         maxSteps: 5,
       });
 
-      // Save results to JSON file (controlled by query parameter)
+      // 결과를 JSON 파일로 저장 (query 매개변수로 제어)
       if (new URL(request.url).searchParams.has('save')) {
         const timestamp = new Date().toISOString().replace(/[:.-]/g, '_');
         const filename = `response_${timestamp}.json`;
         await saveResponseToJson(result, filename);
       }
 
-      // Return text after generation is complete
+      // 생성 완료 후 텍스트 반환
 
       // console.log('messages: ', JSON.stringify(result.response.messages, null, 2));
       // console.log('text: ', result.text);
       // console.log('usage: ', result.usage);
 
-      // Return as a general response
+      // 일반 응답으로 반환
       return NextResponse.json({
         tokenUsage: {
           total: result.usage.totalTokens,
@@ -154,9 +154,9 @@ export async function POST(request: Request) {
         output: preprocessXmlText(result.text),
       });
     } catch (error: any) {
-      console.error('[TEST] Model call error:', error);
+      console.error('[테스트] 모델 호출 에러:', error);
 
-      // Handle resource limit exceeded error
+      // 리소스 한도 초과 에러 처리
       if (
         error.statusCode === 500 ||
         error.statusCode === 429 ||
@@ -169,7 +169,7 @@ export async function POST(request: Request) {
       ) {
         return NextResponse.json(
           {
-            error: 'Processing is delayed due to high request volume. Please try again later.',
+            error: '현재 요청이 많아 처리가 지연되고 있습니다. 잠시 후 다시 시도해 주세요.',
             errorCode: 'RESOURCE_EXHAUSTED',
             retryAfter: 30,
           },
@@ -182,19 +182,19 @@ export async function POST(request: Request) {
         );
       }
 
-      // Handle other errors
+      // 기타 에러 처리
       return NextResponse.json(
         {
-          error: 'An error occurred while processing the request.',
+          error: '요청 처리 중 오류가 발생했습니다.',
           errorDetail: error.message,
         },
         { status: 500 }
       );
     }
   } catch (error: any) {
-    console.error('[TEST] API error:', error);
+    console.error('[테스트] API 오류:', error);
 
-    // Handle empty text parameter error
+    // 빈 텍스트 파라미터 에러 처리
     if (
       error.message?.includes('empty text parameter') ||
       error.errorDetail?.includes('empty text parameter') ||
@@ -202,15 +202,15 @@ export async function POST(request: Request) {
     ) {
       return NextResponse.json(
         {
-          error: 'Question content is empty.',
-          errorDetail: 'Please enter a question.',
+          error: '질문 내용이 비어있습니다.',
+          errorDetail: '질문을 입력해주세요.',
           errorCode: 'EMPTY_TEXT_PARAMETER',
         },
         { status: 400 }
       );
     }
 
-    // Check for Resource exhausted or Rate limit related errors
+    // Resource exhausted 또는 Rate limit 관련 에러 확인
     if (
       error.statusCode === 429 ||
       (error.message && error.message.includes('Resource exhausted')) ||
@@ -218,7 +218,7 @@ export async function POST(request: Request) {
     ) {
       return NextResponse.json(
         {
-          error: 'Processing is delayed due to high request volume. Please try again later.',
+          error: '현재 요청이 많아 처리가 지연되고 있습니다. 잠시 후 다시 시도해 주세요.',
           errorCode: 'RESOURCE_EXHAUSTED',
           retryAfter: 30,
         },
@@ -231,6 +231,6 @@ export async function POST(request: Request) {
       );
     }
 
-    return NextResponse.json({ error: 'An error occurred while processing the request.' }, { status: 500 });
+    return NextResponse.json({ error: '요청 처리 중 오류가 발생했습니다.' }, { status: 500 });
   }
 }

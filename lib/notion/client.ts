@@ -95,8 +95,8 @@ export async function createReport(
 
     return response.id;
   } catch (error) {
-    console.error('Error adding report:', error);
-    throw new Error('Error adding report.');
+    console.error('노션 데이터베이스에 리포트 추가 실패:', error);
+    throw new Error('리포트를 저장하는 중 오류가 발생했습니다.');
   }
 }
 
@@ -149,7 +149,7 @@ export async function getAllReports(): Promise<NotionReportData[]> {
       };
     });
   } catch (error) {
-    console.error('Error getting reports from Notion database:', error);
-    throw new Error('Error getting reports from Notion database.');
+    console.error('노션 데이터베이스에서 리포트 조회 실패:', error);
+    throw new Error('리포트를 조회하는 중 오류가 발생했습니다.');
   }
 }

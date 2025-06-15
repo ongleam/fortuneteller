@@ -1,6 +1,14 @@
 import { createClient } from '@/lib/supabase/client';
 import { getEmbedding } from '@/lib/utils/embedding';
-import { Chat, DBMessage, Faq, Profile, Vote } from '../db/schema';
+import {
+  Chat,
+  DBMessage,
+  Faq,
+  KcCertification,
+  KcCertificationDetail,
+  Profile,
+  Vote,
+} from '../db/schema';
 
 export const runtime = 'edge';
 
@@ -401,6 +409,116 @@ export const getMessageCountByUserId = async ({
     throw error;
   }
 };
+
+// 인증 쿼리
+
+export const getCertificationsByCategory = async (category: string) => {
+  try {
+    const { data, error } = await supabase
+      .from('kc_certifications')
+      .select('category, factor, certifications, keywords, purchase_agency, detail_ids')
+      .ilike('category', `%${category}%`);
+
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error(`카테고리별 인증 조회 오류: ${category}`, error);
+    throw error;
+  }
+};
+
+export const getCertificationsBySimilarity = async (
+  category: string,
+  threshold: number = DEFAULT_CATEGORY_SIMILARITY_THRESHOLD,
+  limit?: number
+): Promise<KcCertification[] | null> => {
+  try {
+    // PostgreSQL similarity 함수 사용
+    let query = supabase.rpc('get_certifications_by_similarity', {
+      query_category: category,
+      similarity_threshold: threshold,
+      results_limit: limit,
+    });
+
+    if (limit) {
+      query = query.limit(limit);
+    }
+
+    const { data, error } = await query;
+
+    if (error) throw error;
+    console.log(
+      `[INFO] 카테고리 "${category}"에 대해 ${data.length}개의 유사 인증 발견 (threshold: ${threshold})`
+    );
+    return data;
+  } catch (error) {
+    console.error(`카테고리 유사도별 인증 조회 오류: ${category}`, error);
+    throw error;
+  }
+};
+
+export const getCertificationsByVector = async (
+  query: string,
+  threshold = DEFAULT_MATCH_THRESHOLD,
+  count = DEFAULT_MATCH_COUNT
+): Promise<KcCertification[] | null> => {
+  try {
+    let queryEmbedding = await getEmbedding(query);
+
+    const { data, error } = await supabase.rpc('get_certifications_by_vector', {
+      query_embedding: queryEmbedding,
+      threshold,
+      results_limit: count,
+    });
+
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error(`벡터 검색 인증 조회 오류: ${query}`, error);
+    throw error;
+  }
+};
+
+// 인증 상세 쿼리
+
+export const getCertificationDetailsByIds = async (
+  ids: string[]
+): Promise<KcCertificationDetail[] | null> => {
+  if (!ids || ids.length === 0) {
+    return [];
+  }
+
+  try {
+    const { data, error } = await supabase
+      .from('kc_certification_details')
+      .select('*')
+      .in('id', ids);
+
+    if (error) {
+      console.error('인증 상세 정보 조회 오류:', error);
+      throw error;
+    }
+
+    return data || [];
+  } catch (error) {
+    console.error('인증 상세 정보 조회 실패:', error);
+    throw error;
+  }
+};
+
+export const getCertificationDetailById = async (
+  id: string
+): Promise<KcCertificationDetail | null> => {
+  const { data, error } = await supabase
+    .from('kc_certification_details')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) throw error;
+  return data;
+};
+// FAQ 쿼리
 
 export const getFaqsByVector = async (
   query: string,

@@ -5,7 +5,7 @@ import {
   smoothStream,
   streamText,
 } from 'ai';
-import { baseAgent } from '../agents/base';
+import { kcAgent } from '../agents/kc-agent';
 import { generateUUID, getTrailingMessageId } from '@/lib/utils';
 import { saveMessages } from '../db/queries';
 import { isProductionEnvironment } from '../constants';

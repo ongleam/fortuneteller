@@ -10,7 +10,6 @@ import {
 import type { VisibilityType } from '@/components/chat/visibility-selector';
 import { myProvider } from '@/lib/utils/registry';
 import { z } from 'zod';
-import { systemPrompts } from '@/config/prompts';
 
 export async function saveChatModelAsCookie(model: string) {
   const cookieStore = await cookies();
@@ -20,7 +19,11 @@ export async function saveChatModelAsCookie(model: string) {
 export async function generateTitleFromUserMessage({ message }: { message: UIMessage }) {
   const { text: title } = await generateText({
     model: myProvider.languageModel('title-model'),
-    system: systemPrompts.TITLE_MODEL,
+    system: `\n
+    - you will generate a short title based on the first message a user begins a conversation with
+    - ensure it is not more than 40 characters long and written in Korean
+    - the title should be a summary of the user's message
+    - do not use quotes or colons`,
     prompt: JSON.stringify(message),
   });
 
