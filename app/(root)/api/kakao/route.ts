@@ -31,7 +31,7 @@ const getCallbackUrl = () => {
   }
 };
 
-const MAX_MESSAGE_COUNT = 20;
+const MAX_MESSAGE_COUNT = 6;
 
 const callbackBackgroundTaskUrl = getCallbackUrl();
 
@@ -109,7 +109,10 @@ export async function POST(request: NextRequest) {
     message: userMessage,
   });
 
-  console.log('previousMessages: ', JSON.stringify(previousMessages, null, 2));
+  console.log(
+    'previousMessages: ',
+    JSON.stringify(previousMessages.slice(0, MAX_MESSAGE_COUNT), null, 2)
+  );
   console.log(`[${getKSTDateTime()}] [INFO] User Utterance: "${userUtterance}"`);
 
   const agentResponse = await getContextResponse(messages.slice(0, MAX_MESSAGE_COUNT));
