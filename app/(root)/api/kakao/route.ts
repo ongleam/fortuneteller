@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
     userId: profile.user_id,
     title: 'Kakao Chat',
   });
-  const userQuery = `DATE INFO: ${getTodaysDate()}\n<USER>${userUtterance}</USER>`;
+  const userQuery = `TODAY'S DATE: ${getTodaysDate()}\n<USER>${userUtterance}</USER>`;
 
   const userMessage: UIMessage = {
     id: generateUUID(),
@@ -111,7 +111,7 @@ export async function POST(request: NextRequest) {
 
   console.log(
     'previousMessages: ',
-    JSON.stringify(previousMessages.slice(0, MAX_MESSAGE_COUNT), null, 2)
+    JSON.stringify(previousMessages.slice(0, -MAX_MESSAGE_COUNT), null, 2)
   );
   console.log(`[${getKSTDateTime()}] [INFO] User Utterance: "${userUtterance}"`);
 
