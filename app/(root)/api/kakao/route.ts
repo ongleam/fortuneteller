@@ -4,7 +4,7 @@ import { KakaoRequestBody, KakaoSkillResponse } from '@/lib/types/kakao';
 import { normalizeText } from '@/lib/utils/text';
 import { appendClientMessage, UIMessage } from 'ai';
 import { siteConfig } from '@/config/site';
-import { getContextResponse, getSingleResponse } from '@/lib/actions/agent';
+import { getContextResponse, getSingleResponse, getTodaysDate } from '@/lib/actions/agent';
 import {
   getOrCreateKakaoChatByUserId,
   getOrCreateProfileByUserKakaoId,
@@ -79,12 +79,13 @@ export async function POST(request: NextRequest) {
     userId: profile.user_id,
     title: 'Kakao Chat',
   });
+  const userQuery = `DATE INFO: ${getTodaysDate()}\n<USER>${userUtterance}</USER>`;
 
   const userMessage: UIMessage = {
     id: generateUUID(),
     role: 'user',
-    parts: [{ type: 'text', text: userUtterance }],
-    content: userUtterance,
+    parts: [{ type: 'text', text: userQuery }],
+    content: userQuery,
   };
 
   await saveMessages({
