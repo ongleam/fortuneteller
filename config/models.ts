@@ -1,11 +1,5 @@
 export const modelConfig = {
-  'default-model': {
-    provider: 'google',
-    model: 'gemini-2.0-flash-lite',
-    temperature: 0.0,
-    // maxTokens: 1000,
-  },
-  'ongleam-model': {
+  'chat-model': {
     provider: 'google',
     model: 'gemini-2.0-flash-lite',
     temperature: 0.0,

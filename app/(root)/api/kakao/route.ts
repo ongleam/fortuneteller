@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getKSTDateTime } from '@/lib/utils';
 import { KakaoRequestBody, KakaoSkillResponse } from '@/lib/types/kakao';
+import { normalizeText } from '@/lib/utils/text';
 import axios from 'axios';
 import { siteConfig } from '@/config/site';
+import { getAgentResponse } from '@/lib/actions/agent';
 
 // Vercel 환경에 따른 콜백 URL 설정
 const getCallbackUrl = () => {
-
   // 로컬 개발 환경
   if (process.env.NODE_ENV === 'development') {
     return `${siteConfig.urls.local}/api/kakao/callback`;
@@ -43,16 +44,16 @@ export async function POST(request: NextRequest) {
   const userId = kakaoRequestBody.userRequest?.user?.id;
   const callbackUrlFromKakao = kakaoRequestBody.userRequest?.callbackUrl;
 
-  if (!callbackUrlFromKakao) {
-    console.warn(`[${getKSTDateTime()}] [WARN] No callbackUrl from Kakao.`);
-    return NextResponse.json(
-      {
-        version: '2.0',
-        template: { outputs: [{ simpleText: { text: '콜백 URL이 없습니다.' } }] },
-      },
-      { status: 200 }
-    );
-  }
+  // if (!callbackUrlFromKakao) {
+  //   console.warn(`[${getKSTDateTime()}] [WARN] No callbackUrl from Kakao.`);
+  //   return NextResponse.json(
+  //     {
+  //       version: '2.0',
+  //       template: { outputs: [{ simpleText: { text: '콜백 URL이 없습니다.' } }] },
+  //     },
+  //     { status: 200 }
+  //   );
+  // }
 
   if (!userUtterance || userUtterance.trim() === '') {
     return NextResponse.json(
@@ -66,43 +67,43 @@ export async function POST(request: NextRequest) {
 
   console.log(`[${getKSTDateTime()}] [INFO] User Utterance: "${userUtterance}"`);
 
-  try {
-    // console.log(`[${getKSTDateTime()}] [INFO] Sending event to Inngest`);
-    // await inngest.send({
-    //   name: 'kakao/message.process.request',
-    //   data: {
-    //     originalCallbackUrl: callbackUrlFromKakao,
-    //     userUtterance,
-    //     userId,
-    //   },
-    // });
+  const agentResponse = await getAgentResponse(userUtterance);
+  // try {
+  //   console.log(
+  //     `[${getKSTDateTime()}] [INFO] Sending event: ${callbackUrlFromKakao}/ ${callbackBackgroundTaskUrl}`
+  //   );
+  //   await axios
+  //     .post(
+  //       callbackBackgroundTaskUrl,
+  //       {
+  //         originalCallbackUrl: callbackUrlFromKakao,
+  //         userUtterance,
+  //         userId,
+  //       },
+  //       { timeout: 2000 }
+  //     )
+  //     .catch(() => {});
 
-    console.log(
-      `[${getKSTDateTime()}] [INFO] Sending event to Inngest: ${callbackUrlFromKakao}/ ${callbackBackgroundTaskUrl}`
-    );
-    await axios
-      .post(
-        callbackBackgroundTaskUrl,
-        {
-          originalCallbackUrl: callbackUrlFromKakao,
-          userUtterance,
-          userId,
-        },
-        { timeout: 2000 }
-      )
-      .catch(() => {});
-
-    console.log(`[${getKSTDateTime()}] [INFO] Successfully sent event to Inngest`);
-  } catch (error: any) {
-    console.error(
-      `[${getKSTDateTime()}] [ERROR] Failed to send event to Inngest (User: ${userId}):`,
-      error.message
-    );
-  }
+  //   console.log(`[${getKSTDateTime()}] [INFO] Successfully sent event to Inngest`);
+  // } catch (error: any) {
+  //   console.error(
+  //     `[${getKSTDateTime()}] [ERROR] Failed to send event to Inngest (User: ${userId}):`,
+  //     error.message
+  //   );
+  // }
 
   const immediateCallbackResponse: KakaoSkillResponse = {
     version: '2.0',
-    useCallback: true,
+    useCallback: false,
+    template: {
+      outputs: [
+        {
+          simpleText: {
+            text: normalizeText(agentResponse),
+          },
+        },
+      ],
+    },
   };
   return NextResponse.json(immediateCallbackResponse, { status: 200 });
 }
