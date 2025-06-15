@@ -31,7 +31,7 @@ const getCallbackUrl = () => {
   }
 };
 
-const MAX_MESSAGE_COUNT = 5;
+const MAX_MESSAGE_COUNT = 20;
 
 const callbackBackgroundTaskUrl = getCallbackUrl();
 
