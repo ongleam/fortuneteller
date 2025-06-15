@@ -46,7 +46,7 @@ export async function getContextResponse(messages: any[]) {
   });
   const result = await generateText({
     ...agentConfig,
-    maxSteps: 1,
+    maxSteps: 5,
   });
 
   console.log('result: ', JSON.stringify(result, null, 2));
