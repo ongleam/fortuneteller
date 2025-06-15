@@ -31,7 +31,7 @@ const getCallbackUrl = () => {
   }
 };
 
-const MAX_MESSAGE_COUNT = 6;
+const MAX_MESSAGE_COUNT = 5;
 
 const callbackBackgroundTaskUrl = getCallbackUrl();
 
@@ -115,7 +115,7 @@ export async function POST(request: NextRequest) {
   );
   console.log(`[${getKSTDateTime()}] [INFO] User Utterance: "${userUtterance}"`);
 
-  const agentResponse = await getContextResponse(messages.slice(0, MAX_MESSAGE_COUNT));
+  const agentResponse = await getContextResponse(messages.slice(0, -MAX_MESSAGE_COUNT));
   // try {
   //   console.log(
   //     `[${getKSTDateTime()}] [INFO] Sending event: ${callbackUrlFromKakao}/ ${callbackBackgroundTaskUrl}`
