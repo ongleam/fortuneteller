@@ -1,31 +1,38 @@
 import { Metadata } from 'next';
 
 export const siteConfig = {
-  name: 'NomadLink Korea | Your Guide to Digital Nomad Life in Korea',
+  name: '점순이 | 당신의 운명을 알려드리는 AI 점술사',
   description:
-    'Discover everything you need for your digital nomad journey in South Korea: visa information (F-1-D), cost of living, co-working spaces, community, and travel tips. Your essential resource for working remotely in Korea.',
+    '신비로운 AI 점술사 점순이와 함께 오늘의 운세를 확인해보세요. 사랑운, 재물운, 직업운, 건강운까지 개인 맞춤형 운세와 조언을 제공합니다. 전통 점술의 지혜와 현대 AI 기술이 만난 새로운 운세 서비스입니다.',
   urls: {
-    production: 'https://nomadlink.co.kr',
-    development: 'https://dev.nomadlink.co.kr',
+    production: 'https://jeomsuni.com',
+    development: 'https://dev.jeomsuni.com',
     local: 'http://localhost:3000',
   },
   keywords: [
-    'Digital Nomad Korea',
-    'Korea Remote Work',
-    'Korea F-1-D Visa',
-    'Work in Korea for Foreigners',
-    'Living in Korea as a Digital Nomad',
-    'Korea Cost of Living',
-    'Korea Co-working Spaces',
-    'Korea Visa for Remote Workers',
-    'South Korea Digital Nomad Guide',
-    'Travel Korea and Work',
-    'Seoul Digital Nomad',
-    'Busan Digital Nomad',
-    'Jeju Digital Nomad',
-    'NomadLink Korea',
-    'Korea Tech Visa',
-    'Remote Jobs Korea',
+    '점순이',
+    '운세',
+    '점술',
+    '사주',
+    '타로',
+    'AI 점술사',
+    '오늘의 운세',
+    '사랑운',
+    '재물운',
+    '직업운',
+    '건강운',
+    '가족운',
+    '학업운',
+    '개인 맞춤 운세',
+    '무료 운세',
+    '온라인 점술',
+    '전통 점술',
+    '동양 점술',
+    '운세 상담',
+    '점괘',
+    '철학관',
+    '신점',
+    '궁합',
   ],
   icons: {
     icon: [{ url: '/favicon.ico', sizes: 'any' }],
@@ -36,7 +43,7 @@ export const siteConfig = {
   termsOfService: {
     url: 'https://ongleam.notion.site/1ee0ab7fb18f802dba22f415dbd517c7',
   },
-  version: '0.1.1',
+  version: '1.0.0',
 };
 
 const siteOpenGraph = {
@@ -45,10 +52,10 @@ const siteOpenGraph = {
   url: siteConfig.urls.production,
   images: [
     {
-      url: `${siteConfig.urls.production}/images/nomadlink-og-image.png`,
+      url: `${siteConfig.urls.production}/images/jeomsuni-og-image.png`,
     },
   ],
-  locale: 'en_US',
+  locale: 'ko_KR',
   type: 'website',
 };
 
