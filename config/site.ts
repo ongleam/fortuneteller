@@ -38,10 +38,10 @@ export const siteConfig = {
     icon: [{ url: '/favicon.ico', sizes: 'any' }],
   },
   privacyPolicy: {
-    url: 'https://ongleam.notion.site/1ee0ab7fb18f80a69e18df2f8052b156',
+    url: 'https://ongleam.notion.site/2220ab7fb18f80fba5c8e0ba61ea3910',
   },
   termsOfService: {
-    url: 'https://ongleam.notion.site/1ee0ab7fb18f802dba22f415dbd517c7',
+    url: 'https://ongleam.notion.site/2220ab7fb18f80b08c5bd0513d561396',
   },
   version: '1.0.0',
 };

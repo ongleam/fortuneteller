@@ -2,6 +2,7 @@ import { cookies, headers } from 'next/headers';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { createServerClient } from '@/lib/supabase/server';
+import { siteConfig } from '@/config/site';
 
 export default async function LandingPage() {
   const supabase = await createServerClient();
@@ -180,17 +181,52 @@ export default async function LandingPage() {
 
       {/* Footer */}
       <footer className="relative border-t border-slate-700/50 px-4 py-12 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl text-center">
-          <div className="mb-4 flex items-center justify-center space-x-2">
-            <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-slate-300 to-slate-600">
-              <span className="text-xs font-bold text-black">점</span>
+        <div className="mx-auto max-w-6xl">
+          {/* Brand Section */}
+          <div className="mb-8 text-center">
+            <div className="mb-4 flex items-center justify-center space-x-2">
+              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-slate-300 to-slate-600">
+                <span className="text-xs font-bold text-black">점</span>
+              </div>
+              <h1 className="bg-gradient-to-r from-slate-200 to-slate-400 bg-clip-text text-xl font-bold text-transparent">
+                점순이
+              </h1>
             </div>
-            <h1 className="bg-gradient-to-r from-slate-200 to-slate-400 bg-clip-text text-xl font-bold text-transparent">
-              점순이
-            </h1>
+            <p className="mb-6 text-slate-400">신비로운 운세의 세계로 여러분을 안내합니다</p>
           </div>
-          <p className="mb-4 text-slate-400">신비로운 운세의 세계로 여러분을 안내합니다</p>
-          <p className="text-sm text-gray-500">© 2024 점순이. 모든 권리 보유.</p>
+
+          {/* Company Information */}
+          <div className="mb-6 space-y-2 text-center text-sm text-slate-500">
+            <p>상호명: 주식회사 온글림</p>
+            <p>대표자: 허빈</p>
+            <p>사업자등록번호: 325-81-03598</p>
+            <p>통신판매업신고번호: 제 2025-서울서대문-0486 호</p>
+            <p>주소: 서울 서대문구 이화여대길 52, 이화 스타트업 오픈 스페이스 1층</p>
+            <p>문의: contact@ongleam.site</p>
+          </div>
+
+          {/* Links and Copyright */}
+          <div className="text-center">
+            <div className="mb-4 flex justify-center space-x-6 text-sm">
+              <Link
+                href={siteConfig.privacyPolicy.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-400 underline hover:text-slate-300"
+              >
+                개인정보처리방침
+              </Link>
+              <Link
+                href={siteConfig.termsOfService.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-400 underline hover:text-slate-300"
+              >
+                이용약관
+              </Link>
+            </div>
+            <p className="text-sm text-gray-500">© 2025 Ongleam Inc. All rights reserved.</p>
+          </div>
         </div>
 
         {/* Decorative elements */}
