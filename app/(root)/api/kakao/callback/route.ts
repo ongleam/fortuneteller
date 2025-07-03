@@ -14,47 +14,24 @@ import {
   generateUUID,
   getTrailingMessageId,
 } from '@/lib/utils';
-import { generateRecommandQuestions } from '@/lib/actions/chat';
-import { ResponseMessage } from '@/lib/types/ai';
-import { KakaoQuickReply, KakaoSkillResponse } from '@/lib/types/kakao';
-import { preprocessXmlText } from '@/lib/utils/textPreprocess';
+import { KakaoSkillResponse } from '@/lib/types/kakao';
 import { getMessagesByChatId, getOrCreateKakaoChatByUserId, saveMessages } from '@/lib/db/queries';
 import { getOrCreateProfileByUserKakaoId } from '@/lib/db/queries';
 import { getCachedData, setCachedData } from '@/lib/actions/redis';
-// import { createCarouselItemsFromLlmResponse } from '@/lib/utils/carousel';
-import { notifySlackOnError } from '@/lib/utils/errorHandler';
-// import * as Sentry from '@sentry/nextjs';
 import axios from 'axios';
 
 // 상수 정의
 const LLM_TIMEOUT = 20000;
 const MAX_STEPS = 5;
-const MAX_RECOMMAND_QUESTIONS = 3;
-const MAX_CAROUSEL_ITEMS = 4;
 const MAX_PREVIOUS_MESSAGES = 0;
-const DEFAULT_QUICK_REPLIES = [
-  {
-    action: 'message' as const,
-    label: '🏠 홈으로',
-    messageText: '🏠 홈으로',
-  },
-  {
-    action: 'message' as const,
-    label: '🚢 문의하기',
-    messageText: '🚢 문의하기',
-  },
-];
 
 interface CachedKakaoData {
   text: string;
-  kakaoQuickReplies: KakaoQuickReply[];
-  kakaoCarouselItems: any[];
   assistantMessage: {
     role: 'data' | 'system' | 'user' | 'assistant';
     parts: any[];
     experimental_attachments?: any[];
   };
-  showCarousel: boolean;
 }
 
 const CACHE_KEY_PREFIX = 'kakao:chat:';
@@ -144,16 +121,10 @@ async function processKakaoMessage(
   // 캐시된 응답 확인
   const cachedData: CachedKakaoData | null = await getCachedData(cacheKey);
   let llmText: string;
-  let carouselItems: any[];
-  let kakaoQuickReplies: KakaoQuickReply[];
   let assistantMessage: Message | null = null;
-  let showCarousel: boolean;
 
   if (cachedData) {
     llmText = cachedData.text;
-    carouselItems = cachedData.kakaoCarouselItems;
-    kakaoQuickReplies = cachedData.kakaoQuickReplies;
-    showCarousel = cachedData.showCarousel;
 
     // 캐시된 어시스턴트 메시지 복원
     assistantMessage = {
@@ -227,7 +198,7 @@ async function processKakaoMessage(
     template: {
       outputs: [
         {
-          simpleText: { text: preprocessXmlText(llmText) },
+          simpleText: { text: llmText },
         },
       ],
     },
@@ -274,42 +245,50 @@ export async function POST(req: Request) {
     console.log(`[${getKSTDateTime()}] [API] 카카오 콜백 요청 성공`);
     return Response.json({ success: true }, { status: 200 });
   } catch (error: any) {
-    console.error(`[${getKSTDateTime()}] [API] 상세 오류 정보:`);
-    console.error(`[${getKSTDateTime()}] [API] 오류 메시지: ${error.message}`);
-    console.error(`[${getKSTDateTime()}] [API] 오류 스택: ${error.stack}`);
+    console.error(`[${getKSTDateTime()}] [api/kakao/callback] 상세 오류 정보:`);
+    console.error(`[${getKSTDateTime()}] [api/kakao/callback] 오류 메시지: ${error.message}`);
+    console.error(`[${getKSTDateTime()}] [api/kakao/callback] 오류 스택: ${error.stack}`);
 
     // axios 에러의 경우 더 상세한 정보 출력
     if (error.response) {
       // 서버가 응답을 반환했지만 상태 코드가 2xx가 아닌 경우
-      console.error(`[${getKSTDateTime()}] [API] 응답 상태: ${error.response.status}`);
-      console.error(`[${getKSTDateTime()}] [API] 응답 상태 텍스트: ${error.response.statusText}`);
       console.error(
-        `[${getKSTDateTime()}] [API] 응답 헤더:`,
+        `[${getKSTDateTime()}] [api/kakao/callback] 응답 상태: ${error.response.status}`
+      );
+      console.error(
+        `[${getKSTDateTime()}] [api/kakao/callback] 응답 상태 텍스트: ${error.response.statusText}`
+      );
+      console.error(
+        `[${getKSTDateTime()}] [api/kakao/callback] 응답 헤더:`,
         JSON.stringify(error.response.headers, null, 2)
       );
       console.error(
-        `[${getKSTDateTime()}] [API] 응답 데이터:`,
+        `[${getKSTDateTime()}] [api/kakao/callback] 응답 데이터:`,
         JSON.stringify(error.response.data, null, 2)
       );
     } else if (error.request) {
       // 요청이 전송되었지만 응답을 받지 못한 경우
-      console.error(`[${getKSTDateTime()}] [API] 요청이 전송되었지만 응답을 받지 못함`);
-      console.error(`[${getKSTDateTime()}] [API] 요청 정보:`, error.request);
+      console.error(
+        `[${getKSTDateTime()}] [api/kakao/callback] 요청이 전송되었지만 응답을 받지 못함`
+      );
+      console.error(`[${getKSTDateTime()}] [api/kakao/callback] 요청 정보:`, error.request);
     } else {
       // 요청 설정 중에 오류가 발생한 경우
-      console.error(`[${getKSTDateTime()}] [API] 요청 설정 오류: ${error.message}`);
+      console.error(`[${getKSTDateTime()}] [api/kakao/callback] 요청 설정 오류: ${error.message}`);
     }
 
     // axios 설정 정보도 출력
     if (error.config) {
-      console.error(`[${getKSTDateTime()}] [API] 요청 설정:`);
-      console.error(`[${getKSTDateTime()}] [API] URL: ${error.config.url}`);
-      console.error(`[${getKSTDateTime()}] [API] 메소드: ${error.config.method}`);
+      console.error(`[${getKSTDateTime()}] [api/kakao/callback] 요청 설정:`);
+      console.error(`[${getKSTDateTime()}] [api/kakao/callback] URL: ${error.config.url}`);
+      console.error(`[${getKSTDateTime()}] [api/kakao/callback] 메소드: ${error.config.method}`);
       console.error(
-        `[${getKSTDateTime()}] [API] 헤더:`,
+        `[${getKSTDateTime()}] [api/kakao/callback] 헤더:`,
         JSON.stringify(error.config.headers, null, 2)
       );
-      console.error(`[${getKSTDateTime()}] [API] 타임아웃: ${error.config.timeout}ms`);
+      console.error(
+        `[${getKSTDateTime()}] [api/kakao/callback] 타임아웃: ${error.config.timeout}ms`
+      );
     }
 
     // await notifySlackOnError(error, 'app/(chat)/api/callback/route.ts:POST');

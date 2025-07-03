@@ -29,6 +29,10 @@ const TIMEOUT_MS = 2000;
 const callbackBackgroundTaskUrl = getCallbackUrl();
 
 export async function POST(request: NextRequest) {
+  // 디버깅을 위한 5초 sleep
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  console.log('5초 디버깅 완료');
+
   let kakaoRequestBody: KakaoRequestBody;
 
   // console.log('[INFO] kakao request:', request);
@@ -82,10 +86,10 @@ export async function POST(request: NextRequest) {
       )
       .catch(() => {});
 
-    console.log(`[${getKSTDateTime()}] [INFO] Successfully sent event to Inngest`);
+    console.log(`[${getKSTDateTime()}] [api/kakao] Successfully sent event to Inngest`);
   } catch (error: any) {
     console.error(
-      `[${getKSTDateTime()}] [ERROR] Failed to send event to Inngest (User: ${userId}):`,
+      `[${getKSTDateTime()}] [api/kakao] Failed to send event to Inngest (User: ${userId}):`,
       error.message
     );
   }
