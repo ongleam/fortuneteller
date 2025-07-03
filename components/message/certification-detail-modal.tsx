@@ -12,7 +12,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Badge } from '@/components/ui/badge';
-import { preprocessText } from '@/lib/utils/textPreprocess';
+import { normText } from '@/lib/utils/textPreprocess';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 // KCTable에서 정의한 인터페이스 재사용 또는 임포트
@@ -102,7 +102,7 @@ function renderDetailSummary(item: CertificationDetail['item']) {
   }
 
   if (details.length === 0) return null;
-  return preprocessText(details.join('\n'));
+  return normText(details.join('\n'));
 }
 
 // 구매대행 상태 뱃지 렌더링 함수
@@ -205,17 +205,17 @@ export function CertificationDetailModal({
               <DetailRow label="구매대행">{renderPurchaseAgencyStatus(item.ic_pagent)}</DetailRow>
 
               <DetailRow label="샘플 수량">
-                <DetailItem value={preprocessText(item.ic_ea)} />
+                <DetailItem value={normText(item.ic_ea)} />
               </DetailRow>
 
               <DetailRow label="예상 소요 기간">
-                <DetailItem value={preprocessText(item.ic_btween)} isHtml />
+                <DetailItem value={normText(item.ic_btween)} isHtml />
               </DetailRow>
 
               <DetailRow label="필요 서류">{renderIcReqBadges(item.ic_req)}</DetailRow>
 
               <DetailRow label="참고 사항 (Tip)">
-                <DetailItem value={preprocessText(item.ic_tip)} isHtml />
+                <DetailItem value={normText(item.ic_tip)} isHtml />
               </DetailRow>
 
               {item.lc_cate1_con && (
@@ -235,17 +235,17 @@ export function CertificationDetailModal({
               <DetailRow label="구매대행">{renderPurchaseAgencyStatus(item.ic_pagent)}</DetailRow>
 
               <DetailRow label="샘플 수량">
-                <DetailItem value={preprocessText(item.ic_ea)} />
+                <DetailItem value={normText(item.ic_ea)} />
               </DetailRow>
 
               <DetailRow label="예상 소요 기간">
-                <DetailItem value={preprocessText(item.ic_btween)} isHtml />
+                <DetailItem value={normText(item.ic_btween)} isHtml />
               </DetailRow>
 
               <DetailRow label="필요 서류">{renderIcReqBadges(item.ic_req)}</DetailRow>
 
               <DetailRow label="참고 사항 (Tip)">
-                <DetailItem value={preprocessText(item.ic_tip)} isHtml />
+                <DetailItem value={normText(item.ic_tip)} isHtml />
               </DetailRow>
 
               {item.lc_cate1_con && (

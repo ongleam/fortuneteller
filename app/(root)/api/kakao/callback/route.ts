@@ -14,6 +14,7 @@ import {
   generateUUID,
   getTrailingMessageId,
 } from '@/lib/utils';
+import { normText } from '@/lib/utils/textPreprocess';
 import { KakaoSkillResponse } from '@/lib/types/kakao';
 import { getMessagesByChatId, getOrCreateKakaoChatByUserId, saveMessages } from '@/lib/db/queries';
 import { getOrCreateProfileByUserKakaoId } from '@/lib/db/queries';
@@ -198,7 +199,7 @@ async function processKakaoMessage(
     template: {
       outputs: [
         {
-          simpleText: { text: llmText },
+          simpleText: { text: normText(llmText) },
         },
       ],
     },

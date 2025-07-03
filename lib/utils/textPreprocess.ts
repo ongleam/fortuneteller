@@ -5,14 +5,15 @@
  * - 여러 연속 공백을 한 칸으로
  * - <br> 태그를 \n으로 변환
  */
-export function preprocessText(raw: string | undefined): string {
+
+export function normText(raw: string | undefined): string {
   if (!raw) return '';
   return raw
-    .replace(/<br\s*\/?>/gi, '') // <br> → \n
-    .replace(/\n{2,}/g, '\n') // 연속 개행 → 한 줄 개행
-    .replace(/[ \t]{2,}/g, ' ') // 연속 공백 → 한 칸
-    .trim(); // 앞뒤 공백/개행 제거
+    .replace(/\n{2,}/g, '\n')
+    .replace(/[ \t]{2,}/g, ' ')
+    .trim();
 }
+
 /**
  * XML 스타일의 텍스트에서 XML 태그를 제거하고 내용만 추출합니다.
  * - <tag>content</tag> → content
@@ -40,5 +41,5 @@ export function removeXmlTags(text: string): string {
  */
 export function preprocessXmlText(text: string | undefined): string {
   if (!text) return '';
-  return preprocessText(removeXmlTags(text));
+  return normText(removeXmlTags(text));
 }
