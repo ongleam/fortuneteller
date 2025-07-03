@@ -24,7 +24,7 @@ const getCallbackUrl = () => {
   }
 };
 
-const TIMEOUT_MS = 2000;
+const TIMEOUT_MS = 500;
 
 const callbackBackgroundTaskUrl = getCallbackUrl();
 
