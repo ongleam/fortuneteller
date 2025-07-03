@@ -29,10 +29,6 @@ const TIMEOUT_MS = 500;
 const callbackBackgroundTaskUrl = getCallbackUrl();
 
 export async function POST(request: NextRequest) {
-  // 디버깅을 위한 5초 sleep
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  console.log('5초 디버깅 완료');
-
   let kakaoRequestBody: KakaoRequestBody;
 
   // console.log('[INFO] kakao request:', request);

@@ -23,7 +23,7 @@ import axios from 'axios';
 // 상수 정의
 const LLM_TIMEOUT = 20000;
 const MAX_STEPS = 5;
-const MAX_PREVIOUS_MESSAGES = 0;
+const MAX_PREVIOUS_MESSAGES = 10;
 
 interface CachedKakaoData {
   text: string;
