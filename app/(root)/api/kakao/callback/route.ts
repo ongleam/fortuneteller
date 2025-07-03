@@ -64,7 +64,7 @@ async function generateLLMResponse(messages: Message[]): Promise<GenerateTextRes
   console.log(`[${getKSTDateTime()}] [API] LLM 처리 시작`);
 
   // 에이전트 설정
-  const agentConfig = baseAgent({ model: 'kakao-chat-model', messages });
+  const agentConfig = baseAgent({ model: 'chat-model', messages });
   try {
     // 타임아웃과 함께 텍스트 생성
     const result = await measureExecutionTime('Promise.race', async () => {
@@ -190,19 +190,19 @@ async function processKakaoMessage(
     // carouselItems = items;
     // showCarousel = newShowCarousel;
 
-    const responseMessages = llmResponse.response.messages as ResponseMessage[];
-    const faqQuestions = extractFaqQuestions(responseMessages);
+    // const responseMessages = llmResponse.response.messages as ResponseMessage[];
+    // const faqQuestions = extractFaqQuestions(responseMessages);
     llmText = llmResponse.text;
-    const genQuestions = await generateRecommandQuestions({
-      userUtterance,
-      questions: faqQuestions,
-    });
+    // const genQuestions = await generateRecommandQuestions({
+    //   userUtterance,
+    //   questions: faqQuestions,
+    // });
 
-    kakaoQuickReplies = genQuestions.map((question) => ({
-      action: 'message' as const,
-      label: question.messageText,
-      messageText: question.messageText,
-    }));
+    // kakaoQuickReplies = genQuestions.map((question) => ({
+    //   action: 'message' as const,
+    //   label: question.messageText,
+    //   messageText: question.messageText,
+    // }));
 
     // 어시스턴트 메시지 생성
     const [, newAssistantMessage] = appendResponseMessages({
@@ -261,12 +261,12 @@ async function processKakaoMessage(
   //   });
   // }
 
-  if (kakaoQuickReplies) {
-    processedResponse.template!.quickReplies = [
-      ...DEFAULT_QUICK_REPLIES,
-      ...kakaoQuickReplies.slice(0, MAX_RECOMMAND_QUESTIONS),
-    ];
-  }
+  // if (kakaoQuickReplies) {
+  //   processedResponse.template!.quickReplies = [
+  //     ...DEFAULT_QUICK_REPLIES,
+  //     ...kakaoQuickReplies.slice(0, MAX_RECOMMAND_QUESTIONS),
+  //   ];
+  // }
 
   return processedResponse;
 }
@@ -281,6 +281,11 @@ export async function POST(req: Request) {
     }
 
     const response = await processKakaoMessage(userUtterance, userId);
+
+    console.log(
+      `[${getKSTDateTime()}] [API] 전송할 응답 데이터:`,
+      JSON.stringify(response, null, 2)
+    );
 
     console.log(`[${getKSTDateTime()}] [API] 카카오 콜백 요청 시작 - URL: ${originalCallbackUrl}`);
     console.log(
@@ -331,7 +336,7 @@ export async function POST(req: Request) {
       console.error(`[${getKSTDateTime()}] [API] 타임아웃: ${error.config.timeout}ms`);
     }
 
-    await notifySlackOnError(error, 'app/(chat)/api/callback/route.ts:POST');
+    // await notifySlackOnError(error, 'app/(chat)/api/callback/route.ts:POST');
     // Sentry.captureException(error);
 
     return Response.json({ success: false }, { status: 500 });

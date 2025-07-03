@@ -5,8 +5,8 @@ export const siteConfig = {
   description:
     '신비로운 AI 점술사 점순이와 함께 오늘의 운세를 확인해보세요. 사랑운, 재물운, 직업운, 건강운까지 개인 맞춤형 운세와 조언을 제공합니다. 전통 점술의 지혜와 현대 AI 기술이 만난 새로운 운세 서비스입니다.',
   urls: {
-    production: 'https://jeomsuni.com',
-    development: 'https://dev.jeomsuni.com',
+    production: 'https://ongleam-fortuneteller.vercel.app',
+    development: 'https://ongleam-fortuneteller.vercel.app',
     local: 'http://localhost:3000',
   },
   keywords: [

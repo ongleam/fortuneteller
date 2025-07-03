@@ -1,5 +1,5 @@
 import { myProvider } from '@/lib/utils/registry';
-import { searchFaq } from '@/lib/tools/search-faq';
+// import { searchFaq } from '@/lib/tools/search-faq';
 import { DataStreamWriter } from 'ai';
 import { systemPrompts } from '@/config/prompts';
 
