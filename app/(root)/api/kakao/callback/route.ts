@@ -93,25 +93,6 @@ function createTimeoutPromise(): Promise<never> {
   });
 }
 
-const extractFaqQuestions = (responseMessages: ResponseMessage[]): string[] => {
-  const faqAnswers: string[] = [];
-
-  for (const message of responseMessages) {
-    if (message.content) {
-      for (const content of message.content) {
-        if (content.type === 'tool-result' && content.toolName === 'searchFaq' && content.result) {
-          const questions = (content.result as Array<{ question: string }>).map(
-            (item) => item.question
-          );
-          faqAnswers.push(...questions);
-        }
-      }
-    }
-  }
-
-  return faqAnswers;
-};
-
 // 카카오 메시지 처리 함수
 async function processKakaoMessage(
   userUtterance: string,
@@ -281,11 +262,6 @@ export async function POST(req: Request) {
     }
 
     const response = await processKakaoMessage(userUtterance, userId);
-
-    console.log(
-      `[${getKSTDateTime()}] [API] 전송할 응답 데이터:`,
-      JSON.stringify(response, null, 2)
-    );
 
     console.log(`[${getKSTDateTime()}] [API] 카카오 콜백 요청 시작 - URL: ${originalCallbackUrl}`);
     console.log(
