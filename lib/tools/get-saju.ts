@@ -43,7 +43,7 @@ async function fetchSaju(
   birthYear: string,
   birthMonth: string,
   birthDay: string,
-  birthTime: string
+  birthTime: string | null | undefined
 ): Promise<SajuOutput> {
   try {
     // 1단계: order3Id 생성
@@ -56,7 +56,7 @@ async function fetchSaju(
       birthYear,
       birthMonth,
       birthDay,
-      birthTime,
+      birthTime: birthTime || '',
     };
 
     const makeOrderResponse = await fetch(SAJU_MAKER_API_URL, {
@@ -141,7 +141,11 @@ export const getSaju = () =>
       birthYear: z.string().describe(TOOL_PROMPTS.parameters.birthYear.description),
       birthMonth: z.string().describe(TOOL_PROMPTS.parameters.birthMonth.description),
       birthDay: z.string().describe(TOOL_PROMPTS.parameters.birthDay.description),
-      birthTime: z.string().optional().describe(TOOL_PROMPTS.parameters.birthTime.description),
+      birthTime: z
+        .string()
+        .nullable()
+        .optional()
+        .describe(TOOL_PROMPTS.parameters.birthTime.description),
     }),
     execute: async ({ name, gender, birthType, birthYear, birthMonth, birthDay, birthTime }) => {
       console.log(
@@ -149,9 +153,6 @@ export const getSaju = () =>
       );
 
       try {
-        // birthTime이 없는 경우 빈 문자열로 설정
-        const formattedBirthTime = birthTime || '';
-
         const result = await fetchSaju(
           name,
           gender,
@@ -159,7 +160,7 @@ export const getSaju = () =>
           birthYear,
           birthMonth,
           birthDay,
-          formattedBirthTime
+          birthTime
         );
 
         return result;
