@@ -122,7 +122,7 @@ async function fetchSaju(
       }),
     };
 
-    console.log('[INFO] 사주 결과 조회 완료 -->', JSON.stringify(output, null, 2));
+    // console.log('[INFO] 사주 결과 조회 완료 -->', JSON.stringify(output, null, 2));
 
     return output;
   } catch (error) {
@@ -136,8 +136,11 @@ export const getSaju = () =>
     description: TOOL_PROMPTS.description,
     parameters: z.object({
       name: z.string().describe(TOOL_PROMPTS.parameters.name.description),
-      gender: z.string().describe(TOOL_PROMPTS.parameters.gender.description),
-      birthType: z.string().describe(TOOL_PROMPTS.parameters.birthType.description),
+      gender: z.enum(['남성', '여성']).describe(TOOL_PROMPTS.parameters.gender.description),
+      birthType: z
+        .enum(['양력', '음력'])
+        .default('양력')
+        .describe(TOOL_PROMPTS.parameters.birthType.description),
       birthYear: z.string().describe(TOOL_PROMPTS.parameters.birthYear.description),
       birthMonth: z.string().describe(TOOL_PROMPTS.parameters.birthMonth.description),
       birthDay: z.string().describe(TOOL_PROMPTS.parameters.birthDay.description),
@@ -149,7 +152,7 @@ export const getSaju = () =>
     }),
     execute: async ({ name, gender, birthType, birthYear, birthMonth, birthDay, birthTime }) => {
       console.log(
-        `[INFO] getSaju 호출: '${name}, ${gender}, ${birthType}, ${birthYear}, ${birthMonth}, ${birthDay}, ${birthTime}'`
+        `[INFO] getSaju 호출: \nname: ${name}\ngender: ${gender}\nbirthType: ${birthType}\nbirthYear: ${birthYear}\nbirthMonth: ${birthMonth}\nbirthDay: ${birthDay}\nbirthTime: ${birthTime}`
       );
 
       try {

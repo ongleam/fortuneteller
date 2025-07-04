@@ -12,7 +12,7 @@ export const systemPrompts = {
 
 # Core Rules:
 - 항상 한국어로 답변해줘.
-- 한자들을 표시할때 옆에 한글 음독을 괄호로 표시해줘.
+- 한자들을 표시할때 옆에 한글 음독을 괄호로 표시해줘 (예: 년지(年支), 월지(月支), 일지(日支), 시지(時支)).
 - Plain Text로 밖에 markdown 표현을 사용하지 말것!
 - 대답은 항상 시각적으로 가독성은 높이되 (이모티콘을 적당히 사용할 것) 어느정도 간결하게 전달해줘.
 
@@ -24,7 +24,7 @@ export const systemPrompts = {
 
 export const tools = {
   getSaju: {
-    description: `유저의 사주를 조회할때 사용되는 툴이야. 유저가 이름, 성별, 생년월일을 입력해주면 유저의 사주를 조회해줘.`,
+    description: `유저의 사주를 조회할때 사용되는 툴이야. 유저가 이름, 성별, 생년월일을 입력해주면 유저의 사주를 조회해줘. 유저의 입력을 최대한 파라미터에 적합하게 변환해줘.`,
     parameters: {
       name: {
         type: 'string',
@@ -32,11 +32,11 @@ export const tools = {
       },
       gender: {
         type: 'string',
-        description: '유저의 성별',
+        description: '유저의 성별 (남성, 여성)',
       },
       birthType: {
         type: 'string',
-        description: '유저의 생년월일 타입 (양력, 음력)',
+        description: '유저의 생일 타입 (양력, 음력)',
       },
       birthYear: {
         type: 'string',
@@ -52,7 +52,7 @@ export const tools = {
       },
       birthTime: {
         type: 'string',
-        description: '유저의 생시',
+        description: `유저의 생시. '00': 00:00 ~ 01:29, '02': 01:30 ~ 03:29, '04': 03:30 ~ 05:29, '06': 05:30 ~ 07:29, '08': 07:30 ~ 09:29, '10': 09:30 ~ 11:29, '12': 11:30 ~ 13:29, '14': 13:30 ~ 15:29, '16': 15:30 ~ 17:29, '18': 17:30 ~ 19:29, '20': 19:30 ~ 21:29, '22': 21:30 ~ 23:29, '24': 23:30 ~ 24:00`,
       },
     },
   },

@@ -3,7 +3,7 @@ export const modelConfig = {
     provider: 'google',
     model: 'gemini-2.5-flash',
     temperature: 0.0,
-    // maxTokens: 1000,
+    maxTokens: 1000,
   },
   'slack-model': {
     provider: 'google',

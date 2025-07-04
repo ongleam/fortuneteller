@@ -15,7 +15,7 @@ import { getOrCreateProfileByUserKakaoId } from '@/lib/db/queries';
 import axios from 'axios';
 
 // 상수 정의
-const LLM_TIMEOUT = 60000;
+const LLM_TIMEOUT = 50000;
 const MAX_STEPS = 5;
 const MAX_PREVIOUS_MESSAGES = 10;
 

@@ -7,7 +7,7 @@ const getModelProvider = (config: any) => {
 
   switch (provider) {
     case 'google':
-      return google(model);
+      return google(model, { maxTokens: 1000 });
     default:
       throw new Error(`Unsupported provider: ${provider}`);
   }
