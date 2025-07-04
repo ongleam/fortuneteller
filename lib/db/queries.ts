@@ -279,6 +279,18 @@ export async function saveMessages({ messages }: { messages: Array<DBMessage> })
 
 export async function getMessagesByChatId({ id, limit }: { id: string; limit?: number }) {
   try {
+    if (limit) {
+      // 서브쿼리: 최신 N개 메시지를 먼저 가져온 후 시간순으로 정렬
+      const latestMessages = await db
+        .select()
+        .from(message)
+        .where(eq(message.chat_id, id))
+        .orderBy(desc(message.created_at))
+        .limit(limit);
+
+      // 시간순으로 정렬 (과거 → 현재)
+      return latestMessages.reverse();
+    }
     return await db
       .select()
       .from(message)

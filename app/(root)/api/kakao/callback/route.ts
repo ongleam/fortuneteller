@@ -99,6 +99,13 @@ async function processKakaoMessage(
     content: userUtterance,
   };
 
+  const previousMessages = await getMessagesByChatId({ id: chat.id, limit: MAX_PREVIOUS_MESSAGES });
+  const messages = appendClientMessage({
+    // @ts-ignore
+    messages: previousMessages,
+    message: userMessage,
+  });
+
   await saveMessages({
     messages: [
       {
@@ -112,13 +119,7 @@ async function processKakaoMessage(
     ],
   });
 
-  const previousMessages = await getMessagesByChatId({ id: chat.id });
-  const messages = appendClientMessage({
-    // @ts-ignore
-    messages: previousMessages,
-    message: userMessage,
-  });
-
+  console.log(JSON.stringify(messages, null, 2));
   // 캐시된 응답 확인
   const cachedData: CachedKakaoData | null = await getCachedData(cacheKey);
   let llmText: string;
