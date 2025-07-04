@@ -26,17 +26,6 @@ const LLM_TIMEOUT = 20000;
 const MAX_STEPS = 5;
 const MAX_PREVIOUS_MESSAGES = 10;
 
-interface CachedKakaoData {
-  text: string;
-  assistantMessage: {
-    role: 'data' | 'system' | 'user' | 'assistant';
-    parts: any[];
-    experimental_attachments?: any[];
-  };
-}
-
-const CACHE_KEY_PREFIX = 'kakao:chat:';
-
 async function generateLLMResponse(messages: Message[]): Promise<GenerateTextResult<any, any>> {
   const startTime = Date.now();
   console.log(`[${getKSTDateTime()}] [API] LLM 처리 시작`);
@@ -76,8 +65,6 @@ async function processKakaoMessage(
   userUtterance: string,
   userId: string
 ): Promise<KakaoSkillResponse> {
-  const cacheKey = `${CACHE_KEY_PREFIX}${userUtterance.toLowerCase().trim()}`;
-
   console.log(
     `[${getKSTDateTime()}] [API] 요청 처리 시작 - "${userUtterance.substring(0, 30)}..."`
   );
@@ -120,64 +107,14 @@ async function processKakaoMessage(
   });
 
   console.log(JSON.stringify(messages, null, 2));
-  // 캐시된 응답 확인
-  const cachedData: CachedKakaoData | null = await getCachedData(cacheKey);
-  let llmText: string;
-  let assistantMessage: Message | null = null;
 
-  if (cachedData) {
-    llmText = cachedData.text;
+  const llmResponse = await generateLLMResponse(messages);
 
-    // 캐시된 어시스턴트 메시지 복원
-    assistantMessage = {
-      id: generateUUID(),
-      role: cachedData.assistantMessage.role,
-      parts: cachedData.assistantMessage.parts,
-      experimental_attachments: cachedData.assistantMessage.experimental_attachments,
-      content: llmText,
-    };
-  } else {
-    console.log('[Cache miss] Generating new response');
-    const llmResponse = await generateLLMResponse(messages.slice(-MAX_PREVIOUS_MESSAGES));
-    // const { items, showCarousel: newShowCarousel } =
-    //   createCarouselItemsFromLlmResponse(llmResponse);
-    // carouselItems = items;
-    // showCarousel = newShowCarousel;
-
-    // const responseMessages = llmResponse.response.messages as ResponseMessage[];
-    // const faqQuestions = extractFaqQuestions(responseMessages);
-    llmText = llmResponse.text;
-    // const genQuestions = await generateRecommandQuestions({
-    //   userUtterance,
-    //   questions: faqQuestions,
-    // });
-
-    // kakaoQuickReplies = genQuestions.map((question) => ({
-    //   action: 'message' as const,
-    //   label: question.messageText,
-    //   messageText: question.messageText,
-    // }));
-
-    // 어시스턴트 메시지 생성
-    const [, newAssistantMessage] = appendResponseMessages({
-      messages: [userMessage],
-      responseMessages: llmResponse.response.messages,
-    });
-    assistantMessage = newAssistantMessage;
-
-    // 응답 캐싱
-    // await setCachedData(cacheKey, {
-    //   text: llmText,
-    //   kakaoQuickReplies,
-    //   kakaoCarouselItems: carouselItems,
-    //   showCarousel,
-    //   assistantMessage: {
-    //     role: assistantMessage.role,
-    //     parts: assistantMessage.parts,
-    //     experimental_attachments: assistantMessage.experimental_attachments,
-    //   },
-    // });
-  }
+  // 어시스턴트 메시지 생성
+  const [, assistantMessage] = appendResponseMessages({
+    messages: [userMessage],
+    responseMessages: llmResponse.response.messages,
+  });
 
   // 어시스턴트 메시지 저장
   if (assistantMessage) {
@@ -200,27 +137,11 @@ async function processKakaoMessage(
     template: {
       outputs: [
         {
-          simpleText: { text: normText(llmText) },
+          simpleText: { text: normText(llmResponse.text) },
         },
       ],
     },
   };
-
-  // if (showCarousel && carouselItems && carouselItems.length > 0) {
-  //   processedResponse.template!.outputs.push({
-  //     carousel: {
-  //       type: 'textCard',
-  //       items: carouselItems.slice(0, MAX_CAROUSEL_ITEMS),
-  //     },
-  //   });
-  // }
-
-  // if (kakaoQuickReplies) {
-  //   processedResponse.template!.quickReplies = [
-  //     ...DEFAULT_QUICK_REPLIES,
-  //     ...kakaoQuickReplies.slice(0, MAX_RECOMMAND_QUESTIONS),
-  //   ];
-  // }
 
   return processedResponse;
 }
