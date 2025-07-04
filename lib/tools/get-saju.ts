@@ -30,6 +30,12 @@ interface Order3FreePayload {
   order3Id: number;
 }
 
+interface SajuOutput {
+  saju: any | null;
+  sinsals: any | null;
+  today: string;
+}
+
 async function fetchSaju(
   name: string,
   gender: string,
@@ -38,7 +44,7 @@ async function fetchSaju(
   birthMonth: string,
   birthDay: string,
   birthTime: string
-): Promise<any> {
+): Promise<SajuOutput> {
   try {
     // 1단계: order3Id 생성
     console.log('[INFO] 사주 주문 생성 시작...');
@@ -101,9 +107,9 @@ async function fetchSaju(
 
     const sajuResult = await freeOrderResponse.json();
 
-    const output = {
-      saju: sajuResult.saju,
-      sinsals: sajuResult.sinsals,
+    const output: SajuOutput = {
+      saju: sajuResult?.saju ?? null,
+      sinsals: sajuResult?.sinsals ?? null,
       today: new Date().toLocaleString('ko-KR', {
         timeZone: 'Asia/Seoul',
         year: 'numeric',
@@ -143,8 +149,8 @@ export const getSaju = () =>
       );
 
       try {
-        // birthTime이 없는 경우 기본값 설정
-        const formattedBirthTime = birthTime || '12';
+        // birthTime이 없는 경우 빈 문자열로 설정
+        const formattedBirthTime = birthTime || '';
 
         const result = await fetchSaju(
           name,
@@ -162,7 +168,23 @@ export const getSaju = () =>
 
         // API 호출 실패 시 테스트 결과로 대체 (개발용)
         console.log('[INFO] API 호출 실패로 테스트 결과 반환');
-        return testSajuResult;
+
+        const fallbackOutput: SajuOutput = {
+          saju: testSajuResult?.saju ?? null,
+          sinsals: testSajuResult?.sinsals ?? null,
+          today: new Date().toLocaleString('ko-KR', {
+            timeZone: 'Asia/Seoul',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false,
+          }),
+        };
+
+        return fallbackOutput;
       }
     },
   });
