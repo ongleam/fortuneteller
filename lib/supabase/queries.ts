@@ -1,12 +1,6 @@
 import { createClient } from '@/lib/supabase/client';
 import { getEmbedding } from '@/lib/utils/embedding';
-import {
-  Chat,
-  DBMessage,
-  Faq,
-  Profile,
-  Vote,
-} from '../db/schema';
+import { Chat, DBMessage, Profile, Vote } from '../db/schema';
 
 export const runtime = 'edge';
 
@@ -406,47 +400,4 @@ export const getMessageCountByUserId = async ({
     console.error('사용자별 메시지 카운트 오류:', error);
     throw error;
   }
-};
-
-
-
-
-
-
-// FAQ 쿼리
-
-export const getFaqsByVector = async (
-  query: string,
-  threshold = DEFAULT_MATCH_THRESHOLD,
-  count = DEFAULT_MATCH_COUNT
-): Promise<Faq[] | null> => {
-  try {
-    let queryEmbedding = await getEmbedding(query);
-
-    if (!queryEmbedding) {
-      console.error('쿼리 임베딩이 null 또는 undefined입니다.');
-      throw new Error('쿼리 임베딩 생성 실패 (결과가 null)');
-    }
-
-    const { data, error } = await supabase.rpc('get_faqs_by_vector', {
-      query_embedding: queryEmbedding,
-      threshold,
-      results_limit: count,
-    });
-
-    if (error) throw error;
-    // console.log('[INFO] 벡터 검색 FAQ:', data);
-    return data;
-  } catch (error) {
-    console.error('FAQ 벡터 검색 오류:', error);
-    throw error;
-  }
-};
-
-export const updateProfile = async (data: Profile) => {
-  const { data: updatedData, error } = await supabase
-    .from('profiles')
-    .update(data)
-    .eq('user_id', data.user_id);
-  return { updatedData, error };
 };
