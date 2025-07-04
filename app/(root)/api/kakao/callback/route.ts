@@ -7,18 +7,11 @@ import {
   UIMessage,
 } from 'ai';
 import { baseAgent } from '@/lib/agents/base';
-import {
-  getKSTDateTime,
-  measureExecutionTime,
-  generateExecutionReport,
-  generateUUID,
-  getTrailingMessageId,
-} from '@/lib/utils';
+import { getKSTDateTime, measureExecutionTime, generateUUID } from '@/lib/utils';
 import { normText } from '@/lib/utils/textPreprocess';
 import { KakaoSkillResponse } from '@/lib/types/kakao';
 import { getMessagesByChatId, getOrCreateKakaoChatByUserId, saveMessages } from '@/lib/db/queries';
 import { getOrCreateProfileByUserKakaoId } from '@/lib/db/queries';
-import { getCachedData, setCachedData } from '@/lib/actions/redis';
 import axios from 'axios';
 
 // 상수 정의

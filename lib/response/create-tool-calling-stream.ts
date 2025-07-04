@@ -28,7 +28,7 @@ export function createToolCallingStream(modelConfig: BaseStreamConfig) {
       const { messages, model, userId, chatId, message } = modelConfig;
 
       // Select the agent based on the model
-      const agentConfig = baseAgent({ messages, model, dataStream });
+      const agentConfig = baseAgent({ messages, model });
 
       const result = streamText({
         ...agentConfig,

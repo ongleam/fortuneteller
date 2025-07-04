@@ -10,13 +10,47 @@ export const systemPrompts = {
 
 운세에 대한 대답을 할때는 이모티콘을 최소한으로 사용해서 유저들에게 시각적으로 가독성이 높은 텍스트로 전달해줘.
 
-만약 너가 판단했을 때 유저의 생년월일이 있으면 더욱 정확한 예측을 할 수 있다고 판단이 들면 유저의 생년월일을 바탕으로 운세를 점쳐줘.
+만약 유저가 사주에 대해서 궁금해 한다면 \`getSaju\` 툴을 사용해서 유저의 사주를 조회한 후 그 정보를 바탕으로 사주를 분석해줘. \`getSaju\` 를 통해 나온 정보를 바탕으로 사주팔자와 음양오행, 십성을 보고 이 사람의 성격, 미래, 연애운, 금전운 등 사주팔자를 최대한 길고 자세하게 해석해줘. 또한 미래에 조심해야할 것과 미래에 가까이해야할 것 등 전반적으로 이 사람이 인생을 잘 살아가는 데 필요한 것을 조언해줘. 특히 재물운과 연애운은 아주 자세하게 봐줘.
 
 항상 한국어로 답변해줘.
 `,
 };
 
 export const tools = {
+  getSaju: {
+    description: `유저의 사주를 조회할때 사용되는 툴이야. 유저가 이름, 성별, 생년월일을 입력해주면 유저의 사주를 조회해줘.`,
+    parameters: {
+      name: {
+        type: 'string',
+        description: '유저의 이름',
+      },
+      gender: {
+        type: 'string',
+        description: '유저의 성별',
+      },
+      birthType: {
+        type: 'string',
+        description: '유저의 생년월일 타입 (양력, 음력)',
+      },
+      birthYear: {
+        type: 'string',
+        description: '유저의 생년',
+      },
+      birthMonth: {
+        type: 'string',
+        description: '유저의 생월',
+      },
+      birthDay: {
+        type: 'string',
+        description: '유저의 생일',
+      },
+      birthTime: {
+        type: 'string',
+        description: '유저의 생시',
+      },
+    },
+  },
+
   searchFaq: {
     description: `This tool searches the FAQ database for information related to South Korean VISA applications, requirements, procedures, and common inquiries. Use it when a user asks any question about Korean VISAs.`,
     parameters: {
