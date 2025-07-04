@@ -1,34 +1,9 @@
 import 'server-only';
 
-import {
-  and,
-  asc,
-  cosineDistance,
-  count,
-  desc,
-  eq,
-  gt,
-  gte,
-  ilike,
-  inArray,
-  lt,
-  sql,
-  type SQL,
-} from 'drizzle-orm';
+import { and, asc, count, desc, eq, gt, gte, inArray, lt, sql, type SQL } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
-import {
-  chat,
-  faq,
-  message,
-  profile,
-  vote,
-  type Chat,
-  type DBMessage,
-  type Profile,
-} from './schema';
-import { getEmbedding } from '@/lib/utils/embedding';
-import { type UUID } from 'crypto';
+import { chat, message, profile, vote, type Chat, type DBMessage, type Profile } from './schema';
 import { generateUUID } from '../utils';
 
 // Optionally, if not using email/pass login, you can
@@ -38,9 +13,6 @@ import { generateUUID } from '../utils';
 // biome-ignore lint: Forbidden non-null assertion.
 const client = postgres(process.env.POSTGRES_URL!);
 export const db = drizzle(client);
-
-const DEFAULT_MATCH_THRESHOLD = 0.7;
-const DEFAULT_MATCH_COUNT = 5;
 
 // Profile Queries
 export async function getProfileByUserId({ id }: { id: string }): Promise<Profile | null> {
@@ -406,45 +378,6 @@ export async function getMessageCountByUserId({
     return stats?.count ?? 0;
   } catch (error) {
     console.error('Failed to get message count by user id for the last 24 hours from database');
-    throw error;
-  }
-}
-
-// FAQ Queries
-export async function getFaqsByVector(
-  query: string,
-  threshold = DEFAULT_MATCH_THRESHOLD,
-  count = DEFAULT_MATCH_COUNT
-) {
-  let queryEmbedding: number[] | null;
-
-  try {
-    queryEmbedding = await getEmbedding(query);
-  } catch (error) {
-    console.error('Failed to get Vertex AI embedding:', error);
-    throw error;
-  }
-  if (!queryEmbedding) {
-    console.error('Query embedding is null or undefined.');
-    throw new Error('Failed to generate query embedding (result is null).');
-  }
-
-  try {
-    const similarity = sql<number>`1 - (${cosineDistance(faq.embedding, queryEmbedding)})`;
-
-    const faqs = await db
-      .select({
-        question: faq.question,
-        answer: faq.answer,
-      })
-      .from(faq)
-      .where(gte(similarity, threshold))
-      .orderBy(desc(similarity))
-      .limit(count);
-    // console.log('[INFO] Vector search faqs:', faqs);
-    return faqs;
-  } catch (error) {
-    console.error('Failed to get Vertex AI embedding:', error);
     throw error;
   }
 }

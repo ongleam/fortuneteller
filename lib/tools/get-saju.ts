@@ -142,7 +142,7 @@ export const getSaju = () =>
       birthMonth: z.string().describe(TOOL_PROMPTS.parameters.birthMonth.description),
       birthDay: z.string().describe(TOOL_PROMPTS.parameters.birthDay.description),
       birthTime: z
-        .string()
+        .enum(['00', '02', '04', '06', '08', '10', '12', '14', '16', '18', '20', '22', '24'])
         .nullable()
         .optional()
         .describe(TOOL_PROMPTS.parameters.birthTime.description),

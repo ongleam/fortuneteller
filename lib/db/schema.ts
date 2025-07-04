@@ -78,13 +78,3 @@ export const vote = pgTable(
   }
 );
 export type Vote = InferSelectModel<typeof vote>;
-
-// FAQ 테이블
-export const faq = pgTable('faqs', {
-  id: uuid('id').primaryKey().notNull().defaultRandom(),
-  question: text('question').notNull(),
-  answer: text('answer').notNull(),
-  embedding: vector('embedding', { dimensions: 768 }).notNull(),
-  created_at: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
-});
-export type Faq = InferSelectModel<typeof faq>;
