@@ -99,8 +99,6 @@ async function processKakaoMessage(
     ],
   });
 
-  console.log(JSON.stringify(messages, null, 2));
-
   const llmResponse = await generateLLMResponse(messages);
 
   // 어시스턴트 메시지 생성
