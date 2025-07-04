@@ -25,6 +25,8 @@ async function generateLLMResponse(messages: Message[]): Promise<GenerateTextRes
 
   // 에이전트 설정
   const agentConfig = baseAgent({ model: 'chat-model', messages });
+
+  console.log(JSON.stringify(agentConfig, null, 2));
   try {
     // 타임아웃과 함께 텍스트 생성
     const result = await measureExecutionTime('Promise.race', async () => {
