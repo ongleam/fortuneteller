@@ -3,7 +3,15 @@ import { getSaju, updateSajuProfile } from '@/lib/tools/saju';
 import { systemPrompts } from '@/config/prompts';
 import { modelConfig } from '@/config/models';
 
-export function baseAgent({ messages, model }: { messages: any[]; model: string }) {
+export function baseAgent({
+  messages,
+  model,
+  kakao_user_id,
+}: {
+  messages: any[];
+  model: string;
+  kakao_user_id: string;
+}) {
   return {
     model: myProvider.languageModel(model),
     maxTokens: (modelConfig[model as keyof typeof modelConfig] as any)?.maxTokens,
@@ -12,7 +20,7 @@ export function baseAgent({ messages, model }: { messages: any[]; model: string 
     messages,
     tools: {
       getSaju: getSaju(),
-      updateSajuProfile: updateSajuProfile(),
+      updateSajuProfile: updateSajuProfile(kakao_user_id),
     },
   };
 }

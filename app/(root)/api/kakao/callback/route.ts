@@ -19,12 +19,15 @@ const LLM_TIMEOUT = 50000;
 const MAX_STEPS = 5;
 const MAX_PREVIOUS_MESSAGES = 10;
 
-async function generateLLMResponse(messages: Message[]): Promise<GenerateTextResult<any, any>> {
+async function generateLLMResponse(
+  messages: Message[],
+  kakao_user_id: string
+): Promise<GenerateTextResult<any, any>> {
   const startTime = Date.now();
   console.log(`[${getKSTDateTime()}] [API] LLM 처리 시작`);
 
   // 에이전트 설정
-  const agentConfig = baseAgent({ model: 'chat-model', messages });
+  const agentConfig = baseAgent({ model: 'chat-model', messages, kakao_user_id });
 
   console.log(JSON.stringify(agentConfig, null, 2));
   try {
@@ -101,7 +104,7 @@ async function processKakaoMessage(
     ],
   });
 
-  const llmResponse = await generateLLMResponse(messages);
+  const llmResponse = await generateLLMResponse(messages, userId);
 
   // 어시스턴트 메시지 생성
   const [, assistantMessage] = appendResponseMessages({

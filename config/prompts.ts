@@ -65,8 +65,22 @@ export const tools = {
     },
   },
   updateSajuProfile: {
-    description: `유저의 사주 정보를 프로필에 저장할 때 사용되는 툴이야. 유저가 제공한 사주 정보를 현재 로그인한 유저의 프로필에 업데이트해줘.`,
+    description: `유저의 사주 정보를 프로필에 저장할 때 사용되는 툴이야. 유저가 제공한 사주 정보를 현재 로그인한 유저의 프로필에 업데이트해줘.
+    입력 폼은 다음과 같아
+
+    # 아래의 정보를 입력해줘
+
+    - 이름:
+    - 성별:
+    - 생년월일:
+    - 양력/음력: 
+    - 생시: 모르면 넘어가도 돼
+    `,
     parameters: {
+      name: {
+        type: 'string',
+        description: '유저의 이름',
+      },
       gender: {
         type: 'string',
         description: '유저의 성별 (남성, 여성)',

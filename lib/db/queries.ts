@@ -51,7 +51,8 @@ export async function createProfile({
 }
 
 export async function updateProfileSaju({
-  id,
+  kakao_user_id,
+  name,
   gender,
   birth_type,
   birth_year,
@@ -59,7 +60,8 @@ export async function updateProfileSaju({
   birth_day,
   birth_time,
 }: {
-  id: string;
+  kakao_user_id: string;
+  name?: string;
   gender?: '남성' | '여성' | null;
   birth_type?: '양력' | '음력' | null;
   birth_year?: number | null;
@@ -84,8 +86,8 @@ export async function updateProfileSaju({
   try {
     const [updatedProfile] = await db
       .update(profile)
-      .set({ gender, birth_type, birth_year, birth_month, birth_day, birth_time })
-      .where(eq(profile.user_id, id))
+      .set({ name, gender, birth_type, birth_year, birth_month, birth_day, birth_time })
+      .where(eq(profile.user_kakao_id, kakao_user_id))
       .returning();
     return updatedProfile;
   } catch (error) {

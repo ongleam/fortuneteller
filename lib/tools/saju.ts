@@ -196,10 +196,11 @@ export const getSaju = () =>
     },
   });
 
-export const updateSajuProfile = () =>
+export const updateSajuProfile = (kakao_user_id: string) =>
   tool({
     description: UPDATE_SAJU_PROFILE_PROMPTS.description,
     parameters: z.object({
+      name: z.string().describe(UPDATE_SAJU_PROFILE_PROMPTS.parameters.name.description),
       gender: z
         .enum(['남성', '여성'])
         .describe(UPDATE_SAJU_PROFILE_PROMPTS.parameters.gender.description),
@@ -218,26 +219,16 @@ export const updateSajuProfile = () =>
         .optional()
         .describe(UPDATE_SAJU_PROFILE_PROMPTS.parameters.birthTime.description),
     }),
-    execute: async ({ gender, birthType, birthYear, birthMonth, birthDay, birthTime }) => {
+    execute: async ({ name, gender, birthType, birthYear, birthMonth, birthDay, birthTime }) => {
       console.log(
-        `[INFO] updateSajuProfile 호출: \ngender: ${gender}\nbirthType: ${birthType}\nbirthYear: ${birthYear}\nbirthMonth: ${birthMonth}\nbirthDay: ${birthDay}\nbirthTime: ${birthTime}`
+        `[INFO] updateSajuProfile 호출: \nname: ${name}\ngender: ${gender}\nbirthType: ${birthType}\nbirthYear: ${birthYear}\nbirthMonth: ${birthMonth}\nbirthDay: ${birthDay}\nbirthTime: ${birthTime}`
       );
 
       try {
-        // 현재 로그인된 사용자 정보 가져오기
-        const supabase = await createServerClient();
-        const {
-          data: { user },
-          error: authError,
-        } = await supabase.auth.getUser();
-
-        if (authError || !user) {
-          throw new Error('사용자 인증 정보를 가져올 수 없습니다.');
-        }
-
         // 사주 정보를 프로필에 업데이트
         const updatedProfile = await updateProfileSaju({
-          id: user.id,
+          kakao_user_id,
+          name,
           gender,
           birth_type: birthType,
           birth_year: parseInt(birthYear),
@@ -246,12 +237,13 @@ export const updateSajuProfile = () =>
           birth_time: birthTime || null,
         });
 
-        console.log(`[INFO] 프로필 사주 정보 업데이트 완료: ${user.id}`);
+        console.log(`[INFO] 프로필 사주 정보 업데이트 완료: ${kakao_user_id}`);
 
         return {
           success: true,
           message: '사주 정보가 프로필에 저장되었습니다.',
           profile: {
+            name: updatedProfile.name,
             gender: updatedProfile.gender,
             birthType: updatedProfile.birth_type,
             birthYear: updatedProfile.birth_year,
