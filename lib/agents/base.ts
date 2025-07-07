@@ -1,5 +1,5 @@
 import { myProvider } from '@/lib/utils/registry';
-import { getSaju, updateSajuProfile } from '@/lib/tools/saju';
+import { getSaju, updateSajuProfile, getUserSaju } from '@/lib/tools/saju';
 import { systemPrompts } from '@/config/prompts';
 import { modelConfig } from '@/config/models';
 
@@ -21,6 +21,7 @@ export function baseAgent({
     tools: {
       getSaju: getSaju(),
       updateSajuProfile: updateSajuProfile(kakao_user_id),
+      getUserSaju: getUserSaju(kakao_user_id),
     },
   };
 }

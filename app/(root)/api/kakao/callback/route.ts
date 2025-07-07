@@ -29,7 +29,7 @@ async function generateLLMResponse(
   // 에이전트 설정
   const agentConfig = baseAgent({ model: 'chat-model', messages, kakao_user_id });
 
-  console.log(JSON.stringify(agentConfig, null, 2));
+  // console.log(JSON.stringify(agentConfig, null, 2));
   try {
     // 타임아웃과 함께 텍스트 생성
     const result = await measureExecutionTime('Promise.race', async () => {
