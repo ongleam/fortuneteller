@@ -50,6 +50,50 @@ export async function createProfile({
   }
 }
 
+export async function updateProfileSaju({
+  id,
+  gender,
+  birth_type,
+  birth_year,
+  birth_month,
+  birth_day,
+  birth_time,
+}: {
+  id: string;
+  gender?: '남성' | '여성' | null;
+  birth_type?: '양력' | '음력' | null;
+  birth_year?: number | null;
+  birth_month?: number | null;
+  birth_day?: number | null;
+  birth_time?:
+    | '00'
+    | '02'
+    | '04'
+    | '06'
+    | '08'
+    | '10'
+    | '12'
+    | '14'
+    | '16'
+    | '18'
+    | '20'
+    | '22'
+    | '24'
+    | null;
+}) {
+  try {
+    const [updatedProfile] = await db
+      .update(profile)
+      .set({ gender, birth_type, birth_year, birth_month, birth_day, birth_time })
+      .where(eq(profile.user_id, id))
+      .returning();
+    return updatedProfile;
+  } catch (error) {
+    console.error('Failed to update profile saju in database');
+    throw error;
+  }
+}
+
 export async function getOrCreateProfileByUserKakaoId({
   user_kakao_id,
 }: {

@@ -23,6 +23,15 @@ export const profile = pgTable('profiles', {
   theme: varchar('theme', { enum: ['light', 'dark', 'system'] })
     .default('system')
     .notNull(),
+
+  gender: varchar('gender', { enum: ['남성', '여성'] }),
+  birth_type: varchar('birth_type', { enum: ['양력', '음력'] }),
+  birth_year: integer('birth_year'),
+  birth_month: integer('birth_month'),
+  birth_day: integer('birth_day'),
+  birth_time: varchar('birth_time', {
+    enum: ['00', '02', '04', '06', '08', '10', '12', '14', '16', '18', '20', '22', '24'],
+  }),
   created_at: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   updated_at: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
 });
