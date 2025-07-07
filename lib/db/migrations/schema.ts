@@ -15,52 +15,6 @@ import {
 } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
 
-export const certState = pgEnum('cert_state', [
-  '취소',
-  '반납',
-  '안전인증취소',
-  '적합',
-  '기간만료',
-  '인증만료',
-  '안전확인신고 효력상실',
-  '청문실시',
-  '개선명령',
-  '-',
-  '안전확인신고 효력상실 처분',
-  '안전확인신고표시 사용금지 2개월',
-  'nan',
-  '정지',
-]);
-export const importDiv = pgEnum('import_div', ['수입', '제조', '3']);
-
-export const faqs = pgTable('faqs', {
-  id: uuid().defaultRandom().primaryKey().notNull(),
-  question: text().notNull(),
-  answer: text().notNull(),
-  embedding: vector({ dimensions: 768 }).notNull(),
-  createdAt: timestamp('created_at', { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
-});
-
-export const kcCertifications = pgTable('kc_certifications', {
-  idx: integer().notNull(),
-  category: text().notNull(),
-  factor: text().notNull(),
-  certifications: text().array().notNull(),
-  purchaseAgency: text('purchase_agency').array(),
-  keywords: text().array(),
-  embedding: vector({ dimensions: 768 }).notNull(),
-  createdAt: timestamp('created_at', { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
-  detailIds: uuid('detail_ids').array(),
-  id: uuid().defaultRandom().primaryKey().notNull(),
-});
-
-export const kcCertificationDetails = pgTable('kc_certification_details', {
-  idx: integer().notNull(),
-  item: jsonb().notNull(),
-  id: uuid().defaultRandom().primaryKey().notNull(),
-  createdAt: timestamp('created_at', { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
-});
-
 export const messages = pgTable(
   'messages',
   {

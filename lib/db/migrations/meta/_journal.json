@@ -5,36 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1747065944279,
-      "tag": "0000_glorious_blur",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1747465997664,
-      "tag": "0001_brief_korath",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1747702142129,
-      "tag": "0002_sharp_virginia_dare",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1748242538764,
-      "tag": "0003_dazzling_clint_barton",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1748248126389,
-      "tag": "0004_curved_warpath",
+      "when": 1751895724922,
+      "tag": "0000_aspiring_owl",
       "breakpoints": true
     }
   ]

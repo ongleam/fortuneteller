@@ -3,36 +3,9 @@ CREATE TABLE IF NOT EXISTS "chats" (
 	"title" text NOT NULL,
 	"user_id" uuid NOT NULL,
 	"visibility" varchar DEFAULT 'private' NOT NULL,
+	"channel" varchar DEFAULT 'web' NOT NULL,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
 	"updated_at" timestamp with time zone DEFAULT now() NOT NULL
-);
---> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "faqs" (
-	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"question" text NOT NULL,
-	"answer" text NOT NULL,
-	"embedding" vector(768) NOT NULL,
-	"created_at" timestamp with time zone DEFAULT now() NOT NULL
-);
---> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "kc_certifications" (
-	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"idx" integer NOT NULL,
-	"category" text NOT NULL,
-	"factor" text NOT NULL,
-	"certifications" text[] NOT NULL,
-	"keywords" text[],
-	"purchase_agency" text[],
-	"embedding" vector(768) NOT NULL,
-	"detail_ids" uuid[],
-	"created_at" timestamp with time zone DEFAULT now() NOT NULL
-);
---> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "kc_certification_details" (
-	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"idx" integer NOT NULL,
-	"item" jsonb NOT NULL,
-	"created_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "messages" (
@@ -46,11 +19,19 @@ CREATE TABLE IF NOT EXISTS "messages" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "profiles" (
 	"user_id" uuid PRIMARY KEY NOT NULL,
+	"user_kakao_id" text,
 	"name" text NOT NULL,
 	"avatar_url" text,
 	"theme" varchar DEFAULT 'system' NOT NULL,
+	"gender" varchar,
+	"birth_type" varchar,
+	"birth_year" integer,
+	"birth_month" integer,
+	"birth_day" integer,
+	"birth_time" varchar,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
-	"updated_at" timestamp with time zone DEFAULT now() NOT NULL
+	"updated_at" timestamp with time zone DEFAULT now() NOT NULL,
+	CONSTRAINT "profiles_user_kakao_id_unique" UNIQUE("user_kakao_id")
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "votes" (

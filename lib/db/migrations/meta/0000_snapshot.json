@@ -1,5 +1,5 @@
 {
-  "id": "4ae20bd8-a490-4097-b185-c9201a03f898",
+  "id": "1ab3634a-fc14-4919-9666-433fe475637b",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -34,6 +34,13 @@
           "notNull": true,
           "default": "'private'"
         },
+        "channel": {
+          "name": "channel",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'web'"
+        },
         "created_at": {
           "name": "created_at",
           "type": "timestamp with time zone",
@@ -55,8 +62,12 @@
           "name": "chats_user_id_profiles_user_id_fk",
           "tableFrom": "chats",
           "tableTo": "profiles",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["user_id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "user_id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -64,150 +75,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "public.faqs": {
-      "name": "faqs",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
-        },
-        "question": {
-          "name": "question",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "answer": {
-          "name": "answer",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "embedding": {
-          "name": "embedding",
-          "type": "vector(768)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "createdAt": {
-          "name": "createdAt",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "public.certification_vertex": {
-      "name": "certification_vertex",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
-        },
-        "idx": {
-          "name": "idx",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "category": {
-          "name": "category",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "factor": {
-          "name": "factor",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "certifications": {
-          "name": "certifications",
-          "type": "text[]",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "keywords": {
-          "name": "keywords",
-          "type": "text[]",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "purchase_agency": {
-          "name": "purchase_agency",
-          "type": "text[]",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "embedding": {
-          "name": "embedding",
-          "type": "vector(768)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "detail_ids": {
-          "name": "detail_ids",
-          "type": "uuid[]",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "public.certification_details": {
-      "name": "certification_details",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "idx": {
-          "name": "idx",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "item": {
-          "name": "item",
-          "type": "jsonb",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "public.Message_v2": {
-      "name": "Message_v2",
+    "public.messages": {
+      "name": "messages",
       "schema": "",
       "columns": {
         "id": {
@@ -255,8 +124,12 @@
           "name": "messages_chat_id_chats_id_fk",
           "tableFrom": "messages",
           "tableTo": "chats",
-          "columnsFrom": ["chat_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "chat_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -273,6 +146,12 @@
           "type": "uuid",
           "primaryKey": true,
           "notNull": true
+        },
+        "user_kakao_id": {
+          "name": "user_kakao_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         },
         "name": {
           "name": "name",
@@ -293,6 +172,42 @@
           "notNull": true,
           "default": "'system'"
         },
+        "gender": {
+          "name": "gender",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "birth_type": {
+          "name": "birth_type",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "birth_year": {
+          "name": "birth_year",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "birth_month": {
+          "name": "birth_month",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "birth_day": {
+          "name": "birth_day",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "birth_time": {
+          "name": "birth_time",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
         "created_at": {
           "name": "created_at",
           "type": "timestamp with time zone",
@@ -311,7 +226,15 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {
+        "profiles_user_kakao_id_unique": {
+          "name": "profiles_user_kakao_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "user_kakao_id"
+          ]
+        }
+      }
     },
     "public.votes": {
       "name": "votes",
@@ -342,8 +265,12 @@
           "name": "votes_chat_id_chats_id_fk",
           "tableFrom": "votes",
           "tableTo": "chats",
-          "columnsFrom": ["chat_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "chat_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -351,8 +278,12 @@
           "name": "votes_message_id_messages_id_fk",
           "tableFrom": "votes",
           "tableTo": "messages",
-          "columnsFrom": ["message_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "message_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -360,7 +291,10 @@
       "compositePrimaryKeys": {
         "votes_chat_id_message_id_pk": {
           "name": "votes_chat_id_message_id_pk",
-          "columns": ["chat_id", "message_id"]
+          "columns": [
+            "chat_id",
+            "message_id"
+          ]
         }
       },
       "uniqueConstraints": {}

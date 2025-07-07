@@ -1,5 +1,5 @@
 import { myProvider } from '@/lib/utils/registry';
-import { getSaju } from '@/lib/tools/get-saju';
+import { getSaju } from '@/lib/tools/saju';
 import { systemPrompts } from '@/config/prompts';
 import { modelConfig } from '@/config/models';
 
