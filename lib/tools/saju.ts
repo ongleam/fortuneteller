@@ -3,8 +3,11 @@ import { tool } from 'ai';
 import { z } from 'zod';
 import { tools } from '@/config/prompts';
 import { testSajuResult } from './test';
+import { createServerClient } from '@/lib/supabase/server';
+import { updateProfileSaju } from '@/lib/db/queries';
 
-const TOOL_PROMPTS = tools.getSaju;
+const GET_SAJU_PROMPTS = tools.getSaju;
+const UPDATE_SAJU_PROFILE_PROMPTS = tools.updateSajuProfile;
 
 const SAJU_MAKER_API_URL = 'https://api.aifortunedoctor.com/order3/make';
 const SAJU_API_URL = 'https://api.aifortunedoctor.com/order3/free';
@@ -133,22 +136,22 @@ async function fetchSaju(
 
 export const getSaju = () =>
   tool({
-    description: TOOL_PROMPTS.description,
+    description: GET_SAJU_PROMPTS.description,
     parameters: z.object({
-      name: z.string().describe(TOOL_PROMPTS.parameters.name.description),
-      gender: z.enum(['남성', '여성']).describe(TOOL_PROMPTS.parameters.gender.description),
+      name: z.string().describe(GET_SAJU_PROMPTS.parameters.name.description),
+      gender: z.enum(['남성', '여성']).describe(GET_SAJU_PROMPTS.parameters.gender.description),
       birthType: z
         .enum(['양력', '음력'])
         .default('양력')
-        .describe(TOOL_PROMPTS.parameters.birthType.description),
-      birthYear: z.string().describe(TOOL_PROMPTS.parameters.birthYear.description),
-      birthMonth: z.string().describe(TOOL_PROMPTS.parameters.birthMonth.description),
-      birthDay: z.string().describe(TOOL_PROMPTS.parameters.birthDay.description),
+        .describe(GET_SAJU_PROMPTS.parameters.birthType.description),
+      birthYear: z.string().describe(GET_SAJU_PROMPTS.parameters.birthYear.description),
+      birthMonth: z.string().describe(GET_SAJU_PROMPTS.parameters.birthMonth.description),
+      birthDay: z.string().describe(GET_SAJU_PROMPTS.parameters.birthDay.description),
       birthTime: z
         .enum(['00', '02', '04', '06', '08', '10', '12', '14', '16', '18', '20', '22', '24'])
         .nullable()
         .optional()
-        .describe(TOOL_PROMPTS.parameters.birthTime.description),
+        .describe(GET_SAJU_PROMPTS.parameters.birthTime.description),
     }),
     execute: async ({ name, gender, birthType, birthYear, birthMonth, birthDay, birthTime }) => {
       console.log(
@@ -189,6 +192,82 @@ export const getSaju = () =>
         };
 
         return fallbackOutput;
+      }
+    },
+  });
+
+export const updateSajuProfile = () =>
+  tool({
+    description: UPDATE_SAJU_PROFILE_PROMPTS.description,
+    parameters: z.object({
+      gender: z
+        .enum(['남성', '여성'])
+        .describe(UPDATE_SAJU_PROFILE_PROMPTS.parameters.gender.description),
+      birthType: z
+        .enum(['양력', '음력'])
+        .default('양력')
+        .describe(UPDATE_SAJU_PROFILE_PROMPTS.parameters.birthType.description),
+      birthYear: z.string().describe(UPDATE_SAJU_PROFILE_PROMPTS.parameters.birthYear.description),
+      birthMonth: z
+        .string()
+        .describe(UPDATE_SAJU_PROFILE_PROMPTS.parameters.birthMonth.description),
+      birthDay: z.string().describe(UPDATE_SAJU_PROFILE_PROMPTS.parameters.birthDay.description),
+      birthTime: z
+        .enum(['00', '02', '04', '06', '08', '10', '12', '14', '16', '18', '20', '22', '24'])
+        .nullable()
+        .optional()
+        .describe(UPDATE_SAJU_PROFILE_PROMPTS.parameters.birthTime.description),
+    }),
+    execute: async ({ gender, birthType, birthYear, birthMonth, birthDay, birthTime }) => {
+      console.log(
+        `[INFO] updateSajuProfile 호출: \ngender: ${gender}\nbirthType: ${birthType}\nbirthYear: ${birthYear}\nbirthMonth: ${birthMonth}\nbirthDay: ${birthDay}\nbirthTime: ${birthTime}`
+      );
+
+      try {
+        // 현재 로그인된 사용자 정보 가져오기
+        const supabase = await createServerClient();
+        const {
+          data: { user },
+          error: authError,
+        } = await supabase.auth.getUser();
+
+        if (authError || !user) {
+          throw new Error('사용자 인증 정보를 가져올 수 없습니다.');
+        }
+
+        // 사주 정보를 프로필에 업데이트
+        const updatedProfile = await updateProfileSaju({
+          id: user.id,
+          gender,
+          birth_type: birthType,
+          birth_year: parseInt(birthYear),
+          birth_month: parseInt(birthMonth),
+          birth_day: parseInt(birthDay),
+          birth_time: birthTime || null,
+        });
+
+        console.log(`[INFO] 프로필 사주 정보 업데이트 완료: ${user.id}`);
+
+        return {
+          success: true,
+          message: '사주 정보가 프로필에 저장되었습니다.',
+          profile: {
+            gender: updatedProfile.gender,
+            birthType: updatedProfile.birth_type,
+            birthYear: updatedProfile.birth_year,
+            birthMonth: updatedProfile.birth_month,
+            birthDay: updatedProfile.birth_day,
+            birthTime: updatedProfile.birth_time,
+          },
+        };
+      } catch (error) {
+        console.error('[ERROR] updateSajuProfile 실행 실패:', formattingErrorMessage(error));
+
+        return {
+          success: false,
+          error: formattingErrorMessage(error),
+          message: '사주 정보를 프로필에 저장하는 중 오류가 발생했습니다.',
+        };
       }
     },
   });

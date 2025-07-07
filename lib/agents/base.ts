@@ -1,5 +1,5 @@
 import { myProvider } from '@/lib/utils/registry';
-import { getSaju } from '@/lib/tools/saju';
+import { getSaju, updateSajuProfile } from '@/lib/tools/saju';
 import { systemPrompts } from '@/config/prompts';
 import { modelConfig } from '@/config/models';
 
@@ -12,6 +12,7 @@ export function baseAgent({ messages, model }: { messages: any[]; model: string 
     messages,
     tools: {
       getSaju: getSaju(),
+      updateSajuProfile: updateSajuProfile(),
     },
   };
 }
