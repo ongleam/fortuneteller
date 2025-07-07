@@ -10,7 +10,7 @@ export function baseAgent({
 }: {
   messages: any[];
   model: string;
-  kakao_user_id: string;
+  kakao_user_id?: string;
 }) {
   return {
     model: myProvider.languageModel(model),
@@ -20,8 +20,10 @@ export function baseAgent({
     messages,
     tools: {
       getSaju: getSaju(),
-      updateSajuProfile: updateSajuProfile(kakao_user_id),
-      getUserSaju: getUserSaju(kakao_user_id),
+      ...(kakao_user_id && {
+        updateSajuProfile: updateSajuProfile(kakao_user_id),
+        getUserSaju: getUserSaju(kakao_user_id),
+      }),
     },
   };
 }

@@ -112,11 +112,10 @@ export async function POST(request: Request) {
       },
     ];
 
-    // kcAgent 설정 (테스트용 더미 kakao_user_id 사용)
+    // kcAgent 설정
     const agentConfig = baseAgent({
       messages,
       model,
-      kakao_user_id: 'test_user_id',
     });
 
     const systemPrompt = TEST_SYSTEM_PROMPTS[systemPromptId];
