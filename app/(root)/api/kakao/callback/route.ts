@@ -13,6 +13,7 @@ import { KakaoSkillResponse } from '@/lib/types/kakao';
 import { getMessagesByChatId, getOrCreateKakaoChatByUserId, saveMessages } from '@/lib/db/queries';
 import { getOrCreateProfileByUserKakaoId } from '@/lib/db/queries';
 import axios from 'axios';
+import { getToday } from '@/lib/utils/saju';
 
 // 상수 정의
 const LLM_TIMEOUT = 50000;
@@ -24,7 +25,7 @@ async function generateLLMResponse(
   kakao_user_id: string
 ): Promise<GenerateTextResult<any, any>> {
   const startTime = Date.now();
-  console.log(`[${getKSTDateTime()}] [API] LLM 처리 시작`);
+  console.log(`[${getKSTDateTime()}] [API] LLM 처리 시작 -> id:${kakao_user_id}`);
 
   // 에이전트 설정
   const agentConfig = baseAgent({ model: 'chat-model', messages, kakao_user_id });
@@ -77,11 +78,13 @@ async function processKakaoMessage(
     throw new Error('채팅방을 생성하거나 가져오는데 실패했습니다.');
   }
 
+  const processedUserUtterance = `<USER_INPUT>오늘 날짜: ${getToday()}\n${userUtterance}</USER_INPUT>`;
+
   const userMessage: UIMessage = {
     id: generateUUID(),
     role: 'user',
-    parts: [{ type: 'text', text: userUtterance }],
-    content: userUtterance,
+    parts: [{ type: 'text', text: processedUserUtterance }],
+    content: processedUserUtterance,
   };
 
   const previousMessages = await getMessagesByChatId({ id: chat.id, limit: MAX_PREVIOUS_MESSAGES });

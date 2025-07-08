@@ -50,7 +50,7 @@ export async function createProfile({
   }
 }
 
-export async function updateProfileSaju({
+export async function updateProfile({
   kakao_user_id,
   name,
   gender,

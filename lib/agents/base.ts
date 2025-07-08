@@ -1,7 +1,9 @@
 import { myProvider } from '@/lib/utils/registry';
-import { getSaju, updateSajuProfile, getUserSaju } from '@/lib/tools/saju';
+import { getSaju } from '@/lib/tools/saju';
+import { updateUserProfile } from '@/lib/tools/profile';
 import { systemPrompts } from '@/config/prompts';
 import { modelConfig } from '@/config/models';
+import { getTodayFortune, getYearFortune } from '@/lib/tools/fortune';
 
 export function baseAgent({
   messages,
@@ -10,7 +12,7 @@ export function baseAgent({
 }: {
   messages: any[];
   model: string;
-  kakao_user_id?: string;
+  kakao_user_id: string;
 }) {
   return {
     model: myProvider.languageModel(model),
@@ -19,11 +21,10 @@ export function baseAgent({
     system: systemPrompts.BASE_AGENT,
     messages,
     tools: {
-      getSaju: getSaju(),
-      ...(kakao_user_id && {
-        updateSajuProfile: updateSajuProfile(kakao_user_id),
-        getUserSaju: getUserSaju(kakao_user_id),
-      }),
+      updateUserProfile: updateUserProfile(kakao_user_id),
+      getSaju: getSaju(kakao_user_id),
+      getTodayFortune: getTodayFortune(kakao_user_id),
+      getYearFortune: getYearFortune(kakao_user_id),
     },
   };
 }

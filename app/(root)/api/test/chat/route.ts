@@ -116,6 +116,7 @@ export async function POST(request: Request) {
     const agentConfig = baseAgent({
       messages,
       model,
+      kakao_user_id: 'test_user_id',
     });
 
     const systemPrompt = TEST_SYSTEM_PROMPTS[systemPromptId];
