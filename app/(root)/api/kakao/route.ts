@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
   const callbackUrlFromKakao = kakaoRequestBody.userRequest?.callbackUrl;
 
   if (!callbackUrlFromKakao) {
-    console.warn(`[${getKSTDateTime()}] [WARN] No callbackUrl from Kakao.`);
+    console.warn(`[${getKSTDateTime()}] [api/kakao] No callbackUrl from Kakao.`);
     return NextResponse.json(
       {
         version: '2.0',
@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
 
   try {
     console.log(
-      `[${getKSTDateTime()}] [INFO] Sending event: ${callbackUrlFromKakao}/ ${callbackBackgroundTaskUrl}`
+      `[${getKSTDateTime()}] [api/kakao] Sending event: ${callbackUrlFromKakao}/ ${callbackBackgroundTaskUrl}`
     );
     await axios
       .post(
@@ -82,10 +82,10 @@ export async function POST(request: NextRequest) {
       )
       .catch(() => {});
 
-    console.log(`[${getKSTDateTime()}] [api/kakao] Successfully sent event to Inngest`);
+    console.log(`[${getKSTDateTime()}] [api/kakao] Successfully sent event to callback`);
   } catch (error: any) {
     console.error(
-      `[${getKSTDateTime()}] [api/kakao] Failed to send event to Inngest (User: ${userId}):`,
+      `[${getKSTDateTime()}] [api/kakao] Failed to send event to callback (User: ${userId}):`,
       error.message
     );
   }
