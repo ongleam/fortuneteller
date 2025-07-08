@@ -78,33 +78,12 @@ export const getHarmony = (kakao_user_id: string) =>
           birthTime
         );
 
-        if (!harmonyResult.compatibility && !harmonyResult.analysis) {
-          return {
-            success: false,
-            error: '궁합 조회에 실패했습니다.',
-            message: '궁합을 분석하는 중에 문제가 발생했어요. 잠시 후 다시 시도해주세요.',
-          };
-        }
+        console.log(JSON.stringify(harmonyResult, null, 2));
 
         return {
           success: true,
-          data: {
-            user1: {
-              name: userProfile.name,
-              gender: userProfile.gender,
-              birthInfo: `${userProfile.birth_year}년 ${userProfile.birth_month}월 ${userProfile.birth_day}일 (${userProfile.birth_type})`,
-            },
-            user2: {
-              name,
-              gender,
-              birthInfo: `${birthYear}년 ${birthMonth}월 ${birthDay}일 (${birthType})`,
-            },
-            compatibility: harmonyResult.compatibility,
-            analysis: harmonyResult.analysis,
-            advice: harmonyResult.advice,
-            rawData: harmonyResult.rawData,
-          },
-          message: `${userProfile.name}님과 ${name}님의 궁합을 분석했어요!`,
+          message: '궁합 조회 완료',
+          harmonyResult,
         };
       } catch (error) {
         console.error('[ERROR] getHarmony 실패:', error);

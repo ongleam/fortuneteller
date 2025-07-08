@@ -20,6 +20,39 @@ import { getToday } from '@/lib/utils/saju';
 const LLM_TIMEOUT = 50000;
 const MAX_STEPS = 5;
 const MAX_PREVIOUS_MESSAGES = 10;
+const DEFAULT_QUICK_REPLIES = [
+  {
+    action: 'message' as const,
+    label: '내 사주팔자를 봐줘',
+    messageText: '내 사주팔자를 봐줘',
+  },
+  {
+    action: 'message' as const,
+    label: '오늘의 운세를 알려줘',
+    messageText: '오늘의 운세를 알려줘',
+  },
+  {
+    action: 'message' as const,
+    label: '올해의 운세를 알려줘',
+    messageText: '올해의 운세를 알려줘',
+  },
+  {
+    action: 'message' as const,
+    label: '연인과의 궁합을 봐줘',
+    messageText: '연인과의 궁합을 봐줘',
+  },
+];
+
+// 배열에서 랜덤으로 n개를 선택하는 함수
+function getRandomItems<T>(array: T[], count: number): T[] {
+  const shuffled = [...array].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+}
+
+// 랜덤으로 3개의 퀵 리플라이를 선택하는 함수
+function getRandomQuickReplies() {
+  return getRandomItems(DEFAULT_QUICK_REPLIES, 3);
+}
 
 // DB 메시지를 UI 메시지로 변환하는 함수
 function convertDBMessageToUIMessage(dbMessage: DBMessage): UIMessage {
@@ -197,6 +230,7 @@ async function processKakaoMessage(
           simpleText: { text: normText(llmResponse.text) },
         },
       ],
+      quickReplies: getRandomQuickReplies(),
     },
   };
 
