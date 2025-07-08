@@ -28,7 +28,7 @@ export function createToolCallingStream(modelConfig: BaseStreamConfig) {
       const { messages, model, userId, chatId, message } = modelConfig;
 
       // Select the agent based on the model
-      const agentConfig = baseAgent({ messages, model });
+      const agentConfig = baseAgent({ messages, model, kakao_user_id: userId });
 
       const result = streamText({
         ...agentConfig,
