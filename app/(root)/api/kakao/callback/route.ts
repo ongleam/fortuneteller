@@ -12,6 +12,7 @@ import { normText } from '@/lib/utils/textPreprocess';
 import { KakaoSkillResponse } from '@/lib/types/kakao';
 import { getMessagesByChatId, getOrCreateKakaoChatByUserId, saveMessages } from '@/lib/db/queries';
 import { getOrCreateProfileByUserKakaoId } from '@/lib/db/queries';
+import { DBMessage } from '@/lib/db/schema';
 import axios from 'axios';
 import { getToday } from '@/lib/utils/saju';
 
@@ -19,6 +20,51 @@ import { getToday } from '@/lib/utils/saju';
 const LLM_TIMEOUT = 50000;
 const MAX_STEPS = 5;
 const MAX_PREVIOUS_MESSAGES = 10;
+
+// DB 메시지를 UI 메시지로 변환하는 함수
+function convertDBMessageToUIMessage(dbMessage: DBMessage): UIMessage {
+  // parts 배열에서 텍스트 콘텐츠 추출
+  let textContent = '';
+
+  // parts가 배열인지 확인하고 안전하게 접근
+  const parts = Array.isArray(dbMessage.parts) ? dbMessage.parts : [];
+
+  if (parts.length > 0) {
+    // 텍스트 타입의 parts만 content로 사용
+    const textParts = parts.filter((part: any) => part.type === 'text');
+    textContent = textParts.map((part: any) => part.text).join('');
+  }
+
+  // role 타입 검증 및 변환
+  const validRoles = ['user', 'assistant', 'system', 'data'] as const;
+  const role = validRoles.includes(dbMessage.role as any)
+    ? (dbMessage.role as 'user' | 'assistant' | 'system' | 'data')
+    : 'assistant'; // 기본값
+
+  // attachments 안전하게 처리
+  const attachments = Array.isArray(dbMessage.attachments) ? dbMessage.attachments : [];
+
+  const uiMessage: UIMessage = {
+    id: dbMessage.id,
+    role: role,
+    content: textContent,
+    parts: parts,
+    experimental_attachments: attachments,
+    createdAt: dbMessage.created_at ? new Date(dbMessage.created_at) : new Date(),
+  };
+
+  // tool call이나 tool result가 있는 경우 content 필드를 제거하여 AI 라이브러리가 올바르게 처리하도록 함
+  const hasToolParts = parts.some(
+    (part: any) => part.type === 'tool-call' || part.type === 'tool-result'
+  );
+
+  if (hasToolParts && !textContent) {
+    // tool-call/tool-result만 있고 텍스트가 없는 경우 content 필드 제거
+    delete (uiMessage as any).content;
+  }
+
+  return uiMessage;
+}
 
 async function generateLLMResponse(
   messages: Message[],
@@ -77,8 +123,17 @@ async function processKakaoMessage(
   if (!chat || !('id' in chat)) {
     throw new Error('채팅방을 생성하거나 가져오는데 실패했습니다.');
   }
+  const userProfile = {
+    name: profile.name,
+    gender: profile.gender,
+    birthType: profile.birth_type,
+    birthYear: profile.birth_year,
+    birthMonth: profile.birth_month,
+    birthDay: profile.birth_day,
+    birthTime: profile.birth_time,
+  };
 
-  const processedUserUtterance = `<USER_INPUT>오늘 날짜: ${getToday()}\n${userUtterance}</USER_INPUT>`;
+  const processedUserUtterance = `오늘 날짜: ${getToday()}\n유저 정보: ${userProfile}\n<USER_INPUT>${userUtterance}</USER_INPUT>`;
 
   const userMessage: UIMessage = {
     id: generateUUID(),
@@ -87,10 +142,13 @@ async function processKakaoMessage(
     content: processedUserUtterance,
   };
 
-  const previousMessages = await getMessagesByChatId({ id: chat.id, limit: MAX_PREVIOUS_MESSAGES });
+  const dbMessages = await getMessagesByChatId({ id: chat.id, limit: MAX_PREVIOUS_MESSAGES });
+
+  // DB 메시지를 UI 메시지로 변환
+  const convertedMessages = dbMessages.map(convertDBMessageToUIMessage);
+
   const messages = appendClientMessage({
-    // @ts-ignore
-    messages: previousMessages,
+    messages: convertedMessages,
     message: userMessage,
   });
 
@@ -156,15 +214,17 @@ export async function POST(req: Request) {
 
     const response = await processKakaoMessage(userUtterance, userId);
 
-    console.log(`[${getKSTDateTime()}] [API] 카카오 콜백 요청 시작 - URL: ${originalCallbackUrl}`);
     console.log(
-      `[${getKSTDateTime()}] [API] 전송할 응답 데이터:`,
+      `[${getKSTDateTime()}] [api/kakao/callback] 카카오 콜백 요청 시작 - URL: ${originalCallbackUrl}`
+    );
+    console.log(
+      `[${getKSTDateTime()}] [api/kakao/callback] 전송할 응답 데이터:`,
       JSON.stringify(response, null, 2)
     );
 
     await axios.post(originalCallbackUrl, response);
 
-    console.log(`[${getKSTDateTime()}] [API] 카카오 콜백 요청 성공`);
+    console.log(`[${getKSTDateTime()}] [api/kakao/callback] 카카오 콜백 요청 성공`);
     return Response.json({ success: true }, { status: 200 });
   } catch (error: any) {
     console.error(`[${getKSTDateTime()}] [api/kakao/callback] 상세 오류 정보:`);
