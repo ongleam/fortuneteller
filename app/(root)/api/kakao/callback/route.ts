@@ -8,13 +8,14 @@ import {
 } from 'ai';
 import { baseAgent } from '@/lib/agents/base';
 import { getKSTDateTime, measureExecutionTime, generateUUID } from '@/lib/utils';
-import { normText } from '@/lib/utils/textPreprocess';
+// import { normText } from '@/lib/utils/textPreprocess';
 import { KakaoSkillResponse } from '@/lib/types/kakao';
 import { getMessagesByChatId, getOrCreateKakaoChatByUserId, saveMessages } from '@/lib/db/queries';
 import { getOrCreateProfileByUserKakaoId } from '@/lib/db/queries';
 import { DBMessage } from '@/lib/db/schema';
 import axios from 'axios';
 import { getToday } from '@/lib/utils/saju';
+import { removeMarkdown } from '@/lib/utils/text';
 
 // 상수 정의
 const LLM_TIMEOUT = 50000;
@@ -227,7 +228,7 @@ async function processKakaoMessage(
     template: {
       outputs: [
         {
-          simpleText: { text: normText(llmResponse.text) },
+          simpleText: { text: removeMarkdown(llmResponse.text) },
         },
       ],
       quickReplies: getRandomQuickReplies(),

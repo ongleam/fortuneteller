@@ -29,70 +29,68 @@ const TIMEOUT_MS = 500;
 const callbackBackgroundTaskUrl = getCallbackUrl();
 
 export async function POST(request: NextRequest) {
-  let kakaoRequestBody: KakaoRequestBody;
-
-  // console.log('[INFO] kakao request:', request);
-  try {
-    kakaoRequestBody = await request.json();
-  } catch (error: any) {
-    console.error(`[${getKSTDateTime()}] [ERROR] Invalid Kakao request body:`, error.message);
-    return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
-  }
-
-  // console.log('[INFO] kakao kakaoRequestBody:', kakaoRequestBody);
-
-  const userUtterance = kakaoRequestBody.userRequest?.utterance;
-  const userId = kakaoRequestBody.userRequest?.user?.id;
-  const callbackUrlFromKakao = kakaoRequestBody.userRequest?.callbackUrl;
-
-  if (!callbackUrlFromKakao) {
-    console.warn(`[${getKSTDateTime()}] [api/kakao] No callbackUrl from Kakao.`);
-    return NextResponse.json(
-      {
-        version: '2.0',
-        template: { outputs: [{ simpleText: { text: '콜백 URL이 없습니다.' } }] },
-      },
-      { status: 200 }
-    );
-  }
-
-  if (!userUtterance || userUtterance.trim() === '') {
-    return NextResponse.json(
-      {
-        version: '2.0',
-        template: { outputs: [{ simpleText: { text: '궁금한 내용을 입력해주세요.' } }] },
-      },
-      { status: 200 }
-    );
-  }
+  // let requestBody: KakaoRequestBody;
 
   try {
+    const requestBody: KakaoRequestBody = await request.json();
+
+    const userMessage = requestBody.userRequest?.utterance;
+    const userId = requestBody.userRequest?.user?.id;
+    const callbackUrl = requestBody.userRequest?.callbackUrl;
+
+    if (!callbackUrl || !userMessage) {
+      console.warn(
+        `[${getKSTDateTime()}:api/kakao] No Parameter: callbackUrl(${callbackUrl}) | userMessage(${userMessage})`
+      );
+      throw new Error('필수 파라미터가 누락되었습니다.');
+    }
+
+    // throw new Error('test');
     console.log(
-      `[${getKSTDateTime()}] [api/kakao] Sending event: ${callbackUrlFromKakao}/ ${callbackBackgroundTaskUrl}`
+      `[${getKSTDateTime()}:api/kakao] Sending event: ${callbackUrl}/ ${callbackBackgroundTaskUrl}`
     );
     await axios
       .post(
         callbackBackgroundTaskUrl,
         {
-          originalCallbackUrl: callbackUrlFromKakao,
-          userUtterance,
+          originalCallbackUrl: callbackUrl,
+          userUtterance: userMessage,
           userId,
         },
         { timeout: TIMEOUT_MS }
       )
       .catch(() => {});
 
-    console.log(`[${getKSTDateTime()}] [api/kakao] Successfully sent event to callback`);
+    console.log(
+      `[${getKSTDateTime()}:api/kakao] Successfully sent event to callback: ${callbackBackgroundTaskUrl}`
+    );
+
+    const response: KakaoSkillResponse = {
+      version: '2.0',
+      useCallback: true,
+      data: {
+        message: '답변을 생성하고 있습니다. 잠시만 기다려주세요 ...',
+      },
+    };
+    return NextResponse.json(response, { status: 200 });
   } catch (error: any) {
     console.error(
-      `[${getKSTDateTime()}] [api/kakao] Failed to send event to callback (User: ${userId}):`,
+      `[${getKSTDateTime()}:api/kakao] Failed to send event to callback: ${callbackBackgroundTaskUrl}`,
       error.message
     );
-  }
+    const failedResponse: KakaoSkillResponse = {
+      version: '2.0',
+      template: {
+        outputs: [
+          {
+            simpleText: {
+              text: '죄송합니다. 요청을 처리하는 중 오류가 발생했습니다.',
+            },
+          },
+        ],
+      },
+    };
 
-  const immediateCallbackResponse: KakaoSkillResponse = {
-    version: '2.0',
-    useCallback: true,
-  };
-  return NextResponse.json(immediateCallbackResponse, { status: 200 });
+    return NextResponse.json(failedResponse, { status: 200 });
+  }
 }
