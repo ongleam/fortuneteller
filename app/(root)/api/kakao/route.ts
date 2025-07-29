@@ -6,7 +6,7 @@ import { siteConfig } from '@/config/site';
 import axios from 'axios';
 
 // Vercel 환경에 따른 콜백 URL 설정
-const getCallbackUrl = () => {
+const getBackgroundTaskUrl = () => {
   // 로컬 개발 환경
   if (process.env.NODE_ENV === 'development') {
     return `${siteConfig.urls.local}/api/kakao/callback`;
@@ -24,9 +24,9 @@ const getCallbackUrl = () => {
   }
 };
 
-const TIMEOUT_MS = 500;
+const TIMEOUT_MS = 1000;
 
-const callbackBackgroundTaskUrl = getCallbackUrl();
+const backgroundTaskUrl = getBackgroundTaskUrl();
 
 export async function POST(request: NextRequest) {
   // let requestBody: KakaoRequestBody;
@@ -47,11 +47,11 @@ export async function POST(request: NextRequest) {
 
     // throw new Error('test');
     console.log(
-      `[${getKSTDateTime()}:api/kakao] Sending event: ${callbackUrl}/ ${callbackBackgroundTaskUrl}`
+      `[${getKSTDateTime()}:api/kakao] Sending event: ${callbackUrl}/ ${backgroundTaskUrl}`
     );
     await axios
       .post(
-        callbackBackgroundTaskUrl,
+        backgroundTaskUrl,
         {
           originalCallbackUrl: callbackUrl,
           userUtterance: userMessage,
@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
       .catch(() => {});
 
     console.log(
-      `[${getKSTDateTime()}:api/kakao] Successfully sent event to callback: ${callbackBackgroundTaskUrl}`
+      `[${getKSTDateTime()}:api/kakao] Successfully sent event to callback: ${backgroundTaskUrl}`
     );
 
     const response: KakaoSkillResponse = {
@@ -75,7 +75,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(response, { status: 200 });
   } catch (error: any) {
     console.error(
-      `[${getKSTDateTime()}:api/kakao] Failed to send event to callback: ${callbackBackgroundTaskUrl}`,
+      `[${getKSTDateTime()}:api/kakao] Failed to send event to callback: ${backgroundTaskUrl}`,
       error.message
     );
     const failedResponse: KakaoSkillResponse = {
