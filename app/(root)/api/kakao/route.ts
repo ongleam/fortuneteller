@@ -32,11 +32,11 @@ export async function POST(request: NextRequest) {
   // let requestBody: KakaoRequestBody;
 
   try {
-    const requestBody: KakaoRequestBody = await request.json();
+    const body: KakaoRequestBody = await request.json();
 
-    const userMessage = requestBody.userRequest?.utterance;
-    const userId = requestBody.userRequest?.user?.id;
-    const callbackUrl = requestBody.userRequest?.callbackUrl;
+    const userMessage = body.userRequest?.utterance;
+    const userId = body.userRequest?.user?.id;
+    const callbackUrl = body.userRequest?.callbackUrl;
 
     if (!callbackUrl || !userMessage) {
       console.warn(
@@ -53,8 +53,8 @@ export async function POST(request: NextRequest) {
       .post(
         backgroundTaskUrl,
         {
-          originalCallbackUrl: callbackUrl,
-          userUtterance: userMessage,
+          callbackUrl,
+          userMessage,
           userId,
         },
         { timeout: TIMEOUT_MS }

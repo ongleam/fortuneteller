@@ -119,7 +119,9 @@ async function generateLLMResponse(
           ...agentConfig,
           maxSteps: MAX_STEPS,
         }),
-        createTimeoutPromise(),
+        new Promise((_, reject) => {
+          setTimeout(() => reject(new Error('LLM generation timeout')), LLM_TIMEOUT);
+        }),
       ])) as GenerateTextResult<any, any>;
     });
 
@@ -133,131 +135,98 @@ async function generateLLMResponse(
   }
 }
 
-function createTimeoutPromise(): Promise<never> {
-  return new Promise((_, reject) => {
-    setTimeout(() => reject(new Error('LLM generation timeout')), LLM_TIMEOUT);
-  });
-}
+export async function POST(req: Request) {
+  try {
+    const body = await req.json();
+    const { userMessage, userId, callbackUrl } = body;
 
-// 카카오 메시지 처리 함수
-async function processKakaoMessage(
-  userUtterance: string,
-  userId: string
-): Promise<KakaoSkillResponse> {
-  console.log(
-    `[${getKSTDateTime()}] [API] 요청 처리 시작 - "${userUtterance.substring(0, 30)}..."`
-  );
+    const profile = await getOrCreateProfileByUserKakaoId({ user_kakao_id: userId });
+    const chat = await getOrCreateKakaoChatByUserId({
+      userId: profile.user_id,
+      title: 'Kakao Chat',
+    });
 
-  const profile = await getOrCreateProfileByUserKakaoId({ user_kakao_id: userId });
-  const chat = await getOrCreateKakaoChatByUserId({
-    userId: profile.user_id,
-    title: 'Kakao Chat',
-  });
+    if (!chat || !('id' in chat)) {
+      throw new Error('채팅방을 생성하거나 가져오는데 실패했습니다.');
+    }
 
-  if (!chat || !('id' in chat)) {
-    throw new Error('채팅방을 생성하거나 가져오는데 실패했습니다.');
-  }
-  const userProfile = {
-    name: profile.name,
-    gender: profile.gender,
-    birthType: profile.birth_type,
-    birthYear: profile.birth_year,
-    birthMonth: profile.birth_month,
-    birthDay: profile.birth_day,
-    birthTime: profile.birth_time,
-  };
+    const userInput = `오늘 날짜: ${getToday()}\n<USER_INPUT>${userMessage}</USER_INPUT>`;
 
-  const processedUserUtterance = `오늘 날짜: ${getToday()}\n유저 정보: ${userProfile}\n<USER_INPUT>${userUtterance}</USER_INPUT>`;
+    const userDBMessage: UIMessage = {
+      id: generateUUID(),
+      role: 'user',
+      parts: [{ type: 'text', text: userInput }],
+      content: userInput,
+    };
 
-  const userMessage: UIMessage = {
-    id: generateUUID(),
-    role: 'user',
-    parts: [{ type: 'text', text: processedUserUtterance }],
-    content: processedUserUtterance,
-  };
+    const dbMessages = await getMessagesByChatId({ id: chat.id, limit: MAX_PREVIOUS_MESSAGES });
 
-  const dbMessages = await getMessagesByChatId({ id: chat.id, limit: MAX_PREVIOUS_MESSAGES });
+    // DB 메시지를 UI 메시지로 변환
+    const previousMessages = dbMessages.map(convertDBMessageToUIMessage);
 
-  // DB 메시지를 UI 메시지로 변환
-  const convertedMessages = dbMessages.map(convertDBMessageToUIMessage);
+    const messages = appendClientMessage({
+      messages: previousMessages,
+      message: userDBMessage,
+    });
 
-  const messages = appendClientMessage({
-    messages: convertedMessages,
-    message: userMessage,
-  });
-
-  await saveMessages({
-    messages: [
-      {
-        chat_id: chat.id,
-        id: userMessage.id,
-        role: 'user',
-        parts: userMessage.parts,
-        attachments: [],
-        created_at: new Date(),
-      },
-    ],
-  });
-
-  const llmResponse = await generateLLMResponse(messages, userId);
-
-  // 어시스턴트 메시지 생성
-  const [, assistantMessage] = appendResponseMessages({
-    messages: [userMessage],
-    responseMessages: llmResponse.response.messages,
-  });
-
-  // 어시스턴트 메시지 저장
-  if (assistantMessage) {
     await saveMessages({
       messages: [
         {
           chat_id: chat.id,
-          id: generateUUID(),
-          role: assistantMessage.role,
-          parts: assistantMessage.parts,
-          attachments: assistantMessage.experimental_attachments ?? [],
+          id: userDBMessage.id,
+          role: 'user',
+          parts: userDBMessage.parts,
+          attachments: [],
           created_at: new Date(),
         },
       ],
     });
-  }
 
-  let processedResponse: KakaoSkillResponse = {
-    version: '2.0',
-    template: {
-      outputs: [
-        {
-          simpleText: { text: removeMarkdown(llmResponse.text) },
-        },
-      ],
-      quickReplies: getRandomQuickReplies(),
-    },
-  };
+    const llmResponse = await generateLLMResponse(messages, userId);
 
-  return processedResponse;
-}
+    // 어시스턴트 메시지 생성
+    const [, assistantMessage] = appendResponseMessages({
+      messages: [userDBMessage],
+      responseMessages: llmResponse.response.messages,
+    });
 
-export async function POST(req: Request) {
-  try {
-    const body = await req.json();
-    const { userUtterance, userId, originalCallbackUrl } = body;
-
-    if (!userUtterance || !userId) {
-      return Response.json({ error: 'userUtterance와 userId가 필요합니다.' }, { status: 400 });
+    // 어시스턴트 메시지 저장
+    if (assistantMessage) {
+      await saveMessages({
+        messages: [
+          {
+            chat_id: chat.id,
+            id: generateUUID(),
+            role: assistantMessage.role,
+            parts: assistantMessage.parts,
+            attachments: assistantMessage.experimental_attachments ?? [],
+            created_at: new Date(),
+          },
+        ],
+      });
     }
 
-    const response = await processKakaoMessage(userUtterance, userId);
+    let response: KakaoSkillResponse = {
+      version: '2.0',
+      template: {
+        outputs: [
+          {
+            simpleText: { text: removeMarkdown(llmResponse.text) },
+          },
+        ],
+        quickReplies: getRandomQuickReplies(),
+      },
+    };
 
     console.log(
-      `[${getKSTDateTime()}] [api/kakao/callback] 카카오 콜백 요청 시작 - URL: ${originalCallbackUrl}`
+      `[${getKSTDateTime()}] [api/kakao/callback] 카카오 콜백 요청 시작 - URL: ${callbackUrl}`
     );
     console.log(
       `[${getKSTDateTime()}] [api/kakao/callback] 전송할 응답 데이터:`,
       JSON.stringify(response, null, 2)
     );
 
-    await axios.post(originalCallbackUrl, response);
+    await axios.post(callbackUrl, response);
 
     console.log(`[${getKSTDateTime()}] [api/kakao/callback] 카카오 콜백 요청 성공`);
     return Response.json({ success: true }, { status: 200 });
