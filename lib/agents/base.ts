@@ -22,7 +22,7 @@ export function baseAgent({
     system: systemPrompts.BASE_AGENT,
     messages,
     tools: {
-      updateUserProfile: updateUserProfile(kakao_user_id),
+      // updateUserProfile: updateUserProfile(kakao_user_id),
       getSaju: getSaju(kakao_user_id),
       getHarmony: getHarmony(kakao_user_id),
       getTodayFortune: getTodayFortune(kakao_user_id),
