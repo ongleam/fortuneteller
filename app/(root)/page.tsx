@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { createServerClient } from '@/lib/supabase/server';
 import { siteConfig } from '@/config/site';
+import { KakaoLoginButton } from '@/components/auth/kakao-login-button';
 
 export default async function LandingPage() {
   const supabase = await createServerClient();
@@ -31,11 +32,9 @@ export default async function LandingPage() {
               </Button>
             </Link>
           ) : (
-            <Link href="/login">
-              <Button className="rounded-full border border-slate-500 bg-gradient-to-r from-slate-600 to-slate-700 px-6 py-2 text-white hover:from-slate-700 hover:to-slate-800">
-                로그인
-              </Button>
-            </Link>
+            <KakaoLoginButton variant="landing" className="px-6 py-2 text-sm">
+              로그인
+            </KakaoLoginButton>
           )}
         </nav>
       </header>
@@ -68,19 +67,9 @@ export default async function LandingPage() {
           </div>
 
           <div className="space-y-4 sm:flex sm:justify-center sm:space-x-4 sm:space-y-0">
-            {user ? (
-              <Link href="/chat">
-                <Button className="w-full transform rounded-full bg-gradient-to-r from-slate-400 to-slate-600 px-8 py-4 text-lg font-bold text-black shadow-lg transition-all duration-200 hover:scale-105 hover:from-slate-500 hover:to-slate-700 sm:w-auto">
-                  ✨ 지금 운세보기 ✨
-                </Button>
-              </Link>
-            ) : (
-              <Link href="/login">
-                <Button className="w-full transform rounded-full bg-gradient-to-r from-slate-400 to-slate-600 px-8 py-4 text-lg font-bold text-black shadow-lg transition-all duration-200 hover:scale-105 hover:from-slate-500 hover:to-slate-700 sm:w-auto">
-                  ✨ 무료로 시작하기 ✨
-                </Button>
-              </Link>
-            )}
+            <KakaoLoginButton variant="landing" className="w-full sm:w-auto">
+              ✨ 카카오로 무료 시작하기 ✨
+            </KakaoLoginButton>
           </div>
         </div>
       </section>
@@ -169,11 +158,9 @@ export default async function LandingPage() {
                 </Button>
               </Link>
             ) : (
-              <Link href="/login">
-                <Button className="w-full transform rounded-full bg-gradient-to-r from-slate-400 to-slate-600 px-10 py-4 text-xl font-bold text-black shadow-lg transition-all duration-200 hover:scale-105 hover:from-slate-500 hover:to-slate-700 sm:w-auto">
-                  🔮 무료로 시작하기
-                </Button>
-              </Link>
+              <KakaoLoginButton variant="landing" className="w-full px-10 py-4 text-xl sm:w-auto">
+                🔮 카카오로 무료 시작하기
+              </KakaoLoginButton>
             )}
           </div>
         </div>
