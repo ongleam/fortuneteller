@@ -5,58 +5,45 @@ import { tools } from '@/config/prompts';
 import { updateProfile as updateProfile, getOrCreateProfileByUserKakaoId } from '@/lib/db/queries';
 import { fetchSaju } from '@/lib/utils/saju';
 
-const GET_USER_SAJU_PROMPTS = tools.getSaju;
+const PROMPTS = tools.getSaju;
 
-export const getSaju = (kakao_user_id: string) =>
+export const getSaju = () =>
   tool({
-    description: GET_USER_SAJU_PROMPTS.description,
-    parameters: z.object({}),
-    execute: async () => {
-      console.log(`[INFO] getUserSaju 호출: kakao_user_id: ${kakao_user_id}`);
-
+    description: PROMPTS.description,
+    parameters: z.object({
+      name: z.string().describe(PROMPTS.parameters.name.description),
+      gender: z.enum(['남성', '여성']).describe(PROMPTS.parameters.gender.description),
+      birthType: z
+        .enum(['양력', '음력'])
+        .default('양력')
+        .describe(PROMPTS.parameters.birthType.description),
+      birthYear: z.string().describe(PROMPTS.parameters.birthYear.description),
+      birthMonth: z.string().describe(PROMPTS.parameters.birthMonth.description),
+      birthDay: z.string().describe(PROMPTS.parameters.birthDay.description),
+      birthTime: z
+        .enum(['00', '02', '04', '06', '08', '10', '12', '14', '16', '18', '20', '22', '24'])
+        .nullable()
+        .optional()
+        .describe(PROMPTS.parameters.birthTime.description),
+    }),
+    execute: async ({ name, gender, birthType, birthYear, birthMonth, birthDay, birthTime }) => {
+      console.log(
+        `[INFO] getSaju 호출: '${name}, ${gender}, ${birthType}, ${birthYear}, ${birthMonth}, ${birthDay}, ${birthTime}'`
+      );
       try {
-        // 카카오 유저 프로필 조회
-        const profile = await getOrCreateProfileByUserKakaoId({ user_kakao_id: kakao_user_id });
-
-        // 사주 정보가 저장되어 있는지 확인
-        if (!profile.gender || !profile.birth_year || !profile.birth_month || !profile.birth_day) {
-          return {
-            success: false,
-            message: '저장된 사주 정보가 없습니다.',
-            hasStoredInfo: false,
-            suggestion:
-              '사주 정보를 먼저 입력해주세요. "내 사주 정보 등록하기"라고 말씀해주시면 됩니다.',
-          };
-        }
-
-        // 저장된 정보로 사주 조회
         const sajuResult = await fetchSaju(
-          profile.name || '',
-          profile.gender,
-          profile.birth_type || '양력',
-          profile.birth_year.toString(),
-          profile.birth_month.toString(),
-          profile.birth_day.toString(),
-          profile.birth_time
+          name,
+          gender,
+          birthType,
+          birthYear,
+          birthMonth,
+          birthDay,
+          birthTime
         );
 
-        console.log(`[INFO] 저장된 정보로 사주 조회 완료: ${kakao_user_id}`);
+        console.log(`[INFO] 저장된 정보로 사주 조회 완료: ${name}`);
 
-        return {
-          success: true,
-          message: '저장된 정보로 사주를 조회했습니다.',
-          hasStoredInfo: true,
-          userInfo: {
-            name: profile.name,
-            gender: profile.gender,
-            birthType: profile.birth_type,
-            birthYear: profile.birth_year,
-            birthMonth: profile.birth_month,
-            birthDay: profile.birth_day,
-            birthTime: profile.birth_time,
-          },
-          sajuResult,
-        };
+        return sajuResult;
       } catch (error) {
         console.error('[ERROR] getUserSaju 실행 실패:', formattingErrorMessage(error));
         return {

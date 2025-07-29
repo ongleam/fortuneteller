@@ -214,7 +214,7 @@ export async function POST(req: Request) {
             simpleText: { text: removeMarkdown(llmResponse.text) },
           },
         ],
-        quickReplies: getRandomQuickReplies(),
+        // quickReplies: getRandomQuickReplies(),
       },
     };
 
