@@ -1,0 +1,5349 @@
+[
+  {
+    "name": "양력 남성 케이스",
+    "input": {
+      "name": "김은식",
+      "gender": "MALE",
+      "birthType": "SOLAR",
+      "birthYear": "1995",
+      "birthMonth": "04",
+      "birthDay": "25",
+      "birthTime": "08"
+    },
+    "expected": {
+      "pillars": {
+        "year": {
+          "stem": "乙",
+          "branch": "亥"
+        },
+        "month": {
+          "stem": "辛",
+          "branch": "巳"
+        },
+        "day": {
+          "stem": "乙",
+          "branch": "卯"
+        },
+        "time": {
+          "stem": "庚",
+          "branch": "辰"
+        }
+      },
+      "tenStars": {
+        "yearStem": "비견",
+        "yearBranch": "정인",
+        "monthStem": "편관",
+        "monthBranch": "상관",
+        "dayStem": "비견",
+        "dayBranch": "비견",
+        "timeStem": "정관",
+        "timeBranch": "정재"
+      },
+      "elements": {
+        "wood": 3,
+        "fire": 1,
+        "earth": 1,
+        "metal": 2,
+        "water": 1
+      },
+      "sinsals": [
+        "역마살",
+        "육해살",
+        "화개살"
+      ]
+    },
+    "rawResult": {
+      "saju": {
+        "fortuneList": {
+          "storedUnse": {
+            "gender": "FEMALE",
+            "birthday": "1995-04-25",
+            "solarBirthday": "1995-05-24",
+            "birthType": "LUNAR",
+            "birthTime": "08:30",
+            "targetYear": 2025,
+            "yearSky": "乙",
+            "yearGround": "亥",
+            "monthSky": "辛",
+            "monthGround": "巳",
+            "daySky": "乙",
+            "dayGround": "卯",
+            "timeSky": "庚",
+            "timeGround": "辰",
+            "bigFortuneNumber": 4,
+            "bigFortuneStartYear": "1999",
+            "seasonStartTime": null,
+            "manseYearSkyRelation": "비견",
+            "manseYearGroundRelation": "정인",
+            "manseMonthSkyRelation": "편관",
+            "manseMonthGroundRelation": "상관",
+            "manseDaySkyRelation": "비견",
+            "manseDayGroundRelation": "비견",
+            "manseTimeSkyRelation": "정관",
+            "manseTimeGroundRelation": "정재",
+            "fiveTreeNum": 3,
+            "fiveFireNum": 1,
+            "fiveSoilNum": 1,
+            "fiveIronNum": 2,
+            "fiveWaterNum": 1
+          },
+          "saju": {
+            "bigFortuneNumber": 4,
+            "bigFortuneStartYear": "1999",
+            "seasonStartTime": null,
+            "yearSky": {
+              "chinese": "乙",
+              "korean": "을",
+              "fiveCircle": "목",
+              "fiveCircleColor": "#84d696",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "비견",
+              "minusPlus": "음",
+              "jijangGan": null,
+              "sinsal": null,
+              "unsung": null,
+              "etcSinsal": null
+            },
+            "yearGround": {
+              "chinese": "亥",
+              "korean": "해",
+              "fiveCircle": "수",
+              "fiveCircleColor": "#3a3b36",
+              "fiveCircleFrontColor": "#ffffff",
+              "tenStar": "정인",
+              "minusPlus": "음",
+              "jijangGan": {
+                "first": {
+                  "chinese": "戊",
+                  "korean": "무",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "minusPlus": "양",
+                  "rate": 7,
+                  "tenStar": "정재"
+                },
+                "second": {
+                  "chinese": "甲",
+                  "korean": "갑",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "minusPlus": "양",
+                  "rate": 7,
+                  "tenStar": "겁재"
+                },
+                "third": {
+                  "chinese": "壬",
+                  "korean": "임",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "minusPlus": "양",
+                  "rate": 16,
+                  "tenStar": "정인"
+                }
+              },
+              "sinsal": "지살",
+              "unsung": "사",
+              "etcSinsal": []
+            },
+            "monthSky": {
+              "chinese": "辛",
+              "korean": "신",
+              "fiveCircle": "금",
+              "fiveCircleColor": "#ffffff",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "편관",
+              "minusPlus": "음",
+              "jijangGan": null,
+              "sinsal": null,
+              "unsung": null,
+              "etcSinsal": null
+            },
+            "monthGround": {
+              "chinese": "巳",
+              "korean": "사",
+              "fiveCircle": "화",
+              "fiveCircleColor": "#fc989a",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "상관",
+              "minusPlus": "음",
+              "jijangGan": {
+                "first": {
+                  "chinese": "戊",
+                  "korean": "무",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "minusPlus": "양",
+                  "rate": 7,
+                  "tenStar": "정재"
+                },
+                "second": {
+                  "chinese": "庚",
+                  "korean": "경",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "minusPlus": "양",
+                  "rate": 7,
+                  "tenStar": "정관"
+                },
+                "third": {
+                  "chinese": "丙",
+                  "korean": "병",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "minusPlus": "양",
+                  "rate": 16,
+                  "tenStar": "상관"
+                }
+              },
+              "sinsal": "역마살",
+              "unsung": "목욕",
+              "etcSinsal": [
+                "현침살",
+                "금여성"
+              ]
+            },
+            "daySky": {
+              "chinese": "乙",
+              "korean": "을",
+              "fiveCircle": "목",
+              "fiveCircleColor": "#84d696",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "비견",
+              "minusPlus": "음",
+              "jijangGan": null,
+              "sinsal": null,
+              "unsung": null,
+              "etcSinsal": null
+            },
+            "dayGround": {
+              "chinese": "卯",
+              "korean": "묘",
+              "fiveCircle": "목",
+              "fiveCircleColor": "#84d696",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "비견",
+              "minusPlus": "음",
+              "jijangGan": {
+                "first": {
+                  "chinese": "甲",
+                  "korean": "갑",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "minusPlus": "양",
+                  "rate": 10,
+                  "tenStar": "겁재"
+                },
+                "second": null,
+                "third": {
+                  "chinese": "乙",
+                  "korean": "을",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "minusPlus": "음",
+                  "rate": 20,
+                  "tenStar": "비견"
+                }
+              },
+              "sinsal": "장성살",
+              "unsung": "건록",
+              "etcSinsal": []
+            },
+            "timeSky": {
+              "chinese": "庚",
+              "korean": "경",
+              "fiveCircle": "금",
+              "fiveCircleColor": "#ffffff",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "정관",
+              "minusPlus": "양",
+              "jijangGan": null,
+              "sinsal": null,
+              "unsung": null,
+              "etcSinsal": null
+            },
+            "timeGround": {
+              "chinese": "辰",
+              "korean": "진",
+              "fiveCircle": "토",
+              "fiveCircleColor": "#fee469",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "정재",
+              "minusPlus": "양",
+              "jijangGan": {
+                "first": {
+                  "chinese": "乙",
+                  "korean": "을",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "minusPlus": "음",
+                  "rate": 9,
+                  "tenStar": "비견"
+                },
+                "second": {
+                  "chinese": "癸",
+                  "korean": "계",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "minusPlus": "음",
+                  "rate": 3,
+                  "tenStar": "편인"
+                },
+                "third": {
+                  "chinese": "戊",
+                  "korean": "무",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "minusPlus": "양",
+                  "rate": 18,
+                  "tenStar": "정재"
+                }
+              },
+              "sinsal": "반안살",
+              "unsung": "관대",
+              "etcSinsal": [
+                "괴강살",
+                "월덕귀인"
+              ]
+            }
+          },
+          "fortune": {
+            "big": 3,
+            "small": 2018
+          },
+          "list": {
+            "bigFortune": {
+              "0": {
+                "number": null,
+                "sky": {
+                  "chinese": "辛",
+                  "korean": "신",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편관",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "巳",
+                  "korean": "사",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "상관",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정재"
+                    },
+                    "second": {
+                      "chinese": "庚",
+                      "korean": "경",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정관"
+                    },
+                    "third": {
+                      "chinese": "丙",
+                      "korean": "병",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "양",
+                      "rate": 16,
+                      "tenStar": "상관"
+                    }
+                  },
+                  "sinsal": "역마살",
+                  "unsung": "목욕",
+                  "etcSinsal": [
+                    "금여성"
+                  ]
+                }
+              },
+              "1": {
+                "number": 4,
+                "sky": {
+                  "chinese": "壬",
+                  "korean": "임",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "정인",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "午",
+                  "korean": "오",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "식신",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "丙",
+                      "korean": "병",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "양",
+                      "rate": 10,
+                      "tenStar": "상관"
+                    },
+                    "second": {
+                      "chinese": "己",
+                      "korean": "기",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "음",
+                      "rate": 10,
+                      "tenStar": "편재"
+                    },
+                    "third": {
+                      "chinese": "丁",
+                      "korean": "정",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "음",
+                      "rate": 10,
+                      "tenStar": "식신"
+                    }
+                  },
+                  "sinsal": "육해살",
+                  "unsung": "장생",
+                  "etcSinsal": [
+                    "현침살",
+                    "문창귀인",
+                    "태극귀인",
+                    "천주귀인",
+                    "학당귀인",
+                    "홍염살"
+                  ]
+                }
+              },
+              "2": {
+                "number": 14,
+                "sky": {
+                  "chinese": "癸",
+                  "korean": "계",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "편인",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "未",
+                  "korean": "미",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편재",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "丁",
+                      "korean": "정",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "음",
+                      "rate": 9,
+                      "tenStar": "식신"
+                    },
+                    "second": {
+                      "chinese": "乙",
+                      "korean": "을",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "음",
+                      "rate": 3,
+                      "tenStar": "비견"
+                    },
+                    "third": {
+                      "chinese": "己",
+                      "korean": "기",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "음",
+                      "rate": 18,
+                      "tenStar": "편재"
+                    }
+                  },
+                  "sinsal": "화개살",
+                  "unsung": "양",
+                  "etcSinsal": [
+                    "현침살"
+                  ]
+                }
+              },
+              "3": {
+                "number": 24,
+                "sky": {
+                  "chinese": "甲",
+                  "korean": "갑",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "겁재",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "申",
+                  "korean": "신",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정관",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정재"
+                    },
+                    "second": {
+                      "chinese": "壬",
+                      "korean": "임",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정인"
+                    },
+                    "third": {
+                      "chinese": "庚",
+                      "korean": "경",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "양",
+                      "rate": 16,
+                      "tenStar": "정관"
+                    }
+                  },
+                  "sinsal": "겁살",
+                  "unsung": "태",
+                  "etcSinsal": [
+                    "귀문관살",
+                    "현침살",
+                    "천을귀인"
+                  ]
+                }
+              },
+              "4": {
+                "number": 34,
+                "sky": {
+                  "chinese": "乙",
+                  "korean": "을",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "비견",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "酉",
+                  "korean": "유",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편관",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "庚",
+                      "korean": "경",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "양",
+                      "rate": 10,
+                      "tenStar": "정관"
+                    },
+                    "second": null,
+                    "third": {
+                      "chinese": "辛",
+                      "korean": "신",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "음",
+                      "rate": 20,
+                      "tenStar": "편관"
+                    }
+                  },
+                  "sinsal": "재살",
+                  "unsung": "절",
+                  "etcSinsal": []
+                }
+              },
+              "5": {
+                "number": 44,
+                "sky": {
+                  "chinese": "丙",
+                  "korean": "병",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "상관",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "戌",
+                  "korean": "술",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정재",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "辛",
+                      "korean": "신",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "음",
+                      "rate": 9,
+                      "tenStar": "편관"
+                    },
+                    "second": {
+                      "chinese": "丁",
+                      "korean": "정",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "음",
+                      "rate": 3,
+                      "tenStar": "식신"
+                    },
+                    "third": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 18,
+                      "tenStar": "정재"
+                    }
+                  },
+                  "sinsal": "천살",
+                  "unsung": "묘",
+                  "etcSinsal": []
+                }
+              },
+              "6": {
+                "number": 54,
+                "sky": {
+                  "chinese": "丁",
+                  "korean": "정",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "식신",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "亥",
+                  "korean": "해",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "정인",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정재"
+                    },
+                    "second": {
+                      "chinese": "甲",
+                      "korean": "갑",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "겁재"
+                    },
+                    "third": {
+                      "chinese": "壬",
+                      "korean": "임",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "양",
+                      "rate": 16,
+                      "tenStar": "정인"
+                    }
+                  },
+                  "sinsal": "지살",
+                  "unsung": "사",
+                  "etcSinsal": []
+                }
+              },
+              "7": {
+                "number": 64,
+                "sky": {
+                  "chinese": "戊",
+                  "korean": "무",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정재",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "子",
+                  "korean": "자",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "편인",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "壬",
+                      "korean": "임",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "양",
+                      "rate": 10,
+                      "tenStar": "정인"
+                    },
+                    "second": null,
+                    "third": {
+                      "chinese": "癸",
+                      "korean": "계",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "음",
+                      "rate": 20,
+                      "tenStar": "편인"
+                    }
+                  },
+                  "sinsal": "도화살",
+                  "unsung": "병",
+                  "etcSinsal": [
+                    "천을귀인",
+                    "태극귀인",
+                    "문곡귀인"
+                  ]
+                }
+              },
+              "8": {
+                "number": 74,
+                "sky": {
+                  "chinese": "己",
+                  "korean": "기",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편재",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "丑",
+                  "korean": "축",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편재",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "癸",
+                      "korean": "계",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "음",
+                      "rate": 9,
+                      "tenStar": "편인"
+                    },
+                    "second": {
+                      "chinese": "辛",
+                      "korean": "신",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "음",
+                      "rate": 3,
+                      "tenStar": "편관"
+                    },
+                    "third": {
+                      "chinese": "己",
+                      "korean": "기",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "음",
+                      "rate": 18,
+                      "tenStar": "편재"
+                    }
+                  },
+                  "sinsal": "월살",
+                  "unsung": "쇠",
+                  "etcSinsal": []
+                }
+              },
+              "9": {
+                "number": 84,
+                "sky": {
+                  "chinese": "庚",
+                  "korean": "경",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정관",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "寅",
+                  "korean": "인",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "겁재",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정재"
+                    },
+                    "second": {
+                      "chinese": "丙",
+                      "korean": "병",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "상관"
+                    },
+                    "third": {
+                      "chinese": "甲",
+                      "korean": "갑",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "양",
+                      "rate": 16,
+                      "tenStar": "겁재"
+                    }
+                  },
+                  "sinsal": "망신살",
+                  "unsung": "제왕",
+                  "etcSinsal": []
+                }
+              },
+              "10": {
+                "number": 94,
+                "sky": {
+                  "chinese": "辛",
+                  "korean": "신",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편관",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "卯",
+                  "korean": "묘",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "비견",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "甲",
+                      "korean": "갑",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "양",
+                      "rate": 10,
+                      "tenStar": "겁재"
+                    },
+                    "second": null,
+                    "third": {
+                      "chinese": "乙",
+                      "korean": "을",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "음",
+                      "rate": 20,
+                      "tenStar": "비견"
+                    }
+                  },
+                  "sinsal": "장성살",
+                  "unsung": "건록",
+                  "etcSinsal": []
+                }
+              }
+            },
+            "smallFortune": {
+              "0": {
+                "year": 2018,
+                "sky": {
+                  "chinese": "戊",
+                  "korean": "무",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정재",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "戌",
+                  "korean": "술",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정재",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "辛",
+                      "korean": "신",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "음",
+                      "rate": 9,
+                      "tenStar": "편관"
+                    },
+                    "second": {
+                      "chinese": "丁",
+                      "korean": "정",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "음",
+                      "rate": 3,
+                      "tenStar": "식신"
+                    },
+                    "third": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 18,
+                      "tenStar": "정재"
+                    }
+                  },
+                  "sinsal": "천살",
+                  "unsung": "묘",
+                  "etcSinsal": []
+                }
+              },
+              "1": {
+                "year": 2019,
+                "sky": {
+                  "chinese": "己",
+                  "korean": "기",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편재",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "亥",
+                  "korean": "해",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "정인",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정재"
+                    },
+                    "second": {
+                      "chinese": "甲",
+                      "korean": "갑",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "겁재"
+                    },
+                    "third": {
+                      "chinese": "壬",
+                      "korean": "임",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "양",
+                      "rate": 16,
+                      "tenStar": "정인"
+                    }
+                  },
+                  "sinsal": "지살",
+                  "unsung": "사",
+                  "etcSinsal": []
+                }
+              },
+              "2": {
+                "year": 2020,
+                "sky": {
+                  "chinese": "庚",
+                  "korean": "경",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정관",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "子",
+                  "korean": "자",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "편인",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "壬",
+                      "korean": "임",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "양",
+                      "rate": 10,
+                      "tenStar": "정인"
+                    },
+                    "second": null,
+                    "third": {
+                      "chinese": "癸",
+                      "korean": "계",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "음",
+                      "rate": 20,
+                      "tenStar": "편인"
+                    }
+                  },
+                  "sinsal": "도화살",
+                  "unsung": "병",
+                  "etcSinsal": [
+                    "천을귀인",
+                    "태극귀인",
+                    "문곡귀인"
+                  ]
+                }
+              },
+              "3": {
+                "year": 2021,
+                "sky": {
+                  "chinese": "辛",
+                  "korean": "신",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편관",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "丑",
+                  "korean": "축",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편재",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "癸",
+                      "korean": "계",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "음",
+                      "rate": 9,
+                      "tenStar": "편인"
+                    },
+                    "second": {
+                      "chinese": "辛",
+                      "korean": "신",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "음",
+                      "rate": 3,
+                      "tenStar": "편관"
+                    },
+                    "third": {
+                      "chinese": "己",
+                      "korean": "기",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "음",
+                      "rate": 18,
+                      "tenStar": "편재"
+                    }
+                  },
+                  "sinsal": "월살",
+                  "unsung": "쇠",
+                  "etcSinsal": []
+                }
+              },
+              "4": {
+                "year": 2022,
+                "sky": {
+                  "chinese": "壬",
+                  "korean": "임",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "정인",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "寅",
+                  "korean": "인",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "겁재",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정재"
+                    },
+                    "second": {
+                      "chinese": "丙",
+                      "korean": "병",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "상관"
+                    },
+                    "third": {
+                      "chinese": "甲",
+                      "korean": "갑",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "양",
+                      "rate": 16,
+                      "tenStar": "겁재"
+                    }
+                  },
+                  "sinsal": "망신살",
+                  "unsung": "제왕",
+                  "etcSinsal": []
+                }
+              },
+              "5": {
+                "year": 2023,
+                "sky": {
+                  "chinese": "癸",
+                  "korean": "계",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "편인",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "卯",
+                  "korean": "묘",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "비견",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "甲",
+                      "korean": "갑",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "양",
+                      "rate": 10,
+                      "tenStar": "겁재"
+                    },
+                    "second": null,
+                    "third": {
+                      "chinese": "乙",
+                      "korean": "을",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "음",
+                      "rate": 20,
+                      "tenStar": "비견"
+                    }
+                  },
+                  "sinsal": "장성살",
+                  "unsung": "건록",
+                  "etcSinsal": []
+                }
+              },
+              "6": {
+                "year": 2024,
+                "sky": {
+                  "chinese": "甲",
+                  "korean": "갑",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "겁재",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "辰",
+                  "korean": "진",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정재",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "乙",
+                      "korean": "을",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "음",
+                      "rate": 9,
+                      "tenStar": "비견"
+                    },
+                    "second": {
+                      "chinese": "癸",
+                      "korean": "계",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "음",
+                      "rate": 3,
+                      "tenStar": "편인"
+                    },
+                    "third": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 18,
+                      "tenStar": "정재"
+                    }
+                  },
+                  "sinsal": "반안살",
+                  "unsung": "관대",
+                  "etcSinsal": []
+                }
+              },
+              "7": {
+                "year": 2025,
+                "sky": {
+                  "chinese": "乙",
+                  "korean": "을",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "비견",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "巳",
+                  "korean": "사",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "상관",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정재"
+                    },
+                    "second": {
+                      "chinese": "庚",
+                      "korean": "경",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정관"
+                    },
+                    "third": {
+                      "chinese": "丙",
+                      "korean": "병",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "양",
+                      "rate": 16,
+                      "tenStar": "상관"
+                    }
+                  },
+                  "sinsal": "역마살",
+                  "unsung": "목욕",
+                  "etcSinsal": [
+                    "금여성"
+                  ]
+                }
+              },
+              "8": {
+                "year": 2026,
+                "sky": {
+                  "chinese": "丙",
+                  "korean": "병",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "상관",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "午",
+                  "korean": "오",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "식신",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "丙",
+                      "korean": "병",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "양",
+                      "rate": 10,
+                      "tenStar": "상관"
+                    },
+                    "second": {
+                      "chinese": "己",
+                      "korean": "기",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "음",
+                      "rate": 10,
+                      "tenStar": "편재"
+                    },
+                    "third": {
+                      "chinese": "丁",
+                      "korean": "정",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "음",
+                      "rate": 10,
+                      "tenStar": "식신"
+                    }
+                  },
+                  "sinsal": "육해살",
+                  "unsung": "장생",
+                  "etcSinsal": [
+                    "현침살",
+                    "문창귀인",
+                    "태극귀인",
+                    "천주귀인",
+                    "학당귀인",
+                    "홍염살"
+                  ]
+                }
+              },
+              "9": {
+                "year": 2027,
+                "sky": {
+                  "chinese": "丁",
+                  "korean": "정",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "식신",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "未",
+                  "korean": "미",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편재",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "丁",
+                      "korean": "정",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "음",
+                      "rate": 9,
+                      "tenStar": "식신"
+                    },
+                    "second": {
+                      "chinese": "乙",
+                      "korean": "을",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "음",
+                      "rate": 3,
+                      "tenStar": "비견"
+                    },
+                    "third": {
+                      "chinese": "己",
+                      "korean": "기",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "음",
+                      "rate": 18,
+                      "tenStar": "편재"
+                    }
+                  },
+                  "sinsal": "화개살",
+                  "unsung": "양",
+                  "etcSinsal": [
+                    "현침살"
+                  ]
+                }
+              }
+            },
+            "monthFortune": {
+              "0": {
+                "month": 1,
+                "sky": {
+                  "chinese": "丁",
+                  "korean": "정",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "식신",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "丑",
+                  "korean": "축",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편재",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "癸",
+                      "korean": "계",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "음",
+                      "rate": 9,
+                      "tenStar": "편인"
+                    },
+                    "second": {
+                      "chinese": "辛",
+                      "korean": "신",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "음",
+                      "rate": 3,
+                      "tenStar": "편관"
+                    },
+                    "third": {
+                      "chinese": "己",
+                      "korean": "기",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "음",
+                      "rate": 18,
+                      "tenStar": "편재"
+                    }
+                  },
+                  "sinsal": "월살",
+                  "unsung": "쇠",
+                  "etcSinsal": []
+                }
+              },
+              "1": {
+                "month": 2,
+                "sky": {
+                  "chinese": "戊",
+                  "korean": "무",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정재",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "寅",
+                  "korean": "인",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "겁재",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정재"
+                    },
+                    "second": {
+                      "chinese": "丙",
+                      "korean": "병",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "상관"
+                    },
+                    "third": {
+                      "chinese": "甲",
+                      "korean": "갑",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "양",
+                      "rate": 16,
+                      "tenStar": "겁재"
+                    }
+                  },
+                  "sinsal": "망신살",
+                  "unsung": "제왕",
+                  "etcSinsal": []
+                }
+              },
+              "2": {
+                "month": 3,
+                "sky": {
+                  "chinese": "己",
+                  "korean": "기",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편재",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "卯",
+                  "korean": "묘",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "비견",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "甲",
+                      "korean": "갑",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "양",
+                      "rate": 10,
+                      "tenStar": "겁재"
+                    },
+                    "second": null,
+                    "third": {
+                      "chinese": "乙",
+                      "korean": "을",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "음",
+                      "rate": 20,
+                      "tenStar": "비견"
+                    }
+                  },
+                  "sinsal": "장성살",
+                  "unsung": "건록",
+                  "etcSinsal": []
+                }
+              },
+              "3": {
+                "month": 4,
+                "sky": {
+                  "chinese": "庚",
+                  "korean": "경",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정관",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "辰",
+                  "korean": "진",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정재",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "乙",
+                      "korean": "을",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "음",
+                      "rate": 9,
+                      "tenStar": "비견"
+                    },
+                    "second": {
+                      "chinese": "癸",
+                      "korean": "계",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "음",
+                      "rate": 3,
+                      "tenStar": "편인"
+                    },
+                    "third": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 18,
+                      "tenStar": "정재"
+                    }
+                  },
+                  "sinsal": "반안살",
+                  "unsung": "관대",
+                  "etcSinsal": []
+                }
+              },
+              "4": {
+                "month": 5,
+                "sky": {
+                  "chinese": "辛",
+                  "korean": "신",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편관",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "巳",
+                  "korean": "사",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "상관",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정재"
+                    },
+                    "second": {
+                      "chinese": "庚",
+                      "korean": "경",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정관"
+                    },
+                    "third": {
+                      "chinese": "丙",
+                      "korean": "병",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "양",
+                      "rate": 16,
+                      "tenStar": "상관"
+                    }
+                  },
+                  "sinsal": "역마살",
+                  "unsung": "목욕",
+                  "etcSinsal": [
+                    "금여성"
+                  ]
+                }
+              },
+              "5": {
+                "month": 6,
+                "sky": {
+                  "chinese": "壬",
+                  "korean": "임",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "정인",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "午",
+                  "korean": "오",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "식신",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "丙",
+                      "korean": "병",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "양",
+                      "rate": 10,
+                      "tenStar": "상관"
+                    },
+                    "second": {
+                      "chinese": "己",
+                      "korean": "기",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "음",
+                      "rate": 10,
+                      "tenStar": "편재"
+                    },
+                    "third": {
+                      "chinese": "丁",
+                      "korean": "정",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "음",
+                      "rate": 10,
+                      "tenStar": "식신"
+                    }
+                  },
+                  "sinsal": "육해살",
+                  "unsung": "장생",
+                  "etcSinsal": [
+                    "현침살",
+                    "문창귀인",
+                    "태극귀인",
+                    "천주귀인",
+                    "학당귀인",
+                    "홍염살"
+                  ]
+                }
+              },
+              "6": {
+                "month": 7,
+                "sky": {
+                  "chinese": "癸",
+                  "korean": "계",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "편인",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "未",
+                  "korean": "미",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편재",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "丁",
+                      "korean": "정",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "음",
+                      "rate": 9,
+                      "tenStar": "식신"
+                    },
+                    "second": {
+                      "chinese": "乙",
+                      "korean": "을",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "음",
+                      "rate": 3,
+                      "tenStar": "비견"
+                    },
+                    "third": {
+                      "chinese": "己",
+                      "korean": "기",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "음",
+                      "rate": 18,
+                      "tenStar": "편재"
+                    }
+                  },
+                  "sinsal": "화개살",
+                  "unsung": "양",
+                  "etcSinsal": [
+                    "현침살"
+                  ]
+                }
+              },
+              "7": {
+                "month": 8,
+                "sky": {
+                  "chinese": "甲",
+                  "korean": "갑",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "겁재",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "申",
+                  "korean": "신",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정관",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정재"
+                    },
+                    "second": {
+                      "chinese": "壬",
+                      "korean": "임",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정인"
+                    },
+                    "third": {
+                      "chinese": "庚",
+                      "korean": "경",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "양",
+                      "rate": 16,
+                      "tenStar": "정관"
+                    }
+                  },
+                  "sinsal": "겁살",
+                  "unsung": "태",
+                  "etcSinsal": [
+                    "귀문관살",
+                    "현침살",
+                    "천을귀인"
+                  ]
+                }
+              },
+              "8": {
+                "month": 9,
+                "sky": {
+                  "chinese": "乙",
+                  "korean": "을",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "비견",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "酉",
+                  "korean": "유",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편관",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "庚",
+                      "korean": "경",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "양",
+                      "rate": 10,
+                      "tenStar": "정관"
+                    },
+                    "second": null,
+                    "third": {
+                      "chinese": "辛",
+                      "korean": "신",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "음",
+                      "rate": 20,
+                      "tenStar": "편관"
+                    }
+                  },
+                  "sinsal": "재살",
+                  "unsung": "절",
+                  "etcSinsal": []
+                }
+              },
+              "9": {
+                "month": 10,
+                "sky": {
+                  "chinese": "丙",
+                  "korean": "병",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "상관",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "戌",
+                  "korean": "술",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정재",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "辛",
+                      "korean": "신",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "음",
+                      "rate": 9,
+                      "tenStar": "편관"
+                    },
+                    "second": {
+                      "chinese": "丁",
+                      "korean": "정",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "음",
+                      "rate": 3,
+                      "tenStar": "식신"
+                    },
+                    "third": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 18,
+                      "tenStar": "정재"
+                    }
+                  },
+                  "sinsal": "천살",
+                  "unsung": "묘",
+                  "etcSinsal": []
+                }
+              },
+              "10": {
+                "month": 11,
+                "sky": {
+                  "chinese": "丁",
+                  "korean": "정",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "식신",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "亥",
+                  "korean": "해",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "정인",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정재"
+                    },
+                    "second": {
+                      "chinese": "甲",
+                      "korean": "갑",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "겁재"
+                    },
+                    "third": {
+                      "chinese": "壬",
+                      "korean": "임",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "양",
+                      "rate": 16,
+                      "tenStar": "정인"
+                    }
+                  },
+                  "sinsal": "지살",
+                  "unsung": "사",
+                  "etcSinsal": []
+                }
+              },
+              "11": {
+                "month": 12,
+                "sky": {
+                  "chinese": "戊",
+                  "korean": "무",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정재",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "子",
+                  "korean": "자",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "편인",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "壬",
+                      "korean": "임",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "양",
+                      "rate": 10,
+                      "tenStar": "정인"
+                    },
+                    "second": null,
+                    "third": {
+                      "chinese": "癸",
+                      "korean": "계",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "음",
+                      "rate": 20,
+                      "tenStar": "편인"
+                    }
+                  },
+                  "sinsal": "도화살",
+                  "unsung": "병",
+                  "etcSinsal": [
+                    "천을귀인",
+                    "태극귀인",
+                    "문곡귀인"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "formatUnse": {
+          "storedUnse": {
+            "gender": "FEMALE",
+            "birthday": "1995-04-25",
+            "solarBirthday": "1995-05-24",
+            "birthType": "LUNAR",
+            "birthTime": "08:30",
+            "targetYear": 2025,
+            "yearSky": "乙",
+            "yearGround": "亥",
+            "monthSky": "辛",
+            "monthGround": "巳",
+            "daySky": "乙",
+            "dayGround": "卯",
+            "timeSky": "庚",
+            "timeGround": "辰",
+            "bigFortuneNumber": 4,
+            "bigFortuneStartYear": "1999",
+            "seasonStartTime": null,
+            "manseYearSkyRelation": "비견",
+            "manseYearGroundRelation": "정인",
+            "manseMonthSkyRelation": "편관",
+            "manseMonthGroundRelation": "상관",
+            "manseDaySkyRelation": "비견",
+            "manseDayGroundRelation": "비견",
+            "manseTimeSkyRelation": "정관",
+            "manseTimeGroundRelation": "정재",
+            "fiveTreeNum": 3,
+            "fiveFireNum": 1,
+            "fiveSoilNum": 1,
+            "fiveIronNum": 2,
+            "fiveWaterNum": 1
+          },
+          "saju": {
+            "bigFortuneNumber": 4,
+            "bigFortuneStartYear": "1999",
+            "seasonStartTime": null,
+            "yearSky": {
+              "chinese": "乙",
+              "korean": "을",
+              "fiveCircle": "목",
+              "fiveCircleColor": "#84d696",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "비견",
+              "minusPlus": "음",
+              "jijangGan": null,
+              "sinsal": null,
+              "unsung": null,
+              "etcSinsal": null
+            },
+            "yearGround": {
+              "chinese": "亥",
+              "korean": "해",
+              "fiveCircle": "수",
+              "fiveCircleColor": "#3a3b36",
+              "fiveCircleFrontColor": "#ffffff",
+              "tenStar": "정인",
+              "minusPlus": "음",
+              "jijangGan": {
+                "first": {
+                  "chinese": "戊",
+                  "korean": "무",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "minusPlus": "양",
+                  "rate": 7,
+                  "tenStar": "정재"
+                },
+                "second": {
+                  "chinese": "甲",
+                  "korean": "갑",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "minusPlus": "양",
+                  "rate": 7,
+                  "tenStar": "겁재"
+                },
+                "third": {
+                  "chinese": "壬",
+                  "korean": "임",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "minusPlus": "양",
+                  "rate": 16,
+                  "tenStar": "정인"
+                }
+              },
+              "sinsal": "지살",
+              "unsung": "사",
+              "etcSinsal": []
+            },
+            "monthSky": {
+              "chinese": "辛",
+              "korean": "신",
+              "fiveCircle": "금",
+              "fiveCircleColor": "#ffffff",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "편관",
+              "minusPlus": "음",
+              "jijangGan": null,
+              "sinsal": null,
+              "unsung": null,
+              "etcSinsal": null
+            },
+            "monthGround": {
+              "chinese": "巳",
+              "korean": "사",
+              "fiveCircle": "화",
+              "fiveCircleColor": "#fc989a",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "상관",
+              "minusPlus": "음",
+              "jijangGan": {
+                "first": {
+                  "chinese": "戊",
+                  "korean": "무",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "minusPlus": "양",
+                  "rate": 7,
+                  "tenStar": "정재"
+                },
+                "second": {
+                  "chinese": "庚",
+                  "korean": "경",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "minusPlus": "양",
+                  "rate": 7,
+                  "tenStar": "정관"
+                },
+                "third": {
+                  "chinese": "丙",
+                  "korean": "병",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "minusPlus": "양",
+                  "rate": 16,
+                  "tenStar": "상관"
+                }
+              },
+              "sinsal": "역마살",
+              "unsung": "목욕",
+              "etcSinsal": [
+                "현침살",
+                "금여성"
+              ]
+            },
+            "daySky": {
+              "chinese": "乙",
+              "korean": "을",
+              "fiveCircle": "목",
+              "fiveCircleColor": "#84d696",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "비견",
+              "minusPlus": "음",
+              "jijangGan": null,
+              "sinsal": null,
+              "unsung": null,
+              "etcSinsal": null
+            },
+            "dayGround": {
+              "chinese": "卯",
+              "korean": "묘",
+              "fiveCircle": "목",
+              "fiveCircleColor": "#84d696",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "비견",
+              "minusPlus": "음",
+              "jijangGan": {
+                "first": {
+                  "chinese": "甲",
+                  "korean": "갑",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "minusPlus": "양",
+                  "rate": 10,
+                  "tenStar": "겁재"
+                },
+                "second": null,
+                "third": {
+                  "chinese": "乙",
+                  "korean": "을",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "minusPlus": "음",
+                  "rate": 20,
+                  "tenStar": "비견"
+                }
+              },
+              "sinsal": "장성살",
+              "unsung": "건록",
+              "etcSinsal": []
+            },
+            "timeSky": {
+              "chinese": "庚",
+              "korean": "경",
+              "fiveCircle": "금",
+              "fiveCircleColor": "#ffffff",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "정관",
+              "minusPlus": "양",
+              "jijangGan": null,
+              "sinsal": null,
+              "unsung": null,
+              "etcSinsal": null
+            },
+            "timeGround": {
+              "chinese": "辰",
+              "korean": "진",
+              "fiveCircle": "토",
+              "fiveCircleColor": "#fee469",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "정재",
+              "minusPlus": "양",
+              "jijangGan": {
+                "first": {
+                  "chinese": "乙",
+                  "korean": "을",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "minusPlus": "음",
+                  "rate": 9,
+                  "tenStar": "비견"
+                },
+                "second": {
+                  "chinese": "癸",
+                  "korean": "계",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "minusPlus": "음",
+                  "rate": 3,
+                  "tenStar": "편인"
+                },
+                "third": {
+                  "chinese": "戊",
+                  "korean": "무",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "minusPlus": "양",
+                  "rate": 18,
+                  "tenStar": "정재"
+                }
+              },
+              "sinsal": "반안살",
+              "unsung": "관대",
+              "etcSinsal": [
+                "괴강살",
+                "월덕귀인"
+              ]
+            }
+          },
+          "fortune": {
+            "bigFortune": {
+              "number": 24,
+              "sky": {
+                "chinese": "甲",
+                "korean": "갑",
+                "fiveCircle": "목",
+                "fiveCircleColor": "#84d696",
+                "fiveCircleFrontColor": "#000000",
+                "tenStar": "겁재",
+                "minusPlus": "양",
+                "jijangGan": null,
+                "sinsal": null,
+                "unsung": null,
+                "etcSinsal": null
+              },
+              "ground": {
+                "chinese": "申",
+                "korean": "신",
+                "fiveCircle": "금",
+                "fiveCircleColor": "#ffffff",
+                "fiveCircleFrontColor": "#000000",
+                "tenStar": "정관",
+                "minusPlus": "양",
+                "jijangGan": {
+                  "first": {
+                    "chinese": "戊",
+                    "korean": "무",
+                    "fiveCircle": "토",
+                    "fiveCircleColor": "#fee469",
+                    "minusPlus": "양",
+                    "rate": 7,
+                    "tenStar": "정재"
+                  },
+                  "second": {
+                    "chinese": "壬",
+                    "korean": "임",
+                    "fiveCircle": "수",
+                    "fiveCircleColor": "#3a3b36",
+                    "minusPlus": "양",
+                    "rate": 7,
+                    "tenStar": "정인"
+                  },
+                  "third": {
+                    "chinese": "庚",
+                    "korean": "경",
+                    "fiveCircle": "금",
+                    "fiveCircleColor": "#ffffff",
+                    "minusPlus": "양",
+                    "rate": 16,
+                    "tenStar": "정관"
+                  }
+                },
+                "sinsal": "겁살",
+                "unsung": "태",
+                "etcSinsal": [
+                  "귀문관살",
+                  "현침살",
+                  "천을귀인"
+                ]
+              }
+            },
+            "smallFortune": {
+              "number": "2025",
+              "sky": {
+                "chinese": "乙",
+                "korean": "을",
+                "fiveCircle": "목",
+                "fiveCircleColor": "#84d696",
+                "fiveCircleFrontColor": "#000000",
+                "tenStar": "비견",
+                "minusPlus": "음",
+                "jijangGan": null,
+                "sinsal": null,
+                "unsung": null,
+                "etcSinsal": null
+              },
+              "ground": {
+                "chinese": "巳",
+                "korean": "사",
+                "fiveCircle": "화",
+                "fiveCircleColor": "#fc989a",
+                "fiveCircleFrontColor": "#000000",
+                "tenStar": "상관",
+                "minusPlus": "음",
+                "jijangGan": {
+                  "first": {
+                    "chinese": "戊",
+                    "korean": "무",
+                    "fiveCircle": "토",
+                    "fiveCircleColor": "#fee469",
+                    "minusPlus": "양",
+                    "rate": 7,
+                    "tenStar": "정재"
+                  },
+                  "second": {
+                    "chinese": "庚",
+                    "korean": "경",
+                    "fiveCircle": "금",
+                    "fiveCircleColor": "#ffffff",
+                    "minusPlus": "양",
+                    "rate": 7,
+                    "tenStar": "정관"
+                  },
+                  "third": {
+                    "chinese": "丙",
+                    "korean": "병",
+                    "fiveCircle": "화",
+                    "fiveCircleColor": "#fc989a",
+                    "minusPlus": "양",
+                    "rate": 16,
+                    "tenStar": "상관"
+                  }
+                },
+                "sinsal": "역마살",
+                "unsung": "목욕",
+                "etcSinsal": [
+                  "금여성"
+                ]
+              }
+            },
+            "monthFortune": {
+              "number": 8,
+              "sky": {
+                "chinese": "癸",
+                "korean": "계",
+                "fiveCircle": "수",
+                "fiveCircleColor": "#3a3b36",
+                "fiveCircleFrontColor": "#ffffff",
+                "tenStar": "편인",
+                "minusPlus": "음",
+                "jijangGan": null,
+                "sinsal": null,
+                "unsung": null,
+                "etcSinsal": null
+              },
+              "ground": {
+                "chinese": "未",
+                "korean": "미",
+                "fiveCircle": "토",
+                "fiveCircleColor": "#fee469",
+                "fiveCircleFrontColor": "#000000",
+                "tenStar": "편재",
+                "minusPlus": "음",
+                "jijangGan": {
+                  "first": {
+                    "chinese": "丁",
+                    "korean": "정",
+                    "fiveCircle": "화",
+                    "fiveCircleColor": "#fc989a",
+                    "minusPlus": "음",
+                    "rate": 9,
+                    "tenStar": "식신"
+                  },
+                  "second": {
+                    "chinese": "乙",
+                    "korean": "을",
+                    "fiveCircle": "목",
+                    "fiveCircleColor": "#84d696",
+                    "minusPlus": "음",
+                    "rate": 3,
+                    "tenStar": "비견"
+                  },
+                  "third": {
+                    "chinese": "己",
+                    "korean": "기",
+                    "fiveCircle": "토",
+                    "fiveCircleColor": "#fee469",
+                    "minusPlus": "음",
+                    "rate": 18,
+                    "tenStar": "편재"
+                  }
+                },
+                "sinsal": "화개살",
+                "unsung": "양",
+                "etcSinsal": [
+                  "현침살"
+                ]
+              }
+            },
+            "dayFortune": {
+              "number": 2,
+              "sky": {
+                "chinese": "癸",
+                "korean": "계",
+                "fiveCircle": "수",
+                "fiveCircleColor": "#3a3b36",
+                "fiveCircleFrontColor": "#ffffff",
+                "tenStar": "편인",
+                "minusPlus": "음",
+                "jijangGan": null,
+                "sinsal": null,
+                "unsung": null,
+                "etcSinsal": null
+              },
+              "ground": {
+                "chinese": "卯",
+                "korean": "묘",
+                "fiveCircle": "목",
+                "fiveCircleColor": "#84d696",
+                "fiveCircleFrontColor": "#000000",
+                "tenStar": "비견",
+                "minusPlus": "음",
+                "jijangGan": {
+                  "first": {
+                    "chinese": "甲",
+                    "korean": "갑",
+                    "fiveCircle": "목",
+                    "fiveCircleColor": "#84d696",
+                    "minusPlus": "양",
+                    "rate": 10,
+                    "tenStar": "겁재"
+                  },
+                  "second": null,
+                  "third": {
+                    "chinese": "乙",
+                    "korean": "을",
+                    "fiveCircle": "목",
+                    "fiveCircleColor": "#84d696",
+                    "minusPlus": "음",
+                    "rate": 20,
+                    "tenStar": "비견"
+                  }
+                },
+                "sinsal": "장성살",
+                "unsung": "건록",
+                "etcSinsal": []
+              }
+            }
+          }
+        },
+        "smallNum": 2025,
+        "bigNum": 3,
+        "targetAge": 31
+      },
+      "sinsals": {
+        "firstSinsal": "역마살",
+        "secondSinsal": "육해살",
+        "thirdSinsal": "화개살"
+      }
+    }
+  },
+  {
+    "name": "음력 여성 케이스",
+    "input": {
+      "name": "이영희",
+      "gender": "FEMALE",
+      "birthType": "LUNAR",
+      "birthYear": "1988",
+      "birthMonth": "03",
+      "birthDay": "15",
+      "birthTime": "14"
+    },
+    "expected": {
+      "pillars": {
+        "year": {
+          "stem": "戊",
+          "branch": "辰"
+        },
+        "month": {
+          "stem": "丙",
+          "branch": "辰"
+        },
+        "day": {
+          "stem": "乙",
+          "branch": "卯"
+        },
+        "time": {
+          "stem": "癸",
+          "branch": "未"
+        }
+      },
+      "tenStars": {
+        "yearStem": "정재",
+        "yearBranch": "정재",
+        "monthStem": "상관",
+        "monthBranch": "정재",
+        "dayStem": "비견",
+        "dayBranch": "비견",
+        "timeStem": "편인",
+        "timeBranch": "편재"
+      },
+      "elements": {
+        "wood": 2,
+        "fire": 1,
+        "earth": 4,
+        "metal": 0,
+        "water": 1
+      },
+      "sinsals": [
+        "역마살",
+        "육해살",
+        "화개살"
+      ]
+    },
+    "rawResult": {
+      "saju": {
+        "fortuneList": {
+          "storedUnse": {
+            "gender": "FEMALE",
+            "birthday": "1988-03-15",
+            "solarBirthday": "1988-04-30",
+            "birthType": "LUNAR",
+            "birthTime": "14:30",
+            "targetYear": 2025,
+            "yearSky": "戊",
+            "yearGround": "辰",
+            "monthSky": "丙",
+            "monthGround": "辰",
+            "daySky": "乙",
+            "dayGround": "卯",
+            "timeSky": "癸",
+            "timeGround": "未",
+            "bigFortuneNumber": 9,
+            "bigFortuneStartYear": "1997",
+            "seasonStartTime": null,
+            "manseYearSkyRelation": "정재",
+            "manseYearGroundRelation": "정재",
+            "manseMonthSkyRelation": "상관",
+            "manseMonthGroundRelation": "정재",
+            "manseDaySkyRelation": "비견",
+            "manseDayGroundRelation": "비견",
+            "manseTimeSkyRelation": "편인",
+            "manseTimeGroundRelation": "편재",
+            "fiveTreeNum": 2,
+            "fiveFireNum": 1,
+            "fiveSoilNum": 4,
+            "fiveIronNum": 0,
+            "fiveWaterNum": 1
+          },
+          "saju": {
+            "bigFortuneNumber": 9,
+            "bigFortuneStartYear": "1997",
+            "seasonStartTime": null,
+            "yearSky": {
+              "chinese": "戊",
+              "korean": "무",
+              "fiveCircle": "토",
+              "fiveCircleColor": "#fee469",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "정재",
+              "minusPlus": "양",
+              "jijangGan": null,
+              "sinsal": null,
+              "unsung": null,
+              "etcSinsal": null
+            },
+            "yearGround": {
+              "chinese": "辰",
+              "korean": "진",
+              "fiveCircle": "토",
+              "fiveCircleColor": "#fee469",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "정재",
+              "minusPlus": "양",
+              "jijangGan": {
+                "first": {
+                  "chinese": "乙",
+                  "korean": "을",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "minusPlus": "음",
+                  "rate": 9,
+                  "tenStar": "비견"
+                },
+                "second": {
+                  "chinese": "癸",
+                  "korean": "계",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "minusPlus": "음",
+                  "rate": 3,
+                  "tenStar": "편인"
+                },
+                "third": {
+                  "chinese": "戊",
+                  "korean": "무",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "minusPlus": "양",
+                  "rate": 18,
+                  "tenStar": "정재"
+                }
+              },
+              "sinsal": "반안살",
+              "unsung": "관대",
+              "etcSinsal": [
+                "백호대살",
+                "괴강살"
+              ]
+            },
+            "monthSky": {
+              "chinese": "丙",
+              "korean": "병",
+              "fiveCircle": "화",
+              "fiveCircleColor": "#fc989a",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "상관",
+              "minusPlus": "양",
+              "jijangGan": null,
+              "sinsal": null,
+              "unsung": null,
+              "etcSinsal": null
+            },
+            "monthGround": {
+              "chinese": "辰",
+              "korean": "진",
+              "fiveCircle": "토",
+              "fiveCircleColor": "#fee469",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "정재",
+              "minusPlus": "양",
+              "jijangGan": {
+                "first": {
+                  "chinese": "乙",
+                  "korean": "을",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "minusPlus": "음",
+                  "rate": 9,
+                  "tenStar": "비견"
+                },
+                "second": {
+                  "chinese": "癸",
+                  "korean": "계",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "minusPlus": "음",
+                  "rate": 3,
+                  "tenStar": "편인"
+                },
+                "third": {
+                  "chinese": "戊",
+                  "korean": "무",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "minusPlus": "양",
+                  "rate": 18,
+                  "tenStar": "정재"
+                }
+              },
+              "sinsal": "반안살",
+              "unsung": "관대",
+              "etcSinsal": []
+            },
+            "daySky": {
+              "chinese": "乙",
+              "korean": "을",
+              "fiveCircle": "목",
+              "fiveCircleColor": "#84d696",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "비견",
+              "minusPlus": "음",
+              "jijangGan": null,
+              "sinsal": null,
+              "unsung": null,
+              "etcSinsal": null
+            },
+            "dayGround": {
+              "chinese": "卯",
+              "korean": "묘",
+              "fiveCircle": "목",
+              "fiveCircleColor": "#84d696",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "비견",
+              "minusPlus": "음",
+              "jijangGan": {
+                "first": {
+                  "chinese": "甲",
+                  "korean": "갑",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "minusPlus": "양",
+                  "rate": 10,
+                  "tenStar": "겁재"
+                },
+                "second": null,
+                "third": {
+                  "chinese": "乙",
+                  "korean": "을",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "minusPlus": "음",
+                  "rate": 20,
+                  "tenStar": "비견"
+                }
+              },
+              "sinsal": "장성살",
+              "unsung": "건록",
+              "etcSinsal": []
+            },
+            "timeSky": {
+              "chinese": "癸",
+              "korean": "계",
+              "fiveCircle": "수",
+              "fiveCircleColor": "#3a3b36",
+              "fiveCircleFrontColor": "#ffffff",
+              "tenStar": "편인",
+              "minusPlus": "음",
+              "jijangGan": null,
+              "sinsal": null,
+              "unsung": null,
+              "etcSinsal": null
+            },
+            "timeGround": {
+              "chinese": "未",
+              "korean": "미",
+              "fiveCircle": "토",
+              "fiveCircleColor": "#fee469",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "편재",
+              "minusPlus": "음",
+              "jijangGan": {
+                "first": {
+                  "chinese": "丁",
+                  "korean": "정",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "minusPlus": "음",
+                  "rate": 9,
+                  "tenStar": "식신"
+                },
+                "second": {
+                  "chinese": "乙",
+                  "korean": "을",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "minusPlus": "음",
+                  "rate": 3,
+                  "tenStar": "비견"
+                },
+                "third": {
+                  "chinese": "己",
+                  "korean": "기",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "minusPlus": "음",
+                  "rate": 18,
+                  "tenStar": "편재"
+                }
+              },
+              "sinsal": "화개살",
+              "unsung": "양",
+              "etcSinsal": [
+                "현침살"
+              ]
+            }
+          },
+          "fortune": {
+            "big": 3,
+            "small": 2016
+          },
+          "list": {
+            "bigFortune": {
+              "0": {
+                "number": null,
+                "sky": {
+                  "chinese": "丙",
+                  "korean": "병",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "상관",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "辰",
+                  "korean": "진",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정재",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "乙",
+                      "korean": "을",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "음",
+                      "rate": 9,
+                      "tenStar": "비견"
+                    },
+                    "second": {
+                      "chinese": "癸",
+                      "korean": "계",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "음",
+                      "rate": 3,
+                      "tenStar": "편인"
+                    },
+                    "third": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 18,
+                      "tenStar": "정재"
+                    }
+                  },
+                  "sinsal": "반안살",
+                  "unsung": "관대",
+                  "etcSinsal": []
+                }
+              },
+              "1": {
+                "number": 9,
+                "sky": {
+                  "chinese": "乙",
+                  "korean": "을",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "비견",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "卯",
+                  "korean": "묘",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "비견",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "甲",
+                      "korean": "갑",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "양",
+                      "rate": 10,
+                      "tenStar": "겁재"
+                    },
+                    "second": null,
+                    "third": {
+                      "chinese": "乙",
+                      "korean": "을",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "음",
+                      "rate": 20,
+                      "tenStar": "비견"
+                    }
+                  },
+                  "sinsal": "장성살",
+                  "unsung": "건록",
+                  "etcSinsal": []
+                }
+              },
+              "2": {
+                "number": 19,
+                "sky": {
+                  "chinese": "甲",
+                  "korean": "갑",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "겁재",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "寅",
+                  "korean": "인",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "겁재",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정재"
+                    },
+                    "second": {
+                      "chinese": "丙",
+                      "korean": "병",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "상관"
+                    },
+                    "third": {
+                      "chinese": "甲",
+                      "korean": "갑",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "양",
+                      "rate": 16,
+                      "tenStar": "겁재"
+                    }
+                  },
+                  "sinsal": "망신살",
+                  "unsung": "제왕",
+                  "etcSinsal": []
+                }
+              },
+              "3": {
+                "number": 29,
+                "sky": {
+                  "chinese": "癸",
+                  "korean": "계",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "편인",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "丑",
+                  "korean": "축",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편재",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "癸",
+                      "korean": "계",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "음",
+                      "rate": 9,
+                      "tenStar": "편인"
+                    },
+                    "second": {
+                      "chinese": "辛",
+                      "korean": "신",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "음",
+                      "rate": 3,
+                      "tenStar": "편관"
+                    },
+                    "third": {
+                      "chinese": "己",
+                      "korean": "기",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "음",
+                      "rate": 18,
+                      "tenStar": "편재"
+                    }
+                  },
+                  "sinsal": "월살",
+                  "unsung": "쇠",
+                  "etcSinsal": []
+                }
+              },
+              "4": {
+                "number": 39,
+                "sky": {
+                  "chinese": "壬",
+                  "korean": "임",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "정인",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "子",
+                  "korean": "자",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "편인",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "壬",
+                      "korean": "임",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "양",
+                      "rate": 10,
+                      "tenStar": "정인"
+                    },
+                    "second": null,
+                    "third": {
+                      "chinese": "癸",
+                      "korean": "계",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "음",
+                      "rate": 20,
+                      "tenStar": "편인"
+                    }
+                  },
+                  "sinsal": "도화살",
+                  "unsung": "병",
+                  "etcSinsal": [
+                    "천을귀인",
+                    "태극귀인",
+                    "문곡귀인"
+                  ]
+                }
+              },
+              "5": {
+                "number": 49,
+                "sky": {
+                  "chinese": "辛",
+                  "korean": "신",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편관",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "亥",
+                  "korean": "해",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "정인",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정재"
+                    },
+                    "second": {
+                      "chinese": "甲",
+                      "korean": "갑",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "겁재"
+                    },
+                    "third": {
+                      "chinese": "壬",
+                      "korean": "임",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "양",
+                      "rate": 16,
+                      "tenStar": "정인"
+                    }
+                  },
+                  "sinsal": "지살",
+                  "unsung": "사",
+                  "etcSinsal": []
+                }
+              },
+              "6": {
+                "number": 59,
+                "sky": {
+                  "chinese": "庚",
+                  "korean": "경",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정관",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "戌",
+                  "korean": "술",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정재",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "辛",
+                      "korean": "신",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "음",
+                      "rate": 9,
+                      "tenStar": "편관"
+                    },
+                    "second": {
+                      "chinese": "丁",
+                      "korean": "정",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "음",
+                      "rate": 3,
+                      "tenStar": "식신"
+                    },
+                    "third": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 18,
+                      "tenStar": "정재"
+                    }
+                  },
+                  "sinsal": "천살",
+                  "unsung": "묘",
+                  "etcSinsal": []
+                }
+              },
+              "7": {
+                "number": 69,
+                "sky": {
+                  "chinese": "己",
+                  "korean": "기",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편재",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "酉",
+                  "korean": "유",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편관",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "庚",
+                      "korean": "경",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "양",
+                      "rate": 10,
+                      "tenStar": "정관"
+                    },
+                    "second": null,
+                    "third": {
+                      "chinese": "辛",
+                      "korean": "신",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "음",
+                      "rate": 20,
+                      "tenStar": "편관"
+                    }
+                  },
+                  "sinsal": "재살",
+                  "unsung": "절",
+                  "etcSinsal": []
+                }
+              },
+              "8": {
+                "number": 79,
+                "sky": {
+                  "chinese": "戊",
+                  "korean": "무",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정재",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "申",
+                  "korean": "신",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정관",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정재"
+                    },
+                    "second": {
+                      "chinese": "壬",
+                      "korean": "임",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정인"
+                    },
+                    "third": {
+                      "chinese": "庚",
+                      "korean": "경",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "양",
+                      "rate": 16,
+                      "tenStar": "정관"
+                    }
+                  },
+                  "sinsal": "겁살",
+                  "unsung": "태",
+                  "etcSinsal": [
+                    "귀문관살",
+                    "현침살",
+                    "천을귀인"
+                  ]
+                }
+              },
+              "9": {
+                "number": 89,
+                "sky": {
+                  "chinese": "丁",
+                  "korean": "정",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "식신",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "未",
+                  "korean": "미",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편재",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "丁",
+                      "korean": "정",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "음",
+                      "rate": 9,
+                      "tenStar": "식신"
+                    },
+                    "second": {
+                      "chinese": "乙",
+                      "korean": "을",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "음",
+                      "rate": 3,
+                      "tenStar": "비견"
+                    },
+                    "third": {
+                      "chinese": "己",
+                      "korean": "기",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "음",
+                      "rate": 18,
+                      "tenStar": "편재"
+                    }
+                  },
+                  "sinsal": "화개살",
+                  "unsung": "양",
+                  "etcSinsal": [
+                    "현침살"
+                  ]
+                }
+              },
+              "10": {
+                "number": 99,
+                "sky": {
+                  "chinese": "丙",
+                  "korean": "병",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "상관",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "午",
+                  "korean": "오",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "식신",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "丙",
+                      "korean": "병",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "양",
+                      "rate": 10,
+                      "tenStar": "상관"
+                    },
+                    "second": {
+                      "chinese": "己",
+                      "korean": "기",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "음",
+                      "rate": 10,
+                      "tenStar": "편재"
+                    },
+                    "third": {
+                      "chinese": "丁",
+                      "korean": "정",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "음",
+                      "rate": 10,
+                      "tenStar": "식신"
+                    }
+                  },
+                  "sinsal": "육해살",
+                  "unsung": "장생",
+                  "etcSinsal": [
+                    "현침살",
+                    "문창귀인",
+                    "태극귀인",
+                    "천주귀인",
+                    "학당귀인",
+                    "홍염살"
+                  ]
+                }
+              }
+            },
+            "smallFortune": {
+              "0": {
+                "year": 2016,
+                "sky": {
+                  "chinese": "丙",
+                  "korean": "병",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "상관",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "申",
+                  "korean": "신",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정관",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정재"
+                    },
+                    "second": {
+                      "chinese": "壬",
+                      "korean": "임",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정인"
+                    },
+                    "third": {
+                      "chinese": "庚",
+                      "korean": "경",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "양",
+                      "rate": 16,
+                      "tenStar": "정관"
+                    }
+                  },
+                  "sinsal": "겁살",
+                  "unsung": "태",
+                  "etcSinsal": [
+                    "귀문관살",
+                    "현침살",
+                    "천을귀인"
+                  ]
+                }
+              },
+              "1": {
+                "year": 2017,
+                "sky": {
+                  "chinese": "丁",
+                  "korean": "정",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "식신",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "酉",
+                  "korean": "유",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편관",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "庚",
+                      "korean": "경",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "양",
+                      "rate": 10,
+                      "tenStar": "정관"
+                    },
+                    "second": null,
+                    "third": {
+                      "chinese": "辛",
+                      "korean": "신",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "음",
+                      "rate": 20,
+                      "tenStar": "편관"
+                    }
+                  },
+                  "sinsal": "재살",
+                  "unsung": "절",
+                  "etcSinsal": []
+                }
+              },
+              "2": {
+                "year": 2018,
+                "sky": {
+                  "chinese": "戊",
+                  "korean": "무",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정재",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "戌",
+                  "korean": "술",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정재",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "辛",
+                      "korean": "신",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "음",
+                      "rate": 9,
+                      "tenStar": "편관"
+                    },
+                    "second": {
+                      "chinese": "丁",
+                      "korean": "정",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "음",
+                      "rate": 3,
+                      "tenStar": "식신"
+                    },
+                    "third": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 18,
+                      "tenStar": "정재"
+                    }
+                  },
+                  "sinsal": "천살",
+                  "unsung": "묘",
+                  "etcSinsal": []
+                }
+              },
+              "3": {
+                "year": 2019,
+                "sky": {
+                  "chinese": "己",
+                  "korean": "기",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편재",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "亥",
+                  "korean": "해",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "정인",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정재"
+                    },
+                    "second": {
+                      "chinese": "甲",
+                      "korean": "갑",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "겁재"
+                    },
+                    "third": {
+                      "chinese": "壬",
+                      "korean": "임",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "양",
+                      "rate": 16,
+                      "tenStar": "정인"
+                    }
+                  },
+                  "sinsal": "지살",
+                  "unsung": "사",
+                  "etcSinsal": []
+                }
+              },
+              "4": {
+                "year": 2020,
+                "sky": {
+                  "chinese": "庚",
+                  "korean": "경",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정관",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "子",
+                  "korean": "자",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "편인",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "壬",
+                      "korean": "임",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "양",
+                      "rate": 10,
+                      "tenStar": "정인"
+                    },
+                    "second": null,
+                    "third": {
+                      "chinese": "癸",
+                      "korean": "계",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "음",
+                      "rate": 20,
+                      "tenStar": "편인"
+                    }
+                  },
+                  "sinsal": "도화살",
+                  "unsung": "병",
+                  "etcSinsal": [
+                    "천을귀인",
+                    "태극귀인",
+                    "문곡귀인"
+                  ]
+                }
+              },
+              "5": {
+                "year": 2021,
+                "sky": {
+                  "chinese": "辛",
+                  "korean": "신",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편관",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "丑",
+                  "korean": "축",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편재",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "癸",
+                      "korean": "계",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "음",
+                      "rate": 9,
+                      "tenStar": "편인"
+                    },
+                    "second": {
+                      "chinese": "辛",
+                      "korean": "신",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "음",
+                      "rate": 3,
+                      "tenStar": "편관"
+                    },
+                    "third": {
+                      "chinese": "己",
+                      "korean": "기",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "음",
+                      "rate": 18,
+                      "tenStar": "편재"
+                    }
+                  },
+                  "sinsal": "월살",
+                  "unsung": "쇠",
+                  "etcSinsal": []
+                }
+              },
+              "6": {
+                "year": 2022,
+                "sky": {
+                  "chinese": "壬",
+                  "korean": "임",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "정인",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "寅",
+                  "korean": "인",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "겁재",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정재"
+                    },
+                    "second": {
+                      "chinese": "丙",
+                      "korean": "병",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "상관"
+                    },
+                    "third": {
+                      "chinese": "甲",
+                      "korean": "갑",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "양",
+                      "rate": 16,
+                      "tenStar": "겁재"
+                    }
+                  },
+                  "sinsal": "망신살",
+                  "unsung": "제왕",
+                  "etcSinsal": []
+                }
+              },
+              "7": {
+                "year": 2023,
+                "sky": {
+                  "chinese": "癸",
+                  "korean": "계",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "편인",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "卯",
+                  "korean": "묘",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "비견",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "甲",
+                      "korean": "갑",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "양",
+                      "rate": 10,
+                      "tenStar": "겁재"
+                    },
+                    "second": null,
+                    "third": {
+                      "chinese": "乙",
+                      "korean": "을",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "음",
+                      "rate": 20,
+                      "tenStar": "비견"
+                    }
+                  },
+                  "sinsal": "장성살",
+                  "unsung": "건록",
+                  "etcSinsal": []
+                }
+              },
+              "8": {
+                "year": 2024,
+                "sky": {
+                  "chinese": "甲",
+                  "korean": "갑",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "겁재",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "辰",
+                  "korean": "진",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정재",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "乙",
+                      "korean": "을",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "음",
+                      "rate": 9,
+                      "tenStar": "비견"
+                    },
+                    "second": {
+                      "chinese": "癸",
+                      "korean": "계",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "음",
+                      "rate": 3,
+                      "tenStar": "편인"
+                    },
+                    "third": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 18,
+                      "tenStar": "정재"
+                    }
+                  },
+                  "sinsal": "반안살",
+                  "unsung": "관대",
+                  "etcSinsal": []
+                }
+              },
+              "9": {
+                "year": 2025,
+                "sky": {
+                  "chinese": "乙",
+                  "korean": "을",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "비견",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "巳",
+                  "korean": "사",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "상관",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정재"
+                    },
+                    "second": {
+                      "chinese": "庚",
+                      "korean": "경",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정관"
+                    },
+                    "third": {
+                      "chinese": "丙",
+                      "korean": "병",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "양",
+                      "rate": 16,
+                      "tenStar": "상관"
+                    }
+                  },
+                  "sinsal": "역마살",
+                  "unsung": "목욕",
+                  "etcSinsal": [
+                    "금여성"
+                  ]
+                }
+              }
+            },
+            "monthFortune": {
+              "0": {
+                "month": 1,
+                "sky": {
+                  "chinese": "丁",
+                  "korean": "정",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "식신",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "丑",
+                  "korean": "축",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편재",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "癸",
+                      "korean": "계",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "음",
+                      "rate": 9,
+                      "tenStar": "편인"
+                    },
+                    "second": {
+                      "chinese": "辛",
+                      "korean": "신",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "음",
+                      "rate": 3,
+                      "tenStar": "편관"
+                    },
+                    "third": {
+                      "chinese": "己",
+                      "korean": "기",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "음",
+                      "rate": 18,
+                      "tenStar": "편재"
+                    }
+                  },
+                  "sinsal": "월살",
+                  "unsung": "쇠",
+                  "etcSinsal": []
+                }
+              },
+              "1": {
+                "month": 2,
+                "sky": {
+                  "chinese": "戊",
+                  "korean": "무",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정재",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "寅",
+                  "korean": "인",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "겁재",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정재"
+                    },
+                    "second": {
+                      "chinese": "丙",
+                      "korean": "병",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "상관"
+                    },
+                    "third": {
+                      "chinese": "甲",
+                      "korean": "갑",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "양",
+                      "rate": 16,
+                      "tenStar": "겁재"
+                    }
+                  },
+                  "sinsal": "망신살",
+                  "unsung": "제왕",
+                  "etcSinsal": []
+                }
+              },
+              "2": {
+                "month": 3,
+                "sky": {
+                  "chinese": "己",
+                  "korean": "기",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편재",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "卯",
+                  "korean": "묘",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "비견",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "甲",
+                      "korean": "갑",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "양",
+                      "rate": 10,
+                      "tenStar": "겁재"
+                    },
+                    "second": null,
+                    "third": {
+                      "chinese": "乙",
+                      "korean": "을",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "음",
+                      "rate": 20,
+                      "tenStar": "비견"
+                    }
+                  },
+                  "sinsal": "장성살",
+                  "unsung": "건록",
+                  "etcSinsal": []
+                }
+              },
+              "3": {
+                "month": 4,
+                "sky": {
+                  "chinese": "庚",
+                  "korean": "경",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정관",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "辰",
+                  "korean": "진",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정재",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "乙",
+                      "korean": "을",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "음",
+                      "rate": 9,
+                      "tenStar": "비견"
+                    },
+                    "second": {
+                      "chinese": "癸",
+                      "korean": "계",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "음",
+                      "rate": 3,
+                      "tenStar": "편인"
+                    },
+                    "third": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 18,
+                      "tenStar": "정재"
+                    }
+                  },
+                  "sinsal": "반안살",
+                  "unsung": "관대",
+                  "etcSinsal": []
+                }
+              },
+              "4": {
+                "month": 5,
+                "sky": {
+                  "chinese": "辛",
+                  "korean": "신",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편관",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "巳",
+                  "korean": "사",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "상관",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정재"
+                    },
+                    "second": {
+                      "chinese": "庚",
+                      "korean": "경",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정관"
+                    },
+                    "third": {
+                      "chinese": "丙",
+                      "korean": "병",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "양",
+                      "rate": 16,
+                      "tenStar": "상관"
+                    }
+                  },
+                  "sinsal": "역마살",
+                  "unsung": "목욕",
+                  "etcSinsal": [
+                    "금여성"
+                  ]
+                }
+              },
+              "5": {
+                "month": 6,
+                "sky": {
+                  "chinese": "壬",
+                  "korean": "임",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "정인",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "午",
+                  "korean": "오",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "식신",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "丙",
+                      "korean": "병",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "양",
+                      "rate": 10,
+                      "tenStar": "상관"
+                    },
+                    "second": {
+                      "chinese": "己",
+                      "korean": "기",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "음",
+                      "rate": 10,
+                      "tenStar": "편재"
+                    },
+                    "third": {
+                      "chinese": "丁",
+                      "korean": "정",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "음",
+                      "rate": 10,
+                      "tenStar": "식신"
+                    }
+                  },
+                  "sinsal": "육해살",
+                  "unsung": "장생",
+                  "etcSinsal": [
+                    "현침살",
+                    "문창귀인",
+                    "태극귀인",
+                    "천주귀인",
+                    "학당귀인",
+                    "홍염살"
+                  ]
+                }
+              },
+              "6": {
+                "month": 7,
+                "sky": {
+                  "chinese": "癸",
+                  "korean": "계",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "편인",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "未",
+                  "korean": "미",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편재",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "丁",
+                      "korean": "정",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "음",
+                      "rate": 9,
+                      "tenStar": "식신"
+                    },
+                    "second": {
+                      "chinese": "乙",
+                      "korean": "을",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "음",
+                      "rate": 3,
+                      "tenStar": "비견"
+                    },
+                    "third": {
+                      "chinese": "己",
+                      "korean": "기",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "음",
+                      "rate": 18,
+                      "tenStar": "편재"
+                    }
+                  },
+                  "sinsal": "화개살",
+                  "unsung": "양",
+                  "etcSinsal": [
+                    "현침살"
+                  ]
+                }
+              },
+              "7": {
+                "month": 8,
+                "sky": {
+                  "chinese": "甲",
+                  "korean": "갑",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "겁재",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "申",
+                  "korean": "신",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정관",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정재"
+                    },
+                    "second": {
+                      "chinese": "壬",
+                      "korean": "임",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정인"
+                    },
+                    "third": {
+                      "chinese": "庚",
+                      "korean": "경",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "양",
+                      "rate": 16,
+                      "tenStar": "정관"
+                    }
+                  },
+                  "sinsal": "겁살",
+                  "unsung": "태",
+                  "etcSinsal": [
+                    "귀문관살",
+                    "현침살",
+                    "천을귀인"
+                  ]
+                }
+              },
+              "8": {
+                "month": 9,
+                "sky": {
+                  "chinese": "乙",
+                  "korean": "을",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "비견",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "酉",
+                  "korean": "유",
+                  "fiveCircle": "금",
+                  "fiveCircleColor": "#ffffff",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "편관",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "庚",
+                      "korean": "경",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "양",
+                      "rate": 10,
+                      "tenStar": "정관"
+                    },
+                    "second": null,
+                    "third": {
+                      "chinese": "辛",
+                      "korean": "신",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "음",
+                      "rate": 20,
+                      "tenStar": "편관"
+                    }
+                  },
+                  "sinsal": "재살",
+                  "unsung": "절",
+                  "etcSinsal": []
+                }
+              },
+              "9": {
+                "month": 10,
+                "sky": {
+                  "chinese": "丙",
+                  "korean": "병",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "상관",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "戌",
+                  "korean": "술",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정재",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "辛",
+                      "korean": "신",
+                      "fiveCircle": "금",
+                      "fiveCircleColor": "#ffffff",
+                      "minusPlus": "음",
+                      "rate": 9,
+                      "tenStar": "편관"
+                    },
+                    "second": {
+                      "chinese": "丁",
+                      "korean": "정",
+                      "fiveCircle": "화",
+                      "fiveCircleColor": "#fc989a",
+                      "minusPlus": "음",
+                      "rate": 3,
+                      "tenStar": "식신"
+                    },
+                    "third": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 18,
+                      "tenStar": "정재"
+                    }
+                  },
+                  "sinsal": "천살",
+                  "unsung": "묘",
+                  "etcSinsal": []
+                }
+              },
+              "10": {
+                "month": 11,
+                "sky": {
+                  "chinese": "丁",
+                  "korean": "정",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "식신",
+                  "minusPlus": "음",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "亥",
+                  "korean": "해",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "정인",
+                  "minusPlus": "음",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "戊",
+                      "korean": "무",
+                      "fiveCircle": "토",
+                      "fiveCircleColor": "#fee469",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "정재"
+                    },
+                    "second": {
+                      "chinese": "甲",
+                      "korean": "갑",
+                      "fiveCircle": "목",
+                      "fiveCircleColor": "#84d696",
+                      "minusPlus": "양",
+                      "rate": 7,
+                      "tenStar": "겁재"
+                    },
+                    "third": {
+                      "chinese": "壬",
+                      "korean": "임",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "양",
+                      "rate": 16,
+                      "tenStar": "정인"
+                    }
+                  },
+                  "sinsal": "지살",
+                  "unsung": "사",
+                  "etcSinsal": []
+                }
+              },
+              "11": {
+                "month": 12,
+                "sky": {
+                  "chinese": "戊",
+                  "korean": "무",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "fiveCircleFrontColor": "#000000",
+                  "tenStar": "정재",
+                  "minusPlus": "양",
+                  "jijangGan": null,
+                  "sinsal": null,
+                  "unsung": null,
+                  "etcSinsal": null
+                },
+                "ground": {
+                  "chinese": "子",
+                  "korean": "자",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "fiveCircleFrontColor": "#ffffff",
+                  "tenStar": "편인",
+                  "minusPlus": "양",
+                  "jijangGan": {
+                    "first": {
+                      "chinese": "壬",
+                      "korean": "임",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "양",
+                      "rate": 10,
+                      "tenStar": "정인"
+                    },
+                    "second": null,
+                    "third": {
+                      "chinese": "癸",
+                      "korean": "계",
+                      "fiveCircle": "수",
+                      "fiveCircleColor": "#3a3b36",
+                      "minusPlus": "음",
+                      "rate": 20,
+                      "tenStar": "편인"
+                    }
+                  },
+                  "sinsal": "도화살",
+                  "unsung": "병",
+                  "etcSinsal": [
+                    "천을귀인",
+                    "태극귀인",
+                    "문곡귀인"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "formatUnse": {
+          "storedUnse": {
+            "gender": "FEMALE",
+            "birthday": "1988-03-15",
+            "solarBirthday": "1988-04-30",
+            "birthType": "LUNAR",
+            "birthTime": "14:30",
+            "targetYear": 2025,
+            "yearSky": "戊",
+            "yearGround": "辰",
+            "monthSky": "丙",
+            "monthGround": "辰",
+            "daySky": "乙",
+            "dayGround": "卯",
+            "timeSky": "癸",
+            "timeGround": "未",
+            "bigFortuneNumber": 9,
+            "bigFortuneStartYear": "1997",
+            "seasonStartTime": null,
+            "manseYearSkyRelation": "정재",
+            "manseYearGroundRelation": "정재",
+            "manseMonthSkyRelation": "상관",
+            "manseMonthGroundRelation": "정재",
+            "manseDaySkyRelation": "비견",
+            "manseDayGroundRelation": "비견",
+            "manseTimeSkyRelation": "편인",
+            "manseTimeGroundRelation": "편재",
+            "fiveTreeNum": 2,
+            "fiveFireNum": 1,
+            "fiveSoilNum": 4,
+            "fiveIronNum": 0,
+            "fiveWaterNum": 1
+          },
+          "saju": {
+            "bigFortuneNumber": 9,
+            "bigFortuneStartYear": "1997",
+            "seasonStartTime": null,
+            "yearSky": {
+              "chinese": "戊",
+              "korean": "무",
+              "fiveCircle": "토",
+              "fiveCircleColor": "#fee469",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "정재",
+              "minusPlus": "양",
+              "jijangGan": null,
+              "sinsal": null,
+              "unsung": null,
+              "etcSinsal": null
+            },
+            "yearGround": {
+              "chinese": "辰",
+              "korean": "진",
+              "fiveCircle": "토",
+              "fiveCircleColor": "#fee469",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "정재",
+              "minusPlus": "양",
+              "jijangGan": {
+                "first": {
+                  "chinese": "乙",
+                  "korean": "을",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "minusPlus": "음",
+                  "rate": 9,
+                  "tenStar": "비견"
+                },
+                "second": {
+                  "chinese": "癸",
+                  "korean": "계",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "minusPlus": "음",
+                  "rate": 3,
+                  "tenStar": "편인"
+                },
+                "third": {
+                  "chinese": "戊",
+                  "korean": "무",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "minusPlus": "양",
+                  "rate": 18,
+                  "tenStar": "정재"
+                }
+              },
+              "sinsal": "반안살",
+              "unsung": "관대",
+              "etcSinsal": [
+                "백호대살",
+                "괴강살"
+              ]
+            },
+            "monthSky": {
+              "chinese": "丙",
+              "korean": "병",
+              "fiveCircle": "화",
+              "fiveCircleColor": "#fc989a",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "상관",
+              "minusPlus": "양",
+              "jijangGan": null,
+              "sinsal": null,
+              "unsung": null,
+              "etcSinsal": null
+            },
+            "monthGround": {
+              "chinese": "辰",
+              "korean": "진",
+              "fiveCircle": "토",
+              "fiveCircleColor": "#fee469",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "정재",
+              "minusPlus": "양",
+              "jijangGan": {
+                "first": {
+                  "chinese": "乙",
+                  "korean": "을",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "minusPlus": "음",
+                  "rate": 9,
+                  "tenStar": "비견"
+                },
+                "second": {
+                  "chinese": "癸",
+                  "korean": "계",
+                  "fiveCircle": "수",
+                  "fiveCircleColor": "#3a3b36",
+                  "minusPlus": "음",
+                  "rate": 3,
+                  "tenStar": "편인"
+                },
+                "third": {
+                  "chinese": "戊",
+                  "korean": "무",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "minusPlus": "양",
+                  "rate": 18,
+                  "tenStar": "정재"
+                }
+              },
+              "sinsal": "반안살",
+              "unsung": "관대",
+              "etcSinsal": []
+            },
+            "daySky": {
+              "chinese": "乙",
+              "korean": "을",
+              "fiveCircle": "목",
+              "fiveCircleColor": "#84d696",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "비견",
+              "minusPlus": "음",
+              "jijangGan": null,
+              "sinsal": null,
+              "unsung": null,
+              "etcSinsal": null
+            },
+            "dayGround": {
+              "chinese": "卯",
+              "korean": "묘",
+              "fiveCircle": "목",
+              "fiveCircleColor": "#84d696",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "비견",
+              "minusPlus": "음",
+              "jijangGan": {
+                "first": {
+                  "chinese": "甲",
+                  "korean": "갑",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "minusPlus": "양",
+                  "rate": 10,
+                  "tenStar": "겁재"
+                },
+                "second": null,
+                "third": {
+                  "chinese": "乙",
+                  "korean": "을",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "minusPlus": "음",
+                  "rate": 20,
+                  "tenStar": "비견"
+                }
+              },
+              "sinsal": "장성살",
+              "unsung": "건록",
+              "etcSinsal": []
+            },
+            "timeSky": {
+              "chinese": "癸",
+              "korean": "계",
+              "fiveCircle": "수",
+              "fiveCircleColor": "#3a3b36",
+              "fiveCircleFrontColor": "#ffffff",
+              "tenStar": "편인",
+              "minusPlus": "음",
+              "jijangGan": null,
+              "sinsal": null,
+              "unsung": null,
+              "etcSinsal": null
+            },
+            "timeGround": {
+              "chinese": "未",
+              "korean": "미",
+              "fiveCircle": "토",
+              "fiveCircleColor": "#fee469",
+              "fiveCircleFrontColor": "#000000",
+              "tenStar": "편재",
+              "minusPlus": "음",
+              "jijangGan": {
+                "first": {
+                  "chinese": "丁",
+                  "korean": "정",
+                  "fiveCircle": "화",
+                  "fiveCircleColor": "#fc989a",
+                  "minusPlus": "음",
+                  "rate": 9,
+                  "tenStar": "식신"
+                },
+                "second": {
+                  "chinese": "乙",
+                  "korean": "을",
+                  "fiveCircle": "목",
+                  "fiveCircleColor": "#84d696",
+                  "minusPlus": "음",
+                  "rate": 3,
+                  "tenStar": "비견"
+                },
+                "third": {
+                  "chinese": "己",
+                  "korean": "기",
+                  "fiveCircle": "토",
+                  "fiveCircleColor": "#fee469",
+                  "minusPlus": "음",
+                  "rate": 18,
+                  "tenStar": "편재"
+                }
+              },
+              "sinsal": "화개살",
+              "unsung": "양",
+              "etcSinsal": [
+                "현침살"
+              ]
+            }
+          },
+          "fortune": {
+            "bigFortune": {
+              "number": 29,
+              "sky": {
+                "chinese": "癸",
+                "korean": "계",
+                "fiveCircle": "수",
+                "fiveCircleColor": "#3a3b36",
+                "fiveCircleFrontColor": "#ffffff",
+                "tenStar": "편인",
+                "minusPlus": "음",
+                "jijangGan": null,
+                "sinsal": null,
+                "unsung": null,
+                "etcSinsal": null
+              },
+              "ground": {
+                "chinese": "丑",
+                "korean": "축",
+                "fiveCircle": "토",
+                "fiveCircleColor": "#fee469",
+                "fiveCircleFrontColor": "#000000",
+                "tenStar": "편재",
+                "minusPlus": "음",
+                "jijangGan": {
+                  "first": {
+                    "chinese": "癸",
+                    "korean": "계",
+                    "fiveCircle": "수",
+                    "fiveCircleColor": "#3a3b36",
+                    "minusPlus": "음",
+                    "rate": 9,
+                    "tenStar": "편인"
+                  },
+                  "second": {
+                    "chinese": "辛",
+                    "korean": "신",
+                    "fiveCircle": "금",
+                    "fiveCircleColor": "#ffffff",
+                    "minusPlus": "음",
+                    "rate": 3,
+                    "tenStar": "편관"
+                  },
+                  "third": {
+                    "chinese": "己",
+                    "korean": "기",
+                    "fiveCircle": "토",
+                    "fiveCircleColor": "#fee469",
+                    "minusPlus": "음",
+                    "rate": 18,
+                    "tenStar": "편재"
+                  }
+                },
+                "sinsal": "월살",
+                "unsung": "쇠",
+                "etcSinsal": []
+              }
+            },
+            "smallFortune": {
+              "number": "2025",
+              "sky": {
+                "chinese": "乙",
+                "korean": "을",
+                "fiveCircle": "목",
+                "fiveCircleColor": "#84d696",
+                "fiveCircleFrontColor": "#000000",
+                "tenStar": "비견",
+                "minusPlus": "음",
+                "jijangGan": null,
+                "sinsal": null,
+                "unsung": null,
+                "etcSinsal": null
+              },
+              "ground": {
+                "chinese": "巳",
+                "korean": "사",
+                "fiveCircle": "화",
+                "fiveCircleColor": "#fc989a",
+                "fiveCircleFrontColor": "#000000",
+                "tenStar": "상관",
+                "minusPlus": "음",
+                "jijangGan": {
+                  "first": {
+                    "chinese": "戊",
+                    "korean": "무",
+                    "fiveCircle": "토",
+                    "fiveCircleColor": "#fee469",
+                    "minusPlus": "양",
+                    "rate": 7,
+                    "tenStar": "정재"
+                  },
+                  "second": {
+                    "chinese": "庚",
+                    "korean": "경",
+                    "fiveCircle": "금",
+                    "fiveCircleColor": "#ffffff",
+                    "minusPlus": "양",
+                    "rate": 7,
+                    "tenStar": "정관"
+                  },
+                  "third": {
+                    "chinese": "丙",
+                    "korean": "병",
+                    "fiveCircle": "화",
+                    "fiveCircleColor": "#fc989a",
+                    "minusPlus": "양",
+                    "rate": 16,
+                    "tenStar": "상관"
+                  }
+                },
+                "sinsal": "역마살",
+                "unsung": "목욕",
+                "etcSinsal": [
+                  "금여성"
+                ]
+              }
+            },
+            "monthFortune": {
+              "number": 8,
+              "sky": {
+                "chinese": "癸",
+                "korean": "계",
+                "fiveCircle": "수",
+                "fiveCircleColor": "#3a3b36",
+                "fiveCircleFrontColor": "#ffffff",
+                "tenStar": "편인",
+                "minusPlus": "음",
+                "jijangGan": null,
+                "sinsal": null,
+                "unsung": null,
+                "etcSinsal": null
+              },
+              "ground": {
+                "chinese": "未",
+                "korean": "미",
+                "fiveCircle": "토",
+                "fiveCircleColor": "#fee469",
+                "fiveCircleFrontColor": "#000000",
+                "tenStar": "편재",
+                "minusPlus": "음",
+                "jijangGan": {
+                  "first": {
+                    "chinese": "丁",
+                    "korean": "정",
+                    "fiveCircle": "화",
+                    "fiveCircleColor": "#fc989a",
+                    "minusPlus": "음",
+                    "rate": 9,
+                    "tenStar": "식신"
+                  },
+                  "second": {
+                    "chinese": "乙",
+                    "korean": "을",
+                    "fiveCircle": "목",
+                    "fiveCircleColor": "#84d696",
+                    "minusPlus": "음",
+                    "rate": 3,
+                    "tenStar": "비견"
+                  },
+                  "third": {
+                    "chinese": "己",
+                    "korean": "기",
+                    "fiveCircle": "토",
+                    "fiveCircleColor": "#fee469",
+                    "minusPlus": "음",
+                    "rate": 18,
+                    "tenStar": "편재"
+                  }
+                },
+                "sinsal": "화개살",
+                "unsung": "양",
+                "etcSinsal": [
+                  "현침살"
+                ]
+              }
+            },
+            "dayFortune": {
+              "number": 2,
+              "sky": {
+                "chinese": "癸",
+                "korean": "계",
+                "fiveCircle": "수",
+                "fiveCircleColor": "#3a3b36",
+                "fiveCircleFrontColor": "#ffffff",
+                "tenStar": "편인",
+                "minusPlus": "음",
+                "jijangGan": null,
+                "sinsal": null,
+                "unsung": null,
+                "etcSinsal": null
+              },
+              "ground": {
+                "chinese": "卯",
+                "korean": "묘",
+                "fiveCircle": "목",
+                "fiveCircleColor": "#84d696",
+                "fiveCircleFrontColor": "#000000",
+                "tenStar": "비견",
+                "minusPlus": "음",
+                "jijangGan": {
+                  "first": {
+                    "chinese": "甲",
+                    "korean": "갑",
+                    "fiveCircle": "목",
+                    "fiveCircleColor": "#84d696",
+                    "minusPlus": "양",
+                    "rate": 10,
+                    "tenStar": "겁재"
+                  },
+                  "second": null,
+                  "third": {
+                    "chinese": "乙",
+                    "korean": "을",
+                    "fiveCircle": "목",
+                    "fiveCircleColor": "#84d696",
+                    "minusPlus": "음",
+                    "rate": 20,
+                    "tenStar": "비견"
+                  }
+                },
+                "sinsal": "장성살",
+                "unsung": "건록",
+                "etcSinsal": []
+              }
+            }
+          }
+        },
+        "smallNum": 2025,
+        "bigNum": 3,
+        "targetAge": 38
+      },
+      "sinsals": {
+        "firstSinsal": "역마살",
+        "secondSinsal": "육해살",
+        "thirdSinsal": "화개살"
+      }
+    }
+  }
+]

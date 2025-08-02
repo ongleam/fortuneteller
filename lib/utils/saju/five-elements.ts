@@ -1,0 +1,140 @@
+/**
+ * 오행 분석 모듈
+ */
+
+import { getStemInfo, getBranchInfo, JIJANG_GAN } from './constants';
+import type { SajuPillars, FiveElements } from '../../types/saju';
+
+/**
+ * 오행 분석 계산 클래스
+ */
+export class SajuFiveElementsCalculator {
+  
+  /**
+   * 사주 팔자를 기준으로 오행 분석
+   */
+  static calculate(pillars: SajuPillars): FiveElements {
+    let elementCounts = {
+      wood: 0,
+      fire: 0,
+      earth: 0,
+      metal: 0,
+      water: 0
+    };
+    
+    // 1. 천간 4개의 오행 카운트
+    const stems = [
+      pillars.year.stem,
+      pillars.month.stem,
+      pillars.day.stem,
+      pillars.time.stem
+    ];
+    
+    for (const stem of stems) {
+      const stemInfo = getStemInfo(stem);
+      if (stemInfo) {
+        this.addElementCount(elementCounts, stemInfo.fiveElement);
+      }
+    }
+    
+    // 2. 지지 4개의 지장간 오행 카운트
+    const branches = [
+      pillars.year.branch,
+      pillars.month.branch,
+      pillars.day.branch,
+      pillars.time.branch
+    ];
+    
+    for (const branch of branches) {
+      this.addBranchElements(elementCounts, branch);
+    }
+    
+    return elementCounts;
+  }
+  
+  /**
+   * 지지의 지장간을 분석하여 오행 카운트에 추가
+   */
+  private static addBranchElements(elementCounts: FiveElements, branch: string) {
+    const jijangGan = JIJANG_GAN[branch as keyof typeof JIJANG_GAN];
+    
+    if (!jijangGan) return;
+    
+    // 지장간의 각 천간을 비율에 따라 계산
+    // 간단화를 위해 주요 지장간만 1개씩 카운트
+    for (const jijang of jijangGan) {
+      const stemInfo = getStemInfo(jijang.stem);
+      if (stemInfo && jijang.rate >= 10) { // 비율이 10 이상인 것만 카운트
+        this.addElementCount(elementCounts, stemInfo.fiveElement);
+      }
+    }
+  }
+  
+  /**
+   * 오행별 카운트 증가
+   */
+  private static addElementCount(elementCounts: FiveElements, element: string) {
+    switch (element) {
+      case '목':
+        elementCounts.wood += 1;
+        break;
+      case '화':
+        elementCounts.fire += 1;
+        break;
+      case '토':
+        elementCounts.earth += 1;
+        break;
+      case '금':
+        elementCounts.metal += 1;
+        break;
+      case '수':
+        elementCounts.water += 1;
+        break;
+    }
+  }
+  
+  /**
+   * 오행 분석 결과 해석
+   */
+  static analyzeBalance(elements: FiveElements): {
+    strongest: string;
+    weakest: string;
+    total: number;
+    balance: 'balanced' | 'imbalanced';
+  } {
+    const elementMap = [
+      { name: '목', count: elements.wood },
+      { name: '화', count: elements.fire },
+      { name: '토', count: elements.earth },
+      { name: '금', count: elements.metal },
+      { name: '수', count: elements.water }
+    ];
+    
+    elementMap.sort((a, b) => b.count - a.count);
+    
+    const strongest = elementMap[0];
+    const weakest = elementMap[elementMap.length - 1];
+    const total = elements.wood + elements.fire + elements.earth + elements.metal + elements.water;
+    
+    // 균형 판단 (가장 많은 것과 가장 적은 것의 차이가 2 이하면 균형)
+    const balance = (strongest.count - weakest.count) <= 2 ? 'balanced' : 'imbalanced';
+    
+    return {
+      strongest: strongest.name,
+      weakest: weakest.name,
+      total,
+      balance
+    };
+  }
+}
+
+/**
+ * 오행 의미 설명 (참고용)
+ */
+export const FIVE_ELEMENTS_MEANINGS = {
+  '목': '성장, 발전, 창의성, 유연성',
+  '화': '열정, 활동성, 표현력, 명예',
+  '토': '안정, 신뢰, 포용력, 중심',
+  '금': '정확성, 원칙, 정의, 절제',
+  '수': '지혜, 적응력, 유동성, 깊이'
+} as const;
