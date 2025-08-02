@@ -14,7 +14,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  automaticVercelMonitors: true,
 };
 
 export default nextConfig;

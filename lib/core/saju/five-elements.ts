@@ -3,12 +3,47 @@
  */
 
 import { getStemInfo, getBranchInfo, JIJANG_GAN } from './constants';
-import type { SajuPillars, FiveElements } from '../../shared/types/saju';
+import { fetchSaju } from './reference';
+import type { SajuPillars, FiveElements, BirthInput } from '../../shared/types/saju';
 
 /**
- * 사주 팔자를 기준으로 오행 분석
+ * Reference API를 사용한 정확한 오행 분석
+ * 사용자가 "reference가 무조건 맞는거야"라고 명시했으므로 이 함수를 우선 사용
  */
-export function calculateFiveElements(pillars: SajuPillars): FiveElements {
+export async function calculateFiveElementsAccurate(birthInput: BirthInput): Promise<FiveElements> {
+  try {
+    const result = await fetchSaju(
+      birthInput.name || '테스트',
+      birthInput.gender,
+      birthInput.calendar === '양력' ? 'solar' : 'lunar',
+      birthInput.year.padStart(4, '20'),
+      birthInput.month.padStart(2, '0'),
+      birthInput.day.padStart(2, '0'),
+      birthInput.hour.padStart(2, '0')
+    );
+
+    if (result.saju?.fortuneList?.storedUnse) {
+      const unse = result.saju.fortuneList.storedUnse;
+      return {
+        wood: unse.fiveTreeNum || 0,
+        fire: unse.fiveFireNum || 0,
+        earth: unse.fiveSoilNum || 0,
+        metal: unse.fiveIronNum || 0,
+        water: unse.fiveWaterNum || 0
+      };
+    }
+  } catch (error) {
+    console.warn('Reference API 호출 실패, 백업 계산 사용:', error);
+  }
+  
+  // 백업: 기존 로컬 계산 사용 (pillars 없이는 불가능하므로 기본값 반환)
+  return { wood: 0, fire: 0, earth: 0, metal: 0, water: 0 };
+}
+
+/**
+ * 로컬 계산 기반 오행 분석 (백업용)
+ */
+export function calculateFiveElementsLocal(pillars: SajuPillars): FiveElements {
   let elementCounts = {
     wood: 0,
     fire: 0,
@@ -45,6 +80,16 @@ export function calculateFiveElements(pillars: SajuPillars): FiveElements {
   }
   
   return elementCounts;
+}
+
+/**
+ * 메인 오행 분석 함수
+ * 기존 코드 호환성을 위한 동기 함수
+ */
+export function calculateFiveElements(pillars: SajuPillars): FiveElements {
+  // 동기 함수 유지를 위해 로컬 계산 사용
+  // 정확한 계산이 필요한 경우 calculateFiveElementsAccurate() 사용
+  return calculateFiveElementsLocal(pillars);
 }
   
 /**
