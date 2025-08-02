@@ -1,11 +1,11 @@
 import { streamText, Message, generateText } from 'ai';
 import { NextResponse } from 'next/server';
-import { baseAgent } from '@/lib/agents/base';
+import { baseAgent } from '@/lib/interfaces/agents/base';
 import { nanoid } from 'nanoid';
 import * as fs from 'fs';
 import * as path from 'path';
 import { TEST_SYSTEM_PROMPTS } from '@/test/promptfoo/prompts';
-import { preprocessXmlText } from '@/lib/utils/textPreprocess';
+import { preprocessXmlText } from '@/lib/shared/utils/textPreprocess';
 
 interface ParsedToolCall {
   toolCallId?: string;

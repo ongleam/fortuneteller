@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { createServerClient } from '@/lib/supabase/server';
-import { getKakaoUserInfo } from '@/lib/actions/kakao';
+import { createServerClient } from '@/lib/infrastructure/supabase/server';
+import { getKakaoUserInfo } from '@/lib/interfaces/actions/kakao';
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);

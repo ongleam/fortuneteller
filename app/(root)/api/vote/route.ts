@@ -1,5 +1,5 @@
-import { getChatById, getVotesByChatId, voteMessage } from '@/lib/db/queries';
-import { createServerClient } from '@/lib/supabase/server';
+import { getChatById, getVotesByChatId, voteMessage } from '@/lib/infrastructure/db/queries';
+import { createServerClient } from '@/lib/infrastructure/supabase/server';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);

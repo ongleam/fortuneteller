@@ -7,10 +7,10 @@ import {
   streamText,
   UIMessage,
 } from 'ai';
-import { baseAgent } from '../agents/base';
-import { generateUUID, getTrailingMessageId } from '@/lib/utils';
-import { saveMessages } from '../db/queries';
-import { isProductionEnvironment } from '../constants';
+import { baseAgent } from '../interfaces/agents/base';
+import { generateUUID, getTrailingMessageId } from '@/lib/shared/utils';
+import { saveMessages } from '../infrastructure/db/queries';
+import { isProductionEnvironment } from '../shared/constants';
 
 const MAX_STEPS = 5;
 

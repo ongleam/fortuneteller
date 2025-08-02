@@ -1,7 +1,7 @@
 import { cookies, headers } from 'next/headers';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { createServerClient } from '@/lib/supabase/server';
+import { createServerClient } from '@/lib/infrastructure/supabase/server';
 import { siteConfig } from '@/config/site';
 import { KakaoLoginButton } from '@/components/auth/kakao-login-button';
 

@@ -106,12 +106,12 @@ export default function RegisterPage() {
           </div>
 
           <div>
-            <Label htmlFor="birthYear" className="text-gray-700">
+            <Label htmlFor="year" className="text-gray-700">
               출생연도
             </Label>
             <Input
-              id="birthYear"
-              name="birthYear"
+              id="year"
+              name="year"
               type="number"
               placeholder="예: 1990"
               min="1900"

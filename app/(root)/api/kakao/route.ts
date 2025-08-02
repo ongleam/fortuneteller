@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getKSTDateTime } from '@/lib/utils';
-import { KakaoRequestBody, KakaoSkillResponse } from '@/lib/types/kakao';
+import { getKSTDateTime } from '@/lib/shared/utils';
+import { KakaoRequestBody, KakaoSkillResponse } from '@/lib/shared/types/kakao';
 import { siteConfig } from '@/config/site';
 
 import axios from 'axios';

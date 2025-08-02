@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbo 2>&1 | tee logs/debug.txt",
-    "build": "tsx lib/db/migrate && next build",
+    "build": "tsx lib/infrastructure/db/migrate && next build",
     "start": "next start",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "npx tsx lib/db/migrate.ts",
+    "db:migrate": "npx tsx lib/infrastructure/db/migrate.ts",
     "db:studio": "NODE_TLS_REJECT_UNAUTHORIZED=0  drizzle-kit studio",
     "db:push": "NODE_TLS_REJECT_UNAUTHORIZED=0 drizzle-kit push",
     "db:pull": "NODE_TLS_REJECT_UNAUTHORIZED=0 drizzle-kit pull",

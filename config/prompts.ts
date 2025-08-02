@@ -1,4 +1,4 @@
-import { getHarmony } from '@/lib/tools/harmony';
+import { getHarmony } from '@/lib/interfaces/tools/harmony';
 
 export const systemPrompts = {
   BASE_AGENT: `
@@ -52,23 +52,23 @@ export const tools = {
         type: 'string',
         description: '유저의 성별 (남성, 여성)',
       },
-      birthType: {
+      calendar: {
         type: 'string',
         description: '유저의 생일 타입 (양력, 음력)',
       },
-      birthYear: {
+      year: {
         type: 'string',
         description: '유저의 생년',
       },
-      birthMonth: {
+      month: {
         type: 'string',
         description: '유저의 생월',
       },
-      birthDay: {
+      day: {
         type: 'string',
         description: '유저의 생일',
       },
-      birthTime: {
+      hour: {
         type: 'string',
         description: `유저의 생시. '00': 00:00 ~ 01:29, '02': 01:30 ~ 03:29, '04': 03:30 ~ 05:29, '06': 05:30 ~ 07:29, '08': 07:30 ~ 09:29, '10': 09:30 ~ 11:29, '12': 11:30 ~ 13:29, '14': 13:30 ~ 15:29, '16': 15:30 ~ 17:29, '18': 17:30 ~ 19:29, '20': 19:30 ~ 21:29, '22': 21:30 ~ 23:29, '24': 23:30 ~ 24:00`,
       },
@@ -90,23 +90,23 @@ export const tools = {
         type: 'string',
         description: '유저의 성별 (남성, 여성)',
       },
-      birthType: {
+      calendar: {
         type: 'string',
         description: '유저의 생일 타입 (양력, 음력)',
       },
-      birthYear: {
+      year: {
         type: 'string',
         description: '유저의 생년',
       },
-      birthMonth: {
+      month: {
         type: 'string',
         description: '유저의 생월',
       },
-      birthDay: {
+      day: {
         type: 'string',
         description: '유저의 생일',
       },
-      birthTime: {
+      hour: {
         type: 'string',
         description: `유저의 생시. '00': 00:00 ~ 01:29, '02': 01:30 ~ 03:29, '04': 03:30 ~ 05:29, '06': 05:30 ~ 07:29, '08': 07:30 ~ 09:29, '10': 09:30 ~ 11:29, '12': 11:30 ~ 13:29, '14': 13:30 ~ 15:29, '16': 15:30 ~ 17:29, '18': 17:30 ~ 19:29, '20': 19:30 ~ 21:29, '22': 21:30 ~ 23:29, '24': 23:30 ~ 24:00`,
       },
@@ -123,19 +123,19 @@ export const tools = {
         gender: {
           description: '상대방의 성별 (남성, 여성)',
         },
-        birthType: {
+        calendar: {
           description: '상대방의 생일 타입 (양력, 음력)',
         },
-        birthYear: {
+        year: {
           description: '상대방의 생년',
         },
-        birthMonth: {
+        month: {
           description: '상대방의 생월',
         },
-        birthDay: {
+        day: {
           description: '상대방의 생일',
         },
-        birthTime: {
+        hour: {
           description: `상대방의 생시. '00': 00:00 ~ 01:29, '02': 01:30 ~ 03:29, '04': 03:30 ~ 05:29, '06': 05:30 ~ 07:29, '08': 07:30 ~ 09:29, '10': 09:30 ~ 11:29, '12': 11:30 ~ 13:29, '14': 13:30 ~ 15:29, '16': 15:30 ~ 17:29, '18': 17:30 ~ 19:29, '20': 19:30 ~ 21:29, '22': 21:30 ~ 23:29, '24': 23:30 ~ 24:00`,
         },
       },

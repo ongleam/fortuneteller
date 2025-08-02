@@ -5,15 +5,15 @@ import {
   getMessagesByChatId,
   saveChat,
   saveMessages,
-} from '@/lib/db/queries';
+} from '@/lib/infrastructure/db/queries';
 import { appendClientMessage } from 'ai';
-import { generateTitleFromUserMessage } from '@/lib/actions/chat';
+import { generateTitleFromUserMessage } from '@/lib/interfaces/actions/chat';
 import { entitlementsByUserType } from '@/config/entitlements';
-import { postRequestBodySchema, type PostRequestBody } from '@/lib/schema/chat';
+import { postRequestBodySchema, type PostRequestBody } from '@/lib/core/chat/chat';
 import { createToolCallingStream } from '@/lib/response/create-tool-calling-stream';
 
 export const maxDuration = 60;
-import { createServerClient } from '@/lib/supabase/server';
+import { createServerClient } from '@/lib/infrastructure/supabase/server';
 
 export async function POST(request: Request) {
   let requestBody: PostRequestBody;

@@ -3,7 +3,7 @@
 import { useMemo } from 'react';
 import useSWR, { useSWRConfig } from 'swr';
 import { unstable_serialize } from 'swr/infinite';
-import { updateChatVisibility } from '@/lib/actions/chat';
+import { updateChatVisibility } from '@/lib/interfaces/actions/chat';
 import { getChatHistoryPaginationKey, type ChatHistory } from '@/components/sidebar/history';
 import type { VisibilityType } from '@/components/chat/visibility-selector';
 

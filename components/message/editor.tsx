@@ -1,6 +1,6 @@
 'use client';
 
-import { deleteTrailingMessages } from '@/lib/actions/chat';
+import { deleteTrailingMessages } from '@/lib/interfaces/actions/chat';
 import { UseChatHelpers } from '@ai-sdk/react';
 import { Message } from 'ai';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';

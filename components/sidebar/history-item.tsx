@@ -1,5 +1,5 @@
 import { useChatVisibility } from '@/hooks/use-chat-visibility';
-import { Chat } from '@/lib/db/schema';
+import { Chat } from '@/lib/infrastructure/db/schema';
 import Link from 'next/link';
 import { memo } from 'react';
 import { MoreHorizontalIcon, ShareIcon, TrashIcon } from '../icons';

@@ -16,8 +16,8 @@ import {
   SidebarMenu,
   useSidebar,
 } from '@/components/ui/sidebar';
-import type { Chat } from '@/lib/db/schema';
-import { fetcher } from '@/lib/utils';
+import type { Chat } from '@/lib/infrastructure/db/schema';
+import { fetcher } from '@/lib/shared/utils';
 import { isToday, isYesterday, subMonths, subWeeks } from 'date-fns';
 import { motion } from 'framer-motion';
 import type { User } from '@supabase/auth-js';

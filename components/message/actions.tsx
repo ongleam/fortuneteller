@@ -2,7 +2,7 @@ import type { Message } from 'ai';
 import { useSWRConfig } from 'swr';
 import { useCopyToClipboard } from 'usehooks-ts';
 
-import type { Vote } from '@/lib/db/schema';
+import type { Vote } from '@/lib/infrastructure/db/schema';
 
 import equal from 'fast-deep-equal';
 import { memo } from 'react';

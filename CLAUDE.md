@@ -131,6 +131,66 @@ Key tables managed through Drizzle:
 - If Korean text appears garbled or corrupted, recreate the file with proper UTF-8 encoding
 - Use consistent encoding across all documentation files (`.md`, `.txt`, etc.)
 
+### Code Design Principles
+
+**Function-First Design (함수 중심 설계):**
+- **PREFER functions over classes** whenever possible for better modularity and testability
+- Use pure functions that are predictable, testable, and side-effect free
+- Organize code into small, composable functions rather than large class hierarchies
+- Each function should have a single responsibility and clear input/output contract
+
+**Function Design Guidelines:**
+```typescript
+// ✅ GOOD: Pure function with clear purpose
+export function calculateSajuPillars(birthData: BirthInput): SajuPillars {
+  // Single responsibility, no side effects, predictable output
+}
+
+// ✅ GOOD: Composed functions for complex operations
+export function getSajuAnalysis(birthData: BirthInput): SajuAnalysis {
+  const pillars = calculateSajuPillars(birthData);
+  const elements = analyzeElements(pillars);
+  const fortune = calculateFortune(pillars);
+  return combineAnalysis(pillars, elements, fortune);
+}
+
+// ❌ AVOID: Large classes with multiple responsibilities
+class SajuCalculator {
+  calculatePillars() { /* ... */ }
+  analyzeElements() { /* ... */ }
+  calculateFortune() { /* ... */ }
+  generateReport() { /* ... */ }
+  saveToDatabase() { /* ... */ }
+}
+```
+
+**When to Use Classes vs Functions:**
+- **Use functions for**: Business logic, calculations, data transformations, utilities
+- **Use classes for**: UI components (React), database models, API clients with state
+- **Consider objects for**: Configuration, data containers, complex state management
+
+**Module Organization:**
+- Group related functions in modules rather than classes
+- Export individual functions for better tree-shaking and testing
+- Use namespace objects sparingly, prefer direct function exports
+- Keep side effects isolated in separate modules (database, API calls)
+
+**Import Guidelines:**
+- **ALWAYS use absolute imports** with the `@/` alias instead of relative imports
+- ✅ GOOD: `import { calculateSaju } from '@/lib/utils/saju'`
+- ❌ AVOID: `import { calculateSaju } from '../../utils/saju'`
+- This improves code readability and prevents import path issues when files are moved
+- Absolute imports make dependency relationships clearer and more maintainable
+
+**Refactoring Guidelines:**
+- **ALWAYS refactor existing functions in-place** rather than creating new files
+- Preserve existing function signatures to maintain compatibility with tests and imports
+- When splitting large functions, extract helper functions within the same file first
+- Only create new files when adding entirely new functionality or domains
+- Maintain git history by editing existing files instead of recreating them
+- Update imports and exports gradually to avoid breaking existing code
+- Run tests after refactoring to ensure compatibility is maintained
+
 ### Testing Strategy
 
 - Jest for unit tests (focus on database queries)

@@ -6,16 +6,24 @@ import {
   Message,
   UIMessage,
 } from 'ai';
-import { baseAgent } from '@/lib/agents/base';
-import { getKSTDateTime, measureExecutionTime, generateUUID } from '@/lib/utils';
-// import { normText } from '@/lib/utils/textPreprocess';
-import { KakaoSkillResponse } from '@/lib/types/kakao';
-import { getMessagesByChatId, getOrCreateKakaoChatByUserId, saveMessages } from '@/lib/db/queries';
-import { getOrCreateProfileByUserKakaoId } from '@/lib/db/queries';
-import { DBMessage } from '@/lib/db/schema';
+import { baseAgent } from '@/lib/interfaces/agents/base';
+import { getKSTDateTime, measureExecutionTime, generateUUID } from '@/lib/shared/utils';
+// import { normText } from '@/lib/shared/utils/textPreprocess';
+import { KakaoSkillResponse } from '@/lib/shared/types/kakao';
+import { getMessagesByChatId, getOrCreateKakaoChatByUserId, saveMessages } from '@/lib/infrastructure/db/queries';
+import { getOrCreateProfileByUserKakaoId } from '@/lib/infrastructure/db/queries';
+import { DBMessage } from '@/lib/infrastructure/db/schema';
 import axios from 'axios';
-import { getToday } from '@/lib/utils/saju';
-import { removeMarkdown } from '@/lib/utils/text';
+// Local getToday function
+function getToday() {
+  return new Date().toLocaleString('ko-KR', {
+    timeZone: 'Asia/Seoul',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
+}
+import { removeMarkdown } from '@/lib/shared/utils/text';
 
 // 상수 정의
 const LLM_TIMEOUT = 50000;
