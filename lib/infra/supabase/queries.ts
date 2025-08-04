@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/infrastructure/supabase/client';
+import { createClient } from '@/lib/infra/supabase/client';
 import { getEmbedding } from '@/lib/shared/utils/embedding';
 import { Chat, DBMessage, Profile, Vote } from '../db/schema';
 

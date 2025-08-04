@@ -10,9 +10,13 @@ import { baseAgent } from '@/lib/interfaces/agents/base';
 import { getKSTDateTime, measureExecutionTime, generateUUID } from '@/lib/shared/utils';
 // import { normText } from '@/lib/shared/utils/textPreprocess';
 import { KakaoSkillResponse } from '@/lib/shared/types/kakao';
-import { getMessagesByChatId, getOrCreateKakaoChatByUserId, saveMessages } from '@/lib/infrastructure/db/queries';
-import { getOrCreateProfileByUserKakaoId } from '@/lib/infrastructure/db/queries';
-import { DBMessage } from '@/lib/infrastructure/db/schema';
+import {
+  getMessagesByChatId,
+  getOrCreateKakaoChatByUserId,
+  saveMessages,
+} from '@/lib/infra/db/queries';
+import { getOrCreateProfileByUserKakaoId } from '@/lib/infra/db/queries';
+import { DBMessage } from '@/lib/infra/db/schema';
 import axios from 'axios';
 // Local getToday function
 function getToday() {

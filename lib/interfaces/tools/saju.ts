@@ -2,7 +2,10 @@ import { formattingErrorMessage } from '@/lib/shared/utils';
 import { tool } from 'ai';
 import { z } from 'zod';
 import { tools } from '@/config/prompts';
-import { updateProfile as updateProfile, getOrCreateProfileByUserKakaoId } from '@/lib/infrastructure/db/queries';
+import {
+  updateProfile as updateProfile,
+  getOrCreateProfileByUserKakaoId,
+} from '@/lib/infra/db/queries';
 import { getSajuInfoCompatible } from '@/lib/core/saju';
 
 const PROMPTS = tools.getSaju;
@@ -38,7 +41,7 @@ export const getSaju = () =>
           year,
           month,
           day,
-          hour: hour || '12'
+          hour: hour || '12',
         });
 
         console.log(`[INFO] 저장된 정보로 사주 조회 완료: ${name}`);

@@ -2,7 +2,7 @@ import { formattingErrorMessage } from '@/lib/shared/utils';
 import { tool } from 'ai';
 import { z } from 'zod';
 import { tools } from '@/config/prompts';
-import { updateProfile } from '@/lib/infrastructure/db/queries';
+import { updateProfile } from '@/lib/infra/db/queries';
 
 const PROFILE_PROMPTS = tools.updateUserProfile;
 

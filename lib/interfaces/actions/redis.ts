@@ -1,4 +1,4 @@
-import { redis } from '../../infrastructure/redis/client';
+import { redis } from '../../infra/redis/client';
 
 const CACHE_TTL = 60 * 60 * 24 * 3; // 3 days
 const CACHE_ENABLED = false;

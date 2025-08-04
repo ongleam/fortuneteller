@@ -9,7 +9,7 @@ import {
 } from 'ai';
 import { baseAgent } from '../interfaces/agents/base';
 import { generateUUID, getTrailingMessageId } from '@/lib/shared/utils';
-import { saveMessages } from '../infrastructure/db/queries';
+import { saveMessages } from '../infra/db/queries';
 import { isProductionEnvironment } from '../shared/constants';
 
 const MAX_STEPS = 5;

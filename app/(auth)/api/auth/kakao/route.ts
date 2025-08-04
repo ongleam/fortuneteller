@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createServerClient } from '@/lib/infrastructure/supabase/server';
+import { createServerClient } from '@/lib/infra/supabase/server';
 import { getKakaoUserInfo } from '@/lib/interfaces/actions/kakao';
 
 export async function GET(request: Request) {
@@ -10,7 +10,9 @@ export async function GET(request: Request) {
   const error_code = searchParams.get('error_code');
   const next = searchParams.get('next') ?? '/'; // 로그인 후 리디렉션 될 경로
 
-  console.log(`[INFO LOGIN] 카카오 콜백 처리 시작 - code: ${code ? 'exists' : 'null'}, error: ${error || 'none'}`);
+  console.log(
+    `[INFO LOGIN] 카카오 콜백 처리 시작 - code: ${code ? 'exists' : 'null'}, error: ${error || 'none'}`
+  );
 
   // 에러가 있는 경우 에러 정보를 포함하여 리디렉션
   if (error) {
@@ -72,9 +74,9 @@ export async function GET(request: Request) {
 
       const forwardedHost = request.headers.get('x-forwarded-host');
       const isLocalEnv = process.env.NODE_ENV === 'development';
-      
+
       console.log('[INFO LOGIN] 로그인 성공, 리디렉션 처리 중');
-      
+
       if (isLocalEnv) {
         return NextResponse.redirect(`${origin}${next}`);
       } else if (forwardedHost) {

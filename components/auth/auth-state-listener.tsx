@@ -2,7 +2,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { createClient } from '@/lib/infrastructure/supabase/client';
+import { createClient } from '@/lib/infra/supabase/client';
 import { upsertProfileFromSupabaseUser } from '@/lib/interfaces/actions/profile';
 import type { AuthChangeEvent, Session, User } from '@supabase/supabase-js';
 import { useRouter } from 'next/navigation';

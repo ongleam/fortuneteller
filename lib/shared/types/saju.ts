@@ -28,13 +28,15 @@ export interface SajuOutput {
 
 // 기본 입력 데이터
 export interface BirthInput {
-  name: string;
+  name?: string;
   gender: string;
   calendar: string;
   year: string;
   month: string;
   day: string;
   hour: string;
+  minute?: string;
+  isLeapMonth?: boolean;
 }
 
 // 사주 팔자

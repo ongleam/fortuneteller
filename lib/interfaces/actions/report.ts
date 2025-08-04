@@ -1,8 +1,8 @@
 'use server';
 
 import { ReportFormData } from '@/lib/shared/types/notion';
-import { createReport } from '@/lib/infrastructure/notion/client';
-import { createServerClient } from '@/lib/infrastructure/supabase/server';
+import { createReport } from '@/lib/infra/notion/client';
+import { createServerClient } from '@/lib/infra/supabase/server';
 
 export async function submitReport(
   formData: ReportFormData

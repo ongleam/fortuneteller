@@ -3,12 +3,12 @@ import { notFound, redirect } from 'next/navigation';
 
 // import { auth } from '@/app/(auth)/auth';
 import { Chat } from '@/components/chat';
-import { getChatById, getMessagesByChatId } from '@/lib/infrastructure/db/queries';
+import { getChatById, getMessagesByChatId } from '@/lib/infra/db/queries';
 // import { DataStreamHandler } from '@/components/artifact/data-stream-handler';
 import { DEFAULT_CHAT_MODEL } from '@/config/models';
-import type { DBMessage } from '@/lib/infrastructure/db/schema';
+import type { DBMessage } from '@/lib/infra/db/schema';
 import type { Attachment, UIMessage } from 'ai';
-import { createServerClient } from '@/lib/infrastructure/supabase/server';
+import { createServerClient } from '@/lib/infra/supabase/server';
 
 export default async function Page(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;

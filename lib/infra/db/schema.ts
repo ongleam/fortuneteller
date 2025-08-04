@@ -9,6 +9,7 @@ import {
   primaryKey,
   text,
   timestamp,
+  unique,
   uuid,
   varchar,
   vector,
@@ -87,3 +88,16 @@ export const vote = pgTable(
   }
 );
 export type Vote = InferSelectModel<typeof vote>;
+
+// 절기 테이블
+export const solarTerm = pgTable('solar_terms', {
+  id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
+  year: integer('year').notNull(),
+  term_name: varchar('term_name', { length: 10 }).notNull(),
+  month: integer('month').notNull(),
+  day: integer('day').notNull(),
+  hour: integer('hour').notNull(),
+  minute: integer('minute').notNull(),
+  created_at: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+});
+export type SolarTerm = InferSelectModel<typeof solarTerm>;

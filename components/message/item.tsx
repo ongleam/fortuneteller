@@ -1,6 +1,6 @@
 'use client';
 
-import type { Vote } from '@/lib/infrastructure/db/schema';
+import type { Vote } from '@/lib/infra/db/schema';
 import { cn } from '@/lib/shared/utils';
 import { UseChatHelpers } from '@ai-sdk/react';
 import type { UIMessage } from 'ai';

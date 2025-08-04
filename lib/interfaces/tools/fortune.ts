@@ -2,7 +2,7 @@ import { formattingErrorMessage } from '@/lib/shared/utils';
 import { tool } from 'ai';
 import { z } from 'zod';
 import { tools } from '@/config/prompts';
-import { getOrCreateProfileByUserKakaoId } from '@/lib/infrastructure/db/queries';
+import { getOrCreateProfileByUserKakaoId } from '@/lib/infra/db/queries';
 import { getSajuInfoCompatible } from '@/lib/core/saju';
 
 // 오늘 날짜 가져오기 함수
@@ -47,7 +47,7 @@ export const getTodayFortune = (kakao_user_id: string) =>
           year: profile.birth_year.toString(),
           month: profile.birth_month.toString(),
           day: profile.birth_day.toString(),
-          hour: profile.birth_time || '12'
+          hour: profile.birth_time || '12',
         });
 
         console.log(`[INFO] 저장된 정보로 사주 조회 완료: ${kakao_user_id}`);
@@ -110,7 +110,7 @@ export const getYearFortune = (kakao_user_id: string) =>
           year: profile.birth_year.toString(),
           month: profile.birth_month.toString(),
           day: profile.birth_day.toString(),
-          hour: profile.birth_time || '12'
+          hour: profile.birth_time || '12',
         });
 
         console.log(`[INFO] 저장된 정보로 사주 조회 완료: ${kakao_user_id}`);

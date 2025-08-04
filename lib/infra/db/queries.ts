@@ -3,7 +3,7 @@ import 'server-only';
 import { and, asc, count, desc, eq, gt, gte, inArray, lt, sql, type SQL } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
-import { chat, message, profile, vote, type Chat, type DBMessage, type Profile } from './schema';
+import { chat, message, profile, vote, solarTerm, type Chat, type DBMessage, type Profile, type SolarTerm } from './schema';
 import { generateUUID } from '../../shared/utils';
 
 // Optionally, if not using email/pass login, you can
@@ -424,6 +424,43 @@ export async function getMessageCountByUserId({
     return stats?.count ?? 0;
   } catch (error) {
     console.error('Failed to get message count by user id for the last 24 hours from database');
+    throw error;
+  }
+}
+
+// Solar Term Queries
+export async function getSolarTermsByYear(year: number): Promise<SolarTerm[]> {
+  try {
+    return await db
+      .select()
+      .from(solarTerm)
+      .where(eq(solarTerm.year, year))
+      .orderBy(asc(solarTerm.month), asc(solarTerm.day));
+  } catch (error) {
+    console.error('Failed to get solar terms by year from database');
+    throw error;
+  }
+}
+
+export async function getSolarTermByYearAndName(year: number, termName: string): Promise<SolarTerm | null> {
+  try {
+    const [result] = await db
+      .select()
+      .from(solarTerm)
+      .where(and(eq(solarTerm.year, year), eq(solarTerm.term_name, termName)))
+      .limit(1);
+    return result || null;
+  } catch (error) {
+    console.error('Failed to get solar term by year and name from database');
+    throw error;
+  }
+}
+
+export async function insertSolarTerms(solarTerms: Array<Omit<SolarTerm, 'id' | 'created_at'>>) {
+  try {
+    return await db.insert(solarTerm).values(solarTerms);
+  } catch (error) {
+    console.error('Failed to insert solar terms into database');
     throw error;
   }
 }

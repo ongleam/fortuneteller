@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, ReactNode, useRef, useCallback } from 'react';
-import { createClient } from '@/lib/infrastructure/supabase/client';
+import { createClient } from '@/lib/infra/supabase/client';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {

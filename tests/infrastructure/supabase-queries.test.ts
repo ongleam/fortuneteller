@@ -17,12 +17,12 @@ import {
   getMessageById,
   deleteMessagesByChatIdAfterTimestamp,
   getMessageCountByUserId,
-  updateProfile,
-} from '@/lib/infrastructure/supabase/queries';
-import { createClient } from '@/lib/infrastructure/supabase/client';
+  // updateProfile,
+} from '@/lib/infra/supabase/queries';
+import { createClient } from '@/lib/infra/supabase/client';
 
 // 모킹 설정
-jest.mock('@/lib/infrastructure/supabase/client', () => {
+jest.mock('@/lib/infra/supabase/client', () => {
   const createChainableMock = () => {
     const mock: Record<string, jest.Mock> = {
       from: jest.fn(() => mock),
@@ -63,12 +63,12 @@ describe('Supabase Queries', () => {
       const mockProfile = {
         user_id: 'test-user-id',
         name: '테스트 사용자',
-        email: 'test@example.com'
+        email: 'test@example.com',
       };
 
       mockClient.single.mockResolvedValue({
         data: mockProfile,
-        error: null
+        error: null,
       });
 
       const result = await getProfileByUserId('test-user-id');
@@ -83,12 +83,12 @@ describe('Supabase Queries', () => {
       const newProfile = {
         user_id: 'new-user-id',
         name: '새 사용자',
-        email: 'new@example.com'
+        email: 'new@example.com',
       };
 
       mockClient.select.mockResolvedValue({
         data: [newProfile],
-        error: null
+        error: null,
       });
 
       const result = await createProfile(newProfile);
@@ -101,12 +101,12 @@ describe('Supabase Queries', () => {
     test('updateProfile - 프로필 업데이트', async () => {
       const updateData = {
         name: '업데이트된 이름',
-        birth_year: 1990
+        birth_year: 1990,
       };
 
       mockClient.select.mockResolvedValue({
         data: [{ user_id: 'test-user', ...updateData }],
-        error: null
+        error: null,
       });
 
       const result = await updateProfile('test-user', updateData);
@@ -122,12 +122,12 @@ describe('Supabase Queries', () => {
       const chatData = {
         user_id: 'test-user',
         title: '테스트 채팅',
-        channel: 'web'
+        channel: 'web',
       };
 
       mockClient.select.mockResolvedValue({
         data: [{ id: 'chat-id', ...chatData }],
-        error: null
+        error: null,
       });
 
       const result = await saveChat(chatData);
@@ -140,12 +140,12 @@ describe('Supabase Queries', () => {
     test('getChatsByUserId - 사용자별 채팅 조회', async () => {
       const mockChats = [
         { id: 'chat1', title: '채팅 1' },
-        { id: 'chat2', title: '채팅 2' }
+        { id: 'chat2', title: '채팅 2' },
       ];
 
       mockClient.order.mockResolvedValue({
         data: mockChats,
-        error: null
+        error: null,
       });
 
       const result = await getChatsByUserId('test-user');
@@ -160,7 +160,7 @@ describe('Supabase Queries', () => {
     test('deleteChatById - 채팅 삭제', async () => {
       mockClient.eq.mockResolvedValue({
         data: null,
-        error: null
+        error: null,
       });
 
       await deleteChatById('chat-id');
@@ -178,13 +178,13 @@ describe('Supabase Queries', () => {
           chat_id: 'chat-id',
           role: 'user',
           parts: [{ type: 'text', text: '테스트 메시지' }],
-          attachments: []
-        }
+          attachments: [],
+        },
       ];
 
       mockClient.select.mockResolvedValue({
         data: messages,
-        error: null
+        error: null,
       });
 
       const result = await saveMessages({ messages });
@@ -197,12 +197,12 @@ describe('Supabase Queries', () => {
     test('getMessagesByChatId - 채팅별 메시지 조회', async () => {
       const mockMessages = [
         { id: 'msg1', content: '메시지 1' },
-        { id: 'msg2', content: '메시지 2' }
+        { id: 'msg2', content: '메시지 2' },
       ];
 
       mockClient.limit.mockResolvedValue({
         data: mockMessages,
-        error: null
+        error: null,
       });
 
       const result = await getMessagesByChatId({ id: 'chat-id', limit: 10 });
@@ -220,12 +220,12 @@ describe('Supabase Queries', () => {
     test('voteMessage - 메시지 투표', async () => {
       const voteData = {
         message_id: 'msg-id',
-        is_upvoted: true
+        is_upvoted: true,
       };
 
       mockClient.select.mockResolvedValue({
         data: [voteData],
-        error: null
+        error: null,
       });
 
       const result = await voteMessage(voteData);
@@ -238,12 +238,12 @@ describe('Supabase Queries', () => {
     test('getVotesByChatId - 채팅별 투표 조회', async () => {
       const mockVotes = [
         { message_id: 'msg1', is_upvoted: true },
-        { message_id: 'msg2', is_upvoted: false }
+        { message_id: 'msg2', is_upvoted: false },
       ];
 
       mockClient.eq.mockResolvedValue({
         data: mockVotes,
-        error: null
+        error: null,
       });
 
       const result = await getVotesByChatId('chat-id');
@@ -258,10 +258,10 @@ describe('Supabase Queries', () => {
   describe('에러 처리', () => {
     test('쿼리 에러 시 예외 발생', async () => {
       const mockError = new Error('Database connection failed');
-      
+
       mockClient.single.mockResolvedValue({
         data: null,
-        error: mockError
+        error: mockError,
       });
 
       await expect(getProfileByUserId('invalid-id')).rejects.toThrow();

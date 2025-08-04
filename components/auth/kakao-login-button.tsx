@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { createClient } from '@/lib/infrastructure/supabase/client';
+import { createClient } from '@/lib/infra/supabase/client';
 import { SignInWithOAuthCredentials } from '@supabase/supabase-js';
 import { useCallback } from 'react';
 

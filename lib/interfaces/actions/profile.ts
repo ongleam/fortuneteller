@@ -1,7 +1,7 @@
 'use server';
 
-import { db } from '@/lib/infrastructure/db/queries';
-import { profile as profileTable } from '@/lib/infrastructure/db/schema';
+import { db } from '@/lib/infra/db/queries';
+import { profile as profileTable } from '@/lib/infra/db/schema';
 import { User } from '@supabase/auth-js';
 import { eq } from 'drizzle-orm';
 
