@@ -1,35 +1,17 @@
 /**
  * 사주 팔자 계산 모듈
- * Reference API를 기반으로 정확한 계산 제공
  */
 
 import { HEAVENLY_STEMS, EARTHLY_BRANCHES, SIXTY_GAPJA, getStemIndex } from './constants';
-import { lunarToSolar, getSajuYear, getSajuMonth } from './calendar';
+import { lunarToSolar, getSajuYear, getSajuMonth, normalizeCalendarType } from './calendar';
 import { fetchSaju } from './reference';
 import type { BirthInput, SajuPillars } from '@/lib/shared/types/saju';
 
 /**
- * 한글 달력 타입을 영어로 변환하는 유틸 함수
- * @param calendar 한글 또는 영어 달력 타입
- * @returns 영어 달력 타입 ('solar' | 'lunar')
+ * Reference API를 사용한 정확한 사주 팔자 계산
+ * @param birthInput 생년월일 정보
+ * @returns 사주 팔자 정보
  */
-export function normalizeCalendarType(calendar: string): 'solar' | 'lunar' {
-  const lowerCalendar = calendar.toLowerCase().trim();
-
-  // 한글 → 영어 변환
-  if (lowerCalendar === '양력' || lowerCalendar === 'solar') {
-    return 'solar';
-  }
-  if (lowerCalendar === '음력' || lowerCalendar === 'lunar') {
-    return 'lunar';
-  }
-
-  // 기본값: 양력
-  console.warn(`알 수 없는 달력 타입: ${calendar}, 기본값 'solar' 사용`);
-  return 'solar';
-}
-
-// reference api를 사용한 사주 팔자 계산
 export async function getSajuPillarsReference(
   birthInput: BirthInput
 ): Promise<SajuPillars | undefined> {
@@ -86,6 +68,11 @@ export async function getSajuPillarsReference(
   }
 }
 
+/**
+ * 메인 사주 팔자 계산 함수
+ * @param birthInput 생년월일 정보
+ * @returns 사주 팔자 정보
+ */
 export async function getSajuPillars(birthInput: BirthInput): Promise<SajuPillars> {
   // BirthInput 필드 매핑
   const year = parseInt(birthInput.year);
@@ -134,6 +121,11 @@ export async function getSajuPillars(birthInput: BirthInput): Promise<SajuPillar
   };
 }
 
+/**
+ * 년주(Year Pillar) 계산
+ * @param year 년도
+ * @returns 년주 정보
+ */
 export function getYearPillar(year: number) {
   const baseYear = 1924;
   const yearOffset = (year - baseYear) % 60;
@@ -142,6 +134,12 @@ export function getYearPillar(year: number) {
   return { stem: gapja.charAt(0), branch: gapja.charAt(1) };
 }
 
+/**
+ * 월주(Month Pillar) 계산
+ * @param year 년도
+ * @param month 월
+ * @returns 월주 정보
+ */
 export function getMonthPillar(year: number, month: number): { stem: string; branch: string } {
   const yearPillar = getYearPillar(year);
   const yearStemIndex = getStemIndex(yearPillar.stem);
@@ -157,6 +155,11 @@ export function getMonthPillar(year: number, month: number): { stem: string; bra
   };
 }
 
+/**
+ * 일주(Day Pillar) 계산
+ * @param date 날짜
+ * @returns 일주 정보
+ */
 export function getDayPillar(date: Date): { stem: string; branch: string } {
   const baseDate = new Date('1995-04-25T00:00:00');
   const baseGapja = '丙戌';
@@ -179,6 +182,13 @@ export function getDayPillar(date: Date): { stem: string; branch: string } {
   return { stem: gapja[0], branch: gapja[1] };
 }
 
+/**
+ * 시주(Time Pillar) 계산
+ * @param dayPillar 일주 정보
+ * @param hourStr 시간
+ * @param minuteStr 분
+ * @returns 시주 정보
+ */
 export function getTimePillar(
   dayPillar: { stem: string; branch: string },
   hourStr: string,
@@ -214,6 +224,11 @@ export function getTimePillar(
   };
 }
 
+/**
+ * 사주 팔자 유효성 검사
+ * @param pillars 사주 팔자 정보
+ * @returns 유효성 여부
+ */
 export function validatePillars(pillars: SajuPillars): boolean {
   const isValidStem = (stem: string) => HEAVENLY_STEMS.some((s) => s.chinese === stem);
   const isValidBranch = (branch: string) => EARTHLY_BRANCHES.some((b) => b.chinese === branch);

@@ -6,6 +6,27 @@
 import { LUNAR_MONTH_TABLE, SOLAR_TERMS_BY_YEAR, SAJU_MONTH_MAPPING } from './constants';
 import { getSolarTermsByYear, getSolarTermByYearAndName } from '@/lib/infra/db/queries';
 
+/**
+ * 한글 달력 타입을 영어로 변환하는 유틸 함수
+ * @param calendar 한글 또는 영어 달력 타입
+ * @returns 영어 달력 타입 ('solar' | 'lunar')
+ */
+export function normalizeCalendarType(calendar: string): 'solar' | 'lunar' {
+  const lowerCalendar = calendar.toLowerCase().trim();
+
+  // 한글 → 영어 변환
+  if (lowerCalendar === '양력' || lowerCalendar === 'solar') {
+    return 'solar';
+  }
+  if (lowerCalendar === '음력' || lowerCalendar === 'lunar') {
+    return 'lunar';
+  }
+
+  // 기본값: 양력
+  console.warn(`알 수 없는 달력 타입: ${calendar}, 기본값 'solar' 사용`);
+  return 'solar';
+}
+
 // validation functions
 export function validateBirthDate(year: string, month: string, day: string): boolean {
   const y = parseInt(year);

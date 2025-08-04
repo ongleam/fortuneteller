@@ -5,7 +5,7 @@
 
 import { toSimpleFormat, toFetchSajuFormat, toUiFormat } from '@/lib/core/saju/adapters';
 import { getSajuPillarsReference } from '@/lib/core/saju/pillars';
-import { calculateFiveElementsAccurate } from '@/lib/core/saju/five-elements';
+import { getFiveElementsReference } from '@/lib/core/saju/five-elements';
 import { TopThreeSinsals } from '@/lib/shared/types/saju';
 import fs from 'fs';
 import path from 'path';
@@ -44,7 +44,7 @@ describe('SajuAdapters', () => {
 
         // Reference API를 통해 정확한 데이터 수집
         const pillars = await getSajuPillarsReference(birthInput);
-        const elements = await calculateFiveElementsAccurate(birthInput);
+        const elements = await getFiveElementsReference(birthInput);
 
         const mockData = {
           basic: birthInput,
