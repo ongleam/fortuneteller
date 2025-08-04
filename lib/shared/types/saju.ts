@@ -53,7 +53,7 @@ export interface SajuPillars {
 }
 
 // 십성 분석
-export interface TenStars {
+export interface PillarsTenStar {
   yearStem: string; // 년간 십성
   yearBranch: string; // 년지 십성
   monthStem: string; // 월간 십성
@@ -90,7 +90,7 @@ export type TopThreeSinsals = [string, string, string];
 export interface SimplifiedSajuOutput {
   basic: BirthInput;
   pillars: SajuPillars;
-  tenStars: TenStars;
+  tenStars: PillarsTenStar;
   elements: FiveElements;
   fortune: FortuneInfo;
   sinsals: TopThreeSinsals;
@@ -100,7 +100,7 @@ export interface SimplifiedSajuOutput {
 export interface SajuCoreResult {
   basic: BirthInput;
   pillars: SajuPillars;
-  tenStars: TenStars;
+  tenStars: PillarsTenStar;
   elements: FiveElements;
   fortune: FortuneInfo;
   sinsals: string[];

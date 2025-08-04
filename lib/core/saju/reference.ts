@@ -45,7 +45,8 @@ export async function fetchSaju(
   birthMonth: string,
   birthDay: string,
   birthTime: string | null | undefined,
-  birthMinute?: string | null | undefined
+  birthMinute?: string | null | undefined,
+  isLeapMonth?: boolean | null | undefined
 ) {
   try {
     // birthTime normalization
@@ -58,7 +59,7 @@ export async function fetchSaju(
     const userInfo = {
       name,
       gender,
-      birthType,
+      birthType: `${birthType}${isLeapMonth ? '윤달' : ''}`,
       birthYear,
       birthMonth,
       birthDay,

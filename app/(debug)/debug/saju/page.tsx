@@ -2,9 +2,7 @@
 
 import { useState } from 'react';
 import { calculateSajuAction } from '@/lib/interfaces/actions/debug';
-import type { BirthInput, SajuPillars, PillarTenStars } from '@/lib/shared/types/saju';
-import { getStemInfo, getBranchInfo } from '@/lib/core/saju/constants';
-import { getTenStarsForPillars } from '@/lib/core/saju/ten-stars';
+import type { BirthInput, SajuPillars, PillarsTenStar } from '@/lib/shared/types/saju';
 
 // 오행에 따른 색상을 반환하는 헬퍼 함수
 const getElementColor = (element: string | undefined): string => {
@@ -30,7 +28,7 @@ const SajuPillarsDisplay = ({
   tenStars,
 }: {
   pillars: SajuPillars;
-  tenStars: PillarTenStars;
+  tenStars: PillarsTenStar;
 }) => {
   const pillarOrder: Array<{ key: keyof SajuPillars; name: string }> = [
     { key: 'time', name: '시주' },
@@ -67,6 +65,42 @@ const SajuPillarsDisplay = ({
     return hanjaMap[hanja] || '';
   };
 
+  // 천간 정보 조회 (로컬 구현)
+  const getStemInfo = (chinese: string) => {
+    const stems = [
+      { chinese: '甲', korean: '갑', fiveElement: '목', yangYin: '양' },
+      { chinese: '乙', korean: '을', fiveElement: '목', yangYin: '음' },
+      { chinese: '丙', korean: '병', fiveElement: '화', yangYin: '양' },
+      { chinese: '丁', korean: '정', fiveElement: '화', yangYin: '음' },
+      { chinese: '戊', korean: '무', fiveElement: '토', yangYin: '양' },
+      { chinese: '己', korean: '기', fiveElement: '토', yangYin: '음' },
+      { chinese: '庚', korean: '경', fiveElement: '금', yangYin: '양' },
+      { chinese: '辛', korean: '신', fiveElement: '금', yangYin: '음' },
+      { chinese: '壬', korean: '임', fiveElement: '수', yangYin: '양' },
+      { chinese: '癸', korean: '계', fiveElement: '수', yangYin: '음' },
+    ];
+    return stems.find((stem) => stem.chinese === chinese);
+  };
+
+  // 지지 정보 조회 (로컬 구현)
+  const getBranchInfo = (chinese: string) => {
+    const branches = [
+      { chinese: '子', korean: '자', fiveElement: '수', yangYin: '양' },
+      { chinese: '丑', korean: '축', fiveElement: '토', yangYin: '음' },
+      { chinese: '寅', korean: '인', fiveElement: '목', yangYin: '양' },
+      { chinese: '卯', korean: '묘', fiveElement: '목', yangYin: '음' },
+      { chinese: '辰', korean: '진', fiveElement: '토', yangYin: '양' },
+      { chinese: '巳', korean: '사', fiveElement: '화', yangYin: '음' },
+      { chinese: '午', korean: '오', fiveElement: '화', yangYin: '양' },
+      { chinese: '未', korean: '미', fiveElement: '토', yangYin: '음' },
+      { chinese: '申', korean: '신', fiveElement: '금', yangYin: '양' },
+      { chinese: '酉', korean: '유', fiveElement: '금', yangYin: '음' },
+      { chinese: '戌', korean: '술', fiveElement: '토', yangYin: '양' },
+      { chinese: '亥', korean: '해', fiveElement: '수', yangYin: '음' },
+    ];
+    return branches.find((branch) => branch.chinese === chinese);
+  };
+
   return (
     <div className="rounded-lg border bg-white p-6 shadow-lg">
       <div className="grid grid-cols-4 text-center text-gray-500">
@@ -83,7 +117,7 @@ const SajuPillarsDisplay = ({
               className={`flex items-center justify-center ${index < 3 ? 'border-r' : ''}`}
             >
               <span className="font-semibold text-gray-800">
-                {tenStars[p.key as keyof PillarTenStars]}
+                {tenStars[p.key as keyof PillarsTenStar]}
               </span>
             </div>
           ))}
@@ -137,8 +171,8 @@ export default function DebugPage() {
   const [sajuResult, setSajuResult] = useState<{
     local?: SajuPillars;
     reference?: SajuPillars;
-    localTenStars?: PillarTenStars;
-    referenceTenStars?: PillarTenStars;
+    localTenStars?: PillarsTenStar;
+    referenceTenStars?: PillarsTenStar;
     error?: string;
     loading?: boolean;
   }>({});
@@ -153,8 +187,12 @@ export default function DebugPage() {
       if (result.local) {
         localTenStars = getTenStarsForPillars(result.local);
       }
+      // API 결과가 있을 때만 reference 십성 계산
       if (result.reference) {
         referenceTenStars = getTenStarsForPillars(result.reference);
+      } else {
+        // API 결과가 없으면, birthInput으로 reference 십성을 직접 가져옴
+        referenceTenStars = await getTenStarsForPillarsReference(birthInput);
       }
 
       setSajuResult({
