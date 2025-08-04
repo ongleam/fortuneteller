@@ -2,7 +2,7 @@
  * 오행 분석 모듈
  */
 
-import { getStemInfo, getBranchInfo, JIJANG_GAN } from './constants';
+import { getStemInfo, JIJANG_GAN } from './constants';
 import { fetchSaju } from './reference';
 import type { SajuPillars, FiveElements, BirthInput } from '../../shared/types/saju';
 import { normalizeCalendarType } from './calendar';
@@ -88,12 +88,10 @@ export function addBranchElements(elementCounts: FiveElements, branch: string): 
 
   if (!jijangGan) return;
 
-  // 지장간의 각 천간을 비율에 따라 계산
-  // 간단화를 위해 주요 지장간만 1개씩 카운트
+  // 지장간의 모든 천간을 카운트
   for (const jijang of jijangGan) {
     const stemInfo = getStemInfo(jijang.stem);
-    if (stemInfo && jijang.rate >= 10) {
-      // 비율이 10 이상인 것만 카운트
+    if (stemInfo) {
       addElementCount(elementCounts, stemInfo.fiveElement);
     }
   }

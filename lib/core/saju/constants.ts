@@ -357,71 +357,74 @@ export function getGapjaIndex(stem: string, branch: string): number {
 // 각 년도별로 절기 날짜가 약간씩 다르므로 평균값 사용
 export const SOLAR_TERMS = {
   // 1월
-  소한: { month: 1, day: 6 },   // 小寒
-  대한: { month: 1, day: 20 },  // 大寒
+  소한: { month: 1, day: 6 }, // 小寒
+  대한: { month: 1, day: 20 }, // 大寒
   // 2월
-  입춘: { month: 2, day: 4 },   // 立春 (년월 구분 기준)
-  우수: { month: 2, day: 19 },  // 雨水
+  입춘: { month: 2, day: 4 }, // 立春 (년월 구분 기준)
+  우수: { month: 2, day: 19 }, // 雨水
   // 3월
-  경칩: { month: 3, day: 6 },   // 驚蟄 (2월/3월 구분 기준)
-  춘분: { month: 3, day: 21 },  // 春分
+  경칩: { month: 3, day: 6 }, // 驚蟄 (2월/3월 구분 기준)
+  춘분: { month: 3, day: 21 }, // 春分
   // 4월
-  청명: { month: 4, day: 5 },   // 清明 (3월/4월 구분 기준)
-  곡우: { month: 4, day: 20 },  // 穀雨
+  청명: { month: 4, day: 5 }, // 清明 (3월/4월 구분 기준)
+  곡우: { month: 4, day: 20 }, // 穀雨
   // 5월
-  입하: { month: 5, day: 6 },   // 立夏 (4월/5월 구분 기준)
-  소만: { month: 5, day: 21 },  // 小滿
+  입하: { month: 5, day: 6 }, // 立夏 (4월/5월 구분 기준)
+  소만: { month: 5, day: 21 }, // 小滿
   // 6월
-  망종: { month: 6, day: 6 },   // 芒種 (5월/6월 구분 기준)
-  하지: { month: 6, day: 21 },  // 夏至
+  망종: { month: 6, day: 6 }, // 芒種 (5월/6월 구분 기준)
+  하지: { month: 6, day: 21 }, // 夏至
   // 7월
-  소서: { month: 7, day: 7 },   // 小暑 (6월/7월 구분 기준)
-  대서: { month: 7, day: 23 },  // 大暑
+  소서: { month: 7, day: 7 }, // 小暑 (6월/7월 구분 기준)
+  대서: { month: 7, day: 23 }, // 大暑
   // 8월
-  입추: { month: 8, day: 8 },   // 立秋 (7월/8월 구분 기준)
-  처서: { month: 8, day: 23 },  // 處暑
+  입추: { month: 8, day: 8 }, // 立秋 (7월/8월 구분 기준)
+  처서: { month: 8, day: 23 }, // 處暑
   // 9월
-  백로: { month: 9, day: 8 },   // 白露 (8월/9월 구분 기준)
-  추분: { month: 9, day: 23 },  // 秋分
+  백로: { month: 9, day: 8 }, // 白露 (8월/9월 구분 기준)
+  추분: { month: 9, day: 23 }, // 秋分
   // 10월
-  한로: { month: 10, day: 8 },  // 寒露 (9월/10월 구분 기준)
+  한로: { month: 10, day: 8 }, // 寒露 (9월/10월 구분 기준)
   상강: { month: 10, day: 23 }, // 霜降
   // 11월
-  입동: { month: 11, day: 8 },  // 立冬 (10월/11월 구분 기준)
+  입동: { month: 11, day: 8 }, // 立冬 (10월/11월 구분 기준)
   소설: { month: 11, day: 22 }, // 小雪
   // 12월
-  대설: { month: 12, day: 7 },  // 大雪 (11월/12월 구분 기준)
+  대설: { month: 12, day: 7 }, // 大雪 (11월/12월 구분 기준)
   동지: { month: 12, day: 22 }, // 冬至
 } as const;
 
 // 년도별 정확한 절기 데이터
-export const SOLAR_TERMS_BY_YEAR: Record<number, {
-  입춘: { month: number; day: number; hour: number; minute: number };
-  경칩: { month: number; day: number; hour: number; minute: number };
-  청명: { month: number; day: number; hour: number; minute: number };
-  입하: { month: number; day: number; hour: number; minute: number };
-  망종: { month: number; day: number; hour: number; minute: number };
-  소서: { month: number; day: number; hour: number; minute: number };
-  입추: { month: number; day: number; hour: number; minute: number };
-  백로: { month: number; day: number; hour: number; minute: number };
-  한로: { month: number; day: number; hour: number; minute: number };
-  입동: { month: number; day: number; hour: number; minute: number };
-  대설: { month: number; day: number; hour: number; minute: number };
-  // 추가 절기들 (참조용)
-  소한?: { month: number; day: number; hour: number; minute: number };
-  대한?: { month: number; day: number; hour: number; minute: number };
-  우수?: { month: number; day: number; hour: number; minute: number };
-  춘분?: { month: number; day: number; hour: number; minute: number };
-  곡우?: { month: number; day: number; hour: number; minute: number };
-  소만?: { month: number; day: number; hour: number; minute: number };
-  하지?: { month: number; day: number; hour: number; minute: number };
-  대서?: { month: number; day: number; hour: number; minute: number };
-  처서?: { month: number; day: number; hour: number; minute: number };
-  추분?: { month: number; day: number; hour: number; minute: number };
-  상강?: { month: number; day: number; hour: number; minute: number };
-  소설?: { month: number; day: number; hour: number; minute: number };
-  동지?: { month: number; day: number; hour: number; minute: number };
-}> = {
+export const SOLAR_TERMS_BY_YEAR: Record<
+  number,
+  {
+    입춘: { month: number; day: number; hour: number; minute: number };
+    경칩: { month: number; day: number; hour: number; minute: number };
+    청명: { month: number; day: number; hour: number; minute: number };
+    입하: { month: number; day: number; hour: number; minute: number };
+    망종: { month: number; day: number; hour: number; minute: number };
+    소서: { month: number; day: number; hour: number; minute: number };
+    입추: { month: number; day: number; hour: number; minute: number };
+    백로: { month: number; day: number; hour: number; minute: number };
+    한로: { month: number; day: number; hour: number; minute: number };
+    입동: { month: number; day: number; hour: number; minute: number };
+    대설: { month: number; day: number; hour: number; minute: number };
+    // 추가 절기들 (참조용)
+    소한?: { month: number; day: number; hour: number; minute: number };
+    대한?: { month: number; day: number; hour: number; minute: number };
+    우수?: { month: number; day: number; hour: number; minute: number };
+    춘분?: { month: number; day: number; hour: number; minute: number };
+    곡우?: { month: number; day: number; hour: number; minute: number };
+    소만?: { month: number; day: number; hour: number; minute: number };
+    하지?: { month: number; day: number; hour: number; minute: number };
+    대서?: { month: number; day: number; hour: number; minute: number };
+    처서?: { month: number; day: number; hour: number; minute: number };
+    추분?: { month: number; day: number; hour: number; minute: number };
+    상강?: { month: number; day: number; hour: number; minute: number };
+    소설?: { month: number; day: number; hour: number; minute: number };
+    동지?: { month: number; day: number; hour: number; minute: number };
+  }
+> = {
   2021: {
     // 사주에 필요한 입절기들
     입춘: { month: 2, day: 3, hour: 23, minute: 59 },
@@ -435,7 +438,7 @@ export const SOLAR_TERMS_BY_YEAR: Record<number, {
     한로: { month: 10, day: 8, hour: 10, minute: 39 },
     입동: { month: 11, day: 7, hour: 13, minute: 59 },
     대설: { month: 12, day: 7, hour: 6, minute: 57 },
-    
+
     // 추가 절기들 (참조용)
     소한: { month: 1, day: 5, hour: 12, minute: 23 },
     대한: { month: 1, day: 20, hour: 5, minute: 40 },
@@ -455,16 +458,79 @@ export const SOLAR_TERMS_BY_YEAR: Record<number, {
 
 // 절기 이름과 사주월 매핑 (입절기 기준)
 export const SAJU_MONTH_MAPPING = {
-  입춘: 1,  // 인월 (1월)
-  경칩: 2,  // 묘월 (2월)
-  청명: 3,  // 진월 (3월)
-  입하: 4,  // 사월 (4월)
-  망종: 5,  // 오월 (5월)
-  소서: 6,  // 미월 (6월)
-  입추: 7,  // 신월 (7월)
-  백로: 8,  // 유월 (8월)
-  한로: 9,  // 술월 (9월)
+  입춘: 1, // 인월 (1월)
+  경칩: 2, // 묘월 (2월)
+  청명: 3, // 진월 (3월)
+  입하: 4, // 사월 (4월)
+  망종: 5, // 오월 (5월)
+  소서: 6, // 미월 (6월)
+  입추: 7, // 신월 (7월)
+  백로: 8, // 유월 (8월)
+  한로: 9, // 술월 (9월)
   입동: 10, // 해월 (10월)
   대설: 11, // 자월 (11월)
   // 12월(축월)은 다음해 입춘 전까지
+} as const;
+
+export const FIVE_ELEMENT_MEAN = {
+  wood: {
+    color: 'blue',
+    season: 'spring',
+    direction: 'east',
+    ten_star: '비겁',
+    ten_star_meaning: '정신력, 지도력',
+    organ: 'liver, gallbladder',
+    family: {
+      male: '형제',
+      female: '자매',
+    },
+  },
+  fire: {
+    color: 'red',
+    season: 'summer',
+    direction: 'south',
+    ten_star: '식상',
+    ten_star_meaning: '재능운, 업무운',
+    organ: '심장, 소장',
+    family: {
+      male: '장모',
+      female: '자식',
+    },
+  },
+  earth: {
+    color: 'yellow',
+    season: 'inter_season',
+    direction: 'center',
+    ten_star: '재성',
+    ten_star_meaning: '재물운, 보수운',
+    organ: '비장, 위장',
+    family: {
+      male: '아내',
+      female: '부친',
+    },
+  },
+  metal: {
+    color: 'white',
+    season: 'autumn',
+    direction: 'west',
+    ten_star: '관성',
+    ten_star_meaning: '관직운, 출세운',
+    organ: '폐장, 대장',
+    family: {
+      male: '자식',
+      female: '남편',
+    },
+  },
+  water: {
+    color: 'black',
+    season: 'winter',
+    direction: 'north',
+    ten_star: '인성',
+    ten_star_meaning: '학문운, 문서운',
+    organ: '신장, 방광',
+    family: {
+      male: '모친',
+      female: '모친',
+    },
+  },
 } as const;

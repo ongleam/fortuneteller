@@ -5,7 +5,7 @@
 
 import { normalizeBirthYear } from './calendar';
 import { getSajuPillars } from './pillars';
-import { calculateTenStars } from './ten-stars';
+import { getTenStars } from './ten-stars';
 import { getFiveElements } from './five-elements';
 import { calculateFortunes } from './fortunes';
 import { calculateSinsals, getTopThreeSinsals } from './sinsals';
