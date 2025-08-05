@@ -57,12 +57,12 @@ export function calculateYeokmasal(pillars: SajuPillars): string[] {
     '亥': '巳', '卯': '巳', '未': '巳'   // 해묘미년생 -> 사년월일시에 역마살
   };
   
-  const yearBranch = pillars.year.branch;
-  const yeokmaTarget = yeokmaRules[yearBranch as keyof typeof yeokmaRules];
+  const yearGround = pillars.year.ground;
+  const yeokmaTarget = yeokmaRules[yearGround as keyof typeof yeokmaRules];
   
   if (yeokmaTarget) {
     // 월지, 일지, 시지에 역마가 있는지 확인
-    if ([pillars.month.branch, pillars.day.branch, pillars.time.branch].includes(yeokmaTarget)) {
+    if ([pillars.month.ground, pillars.day.ground, pillars.time.ground].includes(yeokmaTarget)) {
       result.push('역마살');
     }
   }
@@ -84,11 +84,11 @@ export function calculateHwagaesal(pillars: SajuPillars): string[] {
     '亥': '未', '卯': '未', '未': '未'
   };
   
-  const yearBranch = pillars.year.branch;
-  const hwagaeTarget = hwagaeRules[yearBranch as keyof typeof hwagaeRules];
+  const yearGround = pillars.year.ground;
+  const hwagaeTarget = hwagaeRules[yearGround as keyof typeof hwagaeRules];
   
   if (hwagaeTarget) {
-    if ([pillars.month.branch, pillars.day.branch, pillars.time.branch].includes(hwagaeTarget)) {
+    if ([pillars.month.ground, pillars.day.ground, pillars.time.ground].includes(hwagaeTarget)) {
       result.push('화개살');
     }
   }
@@ -111,14 +111,14 @@ export function calculateCheonulGwiin(pillars: SajuPillars): string[] {
     '壬': ['巳', '卯'], '癸': ['巳', '卯']
   };
   
-  const dayStem = pillars.day.stem;
-  const targets = cheonulRules[dayStem as keyof typeof cheonulRules];
+  const daySky = pillars.day.sky;
+  const targets = cheonulRules[daySky as keyof typeof cheonulRules];
   
   if (targets) {
-    const branches = [pillars.year.branch, pillars.month.branch, pillars.day.branch, pillars.time.branch];
+    const grounds = [pillars.year.ground, pillars.month.ground, pillars.day.ground, pillars.time.ground];
     
     for (const target of targets) {
-      if (branches.includes(target)) {
+      if (grounds.includes(target)) {
         result.push('천을귀인');
         break;
       }
@@ -142,11 +142,11 @@ export function calculateDoHwasal(pillars: SajuPillars): string[] {
     '亥': '子', '卯': '子', '未': '子'
   };
   
-  const yearBranch = pillars.year.branch;
-  const doHwaTarget = doHwaRules[yearBranch as keyof typeof doHwaRules];
+  const yearGround = pillars.year.ground;
+  const doHwaTarget = doHwaRules[yearGround as keyof typeof doHwaRules];
   
   if (doHwaTarget) {
-    if ([pillars.month.branch, pillars.day.branch, pillars.time.branch].includes(doHwaTarget)) {
+    if ([pillars.month.ground, pillars.day.ground, pillars.time.ground].includes(doHwaTarget)) {
       result.push('도화살');
     }
   }
@@ -188,7 +188,7 @@ export function calculateMangsinsal(pillars: SajuPillars): string[] {
 }
 
 // 헬퍼 함수들
-export function getKoreanStem(chinese: string): string {
+export function getKoreanSky(chinese: string): string {
   const map: { [key: string]: string } = {
     '甲': '갑', '乙': '을', '丙': '병', '丁': '정', '戊': '무',
     '己': '기', '庚': '경', '辛': '신', '壬': '임', '癸': '계'
@@ -196,7 +196,7 @@ export function getKoreanStem(chinese: string): string {
   return map[chinese] || chinese;
 }
 
-export function getKoreanBranch(chinese: string): string {
+export function getKoreanGround(chinese: string): string {
   const map: { [key: string]: string } = {
     '子': '자', '丑': '축', '寅': '인', '卯': '묘', '辰': '진', '巳': '사',
     '午': '오', '未': '미', '申': '신', '酉': '유', '戌': '술', '亥': '해'

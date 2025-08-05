@@ -1,6 +1,6 @@
-import { expect, test } from '../fixtures';
+import { expect, test } from '../fixtures/fixtures';
 import { AuthPage } from '../pages/auth';
-import { generateRandomTestUser } from '../helpers';
+import { generateRandomTestUser } from '../fixtures/helpers';
 import { ChatPage } from '../pages/chat';
 
 test.describe.serial('Guest Session', () => {

@@ -49,10 +49,10 @@ describe('SajuAITool', () => {
         year: '1995',
         month: '04',
         day: '25',
-        hour: '08'
+        hour: '08' as const
       };
       
-      const result = await sajuTool.execute(testParams);
+      const result = await sajuTool.execute(testParams, { toolCallId: 'test', messages: [] });
       
       expect(result).toBeDefined();
       expect(typeof result).toBe('object');
@@ -78,7 +78,7 @@ describe('SajuAITool', () => {
         // hour 생략
       };
       
-      const result = await sajuTool.execute(testParams);
+      const result = await sajuTool.execute(testParams, { toolCallId: 'test', messages: [] });
       
       expect(result).toBeDefined();
       console.log('✅ 시간 생략 시 결과:', JSON.stringify(result, null, 2));
@@ -98,7 +98,7 @@ describe('SajuAITool', () => {
           year: '1995',
           month: '04',
           day: '25'
-        });
+        }, { toolCallId: 'test', messages: [] });
       } catch (error) {
         expect(error).toBeDefined();
         console.log('✅ 성별 오류 처리:', error);
@@ -115,7 +115,7 @@ describe('SajuAITool', () => {
         year: '1800', // 범위 초과
         month: '01',
         day: '01'
-      });
+      }, { toolCallId: 'test', messages: [] });
       
       // 에러가 결과에 포함되는지 확인
       if (result && typeof result === 'object') {

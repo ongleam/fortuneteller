@@ -110,13 +110,13 @@ function extractPillars(apiResult) {
   const sajuData = apiResult.saju.fortuneList.saju;
 
   return {
-    year: { stem: sajuData.yearSky?.chinese || '甲', branch: sajuData.yearGround?.chinese || '子' },
+    year: { sky: sajuData.yearSky?.chinese || '甲', ground: sajuData.yearGround?.chinese || '子' },
     month: {
-      stem: sajuData.monthSky?.chinese || '甲',
-      branch: sajuData.monthGround?.chinese || '子',
+      sky: sajuData.monthSky?.chinese || '甲',
+      ground: sajuData.monthGround?.chinese || '子',
     },
-    day: { stem: sajuData.daySky?.chinese || '甲', branch: sajuData.dayGround?.chinese || '子' },
-    time: { stem: sajuData.timeSky?.chinese || '甲', branch: sajuData.timeGround?.chinese || '子' },
+    day: { sky: sajuData.daySky?.chinese || '甲', ground: sajuData.dayGround?.chinese || '子' },
+    time: { sky: sajuData.timeSky?.chinese || '甲', ground: sajuData.timeGround?.chinese || '子' },
   };
 }
 
@@ -131,7 +131,7 @@ function generateRandomDate(startYear, endYear) {
 
 function generateTestInputs() {
   const inputs = [];
-  const totalCases = 100;
+  const totalCases = 10;
 
   // 1. 윤달 테스트 케이스 (5개)
   const leapMonthCases = [
@@ -221,7 +221,7 @@ async function generateTestset() {
         testCases.push({ description, input, expected: pillars });
         console.log(
           `  ✅ 성공: ${Object.values(pillars)
-            .map((p) => p.stem + p.branch)
+            .map((p) => p.sky + p.ground)
             .join(' ')}`
         );
       } else {

@@ -70,14 +70,14 @@ describe('SajuMainModule', () => {
         
         // Reference API 사주 비교
         const referenceSaju = testData.reference.saju;
-        expect(compatibleInfo.saju.year.stem.chinese).toBe(referenceSaju.year.stem.chinese);
-        expect(compatibleInfo.saju.year.branch.chinese).toBe(referenceSaju.year.branch.chinese);
+        expect(compatibleInfo.saju.year.sky.chinese).toBe(referenceSaju.year.stem.chinese);
+        expect(compatibleInfo.saju.year.ground.chinese).toBe(referenceSaju.year.branch.chinese);
         
         // getSajuInfoForUi - UI 최적화
         const uiInfo = getSajuInfoForUi(normalizedInput);
         expect(uiInfo).toHaveProperty('summary');
         expect(uiInfo).toHaveProperty('pillarsDisplay');
-        expect(uiInfo.summary.name).toBe(testData.input.name);
+        expect(uiInfo.summary?.name).toBe(testData.input.name);
         
         console.log(`✅ 모든 메인 모듈 기능이 Reference API와 일치합니다!`);
       }, 30000); // 30초 타임아웃

@@ -56,25 +56,25 @@ export function getFiveElements(pillars: SajuPillars): FiveElements {
   };
 
   // 1. 천간 4개의 오행 카운트
-  const stems = [pillars.year.stem, pillars.month.stem, pillars.day.stem, pillars.time.stem];
+  const skies = [pillars.year.sky, pillars.month.sky, pillars.day.sky, pillars.time.sky];
 
-  for (const stem of stems) {
-    const stemInfo = getStemInfo(stem);
-    if (stemInfo) {
-      addElementCount(elementCounts, stemInfo.fiveElement);
+  for (const sky of skies) {
+    const skyInfo = getStemInfo(sky);
+    if (skyInfo) {
+      addElementCount(elementCounts, skyInfo.fiveElement);
     }
   }
 
   // 2. 지지 4개의 지장간 오행 카운트
-  const branches = [
-    pillars.year.branch,
-    pillars.month.branch,
-    pillars.day.branch,
-    pillars.time.branch,
+  const grounds = [
+    pillars.year.ground,
+    pillars.month.ground,
+    pillars.day.ground,
+    pillars.time.ground,
   ];
 
-  for (const branch of branches) {
-    addBranchElements(elementCounts, branch);
+  for (const ground of grounds) {
+    addGroundElements(elementCounts, ground);
   }
 
   return elementCounts;
@@ -83,16 +83,16 @@ export function getFiveElements(pillars: SajuPillars): FiveElements {
 /**
  * 지지의 지장간을 분석하여 오행 카운트에 추가
  */
-export function addBranchElements(elementCounts: FiveElements, branch: string): void {
-  const jijangGan = JIJANG_GAN[branch as keyof typeof JIJANG_GAN];
+export function addGroundElements(elementCounts: FiveElements, ground: string): void {
+  const jijangGan = JIJANG_GAN[ground as keyof typeof JIJANG_GAN];
 
   if (!jijangGan) return;
 
   // 지장간의 모든 천간을 카운트
   for (const jijang of jijangGan) {
-    const stemInfo = getStemInfo(jijang.stem);
-    if (stemInfo) {
-      addElementCount(elementCounts, stemInfo.fiveElement);
+    const skyInfo = getStemInfo(jijang.stem);
+    if (skyInfo) {
+      addElementCount(elementCounts, skyInfo.fiveElement);
     }
   }
 }

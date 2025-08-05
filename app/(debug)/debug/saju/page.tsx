@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { calculateSajuAction } from '@/lib/interfaces/actions/debug';
 import type { BirthInput, SajuPillars, PillarsTenStar } from '@/lib/shared/types/saju';
+import { getPillarsTenStar } from '@/lib/core/saju/ten-stars';
 
 // 오행에 따른 색상을 반환하는 헬퍼 함수
 const getElementColor = (element: string | undefined): string => {
@@ -127,8 +128,8 @@ const SajuPillarsDisplay = ({
       <div className="grid grid-cols-4 gap-4">
         {pillarOrder.map((p) => {
           const pillar = pillars[p.key];
-          const stemInfo = getStemInfo(pillar.stem);
-          const branchInfo = getBranchInfo(pillar.branch);
+          const stemInfo = getStemInfo(pillar.sky);
+          const branchInfo = getBranchInfo(pillar.ground);
 
           return (
             <div key={p.key} className="space-y-2">
@@ -137,16 +138,16 @@ const SajuPillarsDisplay = ({
                 className={`flex flex-col items-center justify-center rounded-lg p-3 shadow ${getElementColor(stemInfo?.fiveElement)}`}
               >
                 <div className="text-xs opacity-80">{`${stemInfo?.fiveElement}, ${stemInfo?.korean}`}</div>
-                <div className="text-4xl font-bold">{pillar.stem}</div>
-                <div className="text-sm">{getHanjaSound(pillar.stem)}</div>
+                <div className="text-4xl font-bold">{pillar.sky}</div>
+                <div className="text-sm">{getHanjaSound(pillar.sky)}</div>
               </div>
               {/* 지지 */}
               <div
                 className={`flex flex-col items-center justify-center rounded-lg p-3 shadow ${getElementColor(branchInfo?.fiveElement)}`}
               >
                 <div className="text-xs opacity-80">{`${branchInfo?.fiveElement}, ${branchInfo?.korean}`}</div>
-                <div className="text-4xl font-bold">{pillar.branch}</div>
-                <div className="text-sm">{getHanjaSound(pillar.branch)}</div>
+                <div className="text-4xl font-bold">{pillar.ground}</div>
+                <div className="text-sm">{getHanjaSound(pillar.ground)}</div>
               </div>
             </div>
           );
@@ -185,14 +186,14 @@ export default function DebugPage() {
 
       let localTenStars, referenceTenStars;
       if (result.local) {
-        localTenStars = getTenStarsForPillars(result.local);
+        localTenStars = getPillarsTenStar(result.local);
       }
       // API 결과가 있을 때만 reference 십성 계산
       if (result.reference) {
-        referenceTenStars = getTenStarsForPillars(result.reference);
+        referenceTenStars = getPillarsTenStar(result.reference);
       } else {
         // API 결과가 없으면, birthInput으로 reference 십성을 직접 가져옴
-        referenceTenStars = await getTenStarsForPillarsReference(birthInput);
+        // referenceTenStars = await getTenStarsForPillarsReference(birthInput);
       }
 
       setSajuResult({

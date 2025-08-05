@@ -2,7 +2,7 @@
  * 운세 계산 모듈
  */
 
-import { SIXTY_GAPJA, getStemIndex, getBranchIndex } from './constants';
+import { SIXTY_GAPJA, getStemIndex, getGroundIndex } from './constants';
 import type { SajuPillars, FortuneInfo } from '../../shared/types/saju';
 
 /**
@@ -36,8 +36,8 @@ export function calculateCurrentBigFortune(pillars: SajuPillars, currentYear: nu
   // 대운은 월주에서 시작하여 순행 또는 역행
   // 간단한 구현 (추후 정확한 공식으로 교체)
   
-  const monthStemIndex = getStemIndex(pillars.month.stem);
-  const monthBranchIndex = getBranchIndex(pillars.month.branch);
+  const monthSkyIndex = getStemIndex(pillars.month.sky);
+  const monthGroundIndex = getGroundIndex(pillars.month.ground);
   
   // 10년 단위 대운 계산 (임시)
   const age = calculateAge(1995, currentYear);
@@ -47,22 +47,22 @@ export function calculateCurrentBigFortune(pillars: SajuPillars, currentYear: nu
   const isForward = true; // 임시로 순행
   
   const offset = isForward ? fortuneNumber : -fortuneNumber;
-  const newStemIndex = (monthStemIndex + offset) % 10;
-  const newBranchIndex = (monthBranchIndex + offset) % 12;
+  const newSkyIndex = (monthSkyIndex + offset) % 10;
+  const newGroundIndex = (monthGroundIndex + offset) % 12;
   
   return {
     number: fortuneNumber,
-    stem: { 
-      chinese: pillars.month.stem, // 임시
-      korean: getKoreanStem(pillars.month.stem),
-      fiveElement: getStemElement(pillars.month.stem),
-      yangYin: getStemYangYin(pillars.month.stem)
+    sky: { 
+      chinese: pillars.month.sky, // 임시
+      korean: getKoreanSky(pillars.month.sky),
+      fiveElement: getSkyElement(pillars.month.sky),
+      yangYin: getSkyYangYin(pillars.month.sky)
     },
-    branch: {
-      chinese: pillars.month.branch, // 임시  
-      korean: getKoreanBranch(pillars.month.branch),
-      fiveElement: getBranchElement(pillars.month.branch),
-      yangYin: getBranchYangYin(pillars.month.branch)
+    ground: {
+      chinese: pillars.month.ground, // 임시  
+      korean: getKoreanGround(pillars.month.ground),
+      fiveElement: getGroundElement(pillars.month.ground),
+      yangYin: getGroundYangYin(pillars.month.ground)
     }
   };
 }
@@ -92,15 +92,15 @@ export function calculateYearFortune(year: number): any {
   
   return {
     year,
-    stem: {
+    sky: {
       chinese: gapja[0],
-      korean: getKoreanStem(gapja[0]),
-      fiveElement: getStemElement(gapja[0])
+      korean: getKoreanSky(gapja[0]),
+      fiveElement: getSkyElement(gapja[0])
     },
-    branch: {
+    ground: {
       chinese: gapja[1],
-      korean: getKoreanBranch(gapja[1]),
-      fiveElement: getBranchElement(gapja[1])
+      korean: getKoreanGround(gapja[1]),
+      fiveElement: getGroundElement(gapja[1])
     }
   };
 }
@@ -146,31 +146,31 @@ export function getBigFortuneAtAge(pillars: SajuPillars, gender: string, birthYe
   const fortuneNumber = Math.max(0, Math.floor(fortuneAge / 10));
   
   const direction = determineBigFortuneDirection(gender, birthYear);
-  const monthStemIndex = getStemIndex(pillars.month.stem);
-  const monthBranchIndex = getBranchIndex(pillars.month.branch);
+  const monthSkyIndex = getStemIndex(pillars.month.sky);
+  const monthGroundIndex = getGroundIndex(pillars.month.ground);
   
   const offset = direction === 'forward' ? fortuneNumber : -fortuneNumber;
-  const stemIndex = (monthStemIndex + offset + 10) % 10;
-  const branchIndex = (monthBranchIndex + offset + 12) % 12;
+  const skyIndex = (monthSkyIndex + offset + 10) % 10;
+  const groundIndex = (monthGroundIndex + offset + 12) % 12;
   
-  const stemChinese = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'][stemIndex];
-  const branchChinese = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'][branchIndex];
+  const skyChinese = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'][skyIndex];
+  const groundChinese = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'][groundIndex];
   
   return {
     number: fortuneNumber + 1,
     startAge: startAge + (fortuneNumber * 10),
     endAge: startAge + ((fortuneNumber + 1) * 10) - 1,
-    stem: {
-      chinese: stemChinese,
-      korean: getKoreanStem(stemChinese),
-      fiveElement: getStemElement(stemChinese),
-      yangYin: getStemYangYin(stemChinese)
+    sky: {
+      chinese: skyChinese,
+      korean: getKoreanSky(skyChinese),
+      fiveElement: getSkyElement(skyChinese),
+      yangYin: getSkyYangYin(skyChinese)
     },
-    branch: {
-      chinese: branchChinese,
-      korean: getKoreanBranch(branchChinese),
-      fiveElement: getBranchElement(branchChinese),
-      yangYin: getBranchYangYin(branchChinese)
+    ground: {
+      chinese: groundChinese,
+      korean: getKoreanGround(groundChinese),
+      fiveElement: getGroundElement(groundChinese),
+      yangYin: getGroundYangYin(groundChinese)
     }
   };
 }
@@ -188,35 +188,35 @@ export function analyzeYearlyFortune(year: number, month?: number): {
   
   if (month) {
     // 월운 계산 (년간을 기준으로)
-    const yearStemIndex = getStemIndex(yearFortune.stem.chinese);
-    const monthStemIndex = (yearStemIndex * 2 + month - 1) % 10; // 간단한 공식
-    const monthBranchIndex = (month + 1) % 12; // 인월부터 시작
+    const yearSkyIndex = getStemIndex(yearFortune.sky.chinese);
+    const monthSkyIndex = (yearSkyIndex * 2 + month - 1) % 10; // 간단한 공식
+    const monthGroundIndex = (month + 1) % 12; // 인월부터 시작
     
-    const monthStemChinese = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'][monthStemIndex];
-    const monthBranchChinese = ['寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥', '子', '丑'][monthBranchIndex];
+    const monthSkyChinese = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'][monthSkyIndex];
+    const monthGroundChinese = ['寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥', '子', '丑'][monthGroundIndex];
     
     monthFortune = {
       month,
-      stem: {
-        chinese: monthStemChinese,
-        korean: getKoreanStem(monthStemChinese),
-        fiveElement: getStemElement(monthStemChinese)
+      sky: {
+        chinese: monthSkyChinese,
+        korean: getKoreanSky(monthSkyChinese),
+        fiveElement: getSkyElement(monthSkyChinese)
       },
-      branch: {
-        chinese: monthBranchChinese,
-        korean: getKoreanBranch(monthBranchChinese),
-        fiveElement: getBranchElement(monthBranchChinese)
+      ground: {
+        chinese: monthGroundChinese,
+        korean: getKoreanGround(monthGroundChinese),
+        fiveElement: getGroundElement(monthGroundChinese)
       }
     };
   }
   
-  const analysis = `${year}년은 ${yearFortune.stem.korean}${yearFortune.branch.korean}년입니다.`;
+  const analysis = `${year}년은 ${yearFortune.sky.korean}${yearFortune.ground.korean}년입니다.`;
   
   return { yearFortune, monthFortune, analysis };
 }
 
 // 헬퍼 함수들
-export function getKoreanStem(chinese: string): string {
+export function getKoreanSky(chinese: string): string {
   const map: { [key: string]: string } = {
     '甲': '갑', '乙': '을', '丙': '병', '丁': '정', '戊': '무',
     '己': '기', '庚': '경', '辛': '신', '壬': '임', '癸': '계'
@@ -224,7 +224,7 @@ export function getKoreanStem(chinese: string): string {
   return map[chinese] || chinese;
 }
 
-export function getKoreanBranch(chinese: string): string {
+export function getKoreanGround(chinese: string): string {
   const map: { [key: string]: string } = {
     '子': '자', '丑': '축', '寅': '인', '卯': '묘', '辰': '진', '巳': '사',
     '午': '오', '未': '미', '申': '신', '酉': '유', '戌': '술', '亥': '해'
@@ -232,7 +232,7 @@ export function getKoreanBranch(chinese: string): string {
   return map[chinese] || chinese;
 }
 
-export function getStemElement(chinese: string): string {
+export function getSkyElement(chinese: string): string {
   const map: { [key: string]: string } = {
     '甲': '목', '乙': '목', '丙': '화', '丁': '화', '戊': '토',
     '己': '토', '庚': '금', '辛': '금', '壬': '수', '癸': '수'
@@ -240,7 +240,7 @@ export function getStemElement(chinese: string): string {
   return map[chinese] || '';
 }
 
-export function getBranchElement(chinese: string): string {
+export function getGroundElement(chinese: string): string {
   const map: { [key: string]: string } = {
     '子': '수', '丑': '토', '寅': '목', '卯': '목', '辰': '토', '巳': '화',
     '午': '화', '未': '토', '申': '금', '酉': '금', '戌': '토', '亥': '수'
@@ -248,7 +248,7 @@ export function getBranchElement(chinese: string): string {
   return map[chinese] || '';
 }
 
-export function getStemYangYin(chinese: string): string {
+export function getSkyYangYin(chinese: string): string {
   const map: { [key: string]: string } = {
     '甲': '양', '乙': '음', '丙': '양', '丁': '음', '戊': '양',
     '己': '음', '庚': '양', '辛': '음', '壬': '양', '癸': '음'
@@ -256,7 +256,7 @@ export function getStemYangYin(chinese: string): string {
   return map[chinese] || '';
 }
 
-export function getBranchYangYin(chinese: string): string {
+export function getGroundYangYin(chinese: string): string {
   const map: { [key: string]: string } = {
     '子': '양', '丑': '음', '寅': '양', '卯': '음', '辰': '양', '巳': '음',
     '午': '양', '未': '음', '申': '양', '酉': '음', '戌': '양', '亥': '음'

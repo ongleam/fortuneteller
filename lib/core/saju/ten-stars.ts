@@ -36,14 +36,14 @@ export async function getPillarsTenStarReference(
     }
 
     return {
-      yearStem: storedUnse.manseYearSkyRelation,
-      yearBranch: storedUnse.manseYearGroundRelation,
-      monthStem: storedUnse.manseMonthSkyRelation,
-      monthBranch: storedUnse.manseMonthGroundRelation,
-      dayStem: storedUnse.manseDaySkyRelation,
-      dayBranch: storedUnse.manseDayGroundRelation,
-      timeStem: storedUnse.manseTimeSkyRelation,
-      timeBranch: storedUnse.manseTimeGroundRelation,
+      yearSky: storedUnse.manseYearSkyRelation,
+      yearGround: storedUnse.manseYearGroundRelation,
+      monthSky: storedUnse.manseMonthSkyRelation,
+      monthGround: storedUnse.manseMonthGroundRelation,
+      daySky: storedUnse.manseDaySkyRelation,
+      dayGround: storedUnse.manseDayGroundRelation,
+      timeSky: storedUnse.manseTimeSkyRelation,
+      timeGround: storedUnse.manseTimeGroundRelation,
     };
   } catch (error) {
     console.warn('[WARNING] 십성 Reference API 호출 실패, 백업 계산을 사용합니다.', error);
@@ -55,28 +55,28 @@ export async function getPillarsTenStarReference(
  * 사주 팔자 전체(천간, 지지)에 대한 십성 분석
  */
 export function getPillarsTenStar(pillars: SajuPillars): PillarsTenStar {
-  const dayStem = pillars.day.stem; // 일간이 기준
+  const daySky = pillars.day.sky; // 일간이 기준
 
   return {
-    yearStem: getTenStar(dayStem, pillars.year.stem),
-    yearBranch: getTenStar(dayStem, getMainStem(pillars.year.branch)),
-    monthStem: getTenStar(dayStem, pillars.month.stem),
-    monthBranch: getTenStar(dayStem, getMainStem(pillars.month.branch)),
-    dayStem: '비견', // 일간은 항상 자기 자신이므로 비견
-    dayBranch: getTenStar(dayStem, getMainStem(pillars.day.branch)),
-    timeStem: getTenStar(dayStem, pillars.time.stem),
-    timeBranch: getTenStar(dayStem, getMainStem(pillars.time.branch)),
+    yearSky: getTenStar(daySky, pillars.year.sky),
+    yearGround: getTenStar(daySky, getMainSky(pillars.year.ground)),
+    monthSky: getTenStar(daySky, pillars.month.sky),
+    monthGround: getTenStar(daySky, getMainSky(pillars.month.ground)),
+    daySky: '비견', // 일간은 항상 자기 자신이므로 비견
+    dayGround: getTenStar(daySky, getMainSky(pillars.day.ground)),
+    timeSky: getTenStar(daySky, pillars.time.sky),
+    timeGround: getTenStar(daySky, getMainSky(pillars.time.ground)),
   };
 }
 
 /**
  * 두 천간 간의 십성 관계 계산
- * @param baseStem 기준 천간 (일간)
- * @param targetStem 대상 천간
+ * @param baseSky 기준 천간 (일간)
+ * @param targetSky 대상 천간
  */
-export function getTenStar(baseStem: string, targetStem: string): string {
-  const baseInfo = getStemInfo(baseStem);
-  const targetInfo = getStemInfo(targetStem);
+export function getTenStar(baseSky: string, targetSky: string): string {
+  const baseInfo = getStemInfo(baseSky);
+  const targetInfo = getStemInfo(targetSky);
 
   if (!baseInfo || !targetInfo) {
     return ''; // 오류 시 빈 문자열
@@ -122,10 +122,10 @@ export function getTenStar(baseStem: string, targetStem: string): string {
 /**
  * 지지의 주기(지장간 중 가장 강한 천간) 추출
  */
-export function getMainStem(branch: string): string {
+export function getMainSky(ground: string): string {
   // 지장간에서 가장 강한 천간을 반환
   // 간단한 매핑으로 구현 (실제로는 지장간 비율 고려)
-  const branchToMainStem: { [key: string]: string } = {
+  const groundToMainSky: { [key: string]: string } = {
     子: '癸', // 자 -> 계수
     丑: '己', // 축 -> 기토
     寅: '甲', // 인 -> 갑목
@@ -140,7 +140,7 @@ export function getMainStem(branch: string): string {
     亥: '壬', // 해 -> 임수
   };
 
-  return branchToMainStem[branch] || branch;
+  return groundToMainSky[ground] || ground;
 }
 
 /**

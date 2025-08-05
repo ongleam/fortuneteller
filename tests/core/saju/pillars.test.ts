@@ -44,14 +44,14 @@ describe('사주 팔자 계산 비교 테스트', () => {
           saju: {
             fortuneList: {
               saju: {
-                yearSky: { chinese: expected.year.stem },
-                yearGround: { chinese: expected.year.branch },
-                monthSky: { chinese: expected.month.stem },
-                monthGround: { chinese: expected.month.branch },
-                daySky: { chinese: expected.day.stem },
-                dayGround: { chinese: expected.day.branch },
-                timeSky: { chinese: expected.time.stem },
-                timeGround: { chinese: expected.time.branch },
+                yearSky: { chinese: expected.year.sky },
+                yearGround: { chinese: expected.year.ground },
+                monthSky: { chinese: expected.month.sky },
+                monthGround: { chinese: expected.month.ground },
+                daySky: { chinese: expected.day.sky },
+                dayGround: { chinese: expected.day.ground },
+                timeSky: { chinese: expected.time.sky },
+                timeGround: { chinese: expected.time.ground },
               },
             },
           },

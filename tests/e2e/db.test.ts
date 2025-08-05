@@ -1,5 +1,5 @@
-import { getProfileByUserId } from '@/lib/supabase/queries';
-import { createClient } from '@/lib/supabase/client';
+import { getProfileByUserId } from '@/lib/infra/supabase/queries';
+import { createClient } from '@/lib/infra/supabase/client';
 
 describe('Database Integration Tests', () => {
   // 실제 Supabase 클라이언트 사용

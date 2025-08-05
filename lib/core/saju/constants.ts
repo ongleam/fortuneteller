@@ -333,25 +333,29 @@ export const SIXTY_GAPJA = [
 
 // 유틸리티 함수들
 export function getStemInfo(chinese: string) {
-  return HEAVENLY_STEMS.find((stem) => stem.chinese === chinese);
+  return HEAVENLY_STEMS.find((sky) => sky.chinese === chinese);
 }
 
-export function getBranchInfo(chinese: string) {
-  return EARTHLY_BRANCHES.find((branch) => branch.chinese === chinese);
+export function getGroundInfo(chinese: string) {
+  return EARTHLY_BRANCHES.find((ground) => ground.chinese === chinese);
 }
 
 export function getStemIndex(chinese: string): number {
-  return HEAVENLY_STEMS.findIndex((stem) => stem.chinese === chinese);
+  return HEAVENLY_STEMS.findIndex((sky) => sky.chinese === chinese);
 }
 
-export function getBranchIndex(chinese: string): number {
-  return EARTHLY_BRANCHES.findIndex((branch) => branch.chinese === chinese);
+export function getGroundIndex(chinese: string): number {
+  return EARTHLY_BRANCHES.findIndex((ground) => ground.chinese === chinese);
 }
 
-export function getGapjaIndex(stem: string, branch: string): number {
-  const gapja = stem + branch;
+export function getGapjaIndex(sky: string, ground: string): number {
+  const gapja = sky + ground;
   return SIXTY_GAPJA.findIndex((g) => g === gapja);
 }
+
+// Backward compatibility functions
+export const getBranchInfo = getGroundInfo;
+export const getBranchIndex = getGroundIndex;
 
 // 24절기 테이블 (양력 기준 근사값)
 // 각 년도별로 절기 날짜가 약간씩 다르므로 평균값 사용

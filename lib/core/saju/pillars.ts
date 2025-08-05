@@ -47,20 +47,20 @@ export async function getSajuPillarsReference(
 
     return {
       year: {
-        stem: sajuData.yearSky?.chinese || '甲',
-        branch: sajuData.yearGround?.chinese || '子',
+        sky: sajuData.yearSky?.chinese || '甲',
+        ground: sajuData.yearGround?.chinese || '子',
       },
       month: {
-        stem: sajuData.monthSky?.chinese || '甲',
-        branch: sajuData.monthGround?.chinese || '子',
+        sky: sajuData.monthSky?.chinese || '甲',
+        ground: sajuData.monthGround?.chinese || '子',
       },
       day: {
-        stem: sajuData.daySky?.chinese || '甲',
-        branch: sajuData.dayGround?.chinese || '子',
+        sky: sajuData.daySky?.chinese || '甲',
+        ground: sajuData.dayGround?.chinese || '子',
       },
       time: {
-        stem: sajuData.timeSky?.chinese || '甲',
-        branch: sajuData.timeGround?.chinese || '子',
+        sky: sajuData.timeSky?.chinese || '甲',
+        ground: sajuData.timeGround?.chinese || '子',
       },
     };
   } catch (error) {
@@ -131,7 +131,7 @@ export function getYearPillar(year: number) {
   const yearOffset = (year - baseYear) % 60;
   const gapjaIndex = yearOffset < 0 ? yearOffset + 60 : yearOffset;
   const gapja = SIXTY_GAPJA[gapjaIndex];
-  return { stem: gapja.charAt(0), branch: gapja.charAt(1) };
+  return { sky: gapja.charAt(0), ground: gapja.charAt(1) };
 }
 
 /**
@@ -140,18 +140,18 @@ export function getYearPillar(year: number) {
  * @param month 월
  * @returns 월주 정보
  */
-export function getMonthPillar(year: number, month: number): { stem: string; branch: string } {
+export function getMonthPillar(year: number, month: number): { sky: string; ground: string } {
   const yearPillar = getYearPillar(year);
-  const yearStemIndex = getStemIndex(yearPillar.stem);
+  const yearSkyIndex = getStemIndex(yearPillar.sky);
   const firstMonthStemMap = [2, 4, 6, 8, 0, 2, 4, 6, 8, 0];
-  const firstMonthStemIndex = firstMonthStemMap[yearStemIndex];
+  const firstMonthSkyIndex = firstMonthStemMap[yearSkyIndex];
   const monthOffset = month - 1;
-  const monthStemIndex = (firstMonthStemIndex + monthOffset) % 10;
-  const monthBranchIndex = (2 + monthOffset) % 12;
+  const monthSkyIndex = (firstMonthSkyIndex + monthOffset) % 10;
+  const monthGroundIndex = (2 + monthOffset) % 12;
 
   return {
-    stem: HEAVENLY_STEMS[monthStemIndex].chinese,
-    branch: EARTHLY_BRANCHES[monthBranchIndex].chinese,
+    sky: HEAVENLY_STEMS[monthSkyIndex].chinese,
+    ground: EARTHLY_BRANCHES[monthGroundIndex].chinese,
   };
 }
 
@@ -160,7 +160,7 @@ export function getMonthPillar(year: number, month: number): { stem: string; bra
  * @param date 날짜
  * @returns 일주 정보
  */
-export function getDayPillar(date: Date): { stem: string; branch: string } {
+export function getDayPillar(date: Date): { sky: string; ground: string } {
   const baseDate = new Date('1995-04-25T00:00:00');
   const baseGapja = '丙戌';
 
@@ -179,7 +179,7 @@ export function getDayPillar(date: Date): { stem: string; branch: string } {
   if (gapjaIndex < 0) gapjaIndex += 60;
 
   const gapja = SIXTY_GAPJA[gapjaIndex];
-  return { stem: gapja[0], branch: gapja[1] };
+  return { sky: gapja[0], ground: gapja[1] };
 }
 
 /**
@@ -190,37 +190,37 @@ export function getDayPillar(date: Date): { stem: string; branch: string } {
  * @returns 시주 정보
  */
 export function getTimePillar(
-  dayPillar: { stem: string; branch: string },
+  dayPillar: { sky: string; ground: string },
   hourStr: string,
   minuteStr?: string
 ) {
-  const dayStemIndex = getStemIndex(dayPillar.stem);
+  const daySkyIndex = getStemIndex(dayPillar.sky);
   const hour = parseInt(hourStr, 10);
   const minute = minuteStr ? parseInt(minuteStr, 10) : 0;
-  const firstTimeStemMap = [0, 2, 4, 6, 8, 0, 2, 4, 6, 8];
-  const firstTimeStem = firstTimeStemMap[dayStemIndex];
+  const firstTimeSkyMap = [0, 2, 4, 6, 8, 0, 2, 4, 6, 8];
+  const firstTimeSky = firstTimeSkyMap[daySkyIndex];
   const totalMinutes = hour * 60 + minute;
 
-  let timeBranchIndex;
-  if (totalMinutes >= 23 * 60 + 30 || totalMinutes < 1 * 60 + 30) timeBranchIndex = 0;
-  else if (totalMinutes < 3 * 60 + 30) timeBranchIndex = 1;
-  else if (totalMinutes < 5 * 60 + 30) timeBranchIndex = 2;
-  else if (totalMinutes < 7 * 60 + 30) timeBranchIndex = 3;
-  else if (totalMinutes < 9 * 60 + 30) timeBranchIndex = 4;
-  else if (totalMinutes < 11 * 60 + 30) timeBranchIndex = 5;
-  else if (totalMinutes < 13 * 60 + 30) timeBranchIndex = 6;
-  else if (totalMinutes < 15 * 60 + 30) timeBranchIndex = 7;
-  else if (totalMinutes < 17 * 60 + 30) timeBranchIndex = 8;
-  else if (totalMinutes < 19 * 60 + 30) timeBranchIndex = 9;
-  else if (totalMinutes < 21 * 60 + 30) timeBranchIndex = 10;
-  else timeBranchIndex = 11;
+  let timeGroundIndex;
+  if (totalMinutes >= 23 * 60 + 30 || totalMinutes < 1 * 60 + 30) timeGroundIndex = 0;
+  else if (totalMinutes < 3 * 60 + 30) timeGroundIndex = 1;
+  else if (totalMinutes < 5 * 60 + 30) timeGroundIndex = 2;
+  else if (totalMinutes < 7 * 60 + 30) timeGroundIndex = 3;
+  else if (totalMinutes < 9 * 60 + 30) timeGroundIndex = 4;
+  else if (totalMinutes < 11 * 60 + 30) timeGroundIndex = 5;
+  else if (totalMinutes < 13 * 60 + 30) timeGroundIndex = 6;
+  else if (totalMinutes < 15 * 60 + 30) timeGroundIndex = 7;
+  else if (totalMinutes < 17 * 60 + 30) timeGroundIndex = 8;
+  else if (totalMinutes < 19 * 60 + 30) timeGroundIndex = 9;
+  else if (totalMinutes < 21 * 60 + 30) timeGroundIndex = 10;
+  else timeGroundIndex = 11;
 
-  const timeOffset = timeBranchIndex;
-  const timeStemIndex = (firstTimeStem + timeOffset) % 10;
+  const timeOffset = timeGroundIndex;
+  const timeSkyIndex = (firstTimeSky + timeOffset) % 10;
 
   return {
-    stem: HEAVENLY_STEMS[timeStemIndex].chinese,
-    branch: EARTHLY_BRANCHES[timeBranchIndex].chinese,
+    sky: HEAVENLY_STEMS[timeSkyIndex].chinese,
+    ground: EARTHLY_BRANCHES[timeGroundIndex].chinese,
   };
 }
 
@@ -230,17 +230,17 @@ export function getTimePillar(
  * @returns 유효성 여부
  */
 export function validatePillars(pillars: SajuPillars): boolean {
-  const isValidStem = (stem: string) => HEAVENLY_STEMS.some((s) => s.chinese === stem);
-  const isValidBranch = (branch: string) => EARTHLY_BRANCHES.some((b) => b.chinese === branch);
+  const isValidSky = (sky: string) => HEAVENLY_STEMS.some((s) => s.chinese === sky);
+  const isValidGround = (ground: string) => EARTHLY_BRANCHES.some((b) => b.chinese === ground);
 
   return (
-    isValidStem(pillars.year.stem) &&
-    isValidBranch(pillars.year.branch) &&
-    isValidStem(pillars.month.stem) &&
-    isValidBranch(pillars.month.branch) &&
-    isValidStem(pillars.day.stem) &&
-    isValidBranch(pillars.day.branch) &&
-    isValidStem(pillars.time.stem) &&
-    isValidBranch(pillars.time.branch)
+    isValidSky(pillars.year.sky) &&
+    isValidGround(pillars.year.ground) &&
+    isValidSky(pillars.month.sky) &&
+    isValidGround(pillars.month.ground) &&
+    isValidSky(pillars.day.sky) &&
+    isValidGround(pillars.day.ground) &&
+    isValidSky(pillars.time.sky) &&
+    isValidGround(pillars.time.ground)
   );
 }

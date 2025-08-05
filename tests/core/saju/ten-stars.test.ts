@@ -42,14 +42,14 @@ describe('십성 계산 비교 테스트', () => {
           saju: {
             fortuneList: {
               storedUnse: {
-                manseYearSkyRelation: expected.yearStem,
-                manseYearGroundRelation: expected.yearBranch,
-                manseMonthSkyRelation: expected.monthStem,
-                manseMonthGroundRelation: expected.monthBranch,
-                manseDaySkyRelation: expected.dayStem,
-                manseDayGroundRelation: expected.dayBranch,
-                manseTimeSkyRelation: expected.timeStem,
-                manseTimeGroundRelation: expected.timeBranch,
+                manseYearSkyRelation: expected.yearSky,
+                manseYearGroundRelation: expected.yearGround,
+                manseMonthSkyRelation: expected.monthSky,
+                manseMonthGroundRelation: expected.monthGround,
+                manseDaySkyRelation: expected.daySky,
+                manseDayGroundRelation: expected.dayGround,
+                manseTimeSkyRelation: expected.timeSky,
+                manseTimeGroundRelation: expected.timeGround,
               },
             },
           },

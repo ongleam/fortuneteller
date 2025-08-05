@@ -41,8 +41,8 @@ export interface BirthInput {
 
 // 사주 팔자
 export interface SajuPillar {
-  stem: string; // 천간
-  branch: string; // 지지
+  sky: string; // 천간
+  ground: string; // 지지
 }
 
 export interface SajuPillars {
@@ -54,14 +54,14 @@ export interface SajuPillars {
 
 // 십성 분석
 export interface PillarsTenStar {
-  yearStem: string; // 년간 십성
-  yearBranch: string; // 년지 십성
-  monthStem: string; // 월간 십성
-  monthBranch: string; // 월지 십성
-  dayStem: string; // 일간 십성 (비견 고정)
-  dayBranch: string; // 일지 십성
-  timeStem: string; // 시간 십성
-  timeBranch: string; // 시지 십성
+  yearSky: string; // 년간 십성
+  yearGround: string; // 년지 십성
+  monthSky: string; // 월간 십성
+  monthGround: string; // 월지 십성
+  daySky: string; // 일간 십성 (비견 고정)
+  dayGround: string; // 일지 십성
+  timeSky: string; // 시간 십성
+  timeGround: string; // 시지 십성
 }
 
 // 오행 분석

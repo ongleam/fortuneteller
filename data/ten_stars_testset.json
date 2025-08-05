@@ -12,14 +12,14 @@
       "desc": "입춘 직전 (1990년)"
     },
     "expected": {
-      "yearStem": "비견",
-      "yearBranch": "정관",
-      "monthStem": "편인",
-      "monthBranch": "편재",
-      "dayStem": "비견",
-      "dayBranch": "상관",
-      "timeStem": "편관",
-      "timeBranch": "상관"
+      "yearSky": "비견",
+      "yearGround": "정관",
+      "monthSky": "편인",
+      "monthGround": "편재",
+      "daySky": "비견",
+      "dayGround": "상관",
+      "timeSky": "편관",
+      "timeGround": "상관"
     }
   },
   {
@@ -35,14 +35,14 @@
       "desc": "입춘 직후 (1990년)"
     },
     "expected": {
-      "yearStem": "정인",
-      "yearBranch": "편관",
-      "monthStem": "정관",
-      "monthBranch": "정인",
-      "dayStem": "비견",
-      "dayBranch": "상관",
-      "timeStem": "편관",
-      "timeBranch": "상관"
+      "yearSky": "정인",
+      "yearGround": "편관",
+      "monthSky": "정관",
+      "monthGround": "정인",
+      "daySky": "비견",
+      "dayGround": "상관",
+      "timeSky": "편관",
+      "timeGround": "상관"
     }
   },
   {
@@ -58,14 +58,14 @@
       "desc": "입춘 정각 근처 (2000년)"
     },
     "expected": {
-      "yearStem": "편인",
-      "yearBranch": "편관",
-      "monthStem": "편관",
-      "monthBranch": "식신",
-      "dayStem": "비견",
-      "dayBranch": "편관",
-      "timeStem": "정인",
-      "timeBranch": "비견"
+      "yearSky": "편인",
+      "yearGround": "편관",
+      "monthSky": "편관",
+      "monthGround": "식신",
+      "daySky": "비견",
+      "dayGround": "편관",
+      "timeSky": "정인",
+      "timeGround": "비견"
     }
   },
   {
@@ -81,14 +81,14 @@
       "desc": "입춘 정각 근처 (1975년)"
     },
     "expected": {
-      "yearStem": "편재",
-      "yearBranch": "편재",
-      "monthStem": "정인",
-      "monthBranch": "정재",
-      "dayStem": "비견",
-      "dayBranch": "정관",
-      "timeStem": "정인",
-      "timeBranch": "정인"
+      "yearSky": "편재",
+      "yearGround": "편재",
+      "monthSky": "정인",
+      "monthGround": "정재",
+      "daySky": "비견",
+      "dayGround": "정관",
+      "timeSky": "정인",
+      "timeGround": "정인"
     }
   },
   {
@@ -104,14 +104,14 @@
       "desc": "입하 정각 근처 (1985년)"
     },
     "expected": {
-      "yearStem": "겁재",
-      "yearBranch": "정재",
-      "monthStem": "정관",
-      "monthBranch": "식신",
-      "dayStem": "비견",
-      "dayBranch": "편재",
-      "timeStem": "겁재",
-      "timeBranch": "편인"
+      "yearSky": "겁재",
+      "yearGround": "정재",
+      "monthSky": "정관",
+      "monthGround": "식신",
+      "daySky": "비견",
+      "dayGround": "편재",
+      "timeSky": "겁재",
+      "timeGround": "편인"
     }
   },
   {
@@ -127,14 +127,14 @@
       "desc": "입하 직후 (1995년)"
     },
     "expected": {
-      "yearStem": "편인",
-      "yearBranch": "정관",
-      "monthStem": "정재",
-      "monthBranch": "상관",
-      "dayStem": "비견",
-      "dayBranch": "편재",
-      "timeStem": "정재",
-      "timeBranch": "편관"
+      "yearSky": "편인",
+      "yearGround": "정관",
+      "monthSky": "정재",
+      "monthGround": "상관",
+      "daySky": "비견",
+      "dayGround": "편재",
+      "timeSky": "정재",
+      "timeGround": "편관"
     }
   },
   {
@@ -150,14 +150,14 @@
       "desc": "입추 근처 (1980년)"
     },
     "expected": {
-      "yearStem": "편인",
-      "yearBranch": "편인",
-      "monthStem": "겁재",
-      "monthBranch": "정관",
-      "dayStem": "비견",
-      "dayBranch": "겁재",
-      "timeStem": "편관",
-      "timeBranch": "편인"
+      "yearSky": "편인",
+      "yearGround": "편인",
+      "monthSky": "겁재",
+      "monthGround": "정관",
+      "daySky": "비견",
+      "dayGround": "겁재",
+      "timeSky": "편관",
+      "timeGround": "편인"
     }
   },
   {
@@ -173,14 +173,14 @@
       "desc": "입추 근처 (2005년)"
     },
     "expected": {
-      "yearStem": "식신",
-      "yearBranch": "편인",
-      "monthStem": "비견",
-      "monthBranch": "편관",
-      "dayStem": "비견",
-      "dayBranch": "겁재",
-      "timeStem": "편인",
-      "timeBranch": "편인"
+      "yearSky": "식신",
+      "yearGround": "편인",
+      "monthSky": "비견",
+      "monthGround": "편관",
+      "daySky": "비견",
+      "dayGround": "겁재",
+      "timeSky": "편인",
+      "timeGround": "편인"
     }
   },
   {
@@ -196,14 +196,14 @@
       "desc": "입동 근처 (1992년)"
     },
     "expected": {
-      "yearStem": "정관",
-      "yearBranch": "정재",
-      "monthStem": "편재",
-      "monthBranch": "정관",
-      "dayStem": "비견",
-      "dayBranch": "정관",
-      "timeStem": "비견",
-      "timeBranch": "식신"
+      "yearSky": "정관",
+      "yearGround": "정재",
+      "monthSky": "편재",
+      "monthGround": "정관",
+      "daySky": "비견",
+      "dayGround": "정관",
+      "timeSky": "비견",
+      "timeGround": "식신"
     }
   },
   {
@@ -219,14 +219,14 @@
       "desc": "입동 직후 (1988년)"
     },
     "expected": {
-      "yearStem": "상관",
-      "yearBranch": "상관",
-      "monthStem": "편관",
-      "monthBranch": "정관",
-      "dayStem": "비견",
-      "dayBranch": "편인",
-      "timeStem": "정재",
-      "timeBranch": "편관"
+      "yearSky": "상관",
+      "yearGround": "상관",
+      "monthSky": "편관",
+      "monthGround": "정관",
+      "daySky": "비견",
+      "dayGround": "편인",
+      "timeSky": "정재",
+      "timeGround": "편관"
     }
   },
   {
@@ -242,14 +242,14 @@
       "desc": "하지 정오 (1983년)"
     },
     "expected": {
-      "yearStem": "상관",
-      "yearBranch": "식신",
-      "monthStem": "편인",
-      "monthBranch": "정관",
-      "dayStem": "비견",
-      "dayBranch": "편인",
-      "timeStem": "식신",
-      "timeBranch": "정관"
+      "yearSky": "상관",
+      "yearGround": "식신",
+      "monthSky": "편인",
+      "monthGround": "정관",
+      "daySky": "비견",
+      "dayGround": "편인",
+      "timeSky": "식신",
+      "timeGround": "정관"
     }
   },
   {
@@ -265,14 +265,14 @@
       "desc": "동지 자정 (1997년)"
     },
     "expected": {
-      "yearStem": "정인",
-      "yearBranch": "겁재",
-      "monthStem": "편재",
-      "monthBranch": "정재",
-      "dayStem": "비견",
-      "dayBranch": "비견",
-      "timeStem": "편재",
-      "timeBranch": "정재"
+      "yearSky": "정인",
+      "yearGround": "겁재",
+      "monthSky": "편재",
+      "monthGround": "정재",
+      "daySky": "비견",
+      "dayGround": "비견",
+      "timeSky": "편재",
+      "timeGround": "정재"
     }
   },
   {
@@ -288,14 +288,14 @@
       "desc": "춘분 새벽 (1979년)"
     },
     "expected": {
-      "yearStem": "식신",
-      "yearBranch": "식신",
-      "monthStem": "비견",
-      "monthBranch": "편인",
-      "dayStem": "비견",
-      "dayBranch": "정관",
-      "timeStem": "편관",
-      "timeBranch": "편인"
+      "yearSky": "식신",
+      "yearGround": "식신",
+      "monthSky": "비견",
+      "monthGround": "편인",
+      "daySky": "비견",
+      "dayGround": "정관",
+      "timeSky": "편관",
+      "timeGround": "편인"
     }
   },
   {
@@ -311,14 +311,14 @@
       "desc": "추분 저녁 (2001년)"
     },
     "expected": {
-      "yearStem": "식신",
-      "yearBranch": "정인",
-      "monthStem": "편인",
-      "monthBranch": "식신",
-      "dayStem": "비견",
-      "dayBranch": "비견",
-      "timeStem": "편재",
-      "timeBranch": "식신"
+      "yearSky": "식신",
+      "yearGround": "정인",
+      "monthSky": "편인",
+      "monthGround": "식신",
+      "daySky": "비견",
+      "dayGround": "비견",
+      "timeSky": "편재",
+      "timeGround": "식신"
     }
   },
   {
@@ -334,14 +334,14 @@
       "desc": "청명 새벽 (1986년)"
     },
     "expected": {
-      "yearStem": "정인",
-      "yearBranch": "정관",
-      "monthStem": "식신",
-      "monthBranch": "편관",
-      "dayStem": "비견",
-      "dayBranch": "편관",
-      "timeStem": "정인",
-      "timeBranch": "정관"
+      "yearSky": "정인",
+      "yearGround": "정관",
+      "monthSky": "식신",
+      "monthGround": "편관",
+      "daySky": "비견",
+      "dayGround": "편관",
+      "timeSky": "정인",
+      "timeGround": "정관"
     }
   },
   {
@@ -357,14 +357,14 @@
       "desc": "한로 저녁 (1994년)"
     },
     "expected": {
-      "yearStem": "정인",
-      "yearBranch": "상관",
-      "monthStem": "편관",
-      "monthBranch": "편재",
-      "dayStem": "비견",
-      "dayBranch": "편인",
-      "timeStem": "정재",
-      "timeBranch": "상관"
+      "yearSky": "정인",
+      "yearGround": "상관",
+      "monthSky": "편관",
+      "monthGround": "편재",
+      "daySky": "비견",
+      "dayGround": "편인",
+      "timeSky": "정재",
+      "timeGround": "상관"
     }
   },
   {
@@ -380,14 +380,14 @@
       "desc": "대한 오후 (1977년)"
     },
     "expected": {
-      "yearStem": "겁재",
-      "yearBranch": "상관",
-      "monthStem": "편재",
-      "monthBranch": "식신",
-      "dayStem": "비견",
-      "dayBranch": "식신",
-      "timeStem": "비견",
-      "timeBranch": "식신"
+      "yearSky": "겁재",
+      "yearGround": "상관",
+      "monthSky": "편재",
+      "monthGround": "식신",
+      "daySky": "비견",
+      "dayGround": "식신",
+      "timeSky": "비견",
+      "timeGround": "식신"
     }
   },
   {
@@ -403,14 +403,14 @@
       "desc": "소서 오전 (2003년)"
     },
     "expected": {
-      "yearStem": "식신",
-      "yearBranch": "편인",
-      "monthStem": "정인",
-      "monthBranch": "편관",
-      "dayStem": "비견",
-      "dayBranch": "정관",
-      "timeStem": "상관",
-      "timeBranch": "정인"
+      "yearSky": "식신",
+      "yearGround": "편인",
+      "monthSky": "정인",
+      "monthGround": "편관",
+      "daySky": "비견",
+      "dayGround": "정관",
+      "timeSky": "상관",
+      "timeGround": "정인"
     }
   },
   {
@@ -426,14 +426,14 @@
       "desc": "백로 밤 (1982년)"
     },
     "expected": {
-      "yearStem": "편인",
-      "yearBranch": "편재",
-      "monthStem": "정재",
-      "monthBranch": "정관",
-      "dayStem": "비견",
-      "dayBranch": "상관",
-      "timeStem": "겁재",
-      "timeBranch": "편인"
+      "yearSky": "편인",
+      "yearGround": "편재",
+      "monthSky": "정재",
+      "monthGround": "정관",
+      "daySky": "비견",
+      "dayGround": "상관",
+      "timeSky": "겁재",
+      "timeGround": "편인"
     }
   },
   {
@@ -449,14 +449,14 @@
       "desc": "대설 새벽 (1999년)"
     },
     "expected": {
-      "yearStem": "편관",
-      "yearBranch": "식신",
-      "monthStem": "식신",
-      "monthBranch": "겁재",
-      "dayStem": "비견",
-      "dayBranch": "정재",
-      "timeStem": "상관",
-      "timeBranch": "상관"
+      "yearSky": "편관",
+      "yearGround": "식신",
+      "monthSky": "식신",
+      "monthGround": "겁재",
+      "daySky": "비견",
+      "dayGround": "정재",
+      "timeSky": "상관",
+      "timeGround": "상관"
     }
   },
   {
@@ -472,14 +472,14 @@
       "desc": "자시 시작 직전"
     },
     "expected": {
-      "yearStem": "겁재",
-      "yearBranch": "편관",
-      "monthStem": "상관",
-      "monthBranch": "편관",
-      "dayStem": "비견",
-      "dayBranch": "상관",
-      "timeStem": "편인",
-      "timeBranch": "상관"
+      "yearSky": "겁재",
+      "yearGround": "편관",
+      "monthSky": "상관",
+      "monthGround": "편관",
+      "daySky": "비견",
+      "dayGround": "상관",
+      "timeSky": "편인",
+      "timeGround": "상관"
     }
   },
   {
@@ -495,14 +495,14 @@
       "desc": "자시 시작"
     },
     "expected": {
-      "yearStem": "편인",
-      "yearBranch": "정재",
-      "monthStem": "비견",
-      "monthBranch": "정재",
-      "dayStem": "비견",
-      "dayBranch": "겁재",
-      "timeStem": "편인",
-      "timeBranch": "겁재"
+      "yearSky": "편인",
+      "yearGround": "정재",
+      "monthSky": "비견",
+      "monthGround": "정재",
+      "daySky": "비견",
+      "dayGround": "겁재",
+      "timeSky": "편인",
+      "timeGround": "겁재"
     }
   },
   {
@@ -518,14 +518,14 @@
       "desc": "자시 중간"
     },
     "expected": {
-      "yearStem": "겁재",
-      "yearBranch": "편관",
-      "monthStem": "상관",
-      "monthBranch": "편관",
-      "dayStem": "비견",
-      "dayBranch": "상관",
-      "timeStem": "정인",
-      "timeBranch": "식신"
+      "yearSky": "겁재",
+      "yearGround": "편관",
+      "monthSky": "상관",
+      "monthGround": "편관",
+      "daySky": "비견",
+      "dayGround": "상관",
+      "timeSky": "정인",
+      "timeGround": "식신"
     }
   },
   {
@@ -541,14 +541,14 @@
       "desc": "자시 끝"
     },
     "expected": {
-      "yearStem": "겁재",
-      "yearBranch": "편관",
-      "monthStem": "상관",
-      "monthBranch": "편관",
-      "dayStem": "비견",
-      "dayBranch": "상관",
-      "timeStem": "정인",
-      "timeBranch": "식신"
+      "yearSky": "겁재",
+      "yearGround": "편관",
+      "monthSky": "상관",
+      "monthGround": "편관",
+      "daySky": "비견",
+      "dayGround": "상관",
+      "timeSky": "정인",
+      "timeGround": "식신"
     }
   },
   {
@@ -564,14 +564,14 @@
       "desc": "축시 시작"
     },
     "expected": {
-      "yearStem": "겁재",
-      "yearBranch": "편관",
-      "monthStem": "상관",
-      "monthBranch": "편관",
-      "dayStem": "비견",
-      "dayBranch": "상관",
-      "timeStem": "편인",
-      "timeBranch": "편인"
+      "yearSky": "겁재",
+      "yearGround": "편관",
+      "monthSky": "상관",
+      "monthGround": "편관",
+      "daySky": "비견",
+      "dayGround": "상관",
+      "timeSky": "편인",
+      "timeGround": "편인"
     }
   },
   {
@@ -587,14 +587,14 @@
       "desc": "축시 끝"
     },
     "expected": {
-      "yearStem": "정관",
-      "yearBranch": "겁재",
-      "monthStem": "겁재",
-      "monthBranch": "정관",
-      "dayStem": "비견",
-      "dayBranch": "정인",
-      "timeStem": "정재",
-      "timeBranch": "겁재"
+      "yearSky": "정관",
+      "yearGround": "겁재",
+      "monthSky": "겁재",
+      "monthGround": "정관",
+      "daySky": "비견",
+      "dayGround": "정인",
+      "timeSky": "정재",
+      "timeGround": "겁재"
     }
   },
   {
@@ -610,14 +610,14 @@
       "desc": "인시 시작"
     },
     "expected": {
-      "yearStem": "정관",
-      "yearBranch": "겁재",
-      "monthStem": "겁재",
-      "monthBranch": "정관",
-      "dayStem": "비견",
-      "dayBranch": "정인",
-      "timeStem": "편관",
-      "timeBranch": "편관"
+      "yearSky": "정관",
+      "yearGround": "겁재",
+      "monthSky": "겁재",
+      "monthGround": "정관",
+      "daySky": "비견",
+      "dayGround": "정인",
+      "timeSky": "편관",
+      "timeGround": "편관"
     }
   },
   {
@@ -633,14 +633,14 @@
       "desc": "묘시 끝"
     },
     "expected": {
-      "yearStem": "겁재",
-      "yearBranch": "편인",
-      "monthStem": "겁재",
-      "monthBranch": "정관",
-      "dayStem": "비견",
-      "dayBranch": "편재",
-      "timeStem": "상관",
-      "timeBranch": "겁재"
+      "yearSky": "겁재",
+      "yearGround": "편인",
+      "monthSky": "겁재",
+      "monthGround": "정관",
+      "daySky": "비견",
+      "dayGround": "편재",
+      "timeSky": "상관",
+      "timeGround": "겁재"
     }
   },
   {
@@ -656,14 +656,14 @@
       "desc": "진시 시작"
     },
     "expected": {
-      "yearStem": "겁재",
-      "yearBranch": "편인",
-      "monthStem": "겁재",
-      "monthBranch": "정관",
-      "dayStem": "비견",
-      "dayBranch": "편재",
-      "timeStem": "편재",
-      "timeBranch": "편재"
+      "yearSky": "겁재",
+      "yearGround": "편인",
+      "monthSky": "겁재",
+      "monthGround": "정관",
+      "daySky": "비견",
+      "dayGround": "편재",
+      "timeSky": "편재",
+      "timeGround": "편재"
     }
   },
   {
@@ -679,14 +679,14 @@
       "desc": "사시 끝"
     },
     "expected": {
-      "yearStem": "편재",
-      "yearBranch": "편재",
-      "monthStem": "정인",
-      "monthBranch": "편인",
-      "dayStem": "비견",
-      "dayBranch": "상관",
-      "timeStem": "정재",
-      "timeBranch": "식신"
+      "yearSky": "편재",
+      "yearGround": "편재",
+      "monthSky": "정인",
+      "monthGround": "편인",
+      "daySky": "비견",
+      "dayGround": "상관",
+      "timeSky": "정재",
+      "timeGround": "식신"
     }
   },
   {
@@ -702,14 +702,14 @@
       "desc": "오시 시작"
     },
     "expected": {
-      "yearStem": "편재",
-      "yearBranch": "편재",
-      "monthStem": "정인",
-      "monthBranch": "편인",
-      "dayStem": "비견",
-      "dayBranch": "상관",
-      "timeStem": "편관",
-      "timeBranch": "상관"
+      "yearSky": "편재",
+      "yearGround": "편재",
+      "monthSky": "정인",
+      "monthGround": "편인",
+      "daySky": "비견",
+      "dayGround": "상관",
+      "timeSky": "편관",
+      "timeGround": "상관"
     }
   },
   {
@@ -725,14 +725,14 @@
       "desc": "미시 끝"
     },
     "expected": {
-      "yearStem": "편재",
-      "yearBranch": "식신",
-      "monthStem": "편관",
-      "monthBranch": "비견",
-      "dayStem": "비견",
-      "dayBranch": "비견",
-      "timeStem": "겁재",
-      "timeBranch": "겁재"
+      "yearSky": "편재",
+      "yearGround": "식신",
+      "monthSky": "편관",
+      "monthGround": "비견",
+      "daySky": "비견",
+      "dayGround": "비견",
+      "timeSky": "겁재",
+      "timeGround": "겁재"
     }
   },
   {
@@ -748,14 +748,14 @@
       "desc": "신시 시작"
     },
     "expected": {
-      "yearStem": "편재",
-      "yearBranch": "식신",
-      "monthStem": "편관",
-      "monthBranch": "비견",
-      "dayStem": "비견",
-      "dayBranch": "비견",
-      "timeStem": "식신",
-      "timeBranch": "식신"
+      "yearSky": "편재",
+      "yearGround": "식신",
+      "monthSky": "편관",
+      "monthGround": "비견",
+      "daySky": "비견",
+      "dayGround": "비견",
+      "timeSky": "식신",
+      "timeGround": "식신"
     }
   },
   {
@@ -771,14 +771,14 @@
       "desc": "유시 끝"
     },
     "expected": {
-      "yearStem": "상관",
-      "yearBranch": "겁재",
-      "monthStem": "편재",
-      "monthBranch": "편관",
-      "dayStem": "비견",
-      "dayBranch": "상관",
-      "timeStem": "정인",
-      "timeBranch": "정관"
+      "yearSky": "상관",
+      "yearGround": "겁재",
+      "monthSky": "편재",
+      "monthGround": "편관",
+      "daySky": "비견",
+      "dayGround": "상관",
+      "timeSky": "정인",
+      "timeGround": "정관"
     }
   },
   {
@@ -794,14 +794,14 @@
       "desc": "술시 시작"
     },
     "expected": {
-      "yearStem": "상관",
-      "yearBranch": "겁재",
-      "monthStem": "편재",
-      "monthBranch": "편관",
-      "dayStem": "비견",
-      "dayBranch": "상관",
-      "timeStem": "비견",
-      "timeBranch": "편재"
+      "yearSky": "상관",
+      "yearGround": "겁재",
+      "monthSky": "편재",
+      "monthGround": "편관",
+      "daySky": "비견",
+      "dayGround": "상관",
+      "timeSky": "비견",
+      "timeGround": "편재"
     }
   },
   {
@@ -817,14 +817,14 @@
       "desc": "해시 끝"
     },
     "expected": {
-      "yearStem": "편재",
-      "yearBranch": "정재",
-      "monthStem": "편재",
-      "monthBranch": "정재",
-      "dayStem": "비견",
-      "dayBranch": "비견",
-      "timeStem": "정관",
-      "timeBranch": "겁재"
+      "yearSky": "편재",
+      "yearGround": "정재",
+      "monthSky": "편재",
+      "monthGround": "정재",
+      "daySky": "비견",
+      "dayGround": "비견",
+      "timeSky": "정관",
+      "timeGround": "겁재"
     }
   },
   {
@@ -840,14 +840,14 @@
       "desc": "해시 시작"
     },
     "expected": {
-      "yearStem": "편재",
-      "yearBranch": "정재",
-      "monthStem": "편재",
-      "monthBranch": "정재",
-      "dayStem": "비견",
-      "dayBranch": "비견",
-      "timeStem": "편관",
-      "timeBranch": "정재"
+      "yearSky": "편재",
+      "yearGround": "정재",
+      "monthSky": "편재",
+      "monthGround": "정재",
+      "daySky": "비견",
+      "dayGround": "비견",
+      "timeSky": "편관",
+      "timeGround": "정재"
     }
   },
   {
@@ -863,14 +863,14 @@
       "desc": "밀레니엄 정오"
     },
     "expected": {
-      "yearStem": "겁재",
-      "yearBranch": "정관",
-      "monthStem": "편인",
-      "monthBranch": "정재",
-      "dayStem": "비견",
-      "dayBranch": "정인",
-      "timeStem": "비견",
-      "timeBranch": "정인"
+      "yearSky": "겁재",
+      "yearGround": "정관",
+      "monthSky": "편인",
+      "monthGround": "정재",
+      "daySky": "비견",
+      "dayGround": "정인",
+      "timeSky": "비견",
+      "timeGround": "정인"
     }
   },
   {
@@ -886,14 +886,14 @@
       "desc": "밀레니엄 직전 자정"
     },
     "expected": {
-      "yearStem": "식신",
-      "yearBranch": "편인",
-      "monthStem": "겁재",
-      "monthBranch": "편관",
-      "dayStem": "비견",
-      "dayBranch": "겁재",
-      "timeStem": "정재",
-      "timeBranch": "편관"
+      "yearSky": "식신",
+      "yearGround": "편인",
+      "monthSky": "겁재",
+      "monthGround": "편관",
+      "daySky": "비견",
+      "dayGround": "겁재",
+      "timeSky": "정재",
+      "timeGround": "편관"
     }
   },
   {
@@ -909,14 +909,14 @@
       "desc": "6시 정각"
     },
     "expected": {
-      "yearStem": "편재",
-      "yearBranch": "상관",
-      "monthStem": "편재",
-      "monthBranch": "상관",
-      "dayStem": "비견",
-      "dayBranch": "편재",
-      "timeStem": "편재",
-      "timeBranch": "비견"
+      "yearSky": "편재",
+      "yearGround": "상관",
+      "monthSky": "편재",
+      "monthGround": "상관",
+      "daySky": "비견",
+      "dayGround": "편재",
+      "timeSky": "편재",
+      "timeGround": "비견"
     }
   },
   {
@@ -932,14 +932,14 @@
       "desc": "18시 정각"
     },
     "expected": {
-      "yearStem": "겁재",
-      "yearBranch": "상관",
-      "monthStem": "정인",
-      "monthBranch": "비견",
-      "dayStem": "비견",
-      "dayBranch": "겁재",
-      "timeStem": "식신",
-      "timeBranch": "편재"
+      "yearSky": "겁재",
+      "yearGround": "상관",
+      "monthSky": "정인",
+      "monthGround": "비견",
+      "daySky": "비견",
+      "dayGround": "겁재",
+      "timeSky": "식신",
+      "timeGround": "편재"
     }
   },
   {
@@ -955,14 +955,14 @@
       "desc": "9시 정각"
     },
     "expected": {
-      "yearStem": "상관",
-      "yearBranch": "겁재",
-      "monthStem": "비견",
-      "monthBranch": "비견",
-      "dayStem": "비견",
-      "dayBranch": "정인",
-      "timeStem": "편인",
-      "timeBranch": "비견"
+      "yearSky": "상관",
+      "yearGround": "겁재",
+      "monthSky": "비견",
+      "monthGround": "비견",
+      "daySky": "비견",
+      "dayGround": "정인",
+      "timeSky": "편인",
+      "timeGround": "비견"
     }
   },
   {
@@ -978,14 +978,14 @@
       "desc": "윤년 15시 정각"
     },
     "expected": {
-      "yearStem": "상관",
-      "yearBranch": "비견",
-      "monthStem": "정재",
-      "monthBranch": "상관",
-      "dayStem": "비견",
-      "dayBranch": "정재",
-      "timeStem": "편관",
-      "timeBranch": "편관"
+      "yearSky": "상관",
+      "yearGround": "비견",
+      "monthSky": "정재",
+      "monthGround": "상관",
+      "daySky": "비견",
+      "dayGround": "정재",
+      "timeSky": "편관",
+      "timeGround": "편관"
     }
   },
   {
@@ -1001,14 +1001,14 @@
       "desc": "윤년 21시 정각"
     },
     "expected": {
-      "yearStem": "비견",
-      "yearBranch": "정관",
-      "monthStem": "편재",
-      "monthBranch": "편인",
-      "dayStem": "비견",
-      "dayBranch": "편재",
-      "timeStem": "식신",
-      "timeBranch": "식신"
+      "yearSky": "비견",
+      "yearGround": "정관",
+      "monthSky": "편재",
+      "monthGround": "편인",
+      "daySky": "비견",
+      "dayGround": "편재",
+      "timeSky": "식신",
+      "timeGround": "식신"
     }
   },
   {
@@ -1024,14 +1024,14 @@
       "desc": "윤년 3시 정각"
     },
     "expected": {
-      "yearStem": "편관",
-      "yearBranch": "식신",
-      "monthStem": "편인",
-      "monthBranch": "편관",
-      "dayStem": "비견",
-      "dayBranch": "편관",
-      "timeStem": "정재",
-      "timeBranch": "겁재"
+      "yearSky": "편관",
+      "yearGround": "식신",
+      "monthSky": "편인",
+      "monthGround": "편관",
+      "daySky": "비견",
+      "dayGround": "편관",
+      "timeSky": "정재",
+      "timeGround": "겁재"
     }
   },
   {
@@ -1047,14 +1047,14 @@
       "desc": "윤년 2월 29일 (1984)"
     },
     "expected": {
-      "yearStem": "상관",
-      "yearBranch": "비견",
-      "monthStem": "정재",
-      "monthBranch": "상관",
-      "dayStem": "비견",
-      "dayBranch": "정재",
-      "timeStem": "정관",
-      "timeBranch": "편재"
+      "yearSky": "상관",
+      "yearGround": "비견",
+      "monthSky": "정재",
+      "monthGround": "상관",
+      "daySky": "비견",
+      "dayGround": "정재",
+      "timeSky": "정관",
+      "timeGround": "편재"
     }
   },
   {
@@ -1070,14 +1070,14 @@
       "desc": "윤년 2월 29일 자정 (1988)"
     },
     "expected": {
-      "yearStem": "편재",
-      "yearBranch": "편재",
-      "monthStem": "비견",
-      "monthBranch": "비견",
-      "dayStem": "비견",
-      "dayBranch": "비견",
-      "timeStem": "비견",
-      "timeBranch": "정인"
+      "yearSky": "편재",
+      "yearGround": "편재",
+      "monthSky": "비견",
+      "monthGround": "비견",
+      "daySky": "비견",
+      "dayGround": "비견",
+      "timeSky": "비견",
+      "timeGround": "정인"
     }
   },
   {
@@ -1093,14 +1093,14 @@
       "desc": "윤년 2월 29일 마지막 (1992)"
     },
     "expected": {
-      "yearStem": "편관",
-      "yearBranch": "편재",
-      "monthStem": "편관",
-      "monthBranch": "편인",
-      "dayStem": "비견",
-      "dayBranch": "정관",
-      "timeStem": "식신",
-      "timeBranch": "정관"
+      "yearSky": "편관",
+      "yearGround": "편재",
+      "monthSky": "편관",
+      "monthGround": "편인",
+      "daySky": "비견",
+      "dayGround": "정관",
+      "timeSky": "식신",
+      "timeGround": "정관"
     }
   },
   {
@@ -1116,14 +1116,14 @@
       "desc": "윤년 2월 29일 새벽 (1996)"
     },
     "expected": {
-      "yearStem": "비견",
-      "yearBranch": "정관",
-      "monthStem": "편재",
-      "monthBranch": "편인",
-      "dayStem": "비견",
-      "dayBranch": "편재",
-      "timeStem": "정재",
-      "timeBranch": "정인"
+      "yearSky": "비견",
+      "yearGround": "정관",
+      "monthSky": "편재",
+      "monthGround": "편인",
+      "daySky": "비견",
+      "dayGround": "편재",
+      "timeSky": "정재",
+      "timeGround": "정인"
     }
   },
   {
@@ -1139,14 +1139,14 @@
       "desc": "윤년 2월 29일 저녁 (2000)"
     },
     "expected": {
-      "yearStem": "정재",
-      "yearBranch": "상관",
-      "monthStem": "상관",
-      "monthBranch": "정인",
-      "dayStem": "비견",
-      "dayBranch": "겁재",
-      "timeStem": "식신",
-      "timeBranch": "편재"
+      "yearSky": "정재",
+      "yearGround": "상관",
+      "monthSky": "상관",
+      "monthGround": "정인",
+      "daySky": "비견",
+      "dayGround": "겁재",
+      "timeSky": "식신",
+      "timeGround": "편재"
     }
   },
   {
@@ -1163,14 +1163,14 @@
       "isLeapMonth": true
     },
     "expected": {
-      "yearStem": "정관",
-      "yearBranch": "정재",
-      "monthStem": "정관",
-      "monthBranch": "정인",
-      "dayStem": "비견",
-      "dayBranch": "비견",
-      "timeStem": "식신",
-      "timeBranch": "정관"
+      "yearSky": "정관",
+      "yearGround": "정재",
+      "monthSky": "정관",
+      "monthGround": "정인",
+      "daySky": "비견",
+      "dayGround": "비견",
+      "timeSky": "식신",
+      "timeGround": "정관"
     }
   },
   {
@@ -1187,14 +1187,14 @@
       "isLeapMonth": true
     },
     "expected": {
-      "yearStem": "식신",
-      "yearBranch": "정인",
-      "monthStem": "상관",
-      "monthBranch": "편인",
-      "dayStem": "비견",
-      "dayBranch": "비견",
-      "timeStem": "편인",
-      "timeBranch": "비견"
+      "yearSky": "식신",
+      "yearGround": "정인",
+      "monthSky": "상관",
+      "monthGround": "편인",
+      "daySky": "비견",
+      "dayGround": "비견",
+      "timeSky": "편인",
+      "timeGround": "비견"
     }
   },
   {
@@ -1211,14 +1211,14 @@
       "isLeapMonth": true
     },
     "expected": {
-      "yearStem": "겁재",
-      "yearBranch": "정인",
-      "monthStem": "편재",
-      "monthBranch": "편관",
-      "dayStem": "비견",
-      "dayBranch": "편관",
-      "timeStem": "편인",
-      "timeBranch": "편관"
+      "yearSky": "겁재",
+      "yearGround": "정인",
+      "monthSky": "편재",
+      "monthGround": "편관",
+      "daySky": "비견",
+      "dayGround": "편관",
+      "timeSky": "편인",
+      "timeGround": "편관"
     }
   },
   {
@@ -1234,14 +1234,14 @@
       "desc": "1950년 원단"
     },
     "expected": {
-      "yearStem": "상관",
-      "yearBranch": "상관",
-      "monthStem": "비견",
-      "monthBranch": "정관",
-      "dayStem": "비견",
-      "dayBranch": "편재",
-      "timeStem": "식신",
-      "timeBranch": "정관"
+      "yearSky": "상관",
+      "yearGround": "상관",
+      "monthSky": "비견",
+      "monthGround": "정관",
+      "daySky": "비견",
+      "dayGround": "편재",
+      "timeSky": "식신",
+      "timeGround": "정관"
     }
   },
   {
@@ -1257,14 +1257,14 @@
       "desc": "2024년 마지막"
     },
     "expected": {
-      "yearStem": "편재",
-      "yearBranch": "편인",
-      "monthStem": "편관",
-      "monthBranch": "상관",
-      "dayStem": "비견",
-      "dayBranch": "정관",
-      "timeStem": "편관",
-      "timeBranch": "상관"
+      "yearSky": "편재",
+      "yearGround": "편인",
+      "monthSky": "편관",
+      "monthGround": "상관",
+      "daySky": "비견",
+      "dayGround": "정관",
+      "timeSky": "편관",
+      "timeGround": "상관"
     }
   },
   {
@@ -1280,14 +1280,14 @@
       "desc": "1960년 음력 6월"
     },
     "expected": {
-      "yearStem": "정재",
-      "yearBranch": "편관",
-      "monthStem": "편관",
-      "monthBranch": "식신",
-      "dayStem": "비견",
-      "dayBranch": "편재",
-      "timeStem": "겁재",
-      "timeBranch": "비견"
+      "yearSky": "정재",
+      "yearGround": "편관",
+      "monthSky": "편관",
+      "monthGround": "식신",
+      "daySky": "비견",
+      "dayGround": "편재",
+      "timeSky": "겁재",
+      "timeGround": "비견"
     }
   },
   {
@@ -1303,14 +1303,14 @@
       "desc": "2020년 음력 설날"
     },
     "expected": {
-      "yearStem": "식신",
-      "yearBranch": "정관",
-      "monthStem": "비견",
-      "monthBranch": "식신",
-      "dayStem": "비견",
-      "dayBranch": "편인",
-      "timeStem": "정재",
-      "timeBranch": "편관"
+      "yearSky": "식신",
+      "yearGround": "정관",
+      "monthSky": "비견",
+      "monthGround": "식신",
+      "daySky": "비견",
+      "dayGround": "편인",
+      "timeSky": "정재",
+      "timeGround": "편관"
     }
   },
   {
@@ -1326,14 +1326,14 @@
       "desc": "77년 7월 7일 7시 7분"
     },
     "expected": {
-      "yearStem": "식신",
-      "yearBranch": "상관",
-      "monthStem": "상관",
-      "monthBranch": "식신",
-      "dayStem": "비견",
-      "dayBranch": "편재",
-      "timeStem": "편재",
-      "timeBranch": "비견"
+      "yearSky": "식신",
+      "yearGround": "상관",
+      "monthSky": "상관",
+      "monthGround": "식신",
+      "daySky": "비견",
+      "dayGround": "편재",
+      "timeSky": "편재",
+      "timeGround": "비견"
     }
   },
   {
@@ -1349,14 +1349,14 @@
       "desc": "99년 9월 9일 9시 9분"
     },
     "expected": {
-      "yearStem": "정재",
-      "yearBranch": "겁재",
-      "monthStem": "정인",
-      "monthBranch": "정관",
-      "dayStem": "비견",
-      "dayBranch": "정인",
-      "timeStem": "편재",
-      "timeBranch": "편재"
+      "yearSky": "정재",
+      "yearGround": "겁재",
+      "monthSky": "정인",
+      "monthGround": "정관",
+      "daySky": "비견",
+      "dayGround": "정인",
+      "timeSky": "편재",
+      "timeGround": "편재"
     }
   },
   {
@@ -1372,14 +1372,14 @@
       "desc": "2012년 12월 12일 12시 12분"
     },
     "expected": {
-      "yearStem": "정관",
-      "yearBranch": "상관",
-      "monthStem": "정관",
-      "monthBranch": "편관",
-      "dayStem": "비견",
-      "dayBranch": "식신",
-      "timeStem": "겁재",
-      "timeBranch": "비견"
+      "yearSky": "정관",
+      "yearGround": "상관",
+      "monthSky": "정관",
+      "monthGround": "편관",
+      "daySky": "비견",
+      "dayGround": "식신",
+      "timeSky": "겁재",
+      "timeGround": "비견"
     }
   },
   {
@@ -1395,14 +1395,14 @@
       "desc": "1984년 복합 케이스 1 (음력 남성)"
     },
     "expected": {
-      "yearStem": "정관",
-      "yearBranch": "편관",
-      "monthStem": "정인",
-      "monthBranch": "상관",
-      "dayStem": "비견",
-      "dayBranch": "편인",
-      "timeStem": "상관",
-      "timeBranch": "상관"
+      "yearSky": "정관",
+      "yearGround": "편관",
+      "monthSky": "정인",
+      "monthGround": "상관",
+      "daySky": "비견",
+      "dayGround": "편인",
+      "timeSky": "상관",
+      "timeGround": "상관"
     }
   },
   {
@@ -1418,14 +1418,14 @@
       "desc": "1985년 복합 케이스 2 (양력 여성)"
     },
     "expected": {
-      "yearStem": "정인",
-      "yearBranch": "상관",
-      "monthStem": "상관",
-      "monthBranch": "정인",
-      "dayStem": "비견",
-      "dayBranch": "겁재",
-      "timeStem": "정재",
-      "timeBranch": "정인"
+      "yearSky": "정인",
+      "yearGround": "상관",
+      "monthSky": "상관",
+      "monthGround": "정인",
+      "daySky": "비견",
+      "dayGround": "겁재",
+      "timeSky": "정재",
+      "timeGround": "정인"
     }
   },
   {
@@ -1441,14 +1441,14 @@
       "desc": "1986년 복합 케이스 3 (양력 남성)"
     },
     "expected": {
-      "yearStem": "정인",
-      "yearBranch": "정관",
-      "monthStem": "편재",
-      "monthBranch": "정인",
-      "dayStem": "비견",
-      "dayBranch": "비견",
-      "timeStem": "비견",
-      "timeBranch": "정인"
+      "yearSky": "정인",
+      "yearGround": "정관",
+      "monthSky": "편재",
+      "monthGround": "정인",
+      "daySky": "비견",
+      "dayGround": "비견",
+      "timeSky": "비견",
+      "timeGround": "정인"
     }
   },
   {
@@ -1464,14 +1464,14 @@
       "desc": "1987년 복합 케이스 4 (음력 여성)"
     },
     "expected": {
-      "yearStem": "겁재",
-      "yearBranch": "정인",
-      "monthStem": "상관",
-      "monthBranch": "정재",
-      "dayStem": "비견",
-      "dayBranch": "편인",
-      "timeStem": "정인",
-      "timeBranch": "상관"
+      "yearSky": "겁재",
+      "yearGround": "정인",
+      "monthSky": "상관",
+      "monthGround": "정재",
+      "daySky": "비견",
+      "dayGround": "편인",
+      "timeSky": "정인",
+      "timeGround": "상관"
     }
   },
   {
@@ -1487,14 +1487,14 @@
       "desc": "1988년 복합 케이스 5 (양력 남성)"
     },
     "expected": {
-      "yearStem": "겁재",
-      "yearBranch": "겁재",
-      "monthStem": "상관",
-      "monthBranch": "상관",
-      "dayStem": "비견",
-      "dayBranch": "비견",
-      "timeStem": "편재",
-      "timeBranch": "식신"
+      "yearSky": "겁재",
+      "yearGround": "겁재",
+      "monthSky": "상관",
+      "monthGround": "상관",
+      "daySky": "비견",
+      "dayGround": "비견",
+      "timeSky": "편재",
+      "timeGround": "식신"
     }
   },
   {
@@ -1510,14 +1510,14 @@
       "desc": "1989년 복합 케이스 6 (양력 여성)"
     },
     "expected": {
-      "yearStem": "정관",
-      "yearBranch": "편재",
-      "monthStem": "상관",
-      "monthBranch": "비견",
-      "dayStem": "비견",
-      "dayBranch": "편인",
-      "timeStem": "정인",
-      "timeBranch": "비견"
+      "yearSky": "정관",
+      "yearGround": "편재",
+      "monthSky": "상관",
+      "monthGround": "비견",
+      "daySky": "비견",
+      "dayGround": "편인",
+      "timeSky": "정인",
+      "timeGround": "비견"
     }
   },
   {
@@ -1533,14 +1533,14 @@
       "desc": "1990년 복합 케이스 7 (음력 남성)"
     },
     "expected": {
-      "yearStem": "편재",
-      "yearBranch": "겁재",
-      "monthStem": "식신",
-      "monthBranch": "편인",
-      "dayStem": "비견",
-      "dayBranch": "겁재",
-      "timeStem": "상관",
-      "timeBranch": "상관"
+      "yearSky": "편재",
+      "yearGround": "겁재",
+      "monthSky": "식신",
+      "monthGround": "편인",
+      "daySky": "비견",
+      "dayGround": "겁재",
+      "timeSky": "상관",
+      "timeGround": "상관"
     }
   },
   {
@@ -1556,14 +1556,14 @@
       "desc": "1991년 복합 케이스 8 (양력 여성)"
     },
     "expected": {
-      "yearStem": "비견",
-      "yearBranch": "편인",
-      "monthStem": "비견",
-      "monthBranch": "편재",
-      "dayStem": "비견",
-      "dayBranch": "편재",
-      "timeStem": "비견",
-      "timeBranch": "편재"
+      "yearSky": "비견",
+      "yearGround": "편인",
+      "monthSky": "비견",
+      "monthGround": "편재",
+      "daySky": "비견",
+      "dayGround": "편재",
+      "timeSky": "비견",
+      "timeGround": "편재"
     }
   },
   {
@@ -1579,14 +1579,14 @@
       "desc": "1992년 복합 케이스 9 (양력 남성)"
     },
     "expected": {
-      "yearStem": "정관",
-      "yearBranch": "정재",
-      "monthStem": "정인",
-      "monthBranch": "상관",
-      "dayStem": "비견",
-      "dayBranch": "식신",
-      "timeStem": "편인",
-      "timeBranch": "겁재"
+      "yearSky": "정관",
+      "yearGround": "정재",
+      "monthSky": "정인",
+      "monthGround": "상관",
+      "daySky": "비견",
+      "dayGround": "식신",
+      "timeSky": "편인",
+      "timeGround": "겁재"
     }
   },
   {
@@ -1602,14 +1602,14 @@
       "desc": "1993년 복합 케이스 10 (음력 여성)"
     },
     "expected": {
-      "yearStem": "정재",
-      "yearBranch": "상관",
-      "monthStem": "식신",
-      "monthBranch": "식신",
-      "dayStem": "비견",
-      "dayBranch": "편관",
-      "timeStem": "겁재",
-      "timeBranch": "겁재"
+      "yearSky": "정재",
+      "yearGround": "상관",
+      "monthSky": "식신",
+      "monthGround": "식신",
+      "daySky": "비견",
+      "dayGround": "편관",
+      "timeSky": "겁재",
+      "timeGround": "겁재"
     }
   },
   {
@@ -1625,14 +1625,14 @@
       "desc": "1984년 복합 케이스 11 (양력 남성)"
     },
     "expected": {
-      "yearStem": "식신",
-      "yearBranch": "겁재",
-      "monthStem": "겁재",
-      "monthBranch": "정인",
-      "dayStem": "비견",
-      "dayBranch": "겁재",
-      "timeStem": "정관",
-      "timeBranch": "정인"
+      "yearSky": "식신",
+      "yearGround": "겁재",
+      "monthSky": "겁재",
+      "monthGround": "정인",
+      "daySky": "비견",
+      "dayGround": "겁재",
+      "timeSky": "정관",
+      "timeGround": "정인"
     }
   },
   {
@@ -1648,14 +1648,14 @@
       "desc": "1985년 복합 케이스 12 (양력 여성)"
     },
     "expected": {
-      "yearStem": "비견",
-      "yearBranch": "편재",
-      "monthStem": "식신",
-      "monthBranch": "정인",
-      "dayStem": "비견",
-      "dayBranch": "편재",
-      "timeStem": "식신",
-      "timeBranch": "정인"
+      "yearSky": "비견",
+      "yearGround": "편재",
+      "monthSky": "식신",
+      "monthGround": "정인",
+      "daySky": "비견",
+      "dayGround": "편재",
+      "timeSky": "식신",
+      "timeGround": "정인"
     }
   },
   {
@@ -1671,14 +1671,14 @@
       "desc": "1986년 복합 케이스 13 (음력 남성)"
     },
     "expected": {
-      "yearStem": "식신",
-      "yearBranch": "비견",
-      "monthStem": "편관",
-      "monthBranch": "비견",
-      "dayStem": "비견",
-      "dayBranch": "편관",
-      "timeStem": "겁재",
-      "timeBranch": "정재"
+      "yearSky": "식신",
+      "yearGround": "비견",
+      "monthSky": "편관",
+      "monthGround": "비견",
+      "daySky": "비견",
+      "dayGround": "편관",
+      "timeSky": "겁재",
+      "timeGround": "정재"
     }
   },
   {
@@ -1694,14 +1694,14 @@
       "desc": "1987년 복합 케이스 14 (양력 여성)"
     },
     "expected": {
-      "yearStem": "겁재",
-      "yearBranch": "정인",
-      "monthStem": "정관",
-      "monthBranch": "정인",
-      "dayStem": "비견",
-      "dayBranch": "식신",
-      "timeStem": "정재",
-      "timeBranch": "정인"
+      "yearSky": "겁재",
+      "yearGround": "정인",
+      "monthSky": "정관",
+      "monthGround": "정인",
+      "daySky": "비견",
+      "dayGround": "식신",
+      "timeSky": "정재",
+      "timeGround": "정인"
     }
   },
   {
@@ -1717,14 +1717,14 @@
       "desc": "1988년 복합 케이스 15 (양력 남성)"
     },
     "expected": {
-      "yearStem": "편인",
-      "yearBranch": "편인",
-      "monthStem": "정관",
-      "monthBranch": "편관",
-      "dayStem": "비견",
-      "dayBranch": "정관",
-      "timeStem": "겁재",
-      "timeBranch": "편관"
+      "yearSky": "편인",
+      "yearGround": "편인",
+      "monthSky": "정관",
+      "monthGround": "편관",
+      "daySky": "비견",
+      "dayGround": "정관",
+      "timeSky": "겁재",
+      "timeGround": "편관"
     }
   },
   {
@@ -1740,14 +1740,14 @@
       "desc": "1989년 복합 케이스 16 (음력 여성)"
     },
     "expected": {
-      "yearStem": "편재",
-      "yearBranch": "상관",
-      "monthStem": "정인",
-      "monthBranch": "정관",
-      "dayStem": "비견",
-      "dayBranch": "비견",
-      "timeStem": "편인",
-      "timeBranch": "편재"
+      "yearSky": "편재",
+      "yearGround": "상관",
+      "monthSky": "정인",
+      "monthGround": "정관",
+      "daySky": "비견",
+      "dayGround": "비견",
+      "timeSky": "편인",
+      "timeGround": "편재"
     }
   },
   {
@@ -1763,14 +1763,14 @@
       "desc": "1990년 복합 케이스 17 (양력 남성)"
     },
     "expected": {
-      "yearStem": "상관",
-      "yearBranch": "편인",
-      "monthStem": "정관",
-      "monthBranch": "상관",
-      "dayStem": "비견",
-      "dayBranch": "정인",
-      "timeStem": "편재",
-      "timeBranch": "식신"
+      "yearSky": "상관",
+      "yearGround": "편인",
+      "monthSky": "정관",
+      "monthGround": "상관",
+      "daySky": "비견",
+      "dayGround": "정인",
+      "timeSky": "편재",
+      "timeGround": "식신"
     }
   },
   {
@@ -1786,14 +1786,14 @@
       "desc": "1991년 복합 케이스 18 (양력 여성)"
     },
     "expected": {
-      "yearStem": "정인",
-      "yearBranch": "정관",
-      "monthStem": "정관",
-      "monthBranch": "비견",
-      "dayStem": "비견",
-      "dayBranch": "정재",
-      "timeStem": "정인",
-      "timeBranch": "비견"
+      "yearSky": "정인",
+      "yearGround": "정관",
+      "monthSky": "정관",
+      "monthGround": "비견",
+      "daySky": "비견",
+      "dayGround": "정재",
+      "timeSky": "정인",
+      "timeGround": "비견"
     }
   },
   {
@@ -1809,14 +1809,14 @@
       "desc": "1992년 복합 케이스 19 (음력 남성)"
     },
     "expected": {
-      "yearStem": "편인",
-      "yearBranch": "편관",
-      "monthStem": "편인",
-      "monthBranch": "비견",
-      "dayStem": "비견",
-      "dayBranch": "정인",
-      "timeStem": "겁재",
-      "timeBranch": "정재"
+      "yearSky": "편인",
+      "yearGround": "편관",
+      "monthSky": "편인",
+      "monthGround": "비견",
+      "daySky": "비견",
+      "dayGround": "정인",
+      "timeSky": "겁재",
+      "timeGround": "정재"
     }
   },
   {
@@ -1832,14 +1832,14 @@
       "desc": "1993년 복합 케이스 20 (양력 여성)"
     },
     "expected": {
-      "yearStem": "겁재",
-      "yearBranch": "정인",
-      "monthStem": "상관",
-      "monthBranch": "상관",
-      "dayStem": "비견",
-      "dayBranch": "식신",
-      "timeStem": "겁재",
-      "timeBranch": "상관"
+      "yearSky": "겁재",
+      "yearGround": "정인",
+      "monthSky": "상관",
+      "monthGround": "상관",
+      "daySky": "비견",
+      "dayGround": "식신",
+      "timeSky": "겁재",
+      "timeGround": "상관"
     }
   },
   {
@@ -1855,14 +1855,14 @@
       "desc": "1951년 입춘 전야"
     },
     "expected": {
-      "yearStem": "정재",
-      "yearBranch": "정인",
-      "monthStem": "편재",
-      "monthBranch": "편인",
-      "dayStem": "비견",
-      "dayBranch": "정관",
-      "timeStem": "식신",
-      "timeBranch": "정관"
+      "yearSky": "정재",
+      "yearGround": "정인",
+      "monthSky": "편재",
+      "monthGround": "편인",
+      "daySky": "비견",
+      "dayGround": "정관",
+      "timeSky": "식신",
+      "timeGround": "정관"
     }
   },
   {
@@ -1878,14 +1878,14 @@
       "desc": "1955년 음력 입추"
     },
     "expected": {
-      "yearStem": "편인",
-      "yearBranch": "식신",
-      "monthStem": "편인",
-      "monthBranch": "편재",
-      "dayStem": "비견",
-      "dayBranch": "정관",
-      "timeStem": "정재",
-      "timeBranch": "편관"
+      "yearSky": "편인",
+      "yearGround": "식신",
+      "monthSky": "편인",
+      "monthGround": "편재",
+      "daySky": "비견",
+      "dayGround": "정관",
+      "timeSky": "정재",
+      "timeGround": "편관"
     }
   },
   {
@@ -1901,14 +1901,14 @@
       "desc": "1963년 동지"
     },
     "expected": {
-      "yearStem": "편재",
-      "yearBranch": "편관",
-      "monthStem": "정관",
-      "monthBranch": "편재",
-      "dayStem": "비견",
-      "dayBranch": "정재",
-      "timeStem": "식신",
-      "timeBranch": "비견"
+      "yearSky": "편재",
+      "yearGround": "편관",
+      "monthSky": "정관",
+      "monthGround": "편재",
+      "daySky": "비견",
+      "dayGround": "정재",
+      "timeSky": "식신",
+      "timeGround": "비견"
     }
   },
   {
@@ -1924,14 +1924,14 @@
       "desc": "2023년 자시 시작"
     },
     "expected": {
-      "yearStem": "정인",
-      "yearBranch": "겁재",
-      "monthStem": "상관",
-      "monthBranch": "식신",
-      "dayStem": "비견",
-      "dayBranch": "편재",
-      "timeStem": "비견",
-      "timeBranch": "정인"
+      "yearSky": "정인",
+      "yearGround": "겁재",
+      "monthSky": "상관",
+      "monthGround": "식신",
+      "daySky": "비견",
+      "dayGround": "편재",
+      "timeSky": "비견",
+      "timeGround": "정인"
     }
   },
   {
@@ -1947,14 +1947,14 @@
       "desc": "2022년 음력 오시 시작"
     },
     "expected": {
-      "yearStem": "식신",
-      "yearBranch": "편재",
-      "monthStem": "비견",
-      "monthBranch": "편인",
-      "dayStem": "비견",
-      "dayBranch": "비견",
-      "timeStem": "식신",
-      "timeBranch": "정관"
+      "yearSky": "식신",
+      "yearGround": "편재",
+      "monthSky": "비견",
+      "monthGround": "편인",
+      "daySky": "비견",
+      "dayGround": "비견",
+      "timeSky": "식신",
+      "timeGround": "정관"
     }
   },
   {
@@ -1970,14 +1970,14 @@
       "desc": "1985년 음력 마지막 날"
     },
     "expected": {
-      "yearStem": "식신",
-      "yearBranch": "비견",
-      "monthStem": "편관",
-      "monthBranch": "비견",
-      "dayStem": "비견",
-      "dayBranch": "편관",
-      "timeStem": "비견",
-      "timeBranch": "정인"
+      "yearSky": "식신",
+      "yearGround": "비견",
+      "monthSky": "편관",
+      "monthGround": "비견",
+      "daySky": "비견",
+      "dayGround": "편관",
+      "timeSky": "비견",
+      "timeGround": "정인"
     }
   },
   {
@@ -1993,14 +1993,14 @@
       "desc": "1978년 음력 첫날"
     },
     "expected": {
-      "yearStem": "편인",
-      "yearBranch": "정관",
-      "monthStem": "편재",
-      "monthBranch": "편재",
-      "dayStem": "비견",
-      "dayBranch": "상관",
-      "timeStem": "편관",
-      "timeBranch": "상관"
+      "yearSky": "편인",
+      "yearGround": "정관",
+      "monthSky": "편재",
+      "monthGround": "편재",
+      "daySky": "비견",
+      "dayGround": "상관",
+      "timeSky": "편관",
+      "timeGround": "상관"
     }
   },
   {
@@ -2016,14 +2016,14 @@
       "desc": "1995년 음력 중원절"
     },
     "expected": {
-      "yearStem": "겁재",
-      "yearBranch": "편인",
-      "monthStem": "비견",
-      "monthBranch": "편관",
-      "dayStem": "비견",
-      "dayBranch": "편재",
-      "timeStem": "편관",
-      "timeBranch": "상관"
+      "yearSky": "겁재",
+      "yearGround": "편인",
+      "monthSky": "비견",
+      "monthGround": "편관",
+      "daySky": "비견",
+      "dayGround": "편재",
+      "timeSky": "편관",
+      "timeGround": "상관"
     }
   },
   {
@@ -2039,14 +2039,14 @@
       "desc": "1989년 6.4 자정"
     },
     "expected": {
-      "yearStem": "편재",
-      "yearBranch": "상관",
-      "monthStem": "편재",
-      "monthBranch": "상관",
-      "dayStem": "비견",
-      "dayBranch": "편재",
-      "timeStem": "상관",
-      "timeBranch": "편인"
+      "yearSky": "편재",
+      "yearGround": "상관",
+      "monthSky": "편재",
+      "monthGround": "상관",
+      "daySky": "비견",
+      "dayGround": "편재",
+      "timeSky": "상관",
+      "timeGround": "편인"
     }
   },
   {
@@ -2062,14 +2062,14 @@
       "desc": "1974년 4월 마지막"
     },
     "expected": {
-      "yearStem": "식신",
-      "yearBranch": "식신",
-      "monthStem": "편관",
-      "monthBranch": "편관",
-      "dayStem": "비견",
-      "dayBranch": "식신",
-      "timeStem": "편인",
-      "timeBranch": "겁재"
+      "yearSky": "식신",
+      "yearGround": "식신",
+      "monthSky": "편관",
+      "monthGround": "편관",
+      "daySky": "비견",
+      "dayGround": "식신",
+      "timeSky": "편인",
+      "timeGround": "겁재"
     }
   },
   {
@@ -2085,14 +2085,14 @@
       "desc": "1981년 한겨울"
     },
     "expected": {
-      "yearStem": "정인",
-      "yearBranch": "정인",
-      "monthStem": "편관",
-      "monthBranch": "편관",
-      "dayStem": "비견",
-      "dayBranch": "정재",
-      "timeStem": "정인",
-      "timeBranch": "정인"
+      "yearSky": "정인",
+      "yearGround": "정인",
+      "monthSky": "편관",
+      "monthGround": "편관",
+      "daySky": "비견",
+      "dayGround": "정재",
+      "timeSky": "정인",
+      "timeGround": "정인"
     }
   },
   {
@@ -2108,14 +2108,14 @@
       "desc": "1986년 한여름"
     },
     "expected": {
-      "yearStem": "상관",
-      "yearBranch": "겁재",
-      "monthStem": "비견",
-      "monthBranch": "편재",
-      "dayStem": "비견",
-      "dayBranch": "편재",
-      "timeStem": "편인",
-      "timeBranch": "편재"
+      "yearSky": "상관",
+      "yearGround": "겁재",
+      "monthSky": "비견",
+      "monthGround": "편재",
+      "daySky": "비견",
+      "dayGround": "편재",
+      "timeSky": "편인",
+      "timeGround": "편재"
     }
   },
   {
@@ -2131,14 +2131,14 @@
       "desc": "1998년 봄"
     },
     "expected": {
-      "yearStem": "상관",
-      "yearBranch": "정인",
-      "monthStem": "겁재",
-      "monthBranch": "상관",
-      "dayStem": "비견",
-      "dayBranch": "정관",
-      "timeStem": "정인",
-      "timeBranch": "상관"
+      "yearSky": "상관",
+      "yearGround": "정인",
+      "monthSky": "겁재",
+      "monthGround": "상관",
+      "daySky": "비견",
+      "dayGround": "정관",
+      "timeSky": "정인",
+      "timeGround": "상관"
     }
   },
   {
@@ -2154,14 +2154,14 @@
       "desc": "1979년 가을"
     },
     "expected": {
-      "yearStem": "편재",
-      "yearBranch": "편재",
-      "monthStem": "겁재",
-      "monthBranch": "정재",
-      "dayStem": "비견",
-      "dayBranch": "편재",
-      "timeStem": "비견",
-      "timeBranch": "편관"
+      "yearSky": "편재",
+      "yearGround": "편재",
+      "monthSky": "겁재",
+      "monthGround": "정재",
+      "daySky": "비견",
+      "dayGround": "편재",
+      "timeSky": "비견",
+      "timeGround": "편관"
     }
   },
   {
@@ -2177,14 +2177,14 @@
       "desc": "1993년 3월 마지막"
     },
     "expected": {
-      "yearStem": "겁재",
-      "yearBranch": "정인",
-      "monthStem": "상관",
-      "monthBranch": "상관",
-      "dayStem": "비견",
-      "dayBranch": "겁재",
-      "timeStem": "편인",
-      "timeBranch": "겁재"
+      "yearSky": "겁재",
+      "yearGround": "정인",
+      "monthSky": "상관",
+      "monthGround": "상관",
+      "daySky": "비견",
+      "dayGround": "겁재",
+      "timeSky": "편인",
+      "timeGround": "겁재"
     }
   },
   {
@@ -2200,14 +2200,14 @@
       "desc": "1993년 4월 첫날"
     },
     "expected": {
-      "yearStem": "겁재",
-      "yearBranch": "정인",
-      "monthStem": "상관",
-      "monthBranch": "상관",
-      "dayStem": "비견",
-      "dayBranch": "겁재",
-      "timeStem": "편인",
-      "timeBranch": "겁재"
+      "yearSky": "겁재",
+      "yearGround": "정인",
+      "monthSky": "상관",
+      "monthGround": "상관",
+      "daySky": "비견",
+      "dayGround": "겁재",
+      "timeSky": "편인",
+      "timeGround": "겁재"
     }
   },
   {
@@ -2223,14 +2223,14 @@
       "desc": "1987년 상반기 마지막"
     },
     "expected": {
-      "yearStem": "정관",
-      "yearBranch": "정재",
-      "monthStem": "편관",
-      "monthBranch": "정관",
-      "dayStem": "비견",
-      "dayBranch": "편인",
-      "timeStem": "식신",
-      "timeBranch": "정관"
+      "yearSky": "정관",
+      "yearGround": "정재",
+      "monthSky": "편관",
+      "monthGround": "정관",
+      "daySky": "비견",
+      "dayGround": "편인",
+      "timeSky": "식신",
+      "timeGround": "정관"
     }
   },
   {
@@ -2246,14 +2246,14 @@
       "desc": "1987년 하반기 첫날"
     },
     "expected": {
-      "yearStem": "편관",
-      "yearBranch": "편재",
-      "monthStem": "정관",
-      "monthBranch": "편관",
-      "dayStem": "비견",
-      "dayBranch": "상관",
-      "timeStem": "정재",
-      "timeBranch": "편관"
+      "yearSky": "편관",
+      "yearGround": "편재",
+      "monthSky": "정관",
+      "monthGround": "편관",
+      "daySky": "비견",
+      "dayGround": "상관",
+      "timeSky": "정재",
+      "timeGround": "편관"
     }
   },
   {
@@ -2269,14 +2269,14 @@
       "desc": "1975년 5의 조합"
     },
     "expected": {
-      "yearStem": "편재",
-      "yearBranch": "편재",
-      "monthStem": "비견",
-      "monthBranch": "정관",
-      "dayStem": "비견",
-      "dayBranch": "편인",
-      "timeStem": "비견",
-      "timeBranch": "편재"
+      "yearSky": "편재",
+      "yearGround": "편재",
+      "monthSky": "비견",
+      "monthGround": "정관",
+      "daySky": "비견",
+      "dayGround": "편인",
+      "timeSky": "비견",
+      "timeGround": "편재"
     }
   },
   {
@@ -2292,14 +2292,14 @@
       "desc": "1982년 8의 조합"
     },
     "expected": {
-      "yearStem": "겁재",
-      "yearBranch": "정관",
-      "monthStem": "정관",
-      "monthBranch": "정인",
-      "dayStem": "비견",
-      "dayBranch": "편인",
-      "timeStem": "정재",
-      "timeBranch": "정관"
+      "yearSky": "겁재",
+      "yearGround": "정관",
+      "monthSky": "정관",
+      "monthGround": "정인",
+      "daySky": "비견",
+      "dayGround": "편인",
+      "timeSky": "정재",
+      "timeGround": "정관"
     }
   },
   {
@@ -2315,14 +2315,14 @@
       "desc": "2001년 1의 조합"
     },
     "expected": {
-      "yearStem": "편관",
-      "yearBranch": "편재",
-      "monthStem": "정재",
-      "monthBranch": "정재",
-      "dayStem": "비견",
-      "dayBranch": "편재",
-      "timeStem": "정재",
-      "timeBranch": "식신"
+      "yearSky": "편관",
+      "yearGround": "편재",
+      "monthSky": "정재",
+      "monthGround": "정재",
+      "daySky": "비견",
+      "dayGround": "편재",
+      "timeSky": "정재",
+      "timeGround": "식신"
     }
   }
 ]

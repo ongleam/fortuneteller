@@ -63,59 +63,59 @@ export function toFetchSajuFormat(data: {
     // 사주 팔자 (fetchSaju 스타일)
     saju: {
       year: {
-        stem: {
-          korean: getKoreanStem(data.pillars.year.stem),
-          chinese: data.pillars.year.stem,
-          element: getStemElement(data.pillars.year.stem),
-          yangyin: getStemYangYin(data.pillars.year.stem),
+        sky: {
+          korean: getKoreanSky(data.pillars.year.sky),
+          chinese: data.pillars.year.sky,
+          element: getSkyElement(data.pillars.year.sky),
+          yangyin: getSkyYangYin(data.pillars.year.sky),
         },
-        branch: {
-          korean: getKoreanBranch(data.pillars.year.branch),
-          chinese: data.pillars.year.branch,
-          element: getBranchElement(data.pillars.year.branch),
-          yangyin: getBranchYangYin(data.pillars.year.branch),
+        ground: {
+          korean: getKoreanGround(data.pillars.year.ground),
+          chinese: data.pillars.year.ground,
+          element: getGroundElement(data.pillars.year.ground),
+          yangyin: getGroundYangYin(data.pillars.year.ground),
         },
       },
       month: {
-        stem: {
-          korean: getKoreanStem(data.pillars.month.stem),
-          chinese: data.pillars.month.stem,
-          element: getStemElement(data.pillars.month.stem),
-          yangyin: getStemYangYin(data.pillars.month.stem),
+        sky: {
+          korean: getKoreanSky(data.pillars.month.sky),
+          chinese: data.pillars.month.sky,
+          element: getSkyElement(data.pillars.month.sky),
+          yangyin: getSkyYangYin(data.pillars.month.sky),
         },
-        branch: {
-          korean: getKoreanBranch(data.pillars.month.branch),
-          chinese: data.pillars.month.branch,
-          element: getBranchElement(data.pillars.month.branch),
-          yangyin: getBranchYangYin(data.pillars.month.branch),
+        ground: {
+          korean: getKoreanGround(data.pillars.month.ground),
+          chinese: data.pillars.month.ground,
+          element: getGroundElement(data.pillars.month.ground),
+          yangyin: getGroundYangYin(data.pillars.month.ground),
         },
       },
       day: {
-        stem: {
-          korean: getKoreanStem(data.pillars.day.stem),
-          chinese: data.pillars.day.stem,
-          element: getStemElement(data.pillars.day.stem),
-          yangyin: getStemYangYin(data.pillars.day.stem),
+        sky: {
+          korean: getKoreanSky(data.pillars.day.sky),
+          chinese: data.pillars.day.sky,
+          element: getSkyElement(data.pillars.day.sky),
+          yangyin: getSkyYangYin(data.pillars.day.sky),
         },
-        branch: {
-          korean: getKoreanBranch(data.pillars.day.branch),
-          chinese: data.pillars.day.branch,
-          element: getBranchElement(data.pillars.day.branch),
-          yangyin: getBranchYangYin(data.pillars.day.branch),
+        ground: {
+          korean: getKoreanGround(data.pillars.day.ground),
+          chinese: data.pillars.day.ground,
+          element: getGroundElement(data.pillars.day.ground),
+          yangyin: getGroundYangYin(data.pillars.day.ground),
         },
       },
       time: {
-        stem: {
-          korean: getKoreanStem(data.pillars.time.stem),
-          chinese: data.pillars.time.stem,
-          element: getStemElement(data.pillars.time.stem),
-          yangyin: getStemYangYin(data.pillars.time.stem),
+        sky: {
+          korean: getKoreanSky(data.pillars.time.sky),
+          chinese: data.pillars.time.sky,
+          element: getSkyElement(data.pillars.time.sky),
+          yangyin: getSkyYangYin(data.pillars.time.sky),
         },
-        branch: {
-          korean: getKoreanBranch(data.pillars.time.branch),
-          chinese: data.pillars.time.branch,
-          element: getBranchElement(data.pillars.time.branch),
-          yangyin: getBranchYangYin(data.pillars.time.branch),
+        ground: {
+          korean: getKoreanGround(data.pillars.time.ground),
+          chinese: data.pillars.time.ground,
+          element: getGroundElement(data.pillars.time.ground),
+          yangyin: getGroundYangYin(data.pillars.time.ground),
         },
       },
     },
@@ -123,24 +123,24 @@ export function toFetchSajuFormat(data: {
     // 십성 (fetchSaju 형식)
     tenStars: {
       year: {
-        korean: data.tenStars.yearStem,
+        korean: data.tenStars.yearSky,
         chinese: '', // 임시
-        meaning: getTenStarMeaning(data.tenStars.yearStem),
+        meaning: getTenStarMeaning(data.tenStars.yearSky),
       },
       month: {
-        korean: data.tenStars.monthStem,
+        korean: data.tenStars.monthSky,
         chinese: '', // 임시
-        meaning: getTenStarMeaning(data.tenStars.monthStem),
+        meaning: getTenStarMeaning(data.tenStars.monthSky),
       },
       day: {
-        korean: data.tenStars.dayStem,
+        korean: data.tenStars.daySky,
         chinese: '', // 임시
-        meaning: getTenStarMeaning(data.tenStars.dayStem),
+        meaning: getTenStarMeaning(data.tenStars.daySky),
       },
       time: {
-        korean: data.tenStars.timeStem,
+        korean: data.tenStars.timeSky,
         chinese: '', // 임시
-        meaning: getTenStarMeaning(data.tenStars.timeStem),
+        meaning: getTenStarMeaning(data.tenStars.timeSky),
       },
     },
 
@@ -176,14 +176,14 @@ export function toFetchSajuFormat(data: {
         current: {
           number: data.fortune.bigFortune.current.number,
           period: `${data.fortune.bigFortune.current.number * 10 + 1}세~${(data.fortune.bigFortune.current.number + 1) * 10}세`,
-          stem: data.fortune.bigFortune.current.stem,
-          branch: data.fortune.bigFortune.current.branch,
+          sky: data.fortune.bigFortune.current.sky,
+          ground: data.fortune.bigFortune.current.ground,
         },
         next: {
           number: data.fortune.bigFortune.next.number,
           period: `${data.fortune.bigFortune.next.number * 10 + 1}세~${(data.fortune.bigFortune.next.number + 1) * 10}세`,
-          stem: data.fortune.bigFortune.next.stem,
-          branch: data.fortune.bigFortune.next.branch,
+          sky: data.fortune.bigFortune.next.sky,
+          ground: data.fortune.bigFortune.next.ground,
         },
       },
       yearFortune: data.fortune.yearFortune,
@@ -214,18 +214,18 @@ export function toUiFormat(data: {
 
     // 사주 팔자 (한글 표시)
     pillarsDisplay: {
-      year: `${getKoreanStem(data.pillars.year.stem)}${getKoreanBranch(data.pillars.year.branch)}`,
-      month: `${getKoreanStem(data.pillars.month.stem)}${getKoreanBranch(data.pillars.month.branch)}`,
-      day: `${getKoreanStem(data.pillars.day.stem)}${getKoreanBranch(data.pillars.day.branch)}`,
-      time: `${getKoreanStem(data.pillars.time.stem)}${getKoreanBranch(data.pillars.time.branch)}`,
+      year: `${getKoreanSky(data.pillars.year.sky)}${getKoreanGround(data.pillars.year.ground)}`,
+      month: `${getKoreanSky(data.pillars.month.sky)}${getKoreanGround(data.pillars.month.ground)}`,
+      day: `${getKoreanSky(data.pillars.day.sky)}${getKoreanGround(data.pillars.day.ground)}`,
+      time: `${getKoreanSky(data.pillars.time.sky)}${getKoreanGround(data.pillars.time.ground)}`,
     },
 
     // 십성 요약
     tenStarsDisplay: {
-      year: data.tenStars.yearStem,
-      month: data.tenStars.monthStem,
-      day: data.tenStars.dayStem,
-      time: data.tenStars.timeStem,
+      year: data.tenStars.yearSky,
+      month: data.tenStars.monthSky,
+      day: data.tenStars.daySky,
+      time: data.tenStars.timeSky,
       summary: getTenStarsSummary(data.tenStars),
     },
 
@@ -268,7 +268,7 @@ export function toUiFormat(data: {
 }
 
 // 헬퍼 함수들
-export function getKoreanStem(chinese: string): string {
+export function getKoreanSky(chinese: string): string {
   const map: { [key: string]: string } = {
     甲: '갑',
     乙: '을',
@@ -284,7 +284,7 @@ export function getKoreanStem(chinese: string): string {
   return map[chinese] || chinese;
 }
 
-export function getKoreanBranch(chinese: string): string {
+export function getKoreanGround(chinese: string): string {
   const map: { [key: string]: string } = {
     子: '자',
     丑: '축',
@@ -302,7 +302,7 @@ export function getKoreanBranch(chinese: string): string {
   return map[chinese] || chinese;
 }
 
-export function getStemElement(chinese: string): string {
+export function getSkyElement(chinese: string): string {
   const map: { [key: string]: string } = {
     甲: '목',
     乙: '목',
@@ -318,7 +318,7 @@ export function getStemElement(chinese: string): string {
   return map[chinese] || '';
 }
 
-export function getBranchElement(chinese: string): string {
+export function getGroundElement(chinese: string): string {
   const map: { [key: string]: string } = {
     子: '수',
     丑: '토',
@@ -336,7 +336,7 @@ export function getBranchElement(chinese: string): string {
   return map[chinese] || '';
 }
 
-export function getStemYangYin(chinese: string): string {
+export function getSkyYangYin(chinese: string): string {
   const map: { [key: string]: string } = {
     甲: '양',
     乙: '음',
@@ -352,7 +352,7 @@ export function getStemYangYin(chinese: string): string {
   return map[chinese] || '';
 }
 
-export function getBranchYangYin(chinese: string): string {
+export function getGroundYangYin(chinese: string): string {
   const map: { [key: string]: string } = {
     子: '양',
     丑: '음',
@@ -426,7 +426,7 @@ export function getElementBalance(elements: FiveElements): string {
 }
 
 export function getTenStarsSummary(tenStars: PillarsTenStar): string {
-  const stars = [tenStars.yearStem, tenStars.monthStem, tenStars.dayStem, tenStars.timeStem];
+  const stars = [tenStars.yearSky, tenStars.monthSky, tenStars.daySky, tenStars.timeSky];
   const uniqueStars = [...new Set(stars)];
   return `${uniqueStars.length}개 십성 (${uniqueStars.join(', ')})`;
 }

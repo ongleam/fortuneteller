@@ -13,20 +13,20 @@
     },
     "expected": {
       "year": {
-        "stem": "癸",
-        "branch": "卯"
+        "sky": "癸",
+        "ground": "卯"
       },
       "month": {
-        "stem": "乙",
-        "branch": "卯"
+        "sky": "乙",
+        "ground": "卯"
       },
       "day": {
-        "stem": "癸",
-        "branch": "亥"
+        "sky": "癸",
+        "ground": "亥"
       },
       "time": {
-        "stem": "丁",
-        "branch": "巳"
+        "sky": "丁",
+        "ground": "巳"
       }
     }
   },
@@ -44,20 +44,20 @@
     },
     "expected": {
       "year": {
-        "stem": "癸",
-        "branch": "卯"
+        "sky": "癸",
+        "ground": "卯"
       },
       "month": {
-        "stem": "乙",
-        "branch": "卯"
+        "sky": "乙",
+        "ground": "卯"
       },
       "day": {
-        "stem": "癸",
-        "branch": "亥"
+        "sky": "癸",
+        "ground": "亥"
       },
       "time": {
-        "stem": "丁",
-        "branch": "巳"
+        "sky": "丁",
+        "ground": "巳"
       }
     }
   },
@@ -75,20 +75,20 @@
     },
     "expected": {
       "year": {
-        "stem": "庚",
-        "branch": "子"
+        "sky": "庚",
+        "ground": "子"
       },
       "month": {
-        "stem": "庚",
-        "branch": "辰"
+        "sky": "庚",
+        "ground": "辰"
       },
       "day": {
-        "stem": "丙",
-        "branch": "申"
+        "sky": "丙",
+        "ground": "申"
       },
       "time": {
-        "stem": "壬",
-        "branch": "辰"
+        "sky": "壬",
+        "ground": "辰"
       }
     }
   },
@@ -106,20 +106,20 @@
     },
     "expected": {
       "year": {
-        "stem": "庚",
-        "branch": "子"
+        "sky": "庚",
+        "ground": "子"
       },
       "month": {
-        "stem": "庚",
-        "branch": "辰"
+        "sky": "庚",
+        "ground": "辰"
       },
       "day": {
-        "stem": "丙",
-        "branch": "申"
+        "sky": "丙",
+        "ground": "申"
       },
       "time": {
-        "stem": "壬",
-        "branch": "辰"
+        "sky": "壬",
+        "ground": "辰"
       }
     }
   },
@@ -137,20 +137,20 @@
     },
     "expected": {
       "year": {
-        "stem": "辛",
-        "branch": "巳"
+        "sky": "辛",
+        "ground": "巳"
       },
       "month": {
-        "stem": "癸",
-        "branch": "巳"
+        "sky": "癸",
+        "ground": "巳"
       },
       "day": {
-        "stem": "丙",
-        "branch": "子"
+        "sky": "丙",
+        "ground": "子"
       },
       "time": {
-        "stem": "丁",
-        "branch": "酉"
+        "sky": "丁",
+        "ground": "酉"
       }
     }
   },
@@ -168,20 +168,20 @@
     },
     "expected": {
       "year": {
-        "stem": "辛",
-        "branch": "巳"
+        "sky": "辛",
+        "ground": "巳"
       },
       "month": {
-        "stem": "癸",
-        "branch": "巳"
+        "sky": "癸",
+        "ground": "巳"
       },
       "day": {
-        "stem": "丙",
-        "branch": "子"
+        "sky": "丙",
+        "ground": "子"
       },
       "time": {
-        "stem": "丁",
-        "branch": "酉"
+        "sky": "丁",
+        "ground": "酉"
       }
     }
   },
@@ -199,20 +199,20 @@
     },
     "expected": {
       "year": {
-        "stem": "乙",
-        "branch": "亥"
+        "sky": "乙",
+        "ground": "亥"
       },
       "month": {
-        "stem": "甲",
-        "branch": "申"
+        "sky": "甲",
+        "ground": "申"
       },
       "day": {
-        "stem": "己",
-        "branch": "亥"
+        "sky": "己",
+        "ground": "亥"
       },
       "time": {
-        "stem": "甲",
-        "branch": "子"
+        "sky": "甲",
+        "ground": "子"
       }
     }
   },
@@ -230,20 +230,20 @@
     },
     "expected": {
       "year": {
-        "stem": "乙",
-        "branch": "亥"
+        "sky": "乙",
+        "ground": "亥"
       },
       "month": {
-        "stem": "甲",
-        "branch": "申"
+        "sky": "甲",
+        "ground": "申"
       },
       "day": {
-        "stem": "己",
-        "branch": "亥"
+        "sky": "己",
+        "ground": "亥"
       },
       "time": {
-        "stem": "甲",
-        "branch": "子"
+        "sky": "甲",
+        "ground": "子"
       }
     }
   },
@@ -261,20 +261,20 @@
     },
     "expected": {
       "year": {
-        "stem": "壬",
-        "branch": "戌"
+        "sky": "壬",
+        "ground": "戌"
       },
       "month": {
-        "stem": "甲",
-        "branch": "辰"
+        "sky": "甲",
+        "ground": "辰"
       },
       "day": {
-        "stem": "辛",
-        "branch": "巳"
+        "sky": "辛",
+        "ground": "巳"
       },
       "time": {
-        "stem": "己",
-        "branch": "丑"
+        "sky": "己",
+        "ground": "丑"
       }
     }
   },
@@ -292,20 +292,20 @@
     },
     "expected": {
       "year": {
-        "stem": "壬",
-        "branch": "戌"
+        "sky": "壬",
+        "ground": "戌"
       },
       "month": {
-        "stem": "甲",
-        "branch": "辰"
+        "sky": "甲",
+        "ground": "辰"
       },
       "day": {
-        "stem": "辛",
-        "branch": "巳"
+        "sky": "辛",
+        "ground": "巳"
       },
       "time": {
-        "stem": "己",
-        "branch": "丑"
+        "sky": "己",
+        "ground": "丑"
       }
     }
   },
@@ -323,20 +323,20 @@
     },
     "expected": {
       "year": {
-        "stem": "丁",
-        "branch": "亥"
+        "sky": "丁",
+        "ground": "亥"
       },
       "month": {
-        "stem": "庚",
-        "branch": "戌"
+        "sky": "庚",
+        "ground": "戌"
       },
       "day": {
-        "stem": "己",
-        "branch": "亥"
+        "sky": "己",
+        "ground": "亥"
       },
       "time": {
-        "stem": "壬",
-        "branch": "申"
+        "sky": "壬",
+        "ground": "申"
       }
     }
   },
@@ -354,20 +354,20 @@
     },
     "expected": {
       "year": {
-        "stem": "丁",
-        "branch": "亥"
+        "sky": "丁",
+        "ground": "亥"
       },
       "month": {
-        "stem": "壬",
-        "branch": "子"
+        "sky": "壬",
+        "ground": "子"
       },
       "day": {
-        "stem": "辛",
-        "branch": "丑"
+        "sky": "辛",
+        "ground": "丑"
       },
       "time": {
-        "stem": "辛",
-        "branch": "卯"
+        "sky": "辛",
+        "ground": "卯"
       }
     }
   },
@@ -385,20 +385,20 @@
     },
     "expected": {
       "year": {
-        "stem": "丁",
-        "branch": "卯"
+        "sky": "丁",
+        "ground": "卯"
       },
       "month": {
-        "stem": "己",
-        "branch": "酉"
+        "sky": "己",
+        "ground": "酉"
       },
       "day": {
-        "stem": "戊",
-        "branch": "辰"
+        "sky": "戊",
+        "ground": "辰"
       },
       "time": {
-        "stem": "乙",
-        "branch": "卯"
+        "sky": "乙",
+        "ground": "卯"
       }
     }
   },
@@ -416,20 +416,20 @@
     },
     "expected": {
       "year": {
-        "stem": "辛",
-        "branch": "卯"
+        "sky": "辛",
+        "ground": "卯"
       },
       "month": {
-        "stem": "戊",
-        "branch": "戌"
+        "sky": "戊",
+        "ground": "戌"
       },
       "day": {
-        "stem": "戊",
-        "branch": "申"
+        "sky": "戊",
+        "ground": "申"
       },
       "time": {
-        "stem": "己",
-        "branch": "未"
+        "sky": "己",
+        "ground": "未"
       }
     }
   },
@@ -447,20 +447,20 @@
     },
     "expected": {
       "year": {
-        "stem": "壬",
-        "branch": "午"
+        "sky": "壬",
+        "ground": "午"
       },
       "month": {
-        "stem": "辛",
-        "branch": "亥"
+        "sky": "辛",
+        "ground": "亥"
       },
       "day": {
-        "stem": "丙",
-        "branch": "申"
+        "sky": "丙",
+        "ground": "申"
       },
       "time": {
-        "stem": "乙",
-        "branch": "未"
+        "sky": "乙",
+        "ground": "未"
       }
     }
   },
@@ -478,20 +478,20 @@
     },
     "expected": {
       "year": {
-        "stem": "癸",
-        "branch": "卯"
+        "sky": "癸",
+        "ground": "卯"
       },
       "month": {
-        "stem": "己",
-        "branch": "未"
+        "sky": "己",
+        "ground": "未"
       },
       "day": {
-        "stem": "丙",
-        "branch": "戌"
+        "sky": "丙",
+        "ground": "戌"
       },
       "time": {
-        "stem": "癸",
-        "branch": "巳"
+        "sky": "癸",
+        "ground": "巳"
       }
     }
   },
@@ -509,20 +509,20 @@
     },
     "expected": {
       "year": {
-        "stem": "丁",
-        "branch": "丑"
+        "sky": "丁",
+        "ground": "丑"
       },
       "month": {
-        "stem": "乙",
-        "branch": "巳"
+        "sky": "乙",
+        "ground": "巳"
       },
       "day": {
-        "stem": "壬",
-        "branch": "戌"
+        "sky": "壬",
+        "ground": "戌"
       },
       "time": {
-        "stem": "辛",
-        "branch": "亥"
+        "sky": "辛",
+        "ground": "亥"
       }
     }
   },
@@ -540,20 +540,20 @@
     },
     "expected": {
       "year": {
-        "stem": "甲",
-        "branch": "辰"
+        "sky": "甲",
+        "ground": "辰"
       },
       "month": {
-        "stem": "丙",
-        "branch": "子"
+        "sky": "丙",
+        "ground": "子"
       },
       "day": {
-        "stem": "癸",
-        "branch": "巳"
+        "sky": "癸",
+        "ground": "巳"
       },
       "time": {
-        "stem": "癸",
-        "branch": "亥"
+        "sky": "癸",
+        "ground": "亥"
       }
     }
   },
@@ -571,20 +571,20 @@
     },
     "expected": {
       "year": {
-        "stem": "乙",
-        "branch": "巳"
+        "sky": "乙",
+        "ground": "巳"
       },
       "month": {
-        "stem": "己",
-        "branch": "卯"
+        "sky": "己",
+        "ground": "卯"
       },
       "day": {
-        "stem": "癸",
-        "branch": "亥"
+        "sky": "癸",
+        "ground": "亥"
       },
       "time": {
-        "stem": "己",
-        "branch": "未"
+        "sky": "己",
+        "ground": "未"
       }
     }
   },
@@ -602,20 +602,20 @@
     },
     "expected": {
       "year": {
-        "stem": "癸",
-        "branch": "亥"
+        "sky": "癸",
+        "ground": "亥"
       },
       "month": {
-        "stem": "戊",
-        "branch": "午"
+        "sky": "戊",
+        "ground": "午"
       },
       "day": {
-        "stem": "甲",
-        "branch": "戌"
+        "sky": "甲",
+        "ground": "戌"
       },
       "time": {
-        "stem": "癸",
-        "branch": "酉"
+        "sky": "癸",
+        "ground": "酉"
       }
     }
   },
@@ -633,20 +633,20 @@
     },
     "expected": {
       "year": {
-        "stem": "甲",
-        "branch": "子"
+        "sky": "甲",
+        "ground": "子"
       },
       "month": {
-        "stem": "丙",
-        "branch": "寅"
+        "sky": "丙",
+        "ground": "寅"
       },
       "day": {
-        "stem": "己",
-        "branch": "卯"
+        "sky": "己",
+        "ground": "卯"
       },
       "time": {
-        "stem": "乙",
-        "branch": "亥"
+        "sky": "乙",
+        "ground": "亥"
       }
     }
   },
@@ -664,20 +664,20 @@
     },
     "expected": {
       "year": {
-        "stem": "丁",
-        "branch": "巳"
+        "sky": "丁",
+        "ground": "巳"
       },
       "month": {
-        "stem": "戊",
-        "branch": "申"
+        "sky": "戊",
+        "ground": "申"
       },
       "day": {
-        "stem": "丙",
-        "branch": "午"
+        "sky": "丙",
+        "ground": "午"
       },
       "time": {
-        "stem": "乙",
-        "branch": "未"
+        "sky": "乙",
+        "ground": "未"
       }
     }
   },
@@ -695,20 +695,20 @@
     },
     "expected": {
       "year": {
-        "stem": "戊",
-        "branch": "戌"
+        "sky": "戊",
+        "ground": "戌"
       },
       "month": {
-        "stem": "辛",
-        "branch": "酉"
+        "sky": "辛",
+        "ground": "酉"
       },
       "day": {
-        "stem": "戊",
-        "branch": "午"
+        "sky": "戊",
+        "ground": "午"
       },
       "time": {
-        "stem": "壬",
-        "branch": "戌"
+        "sky": "壬",
+        "ground": "戌"
       }
     }
   },
@@ -726,20 +726,20 @@
     },
     "expected": {
       "year": {
-        "stem": "壬",
-        "branch": "子"
+        "sky": "壬",
+        "ground": "子"
       },
       "month": {
-        "stem": "癸",
-        "branch": "丑"
+        "sky": "癸",
+        "ground": "丑"
       },
       "day": {
-        "stem": "丁",
-        "branch": "未"
+        "sky": "丁",
+        "ground": "未"
       },
       "time": {
-        "stem": "辛",
-        "branch": "丑"
+        "sky": "辛",
+        "ground": "丑"
       }
     }
   },
@@ -757,20 +757,20 @@
     },
     "expected": {
       "year": {
-        "stem": "庚",
-        "branch": "辰"
+        "sky": "庚",
+        "ground": "辰"
       },
       "month": {
-        "stem": "戊",
-        "branch": "子"
+        "sky": "戊",
+        "ground": "子"
       },
       "day": {
-        "stem": "戊",
-        "branch": "午"
+        "sky": "戊",
+        "ground": "午"
       },
       "time": {
-        "stem": "辛",
-        "branch": "酉"
+        "sky": "辛",
+        "ground": "酉"
       }
     }
   },
@@ -788,20 +788,20 @@
     },
     "expected": {
       "year": {
-        "stem": "丁",
-        "branch": "未"
+        "sky": "丁",
+        "ground": "未"
       },
       "month": {
-        "stem": "壬",
-        "branch": "寅"
+        "sky": "壬",
+        "ground": "寅"
       },
       "day": {
-        "stem": "癸",
-        "branch": "卯"
+        "sky": "癸",
+        "ground": "卯"
       },
       "time": {
-        "stem": "癸",
-        "branch": "亥"
+        "sky": "癸",
+        "ground": "亥"
       }
     }
   },
@@ -819,20 +819,20 @@
     },
     "expected": {
       "year": {
-        "stem": "己",
-        "branch": "巳"
+        "sky": "己",
+        "ground": "巳"
       },
       "month": {
-        "stem": "己",
-        "branch": "巳"
+        "sky": "己",
+        "ground": "巳"
       },
       "day": {
-        "stem": "乙",
-        "branch": "未"
+        "sky": "乙",
+        "ground": "未"
       },
       "time": {
-        "stem": "丁",
-        "branch": "丑"
+        "sky": "丁",
+        "ground": "丑"
       }
     }
   },
@@ -850,20 +850,20 @@
     },
     "expected": {
       "year": {
-        "stem": "丁",
-        "branch": "酉"
+        "sky": "丁",
+        "ground": "酉"
       },
       "month": {
-        "stem": "戊",
-        "branch": "申"
+        "sky": "戊",
+        "ground": "申"
       },
       "day": {
-        "stem": "辛",
-        "branch": "酉"
+        "sky": "辛",
+        "ground": "酉"
       },
       "time": {
-        "stem": "辛",
-        "branch": "卯"
+        "sky": "辛",
+        "ground": "卯"
       }
     }
   },
@@ -881,20 +881,20 @@
     },
     "expected": {
       "year": {
-        "stem": "戊",
-        "branch": "子"
+        "sky": "戊",
+        "ground": "子"
       },
       "month": {
-        "stem": "辛",
-        "branch": "酉"
+        "sky": "辛",
+        "ground": "酉"
       },
       "day": {
-        "stem": "庚",
-        "branch": "午"
+        "sky": "庚",
+        "ground": "午"
       },
       "time": {
-        "stem": "辛",
-        "branch": "巳"
+        "sky": "辛",
+        "ground": "巳"
       }
     }
   },
@@ -912,20 +912,20 @@
     },
     "expected": {
       "year": {
-        "stem": "庚",
-        "branch": "寅"
+        "sky": "庚",
+        "ground": "寅"
       },
       "month": {
-        "stem": "己",
-        "branch": "丑"
+        "sky": "己",
+        "ground": "丑"
       },
       "day": {
-        "stem": "辛",
-        "branch": "亥"
+        "sky": "辛",
+        "ground": "亥"
       },
       "time": {
-        "stem": "辛",
-        "branch": "卯"
+        "sky": "辛",
+        "ground": "卯"
       }
     }
   },
@@ -943,20 +943,20 @@
     },
     "expected": {
       "year": {
-        "stem": "癸",
-        "branch": "巳"
+        "sky": "癸",
+        "ground": "巳"
       },
       "month": {
-        "stem": "辛",
-        "branch": "酉"
+        "sky": "辛",
+        "ground": "酉"
       },
       "day": {
-        "stem": "戊",
-        "branch": "子"
+        "sky": "戊",
+        "ground": "子"
       },
       "time": {
-        "stem": "辛",
-        "branch": "酉"
+        "sky": "辛",
+        "ground": "酉"
       }
     }
   },
@@ -974,20 +974,20 @@
     },
     "expected": {
       "year": {
-        "stem": "庚",
-        "branch": "午"
+        "sky": "庚",
+        "ground": "午"
       },
       "month": {
-        "stem": "戊",
-        "branch": "子"
+        "sky": "戊",
+        "ground": "子"
       },
       "day": {
-        "stem": "戊",
-        "branch": "午"
+        "sky": "戊",
+        "ground": "午"
       },
       "time": {
-        "stem": "壬",
-        "branch": "子"
+        "sky": "壬",
+        "ground": "子"
       }
     }
   },
@@ -1005,20 +1005,20 @@
     },
     "expected": {
       "year": {
-        "stem": "丁",
-        "branch": "亥"
+        "sky": "丁",
+        "ground": "亥"
       },
       "month": {
-        "stem": "癸",
-        "branch": "丑"
+        "sky": "癸",
+        "ground": "丑"
       },
       "day": {
-        "stem": "癸",
-        "branch": "丑"
+        "sky": "癸",
+        "ground": "丑"
       },
       "time": {
-        "stem": "甲",
-        "branch": "寅"
+        "sky": "甲",
+        "ground": "寅"
       }
     }
   },
@@ -1036,20 +1036,20 @@
     },
     "expected": {
       "year": {
-        "stem": "丁",
-        "branch": "酉"
+        "sky": "丁",
+        "ground": "酉"
       },
       "month": {
-        "stem": "壬",
-        "branch": "子"
+        "sky": "壬",
+        "ground": "子"
       },
       "day": {
-        "stem": "丁",
-        "branch": "酉"
+        "sky": "丁",
+        "ground": "酉"
       },
       "time": {
-        "stem": "乙",
-        "branch": "巳"
+        "sky": "乙",
+        "ground": "巳"
       }
     }
   },
@@ -1067,20 +1067,20 @@
     },
     "expected": {
       "year": {
-        "stem": "乙",
-        "branch": "未"
+        "sky": "乙",
+        "ground": "未"
       },
       "month": {
-        "stem": "戊",
-        "branch": "寅"
+        "sky": "戊",
+        "ground": "寅"
       },
       "day": {
-        "stem": "乙",
-        "branch": "丑"
+        "sky": "乙",
+        "ground": "丑"
       },
       "time": {
-        "stem": "壬",
-        "branch": "午"
+        "sky": "壬",
+        "ground": "午"
       }
     }
   },
@@ -1098,20 +1098,20 @@
     },
     "expected": {
       "year": {
-        "stem": "戊",
-        "branch": "辰"
+        "sky": "戊",
+        "ground": "辰"
       },
       "month": {
-        "stem": "甲",
-        "branch": "寅"
+        "sky": "甲",
+        "ground": "寅"
       },
       "day": {
-        "stem": "壬",
-        "branch": "寅"
+        "sky": "壬",
+        "ground": "寅"
       },
       "time": {
-        "stem": "辛",
-        "branch": "亥"
+        "sky": "辛",
+        "ground": "亥"
       }
     }
   },
@@ -1129,20 +1129,20 @@
     },
     "expected": {
       "year": {
-        "stem": "乙",
-        "branch": "未"
+        "sky": "乙",
+        "ground": "未"
       },
       "month": {
-        "stem": "己",
-        "branch": "卯"
+        "sky": "己",
+        "ground": "卯"
       },
       "day": {
-        "stem": "丙",
-        "branch": "戌"
+        "sky": "丙",
+        "ground": "戌"
       },
       "time": {
-        "stem": "乙",
-        "branch": "未"
+        "sky": "乙",
+        "ground": "未"
       }
     }
   },
@@ -1160,20 +1160,20 @@
     },
     "expected": {
       "year": {
-        "stem": "丙",
-        "branch": "戌"
+        "sky": "丙",
+        "ground": "戌"
       },
       "month": {
-        "stem": "丁",
-        "branch": "酉"
+        "sky": "丁",
+        "ground": "酉"
       },
       "day": {
-        "stem": "乙",
-        "branch": "卯"
+        "sky": "乙",
+        "ground": "卯"
       },
       "time": {
-        "stem": "乙",
-        "branch": "酉"
+        "sky": "乙",
+        "ground": "酉"
       }
     }
   },
@@ -1191,20 +1191,20 @@
     },
     "expected": {
       "year": {
-        "stem": "己",
-        "branch": "丑"
+        "sky": "己",
+        "ground": "丑"
       },
       "month": {
-        "stem": "丙",
-        "branch": "子"
+        "sky": "丙",
+        "ground": "子"
       },
       "day": {
-        "stem": "甲",
-        "branch": "辰"
+        "sky": "甲",
+        "ground": "辰"
       },
       "time": {
-        "stem": "壬",
-        "branch": "申"
+        "sky": "壬",
+        "ground": "申"
       }
     }
   },
@@ -1222,20 +1222,20 @@
     },
     "expected": {
       "year": {
-        "stem": "壬",
-        "branch": "戌"
+        "sky": "壬",
+        "ground": "戌"
       },
       "month": {
-        "stem": "丙",
-        "branch": "午"
+        "sky": "丙",
+        "ground": "午"
       },
       "day": {
-        "stem": "己",
-        "branch": "卯"
+        "sky": "己",
+        "ground": "卯"
       },
       "time": {
-        "stem": "庚",
-        "branch": "午"
+        "sky": "庚",
+        "ground": "午"
       }
     }
   },
@@ -1253,20 +1253,20 @@
     },
     "expected": {
       "year": {
-        "stem": "辛",
-        "branch": "卯"
+        "sky": "辛",
+        "ground": "卯"
       },
       "month": {
-        "stem": "庚",
-        "branch": "寅"
+        "sky": "庚",
+        "ground": "寅"
       },
       "day": {
-        "stem": "癸",
-        "branch": "巳"
+        "sky": "癸",
+        "ground": "巳"
       },
       "time": {
-        "stem": "壬",
-        "branch": "戌"
+        "sky": "壬",
+        "ground": "戌"
       }
     }
   },
@@ -1284,20 +1284,20 @@
     },
     "expected": {
       "year": {
-        "stem": "乙",
-        "branch": "酉"
+        "sky": "乙",
+        "ground": "酉"
       },
       "month": {
-        "stem": "甲",
-        "branch": "申"
+        "sky": "甲",
+        "ground": "申"
       },
       "day": {
-        "stem": "甲",
-        "branch": "戌"
+        "sky": "甲",
+        "ground": "戌"
       },
       "time": {
-        "stem": "甲",
-        "branch": "戌"
+        "sky": "甲",
+        "ground": "戌"
       }
     }
   },
@@ -1315,20 +1315,20 @@
     },
     "expected": {
       "year": {
-        "stem": "癸",
-        "branch": "未"
+        "sky": "癸",
+        "ground": "未"
       },
       "month": {
-        "stem": "辛",
-        "branch": "酉"
+        "sky": "辛",
+        "ground": "酉"
       },
       "day": {
-        "stem": "乙",
-        "branch": "未"
+        "sky": "乙",
+        "ground": "未"
       },
       "time": {
-        "stem": "癸",
-        "branch": "未"
+        "sky": "癸",
+        "ground": "未"
       }
     }
   },
@@ -1346,20 +1346,20 @@
     },
     "expected": {
       "year": {
-        "stem": "丙",
-        "branch": "戌"
+        "sky": "丙",
+        "ground": "戌"
       },
       "month": {
-        "stem": "辛",
-        "branch": "卯"
+        "sky": "辛",
+        "ground": "卯"
       },
       "day": {
-        "stem": "丙",
-        "branch": "申"
+        "sky": "丙",
+        "ground": "申"
       },
       "time": {
-        "stem": "癸",
-        "branch": "巳"
+        "sky": "癸",
+        "ground": "巳"
       }
     }
   },
@@ -1377,20 +1377,20 @@
     },
     "expected": {
       "year": {
-        "stem": "辛",
-        "branch": "卯"
+        "sky": "辛",
+        "ground": "卯"
       },
       "month": {
-        "stem": "丁",
-        "branch": "酉"
+        "sky": "丁",
+        "ground": "酉"
       },
       "day": {
-        "stem": "辛",
-        "branch": "巳"
+        "sky": "辛",
+        "ground": "巳"
       },
       "time": {
-        "stem": "己",
-        "branch": "亥"
+        "sky": "己",
+        "ground": "亥"
       }
     }
   },
@@ -1408,20 +1408,20 @@
     },
     "expected": {
       "year": {
-        "stem": "庚",
-        "branch": "申"
+        "sky": "庚",
+        "ground": "申"
       },
       "month": {
-        "stem": "庚",
-        "branch": "辰"
+        "sky": "庚",
+        "ground": "辰"
       },
       "day": {
-        "stem": "庚",
-        "branch": "午"
+        "sky": "庚",
+        "ground": "午"
       },
       "time": {
-        "stem": "乙",
-        "branch": "酉"
+        "sky": "乙",
+        "ground": "酉"
       }
     }
   },
@@ -1439,20 +1439,20 @@
     },
     "expected": {
       "year": {
-        "stem": "甲",
-        "branch": "辰"
+        "sky": "甲",
+        "ground": "辰"
       },
       "month": {
-        "stem": "甲",
-        "branch": "戌"
+        "sky": "甲",
+        "ground": "戌"
       },
       "day": {
-        "stem": "己",
-        "branch": "酉"
+        "sky": "己",
+        "ground": "酉"
       },
       "time": {
-        "stem": "壬",
-        "branch": "申"
+        "sky": "壬",
+        "ground": "申"
       }
     }
   },
@@ -1470,20 +1470,20 @@
     },
     "expected": {
       "year": {
-        "stem": "辛",
-        "branch": "丑"
+        "sky": "辛",
+        "ground": "丑"
       },
       "month": {
-        "stem": "丙",
-        "branch": "申"
+        "sky": "丙",
+        "ground": "申"
       },
       "day": {
-        "stem": "戊",
-        "branch": "申"
+        "sky": "戊",
+        "ground": "申"
       },
       "time": {
-        "stem": "丙",
-        "branch": "辰"
+        "sky": "丙",
+        "ground": "辰"
       }
     }
   },
@@ -1501,20 +1501,20 @@
     },
     "expected": {
       "year": {
-        "stem": "辛",
-        "branch": "丑"
+        "sky": "辛",
+        "ground": "丑"
       },
       "month": {
-        "stem": "丙",
-        "branch": "申"
+        "sky": "丙",
+        "ground": "申"
       },
       "day": {
-        "stem": "丁",
-        "branch": "巳"
+        "sky": "丁",
+        "ground": "巳"
       },
       "time": {
-        "stem": "辛",
-        "branch": "亥"
+        "sky": "辛",
+        "ground": "亥"
       }
     }
   },
@@ -1532,20 +1532,20 @@
     },
     "expected": {
       "year": {
-        "stem": "壬",
-        "branch": "子"
+        "sky": "壬",
+        "ground": "子"
       },
       "month": {
-        "stem": "甲",
-        "branch": "辰"
+        "sky": "甲",
+        "ground": "辰"
       },
       "day": {
-        "stem": "丙",
-        "branch": "申"
+        "sky": "丙",
+        "ground": "申"
       },
       "time": {
-        "stem": "甲",
-        "branch": "午"
+        "sky": "甲",
+        "ground": "午"
       }
     }
   },
@@ -1563,20 +1563,20 @@
     },
     "expected": {
       "year": {
-        "stem": "辛",
-        "branch": "未"
+        "sky": "辛",
+        "ground": "未"
       },
       "month": {
-        "stem": "壬",
-        "branch": "辰"
+        "sky": "壬",
+        "ground": "辰"
       },
       "day": {
-        "stem": "乙",
-        "branch": "亥"
+        "sky": "乙",
+        "ground": "亥"
       },
       "time": {
-        "stem": "乙",
-        "branch": "酉"
+        "sky": "乙",
+        "ground": "酉"
       }
     }
   },
@@ -1594,20 +1594,20 @@
     },
     "expected": {
       "year": {
-        "stem": "甲",
-        "branch": "午"
+        "sky": "甲",
+        "ground": "午"
       },
       "month": {
-        "stem": "癸",
-        "branch": "酉"
+        "sky": "癸",
+        "ground": "酉"
       },
       "day": {
-        "stem": "甲",
-        "branch": "午"
+        "sky": "甲",
+        "ground": "午"
       },
       "time": {
-        "stem": "丁",
-        "branch": "卯"
+        "sky": "丁",
+        "ground": "卯"
       }
     }
   },
@@ -1625,20 +1625,20 @@
     },
     "expected": {
       "year": {
-        "stem": "丙",
-        "branch": "申"
+        "sky": "丙",
+        "ground": "申"
       },
       "month": {
-        "stem": "丙",
-        "branch": "申"
+        "sky": "丙",
+        "ground": "申"
       },
       "day": {
-        "stem": "乙",
-        "branch": "卯"
+        "sky": "乙",
+        "ground": "卯"
       },
       "time": {
-        "stem": "壬",
-        "branch": "午"
+        "sky": "壬",
+        "ground": "午"
       }
     }
   },
@@ -1656,20 +1656,20 @@
     },
     "expected": {
       "year": {
-        "stem": "甲",
-        "branch": "寅"
+        "sky": "甲",
+        "ground": "寅"
       },
       "month": {
-        "stem": "丁",
-        "branch": "丑"
+        "sky": "丁",
+        "ground": "丑"
       },
       "day": {
-        "stem": "癸",
-        "branch": "酉"
+        "sky": "癸",
+        "ground": "酉"
       },
       "time": {
-        "stem": "戊",
-        "branch": "午"
+        "sky": "戊",
+        "ground": "午"
       }
     }
   },
@@ -1687,20 +1687,20 @@
     },
     "expected": {
       "year": {
-        "stem": "癸",
-        "branch": "巳"
+        "sky": "癸",
+        "ground": "巳"
       },
       "month": {
-        "stem": "乙",
-        "branch": "卯"
+        "sky": "乙",
+        "ground": "卯"
       },
       "day": {
-        "stem": "壬",
-        "branch": "申"
+        "sky": "壬",
+        "ground": "申"
       },
       "time": {
-        "stem": "壬",
-        "branch": "寅"
+        "sky": "壬",
+        "ground": "寅"
       }
     }
   },
@@ -1718,20 +1718,20 @@
     },
     "expected": {
       "year": {
-        "stem": "己",
-        "branch": "亥"
+        "sky": "己",
+        "ground": "亥"
       },
       "month": {
-        "stem": "壬",
-        "branch": "申"
+        "sky": "壬",
+        "ground": "申"
       },
       "day": {
-        "stem": "丁",
-        "branch": "丑"
+        "sky": "丁",
+        "ground": "丑"
       },
       "time": {
-        "stem": "丙",
-        "branch": "午"
+        "sky": "丙",
+        "ground": "午"
       }
     }
   },
@@ -1749,20 +1749,20 @@
     },
     "expected": {
       "year": {
-        "stem": "癸",
-        "branch": "卯"
+        "sky": "癸",
+        "ground": "卯"
       },
       "month": {
-        "stem": "壬",
-        "branch": "戌"
+        "sky": "壬",
+        "ground": "戌"
       },
       "day": {
-        "stem": "戊",
-        "branch": "午"
+        "sky": "戊",
+        "ground": "午"
       },
       "time": {
-        "stem": "癸",
-        "branch": "丑"
+        "sky": "癸",
+        "ground": "丑"
       }
     }
   },
@@ -1780,20 +1780,20 @@
     },
     "expected": {
       "year": {
-        "stem": "庚",
-        "branch": "寅"
+        "sky": "庚",
+        "ground": "寅"
       },
       "month": {
-        "stem": "乙",
-        "branch": "酉"
+        "sky": "乙",
+        "ground": "酉"
       },
       "day": {
-        "stem": "丙",
-        "branch": "寅"
+        "sky": "丙",
+        "ground": "寅"
       },
       "time": {
-        "stem": "丁",
-        "branch": "酉"
+        "sky": "丁",
+        "ground": "酉"
       }
     }
   },
@@ -1811,20 +1811,20 @@
     },
     "expected": {
       "year": {
-        "stem": "庚",
-        "branch": "子"
+        "sky": "庚",
+        "ground": "子"
       },
       "month": {
-        "stem": "庚",
-        "branch": "辰"
+        "sky": "庚",
+        "ground": "辰"
       },
       "day": {
-        "stem": "甲",
-        "branch": "戌"
+        "sky": "甲",
+        "ground": "戌"
       },
       "time": {
-        "stem": "甲",
-        "branch": "子"
+        "sky": "甲",
+        "ground": "子"
       }
     }
   },
@@ -1842,20 +1842,20 @@
     },
     "expected": {
       "year": {
-        "stem": "甲",
-        "branch": "子"
+        "sky": "甲",
+        "ground": "子"
       },
       "month": {
-        "stem": "甲",
-        "branch": "戌"
+        "sky": "甲",
+        "ground": "戌"
       },
       "day": {
-        "stem": "壬",
-        "branch": "辰"
+        "sky": "壬",
+        "ground": "辰"
       },
       "time": {
-        "stem": "戊",
-        "branch": "申"
+        "sky": "戊",
+        "ground": "申"
       }
     }
   },
@@ -1873,20 +1873,20 @@
     },
     "expected": {
       "year": {
-        "stem": "壬",
-        "branch": "午"
+        "sky": "壬",
+        "ground": "午"
       },
       "month": {
-        "stem": "丙",
-        "branch": "午"
+        "sky": "丙",
+        "ground": "午"
       },
       "day": {
-        "stem": "癸",
-        "branch": "亥"
+        "sky": "癸",
+        "ground": "亥"
       },
       "time": {
-        "stem": "辛",
-        "branch": "酉"
+        "sky": "辛",
+        "ground": "酉"
       }
     }
   },
@@ -1904,20 +1904,20 @@
     },
     "expected": {
       "year": {
-        "stem": "辛",
-        "branch": "巳"
+        "sky": "辛",
+        "ground": "巳"
       },
       "month": {
-        "stem": "庚",
-        "branch": "寅"
+        "sky": "庚",
+        "ground": "寅"
       },
       "day": {
-        "stem": "壬",
-        "branch": "寅"
+        "sky": "壬",
+        "ground": "寅"
       },
       "time": {
-        "stem": "癸",
-        "branch": "卯"
+        "sky": "癸",
+        "ground": "卯"
       }
     }
   },
@@ -1935,20 +1935,20 @@
     },
     "expected": {
       "year": {
-        "stem": "辛",
-        "branch": "酉"
+        "sky": "辛",
+        "ground": "酉"
       },
       "month": {
-        "stem": "癸",
-        "branch": "巳"
+        "sky": "癸",
+        "ground": "巳"
       },
       "day": {
-        "stem": "辛",
-        "branch": "丑"
+        "sky": "辛",
+        "ground": "丑"
       },
       "time": {
-        "stem": "壬",
-        "branch": "辰"
+        "sky": "壬",
+        "ground": "辰"
       }
     }
   },
@@ -1966,20 +1966,20 @@
     },
     "expected": {
       "year": {
-        "stem": "丙",
-        "branch": "寅"
+        "sky": "丙",
+        "ground": "寅"
       },
       "month": {
-        "stem": "庚",
-        "branch": "寅"
+        "sky": "庚",
+        "ground": "寅"
       },
       "day": {
-        "stem": "庚",
-        "branch": "寅"
+        "sky": "庚",
+        "ground": "寅"
       },
       "time": {
-        "stem": "壬",
-        "branch": "午"
+        "sky": "壬",
+        "ground": "午"
       }
     }
   },
@@ -1997,20 +1997,20 @@
     },
     "expected": {
       "year": {
-        "stem": "丙",
-        "branch": "申"
+        "sky": "丙",
+        "ground": "申"
       },
       "month": {
-        "stem": "乙",
-        "branch": "未"
+        "sky": "乙",
+        "ground": "未"
       },
       "day": {
-        "stem": "庚",
-        "branch": "申"
+        "sky": "庚",
+        "ground": "申"
       },
       "time": {
-        "stem": "辛",
-        "branch": "巳"
+        "sky": "辛",
+        "ground": "巳"
       }
     }
   },
@@ -2028,20 +2028,20 @@
     },
     "expected": {
       "year": {
-        "stem": "丙",
-        "branch": "子"
+        "sky": "丙",
+        "ground": "子"
       },
       "month": {
-        "stem": "丁",
-        "branch": "酉"
+        "sky": "丁",
+        "ground": "酉"
       },
       "day": {
-        "stem": "壬",
-        "branch": "戌"
+        "sky": "壬",
+        "ground": "戌"
       },
       "time": {
-        "stem": "癸",
-        "branch": "卯"
+        "sky": "癸",
+        "ground": "卯"
       }
     }
   },
@@ -2059,20 +2059,20 @@
     },
     "expected": {
       "year": {
-        "stem": "己",
-        "branch": "亥"
+        "sky": "己",
+        "ground": "亥"
       },
       "month": {
-        "stem": "丁",
-        "branch": "卯"
+        "sky": "丁",
+        "ground": "卯"
       },
       "day": {
-        "stem": "癸",
-        "branch": "丑"
+        "sky": "癸",
+        "ground": "丑"
       },
       "time": {
-        "stem": "乙",
-        "branch": "卯"
+        "sky": "乙",
+        "ground": "卯"
       }
     }
   },
@@ -2090,20 +2090,20 @@
     },
     "expected": {
       "year": {
-        "stem": "丁",
-        "branch": "酉"
+        "sky": "丁",
+        "ground": "酉"
       },
       "month": {
-        "stem": "乙",
-        "branch": "巳"
+        "sky": "乙",
+        "ground": "巳"
       },
       "day": {
-        "stem": "庚",
-        "branch": "申"
+        "sky": "庚",
+        "ground": "申"
       },
       "time": {
-        "stem": "丁",
-        "branch": "丑"
+        "sky": "丁",
+        "ground": "丑"
       }
     }
   },
@@ -2121,20 +2121,20 @@
     },
     "expected": {
       "year": {
-        "stem": "辛",
-        "branch": "未"
+        "sky": "辛",
+        "ground": "未"
       },
       "month": {
-        "stem": "丙",
-        "branch": "申"
+        "sky": "丙",
+        "ground": "申"
       },
       "day": {
-        "stem": "戊",
-        "branch": "寅"
+        "sky": "戊",
+        "ground": "寅"
       },
       "time": {
-        "stem": "壬",
-        "branch": "子"
+        "sky": "壬",
+        "ground": "子"
       }
     }
   },
@@ -2152,20 +2152,20 @@
     },
     "expected": {
       "year": {
-        "stem": "甲",
-        "branch": "寅"
+        "sky": "甲",
+        "ground": "寅"
       },
       "month": {
-        "stem": "丙",
-        "branch": "寅"
+        "sky": "丙",
+        "ground": "寅"
       },
       "day": {
-        "stem": "甲",
-        "branch": "午"
+        "sky": "甲",
+        "ground": "午"
       },
       "time": {
-        "stem": "癸",
-        "branch": "酉"
+        "sky": "癸",
+        "ground": "酉"
       }
     }
   },
@@ -2183,20 +2183,20 @@
     },
     "expected": {
       "year": {
-        "stem": "庚",
-        "branch": "寅"
+        "sky": "庚",
+        "ground": "寅"
       },
       "month": {
-        "stem": "己",
-        "branch": "丑"
+        "sky": "己",
+        "ground": "丑"
       },
       "day": {
-        "stem": "壬",
-        "branch": "子"
+        "sky": "壬",
+        "ground": "子"
       },
       "time": {
-        "stem": "丙",
-        "branch": "午"
+        "sky": "丙",
+        "ground": "午"
       }
     }
   },
@@ -2214,20 +2214,20 @@
     },
     "expected": {
       "year": {
-        "stem": "庚",
-        "branch": "子"
+        "sky": "庚",
+        "ground": "子"
       },
       "month": {
-        "stem": "癸",
-        "branch": "未"
+        "sky": "癸",
+        "ground": "未"
       },
       "day": {
-        "stem": "丙",
-        "branch": "辰"
+        "sky": "丙",
+        "ground": "辰"
       },
       "time": {
-        "stem": "壬",
-        "branch": "辰"
+        "sky": "壬",
+        "ground": "辰"
       }
     }
   },
@@ -2245,20 +2245,20 @@
     },
     "expected": {
       "year": {
-        "stem": "乙",
-        "branch": "巳"
+        "sky": "乙",
+        "ground": "巳"
       },
       "month": {
-        "stem": "辛",
-        "branch": "巳"
+        "sky": "辛",
+        "ground": "巳"
       },
       "day": {
-        "stem": "丙",
-        "branch": "子"
+        "sky": "丙",
+        "ground": "子"
       },
       "time": {
-        "stem": "己",
-        "branch": "亥"
+        "sky": "己",
+        "ground": "亥"
       }
     }
   },
@@ -2276,20 +2276,20 @@
     },
     "expected": {
       "year": {
-        "stem": "戊",
-        "branch": "午"
+        "sky": "戊",
+        "ground": "午"
       },
       "month": {
-        "stem": "丁",
-        "branch": "巳"
+        "sky": "丁",
+        "ground": "巳"
       },
       "day": {
-        "stem": "己",
-        "branch": "卯"
+        "sky": "己",
+        "ground": "卯"
       },
       "time": {
-        "stem": "丁",
-        "branch": "卯"
+        "sky": "丁",
+        "ground": "卯"
       }
     }
   },
@@ -2307,20 +2307,20 @@
     },
     "expected": {
       "year": {
-        "stem": "丙",
-        "branch": "申"
+        "sky": "丙",
+        "ground": "申"
       },
       "month": {
-        "stem": "庚",
-        "branch": "子"
+        "sky": "庚",
+        "ground": "子"
       },
       "day": {
-        "stem": "戊",
-        "branch": "申"
+        "sky": "戊",
+        "ground": "申"
       },
       "time": {
-        "stem": "己",
-        "branch": "未"
+        "sky": "己",
+        "ground": "未"
       }
     }
   },
@@ -2338,20 +2338,20 @@
     },
     "expected": {
       "year": {
-        "stem": "壬",
-        "branch": "寅"
+        "sky": "壬",
+        "ground": "寅"
       },
       "month": {
-        "stem": "辛",
-        "branch": "亥"
+        "sky": "辛",
+        "ground": "亥"
       },
       "day": {
-        "stem": "丙",
-        "branch": "子"
+        "sky": "丙",
+        "ground": "子"
       },
       "time": {
-        "stem": "戊",
-        "branch": "子"
+        "sky": "戊",
+        "ground": "子"
       }
     }
   },
@@ -2369,20 +2369,20 @@
     },
     "expected": {
       "year": {
-        "stem": "癸",
-        "branch": "卯"
+        "sky": "癸",
+        "ground": "卯"
       },
       "month": {
-        "stem": "庚",
-        "branch": "申"
+        "sky": "庚",
+        "ground": "申"
       },
       "day": {
-        "stem": "辛",
-        "branch": "亥"
+        "sky": "辛",
+        "ground": "亥"
       },
       "time": {
-        "stem": "戊",
-        "branch": "戌"
+        "sky": "戊",
+        "ground": "戌"
       }
     }
   },
@@ -2400,20 +2400,20 @@
     },
     "expected": {
       "year": {
-        "stem": "己",
-        "branch": "亥"
+        "sky": "己",
+        "ground": "亥"
       },
       "month": {
-        "stem": "丁",
-        "branch": "卯"
+        "sky": "丁",
+        "ground": "卯"
       },
       "day": {
-        "stem": "乙",
-        "branch": "未"
+        "sky": "乙",
+        "ground": "未"
       },
       "time": {
-        "stem": "甲",
-        "branch": "申"
+        "sky": "甲",
+        "ground": "申"
       }
     }
   },
@@ -2431,20 +2431,20 @@
     },
     "expected": {
       "year": {
-        "stem": "癸",
-        "branch": "卯"
+        "sky": "癸",
+        "ground": "卯"
       },
       "month": {
-        "stem": "甲",
-        "branch": "子"
+        "sky": "甲",
+        "ground": "子"
       },
       "day": {
-        "stem": "辛",
-        "branch": "亥"
+        "sky": "辛",
+        "ground": "亥"
       },
       "time": {
-        "stem": "甲",
-        "branch": "午"
+        "sky": "甲",
+        "ground": "午"
       }
     }
   },
@@ -2462,20 +2462,20 @@
     },
     "expected": {
       "year": {
-        "stem": "丙",
-        "branch": "申"
+        "sky": "丙",
+        "ground": "申"
       },
       "month": {
-        "stem": "丁",
-        "branch": "酉"
+        "sky": "丁",
+        "ground": "酉"
       },
       "day": {
-        "stem": "癸",
-        "branch": "巳"
+        "sky": "癸",
+        "ground": "巳"
       },
       "time": {
-        "stem": "癸",
-        "branch": "亥"
+        "sky": "癸",
+        "ground": "亥"
       }
     }
   },
@@ -2493,20 +2493,20 @@
     },
     "expected": {
       "year": {
-        "stem": "甲",
-        "branch": "寅"
+        "sky": "甲",
+        "ground": "寅"
       },
       "month": {
-        "stem": "乙",
-        "branch": "亥"
+        "sky": "乙",
+        "ground": "亥"
       },
       "day": {
-        "stem": "甲",
-        "branch": "寅"
+        "sky": "甲",
+        "ground": "寅"
       },
       "time": {
-        "stem": "戊",
-        "branch": "辰"
+        "sky": "戊",
+        "ground": "辰"
       }
     }
   },
@@ -2524,20 +2524,20 @@
     },
     "expected": {
       "year": {
-        "stem": "辛",
-        "branch": "酉"
+        "sky": "辛",
+        "ground": "酉"
       },
       "month": {
-        "stem": "丁",
-        "branch": "酉"
+        "sky": "丁",
+        "ground": "酉"
       },
       "day": {
-        "stem": "己",
-        "branch": "亥"
+        "sky": "己",
+        "ground": "亥"
       },
       "time": {
-        "stem": "甲",
-        "branch": "子"
+        "sky": "甲",
+        "ground": "子"
       }
     }
   },
@@ -2555,20 +2555,20 @@
     },
     "expected": {
       "year": {
-        "stem": "癸",
-        "branch": "卯"
+        "sky": "癸",
+        "ground": "卯"
       },
       "month": {
-        "stem": "乙",
-        "branch": "丑"
+        "sky": "乙",
+        "ground": "丑"
       },
       "day": {
-        "stem": "辛",
-        "branch": "酉"
+        "sky": "辛",
+        "ground": "酉"
       },
       "time": {
-        "stem": "己",
-        "branch": "亥"
+        "sky": "己",
+        "ground": "亥"
       }
     }
   },
@@ -2586,20 +2586,20 @@
     },
     "expected": {
       "year": {
-        "stem": "乙",
-        "branch": "未"
+        "sky": "乙",
+        "ground": "未"
       },
       "month": {
-        "stem": "己",
-        "branch": "丑"
+        "sky": "己",
+        "ground": "丑"
       },
       "day": {
-        "stem": "辛",
-        "branch": "丑"
+        "sky": "辛",
+        "ground": "丑"
       },
       "time": {
-        "stem": "戊",
-        "branch": "子"
+        "sky": "戊",
+        "ground": "子"
       }
     }
   },
@@ -2617,20 +2617,20 @@
     },
     "expected": {
       "year": {
-        "stem": "丙",
-        "branch": "申"
+        "sky": "丙",
+        "ground": "申"
       },
       "month": {
-        "stem": "丁",
-        "branch": "酉"
+        "sky": "丁",
+        "ground": "酉"
       },
       "day": {
-        "stem": "乙",
-        "branch": "巳"
+        "sky": "乙",
+        "ground": "巳"
       },
       "time": {
-        "stem": "壬",
-        "branch": "午"
+        "sky": "壬",
+        "ground": "午"
       }
     }
   },
@@ -2648,20 +2648,20 @@
     },
     "expected": {
       "year": {
-        "stem": "庚",
-        "branch": "寅"
+        "sky": "庚",
+        "ground": "寅"
       },
       "month": {
-        "stem": "丙",
-        "branch": "戌"
+        "sky": "丙",
+        "ground": "戌"
       },
       "day": {
-        "stem": "丙",
-        "branch": "辰"
+        "sky": "丙",
+        "ground": "辰"
       },
       "time": {
-        "stem": "己",
-        "branch": "亥"
+        "sky": "己",
+        "ground": "亥"
       }
     }
   },
@@ -2679,20 +2679,20 @@
     },
     "expected": {
       "year": {
-        "stem": "辛",
-        "branch": "丑"
+        "sky": "辛",
+        "ground": "丑"
       },
       "month": {
-        "stem": "壬",
-        "branch": "辰"
+        "sky": "壬",
+        "ground": "辰"
       },
       "day": {
-        "stem": "丁",
-        "branch": "酉"
+        "sky": "丁",
+        "ground": "酉"
       },
       "time": {
-        "stem": "庚",
-        "branch": "子"
+        "sky": "庚",
+        "ground": "子"
       }
     }
   },
@@ -2710,20 +2710,20 @@
     },
     "expected": {
       "year": {
-        "stem": "戊",
-        "branch": "戌"
+        "sky": "戊",
+        "ground": "戌"
       },
       "month": {
-        "stem": "甲",
-        "branch": "子"
+        "sky": "甲",
+        "ground": "子"
       },
       "day": {
-        "stem": "癸",
-        "branch": "酉"
+        "sky": "癸",
+        "ground": "酉"
       },
       "time": {
-        "stem": "壬",
-        "branch": "戌"
+        "sky": "壬",
+        "ground": "戌"
       }
     }
   },
@@ -2741,20 +2741,20 @@
     },
     "expected": {
       "year": {
-        "stem": "乙",
-        "branch": "亥"
+        "sky": "乙",
+        "ground": "亥"
       },
       "month": {
-        "stem": "庚",
-        "branch": "辰"
+        "sky": "庚",
+        "ground": "辰"
       },
       "day": {
-        "stem": "戊",
-        "branch": "子"
+        "sky": "戊",
+        "ground": "子"
       },
       "time": {
-        "stem": "癸",
-        "branch": "亥"
+        "sky": "癸",
+        "ground": "亥"
       }
     }
   },
@@ -2772,20 +2772,20 @@
     },
     "expected": {
       "year": {
-        "stem": "壬",
-        "branch": "子"
+        "sky": "壬",
+        "ground": "子"
       },
       "month": {
-        "stem": "癸",
-        "branch": "卯"
+        "sky": "癸",
+        "ground": "卯"
       },
       "day": {
-        "stem": "己",
-        "branch": "酉"
+        "sky": "己",
+        "ground": "酉"
       },
       "time": {
-        "stem": "丁",
-        "branch": "卯"
+        "sky": "丁",
+        "ground": "卯"
       }
     }
   },
@@ -2803,20 +2803,20 @@
     },
     "expected": {
       "year": {
-        "stem": "乙",
-        "branch": "未"
+        "sky": "乙",
+        "ground": "未"
       },
       "month": {
-        "stem": "己",
-        "branch": "丑"
+        "sky": "己",
+        "ground": "丑"
       },
       "day": {
-        "stem": "乙",
-        "branch": "巳"
+        "sky": "乙",
+        "ground": "巳"
       },
       "time": {
-        "stem": "乙",
-        "branch": "酉"
+        "sky": "乙",
+        "ground": "酉"
       }
     }
   },
@@ -2834,20 +2834,20 @@
     },
     "expected": {
       "year": {
-        "stem": "丙",
-        "branch": "午"
+        "sky": "丙",
+        "ground": "午"
       },
       "month": {
-        "stem": "辛",
-        "branch": "丑"
+        "sky": "辛",
+        "ground": "丑"
       },
       "day": {
-        "stem": "戊",
-        "branch": "戌"
+        "sky": "戊",
+        "ground": "戌"
       },
       "time": {
-        "stem": "甲",
-        "branch": "寅"
+        "sky": "甲",
+        "ground": "寅"
       }
     }
   },
@@ -2865,20 +2865,20 @@
     },
     "expected": {
       "year": {
-        "stem": "乙",
-        "branch": "丑"
+        "sky": "乙",
+        "ground": "丑"
       },
       "month": {
-        "stem": "乙",
-        "branch": "酉"
+        "sky": "乙",
+        "ground": "酉"
       },
       "day": {
-        "stem": "丁",
-        "branch": "巳"
+        "sky": "丁",
+        "ground": "巳"
       },
       "time": {
-        "stem": "丁",
-        "branch": "未"
+        "sky": "丁",
+        "ground": "未"
       }
     }
   },
@@ -2896,20 +2896,20 @@
     },
     "expected": {
       "year": {
-        "stem": "戊",
-        "branch": "午"
+        "sky": "戊",
+        "ground": "午"
       },
       "month": {
-        "stem": "己",
-        "branch": "未"
+        "sky": "己",
+        "ground": "未"
       },
       "day": {
-        "stem": "庚",
-        "branch": "寅"
+        "sky": "庚",
+        "ground": "寅"
       },
       "time": {
-        "stem": "乙",
-        "branch": "酉"
+        "sky": "乙",
+        "ground": "酉"
       }
     }
   },
@@ -2927,20 +2927,20 @@
     },
     "expected": {
       "year": {
-        "stem": "戊",
-        "branch": "申"
+        "sky": "戊",
+        "ground": "申"
       },
       "month": {
-        "stem": "丁",
-        "branch": "巳"
+        "sky": "丁",
+        "ground": "巳"
       },
       "day": {
-        "stem": "丙",
-        "branch": "午"
+        "sky": "丙",
+        "ground": "午"
       },
       "time": {
-        "stem": "甲",
-        "branch": "午"
+        "sky": "甲",
+        "ground": "午"
       }
     }
   },
@@ -2958,20 +2958,20 @@
     },
     "expected": {
       "year": {
-        "stem": "辛",
-        "branch": "丑"
+        "sky": "辛",
+        "ground": "丑"
       },
       "month": {
-        "stem": "丁",
-        "branch": "酉"
+        "sky": "丁",
+        "ground": "酉"
       },
       "day": {
-        "stem": "丁",
-        "branch": "卯"
+        "sky": "丁",
+        "ground": "卯"
       },
       "time": {
-        "stem": "庚",
-        "branch": "戌"
+        "sky": "庚",
+        "ground": "戌"
       }
     }
   },
@@ -2989,20 +2989,20 @@
     },
     "expected": {
       "year": {
-        "stem": "丙",
-        "branch": "午"
+        "sky": "丙",
+        "ground": "午"
       },
       "month": {
-        "stem": "壬",
-        "branch": "辰"
+        "sky": "壬",
+        "ground": "辰"
       },
       "day": {
-        "stem": "戊",
-        "branch": "戌"
+        "sky": "戊",
+        "ground": "戌"
       },
       "time": {
-        "stem": "丙",
-        "branch": "辰"
+        "sky": "丙",
+        "ground": "辰"
       }
     }
   },
@@ -3020,20 +3020,20 @@
     },
     "expected": {
       "year": {
-        "stem": "辛",
-        "branch": "未"
+        "sky": "辛",
+        "ground": "未"
       },
       "month": {
-        "stem": "癸",
-        "branch": "巳"
+        "sky": "癸",
+        "ground": "巳"
       },
       "day": {
-        "stem": "丙",
-        "branch": "申"
+        "sky": "丙",
+        "ground": "申"
       },
       "time": {
-        "stem": "乙",
-        "branch": "未"
+        "sky": "乙",
+        "ground": "未"
       }
     }
   },
@@ -3051,20 +3051,20 @@
     },
     "expected": {
       "year": {
-        "stem": "壬",
-        "branch": "寅"
+        "sky": "壬",
+        "ground": "寅"
       },
       "month": {
-        "stem": "癸",
-        "branch": "卯"
+        "sky": "癸",
+        "ground": "卯"
       },
       "day": {
-        "stem": "丁",
-        "branch": "亥"
+        "sky": "丁",
+        "ground": "亥"
       },
       "time": {
-        "stem": "辛",
-        "branch": "亥"
+        "sky": "辛",
+        "ground": "亥"
       }
     }
   },
@@ -3082,20 +3082,20 @@
     },
     "expected": {
       "year": {
-        "stem": "庚",
-        "branch": "申"
+        "sky": "庚",
+        "ground": "申"
       },
       "month": {
-        "stem": "甲",
-        "branch": "申"
+        "sky": "甲",
+        "ground": "申"
       },
       "day": {
-        "stem": "壬",
-        "branch": "子"
+        "sky": "壬",
+        "ground": "子"
       },
       "time": {
-        "stem": "己",
-        "branch": "酉"
+        "sky": "己",
+        "ground": "酉"
       }
     }
   }
