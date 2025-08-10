@@ -81,7 +81,7 @@ export default async function LandingPage() {
             점순이만의 특별함
           </h3>
 
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             <div className="rounded-2xl border border-slate-700/50 bg-gradient-to-br from-slate-800/50 to-gray-800/50 p-8 text-center backdrop-blur-sm">
               <div className="mb-4 text-5xl">🌙</div>
               <h4 className="mb-4 text-2xl font-bold text-slate-300">오늘의 운세</h4>
@@ -106,6 +106,19 @@ export default async function LandingPage() {
               <p className="text-slate-400">
                 동양의 전통 점술 방식을 AI와 결합하여 현대적이면서도 깊이있는 해석을 제공합니다.
               </p>
+            </div>
+
+            <div className="rounded-2xl border border-purple-700/50 bg-gradient-to-br from-purple-800/50 to-indigo-800/50 p-8 text-center backdrop-blur-sm hover:border-purple-500/50 transition-all duration-300">
+              <div className="mb-4 text-5xl">📊</div>
+              <h4 className="mb-4 text-2xl font-bold text-slate-300">사주팔자 분석</h4>
+              <p className="text-slate-400 mb-6">
+                생년월일과 시간을 바탕으로 정확한 사주팔자와 오행 분석을 제공합니다. 5각형 차트로 오행 분포를 시각화합니다.
+              </p>
+              <Link href="/saju">
+                <Button className="w-full rounded-full bg-gradient-to-r from-purple-500 to-indigo-600 px-6 py-3 text-white font-semibold hover:from-purple-600 hover:to-indigo-700 transition-all duration-200 transform hover:scale-105">
+                  📊 사주팔자 분석하기
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -150,17 +163,31 @@ export default async function LandingPage() {
           </h3>
           <p className="mb-8 text-xl text-gray-400">점순이와 함께 더 나은 내일을 준비하세요</p>
 
-          <div className="space-y-4 sm:flex sm:justify-center sm:space-x-4 sm:space-y-0">
+          <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-x-4 sm:space-y-0">
             {user ? (
-              <Link href="/chat">
-                <Button className="w-full transform rounded-full bg-gradient-to-r from-slate-400 to-slate-600 px-10 py-4 text-xl font-bold text-black shadow-lg transition-all duration-200 hover:scale-105 hover:from-slate-500 hover:to-slate-700 sm:w-auto">
-                  🔮 운세 보러가기
-                </Button>
-              </Link>
+              <>
+                <Link href="/chat">
+                  <Button className="w-full transform rounded-full bg-gradient-to-r from-slate-400 to-slate-600 px-10 py-4 text-xl font-bold text-black shadow-lg transition-all duration-200 hover:scale-105 hover:from-slate-500 hover:to-slate-700 sm:w-auto">
+                    🔮 운세 보러가기
+                  </Button>
+                </Link>
+                <Link href="/saju">
+                  <Button className="w-full transform rounded-full bg-gradient-to-r from-purple-500 to-indigo-600 px-10 py-4 text-xl font-bold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-purple-600 hover:to-indigo-700 sm:w-auto">
+                    📊 사주팔자 분석하기
+                  </Button>
+                </Link>
+              </>
             ) : (
-              <KakaoLoginButton variant="landing" className="w-full px-10 py-4 text-xl sm:w-auto">
-                🔮 카카오로 무료 시작하기
-              </KakaoLoginButton>
+              <>
+                <KakaoLoginButton variant="landing" className="w-full px-10 py-4 text-xl sm:w-auto">
+                  🔮 카카오로 무료 시작하기
+                </KakaoLoginButton>
+                <Link href="/saju">
+                  <Button className="w-full transform rounded-full bg-gradient-to-r from-purple-500 to-indigo-600 px-10 py-4 text-xl font-bold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-purple-600 hover:to-indigo-700 sm:w-auto">
+                    📊 사주팔자 분석하기
+                  </Button>
+                </Link>
+              </>
             )}
           </div>
         </div>
