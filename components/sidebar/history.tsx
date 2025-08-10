@@ -16,8 +16,8 @@ import {
   SidebarMenu,
   useSidebar,
 } from '@/components/ui/sidebar';
-import type { Chat } from '@/lib/db/schema';
-import { fetcher } from '@/lib/utils';
+import type { Chat } from '@/lib/infra/db/schema';
+import { fetcher } from '@/lib/shared/utils';
 import { isToday, isYesterday, subMonths, subWeeks } from 'date-fns';
 import { motion } from 'framer-motion';
 import type { User } from '@supabase/auth-js';
@@ -228,7 +228,9 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
 
                     {groupedChats.yesterday.length > 0 && (
                       <div>
-                        <div className="px-2 py-1 text-xs text-sidebar-foreground/50">Yesterday</div>
+                        <div className="px-2 py-1 text-xs text-sidebar-foreground/50">
+                          Yesterday
+                        </div>
                         {groupedChats.yesterday.map((chat) => (
                           <ChatItem
                             key={chat.id}
@@ -246,7 +248,9 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
 
                     {groupedChats.lastWeek.length > 0 && (
                       <div>
-                        <div className="px-2 py-1 text-xs text-sidebar-foreground/50">Last 7 Days</div>
+                        <div className="px-2 py-1 text-xs text-sidebar-foreground/50">
+                          Last 7 Days
+                        </div>
                         {groupedChats.lastWeek.map((chat) => (
                           <ChatItem
                             key={chat.id}

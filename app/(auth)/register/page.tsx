@@ -29,7 +29,7 @@ export default function RegisterPage() {
   return (
     <div className="flex min-h-dvh w-screen items-center justify-center bg-gradient-to-br from-yellow-50 via-white to-yellow-100 px-4 py-8">
       <div className="w-full max-w-lg rounded-2xl bg-white/90 p-6 shadow-xl backdrop-blur-sm sm:p-8 md:p-10">
-        <h1 className="mb-8 text-center text-3xl font-bold text-gray-800">팩토리얼 회원가입</h1>
+        <h1 className="mb-8 text-center text-3xl font-bold text-gray-800">점순이 회원가입</h1>
         <p className="mb-8 text-center text-sm text-gray-600">
           아래 필수 항목들을 입력하여 회원가입을 진행해주세요.
         </p>
@@ -106,12 +106,12 @@ export default function RegisterPage() {
           </div>
 
           <div>
-            <Label htmlFor="birthYear" className="text-gray-700">
+            <Label htmlFor="year" className="text-gray-700">
               출생연도
             </Label>
             <Input
-              id="birthYear"
-              name="birthYear"
+              id="year"
+              name="year"
               type="number"
               placeholder="예: 1990"
               min="1900"

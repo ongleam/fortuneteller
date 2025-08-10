@@ -2,11 +2,11 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { createClient } from '@/lib/supabase/client';
-import { upsertProfileFromSupabaseUser } from '@/lib/actions/profile';
+import { createClient } from '@/lib/infra/supabase/client';
+import { upsertProfileFromSupabaseUser } from '@/lib/interfaces/actions/profile';
 import type { AuthChangeEvent, Session, User } from '@supabase/supabase-js';
 import { useRouter } from 'next/navigation';
-import { getKakaoUserInfo } from '@/lib/actions/kakao';
+import { getKakaoUserInfo } from '@/lib/interfaces/actions/kakao';
 
 // 프로필 업데이트가 필요한 이벤트 정의 - 우선순위가 높은 이벤트 추가
 const PROFILE_UPDATE_EVENTS: AuthChangeEvent[] = [

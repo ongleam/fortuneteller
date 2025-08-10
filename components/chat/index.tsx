@@ -2,8 +2,8 @@
 
 import { ChatHeader } from '@/components/chat/header';
 // import { useArtifactSelector } from '@/hooks/use-artifact';
-import type { Vote } from '@/lib/db/schema';
-import { fetcher, generateUUID } from '@/lib/utils';
+import type { Vote } from '@/lib/infra/db/schema';
+import { fetcher, generateUUID } from '@/lib/shared/utils';
 import { useChat } from '@ai-sdk/react';
 import type { Attachment, UIMessage } from 'ai';
 import type { User } from '@supabase/auth-js';

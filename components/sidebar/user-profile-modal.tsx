@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, ReactNode, useRef, useCallback } from 'react';
-import { createClient } from '@/lib/supabase/client';
+import { createClient } from '@/lib/infra/supabase/client';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -30,7 +30,7 @@ import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
 import { toast } from '@/components/toast';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/shared/utils';
 import { siteConfig } from '@/config/site';
 import { useTheme } from 'next-themes';
 

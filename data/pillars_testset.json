@@ -1,0 +1,3102 @@
+[
+  {
+    "description": "음력 2023년 윤2월 15일 10시 30분 (여성)",
+    "input": {
+      "year": "2023",
+      "month": "2",
+      "day": "15",
+      "hour": "10",
+      "minute": "30",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": true
+    },
+    "expected": {
+      "year": {
+        "sky": "癸",
+        "ground": "卯"
+      },
+      "month": {
+        "sky": "乙",
+        "ground": "卯"
+      },
+      "day": {
+        "sky": "癸",
+        "ground": "亥"
+      },
+      "time": {
+        "sky": "丁",
+        "ground": "巳"
+      }
+    }
+  },
+  {
+    "description": "음력 2023년 2월 15일 10시 30분 (남성)",
+    "input": {
+      "year": "2023",
+      "month": "2",
+      "day": "15",
+      "hour": "10",
+      "minute": "30",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "癸",
+        "ground": "卯"
+      },
+      "month": {
+        "sky": "乙",
+        "ground": "卯"
+      },
+      "day": {
+        "sky": "癸",
+        "ground": "亥"
+      },
+      "time": {
+        "sky": "丁",
+        "ground": "巳"
+      }
+    }
+  },
+  {
+    "description": "음력 2020년 윤4월 1일 8시 0분 (여성)",
+    "input": {
+      "year": "2020",
+      "month": "4",
+      "day": "1",
+      "hour": "8",
+      "minute": "0",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": true
+    },
+    "expected": {
+      "year": {
+        "sky": "庚",
+        "ground": "子"
+      },
+      "month": {
+        "sky": "庚",
+        "ground": "辰"
+      },
+      "day": {
+        "sky": "丙",
+        "ground": "申"
+      },
+      "time": {
+        "sky": "壬",
+        "ground": "辰"
+      }
+    }
+  },
+  {
+    "description": "음력 2020년 4월 1일 8시 0분 (남성)",
+    "input": {
+      "year": "2020",
+      "month": "4",
+      "day": "1",
+      "hour": "8",
+      "minute": "0",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "庚",
+        "ground": "子"
+      },
+      "month": {
+        "sky": "庚",
+        "ground": "辰"
+      },
+      "day": {
+        "sky": "丙",
+        "ground": "申"
+      },
+      "time": {
+        "sky": "壬",
+        "ground": "辰"
+      }
+    }
+  },
+  {
+    "description": "음력 2001년 윤4월 20일 18시 5분 (여성)",
+    "input": {
+      "year": "2001",
+      "month": "4",
+      "day": "20",
+      "hour": "18",
+      "minute": "5",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": true
+    },
+    "expected": {
+      "year": {
+        "sky": "辛",
+        "ground": "巳"
+      },
+      "month": {
+        "sky": "癸",
+        "ground": "巳"
+      },
+      "day": {
+        "sky": "丙",
+        "ground": "子"
+      },
+      "time": {
+        "sky": "丁",
+        "ground": "酉"
+      }
+    }
+  },
+  {
+    "description": "음력 2001년 4월 20일 18시 5분 (남성)",
+    "input": {
+      "year": "2001",
+      "month": "4",
+      "day": "20",
+      "hour": "18",
+      "minute": "5",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "辛",
+        "ground": "巳"
+      },
+      "month": {
+        "sky": "癸",
+        "ground": "巳"
+      },
+      "day": {
+        "sky": "丙",
+        "ground": "子"
+      },
+      "time": {
+        "sky": "丁",
+        "ground": "酉"
+      }
+    }
+  },
+  {
+    "description": "음력 1995년 윤8월 10일 23시 40분 (여성)",
+    "input": {
+      "year": "1995",
+      "month": "8",
+      "day": "10",
+      "hour": "23",
+      "minute": "40",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": true
+    },
+    "expected": {
+      "year": {
+        "sky": "乙",
+        "ground": "亥"
+      },
+      "month": {
+        "sky": "甲",
+        "ground": "申"
+      },
+      "day": {
+        "sky": "己",
+        "ground": "亥"
+      },
+      "time": {
+        "sky": "甲",
+        "ground": "子"
+      }
+    }
+  },
+  {
+    "description": "음력 1995년 8월 10일 23시 40분 (남성)",
+    "input": {
+      "year": "1995",
+      "month": "8",
+      "day": "10",
+      "hour": "23",
+      "minute": "40",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "乙",
+        "ground": "亥"
+      },
+      "month": {
+        "sky": "甲",
+        "ground": "申"
+      },
+      "day": {
+        "sky": "己",
+        "ground": "亥"
+      },
+      "time": {
+        "sky": "甲",
+        "ground": "子"
+      }
+    }
+  },
+  {
+    "description": "음력 1982년 윤4월 5일 3시 15분 (여성)",
+    "input": {
+      "year": "1982",
+      "month": "4",
+      "day": "5",
+      "hour": "3",
+      "minute": "15",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": true
+    },
+    "expected": {
+      "year": {
+        "sky": "壬",
+        "ground": "戌"
+      },
+      "month": {
+        "sky": "甲",
+        "ground": "辰"
+      },
+      "day": {
+        "sky": "辛",
+        "ground": "巳"
+      },
+      "time": {
+        "sky": "己",
+        "ground": "丑"
+      }
+    }
+  },
+  {
+    "description": "음력 1982년 4월 5일 3시 15분 (남성)",
+    "input": {
+      "year": "1982",
+      "month": "4",
+      "day": "5",
+      "hour": "3",
+      "minute": "15",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "壬",
+        "ground": "戌"
+      },
+      "month": {
+        "sky": "甲",
+        "ground": "辰"
+      },
+      "day": {
+        "sky": "辛",
+        "ground": "巳"
+      },
+      "time": {
+        "sky": "己",
+        "ground": "丑"
+      }
+    }
+  },
+  {
+    "description": "양력 2007년 11월 1일 17시 18분 여성",
+    "input": {
+      "year": "2007",
+      "month": "11",
+      "day": "1",
+      "hour": "17",
+      "minute": "18",
+      "gender": "여성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "丁",
+        "ground": "亥"
+      },
+      "month": {
+        "sky": "庚",
+        "ground": "戌"
+      },
+      "day": {
+        "sky": "己",
+        "ground": "亥"
+      },
+      "time": {
+        "sky": "壬",
+        "ground": "申"
+      }
+    }
+  },
+  {
+    "description": "음력 2007년 11월 24일 5시 46분 남성",
+    "input": {
+      "year": "2007",
+      "month": "11",
+      "day": "24",
+      "hour": "5",
+      "minute": "46",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "丁",
+        "ground": "亥"
+      },
+      "month": {
+        "sky": "壬",
+        "ground": "子"
+      },
+      "day": {
+        "sky": "辛",
+        "ground": "丑"
+      },
+      "time": {
+        "sky": "辛",
+        "ground": "卯"
+      }
+    }
+  },
+  {
+    "description": "양력 1987년 9월 16일 7시 3분 여성",
+    "input": {
+      "year": "1987",
+      "month": "9",
+      "day": "16",
+      "hour": "7",
+      "minute": "3",
+      "gender": "여성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "丁",
+        "ground": "卯"
+      },
+      "month": {
+        "sky": "己",
+        "ground": "酉"
+      },
+      "day": {
+        "sky": "戊",
+        "ground": "辰"
+      },
+      "time": {
+        "sky": "乙",
+        "ground": "卯"
+      }
+    }
+  },
+  {
+    "description": "음력 1951년 10월 6일 14시 56분 남성",
+    "input": {
+      "year": "1951",
+      "month": "10",
+      "day": "6",
+      "hour": "14",
+      "minute": "56",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "辛",
+        "ground": "卯"
+      },
+      "month": {
+        "sky": "戊",
+        "ground": "戌"
+      },
+      "day": {
+        "sky": "戊",
+        "ground": "申"
+      },
+      "time": {
+        "sky": "己",
+        "ground": "未"
+      }
+    }
+  },
+  {
+    "description": "양력 2002년 11월 24일 13시 46분 여성",
+    "input": {
+      "year": "2002",
+      "month": "11",
+      "day": "24",
+      "hour": "13",
+      "minute": "46",
+      "gender": "여성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "壬",
+        "ground": "午"
+      },
+      "month": {
+        "sky": "辛",
+        "ground": "亥"
+      },
+      "day": {
+        "sky": "丙",
+        "ground": "申"
+      },
+      "time": {
+        "sky": "乙",
+        "ground": "未"
+      }
+    }
+  },
+  {
+    "description": "음력 2023년 6월 10일 9시 43분 남성",
+    "input": {
+      "year": "2023",
+      "month": "6",
+      "day": "10",
+      "hour": "9",
+      "minute": "43",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "癸",
+        "ground": "卯"
+      },
+      "month": {
+        "sky": "己",
+        "ground": "未"
+      },
+      "day": {
+        "sky": "丙",
+        "ground": "戌"
+      },
+      "time": {
+        "sky": "癸",
+        "ground": "巳"
+      }
+    }
+  },
+  {
+    "description": "음력 1997년 4월 14일 22시 43분 여성",
+    "input": {
+      "year": "1997",
+      "month": "4",
+      "day": "14",
+      "hour": "22",
+      "minute": "43",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "丁",
+        "ground": "丑"
+      },
+      "month": {
+        "sky": "乙",
+        "ground": "巳"
+      },
+      "day": {
+        "sky": "壬",
+        "ground": "戌"
+      },
+      "time": {
+        "sky": "辛",
+        "ground": "亥"
+      }
+    }
+  },
+  {
+    "description": "음력 1964년 11월 7일 21시 54분 남성",
+    "input": {
+      "year": "1964",
+      "month": "11",
+      "day": "7",
+      "hour": "21",
+      "minute": "54",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "甲",
+        "ground": "辰"
+      },
+      "month": {
+        "sky": "丙",
+        "ground": "子"
+      },
+      "day": {
+        "sky": "癸",
+        "ground": "巳"
+      },
+      "time": {
+        "sky": "癸",
+        "ground": "亥"
+      }
+    }
+  },
+  {
+    "description": "음력 1965년 2월 8일 15시 10분 남성",
+    "input": {
+      "year": "1965",
+      "month": "2",
+      "day": "8",
+      "hour": "15",
+      "minute": "10",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "乙",
+        "ground": "巳"
+      },
+      "month": {
+        "sky": "己",
+        "ground": "卯"
+      },
+      "day": {
+        "sky": "癸",
+        "ground": "亥"
+      },
+      "time": {
+        "sky": "己",
+        "ground": "未"
+      }
+    }
+  },
+  {
+    "description": "음력 1983년 5월 5일 18시 34분 남성",
+    "input": {
+      "year": "1983",
+      "month": "5",
+      "day": "5",
+      "hour": "18",
+      "minute": "34",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "癸",
+        "ground": "亥"
+      },
+      "month": {
+        "sky": "戊",
+        "ground": "午"
+      },
+      "day": {
+        "sky": "甲",
+        "ground": "戌"
+      },
+      "time": {
+        "sky": "癸",
+        "ground": "酉"
+      }
+    }
+  },
+  {
+    "description": "음력 1984년 1월 14일 22시 0분 남성",
+    "input": {
+      "year": "1984",
+      "month": "1",
+      "day": "14",
+      "hour": "22",
+      "minute": "0",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "甲",
+        "ground": "子"
+      },
+      "month": {
+        "sky": "丙",
+        "ground": "寅"
+      },
+      "day": {
+        "sky": "己",
+        "ground": "卯"
+      },
+      "time": {
+        "sky": "乙",
+        "ground": "亥"
+      }
+    }
+  },
+  {
+    "description": "음력 1977년 7월 3일 14시 51분 여성",
+    "input": {
+      "year": "1977",
+      "month": "7",
+      "day": "3",
+      "hour": "14",
+      "minute": "51",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "丁",
+        "ground": "巳"
+      },
+      "month": {
+        "sky": "戊",
+        "ground": "申"
+      },
+      "day": {
+        "sky": "丙",
+        "ground": "午"
+      },
+      "time": {
+        "sky": "乙",
+        "ground": "未"
+      }
+    }
+  },
+  {
+    "description": "음력 2018년 8월 14일 21시 23분 여성",
+    "input": {
+      "year": "2018",
+      "month": "8",
+      "day": "14",
+      "hour": "21",
+      "minute": "23",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "戊",
+        "ground": "戌"
+      },
+      "month": {
+        "sky": "辛",
+        "ground": "酉"
+      },
+      "day": {
+        "sky": "戊",
+        "ground": "午"
+      },
+      "time": {
+        "sky": "壬",
+        "ground": "戌"
+      }
+    }
+  },
+  {
+    "description": "음력 1972년 12월 7일 2시 59분 여성",
+    "input": {
+      "year": "1972",
+      "month": "12",
+      "day": "7",
+      "hour": "2",
+      "minute": "59",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "壬",
+        "ground": "子"
+      },
+      "month": {
+        "sky": "癸",
+        "ground": "丑"
+      },
+      "day": {
+        "sky": "丁",
+        "ground": "未"
+      },
+      "time": {
+        "sky": "辛",
+        "ground": "丑"
+      }
+    }
+  },
+  {
+    "description": "양력 2000년 12월 26일 18시 17분 여성",
+    "input": {
+      "year": "2000",
+      "month": "12",
+      "day": "26",
+      "hour": "18",
+      "minute": "17",
+      "gender": "여성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "庚",
+        "ground": "辰"
+      },
+      "month": {
+        "sky": "戊",
+        "ground": "子"
+      },
+      "day": {
+        "sky": "戊",
+        "ground": "午"
+      },
+      "time": {
+        "sky": "辛",
+        "ground": "酉"
+      }
+    }
+  },
+  {
+    "description": "양력 1967년 2월 8일 23시 12분 남성",
+    "input": {
+      "year": "1967",
+      "month": "2",
+      "day": "8",
+      "hour": "23",
+      "minute": "12",
+      "gender": "남성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "丁",
+        "ground": "未"
+      },
+      "month": {
+        "sky": "壬",
+        "ground": "寅"
+      },
+      "day": {
+        "sky": "癸",
+        "ground": "卯"
+      },
+      "time": {
+        "sky": "癸",
+        "ground": "亥"
+      }
+    }
+  },
+  {
+    "description": "양력 1989년 6월 4일 2시 33분 여성",
+    "input": {
+      "year": "1989",
+      "month": "6",
+      "day": "4",
+      "hour": "2",
+      "minute": "33",
+      "gender": "여성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "己",
+        "ground": "巳"
+      },
+      "month": {
+        "sky": "己",
+        "ground": "巳"
+      },
+      "day": {
+        "sky": "乙",
+        "ground": "未"
+      },
+      "time": {
+        "sky": "丁",
+        "ground": "丑"
+      }
+    }
+  },
+  {
+    "description": "음력 1957년 7월 22일 7시 14분 남성",
+    "input": {
+      "year": "1957",
+      "month": "7",
+      "day": "22",
+      "hour": "7",
+      "minute": "14",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "丁",
+        "ground": "酉"
+      },
+      "month": {
+        "sky": "戊",
+        "ground": "申"
+      },
+      "day": {
+        "sky": "辛",
+        "ground": "酉"
+      },
+      "time": {
+        "sky": "辛",
+        "ground": "卯"
+      }
+    }
+  },
+  {
+    "description": "양력 2008년 9월 27일 9시 52분 남성",
+    "input": {
+      "year": "2008",
+      "month": "9",
+      "day": "27",
+      "hour": "9",
+      "minute": "52",
+      "gender": "남성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "戊",
+        "ground": "子"
+      },
+      "month": {
+        "sky": "辛",
+        "ground": "酉"
+      },
+      "day": {
+        "sky": "庚",
+        "ground": "午"
+      },
+      "time": {
+        "sky": "辛",
+        "ground": "巳"
+      }
+    }
+  },
+  {
+    "description": "양력 1951년 1월 11일 5시 44분 여성",
+    "input": {
+      "year": "1951",
+      "month": "1",
+      "day": "11",
+      "hour": "5",
+      "minute": "44",
+      "gender": "여성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "庚",
+        "ground": "寅"
+      },
+      "month": {
+        "sky": "己",
+        "ground": "丑"
+      },
+      "day": {
+        "sky": "辛",
+        "ground": "亥"
+      },
+      "time": {
+        "sky": "辛",
+        "ground": "卯"
+      }
+    }
+  },
+  {
+    "description": "양력 1953년 10월 4일 18시 29분 남성",
+    "input": {
+      "year": "1953",
+      "month": "10",
+      "day": "4",
+      "hour": "18",
+      "minute": "29",
+      "gender": "남성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "癸",
+        "ground": "巳"
+      },
+      "month": {
+        "sky": "辛",
+        "ground": "酉"
+      },
+      "day": {
+        "sky": "戊",
+        "ground": "子"
+      },
+      "time": {
+        "sky": "辛",
+        "ground": "酉"
+      }
+    }
+  },
+  {
+    "description": "양력 1990년 12월 19일 1시 15분 여성",
+    "input": {
+      "year": "1990",
+      "month": "12",
+      "day": "19",
+      "hour": "1",
+      "minute": "15",
+      "gender": "여성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "庚",
+        "ground": "午"
+      },
+      "month": {
+        "sky": "戊",
+        "ground": "子"
+      },
+      "day": {
+        "sky": "戊",
+        "ground": "午"
+      },
+      "time": {
+        "sky": "壬",
+        "ground": "子"
+      }
+    }
+  },
+  {
+    "description": "음력 2007년 12월 7일 5시 18분 남성",
+    "input": {
+      "year": "2007",
+      "month": "12",
+      "day": "7",
+      "hour": "5",
+      "minute": "18",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "丁",
+        "ground": "亥"
+      },
+      "month": {
+        "sky": "癸",
+        "ground": "丑"
+      },
+      "day": {
+        "sky": "癸",
+        "ground": "丑"
+      },
+      "time": {
+        "sky": "甲",
+        "ground": "寅"
+      }
+    }
+  },
+  {
+    "description": "양력 2018년 1월 5일 10시 58분 남성",
+    "input": {
+      "year": "2018",
+      "month": "1",
+      "day": "5",
+      "hour": "10",
+      "minute": "58",
+      "gender": "남성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "丁",
+        "ground": "酉"
+      },
+      "month": {
+        "sky": "壬",
+        "ground": "子"
+      },
+      "day": {
+        "sky": "丁",
+        "ground": "酉"
+      },
+      "time": {
+        "sky": "乙",
+        "ground": "巳"
+      }
+    }
+  },
+  {
+    "description": "양력 1955년 3월 5일 12시 5분 여성",
+    "input": {
+      "year": "1955",
+      "month": "3",
+      "day": "5",
+      "hour": "12",
+      "minute": "5",
+      "gender": "여성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "乙",
+        "ground": "未"
+      },
+      "month": {
+        "sky": "戊",
+        "ground": "寅"
+      },
+      "day": {
+        "sky": "乙",
+        "ground": "丑"
+      },
+      "time": {
+        "sky": "壬",
+        "ground": "午"
+      }
+    }
+  },
+  {
+    "description": "양력 1988년 2월 17일 23시 16분 여성",
+    "input": {
+      "year": "1988",
+      "month": "2",
+      "day": "17",
+      "hour": "23",
+      "minute": "16",
+      "gender": "여성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "戊",
+        "ground": "辰"
+      },
+      "month": {
+        "sky": "甲",
+        "ground": "寅"
+      },
+      "day": {
+        "sky": "壬",
+        "ground": "寅"
+      },
+      "time": {
+        "sky": "辛",
+        "ground": "亥"
+      }
+    }
+  },
+  {
+    "description": "음력 2015년 1월 21일 14시 58분 남성",
+    "input": {
+      "year": "2015",
+      "month": "1",
+      "day": "21",
+      "hour": "14",
+      "minute": "58",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "乙",
+        "ground": "未"
+      },
+      "month": {
+        "sky": "己",
+        "ground": "卯"
+      },
+      "day": {
+        "sky": "丙",
+        "ground": "戌"
+      },
+      "time": {
+        "sky": "乙",
+        "ground": "未"
+      }
+    }
+  },
+  {
+    "description": "음력 2006년 8월 2일 19시 11분 여성",
+    "input": {
+      "year": "2006",
+      "month": "8",
+      "day": "2",
+      "hour": "19",
+      "minute": "11",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "丙",
+        "ground": "戌"
+      },
+      "month": {
+        "sky": "丁",
+        "ground": "酉"
+      },
+      "day": {
+        "sky": "乙",
+        "ground": "卯"
+      },
+      "time": {
+        "sky": "乙",
+        "ground": "酉"
+      }
+    }
+  },
+  {
+    "description": "양력 2009년 12월 25일 17시 26분 여성",
+    "input": {
+      "year": "2009",
+      "month": "12",
+      "day": "25",
+      "hour": "17",
+      "minute": "26",
+      "gender": "여성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "己",
+        "ground": "丑"
+      },
+      "month": {
+        "sky": "丙",
+        "ground": "子"
+      },
+      "day": {
+        "sky": "甲",
+        "ground": "辰"
+      },
+      "time": {
+        "sky": "壬",
+        "ground": "申"
+      }
+    }
+  },
+  {
+    "description": "음력 1982년 5월 5일 12시 56분 남성",
+    "input": {
+      "year": "1982",
+      "month": "5",
+      "day": "5",
+      "hour": "12",
+      "minute": "56",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "壬",
+        "ground": "戌"
+      },
+      "month": {
+        "sky": "丙",
+        "ground": "午"
+      },
+      "day": {
+        "sky": "己",
+        "ground": "卯"
+      },
+      "time": {
+        "sky": "庚",
+        "ground": "午"
+      }
+    }
+  },
+  {
+    "description": "양력 2011년 2월 7일 20시 31분 여성",
+    "input": {
+      "year": "2011",
+      "month": "2",
+      "day": "7",
+      "hour": "20",
+      "minute": "31",
+      "gender": "여성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "辛",
+        "ground": "卯"
+      },
+      "month": {
+        "sky": "庚",
+        "ground": "寅"
+      },
+      "day": {
+        "sky": "癸",
+        "ground": "巳"
+      },
+      "time": {
+        "sky": "壬",
+        "ground": "戌"
+      }
+    }
+  },
+  {
+    "description": "음력 2005년 7월 14일 20시 43분 여성",
+    "input": {
+      "year": "2005",
+      "month": "7",
+      "day": "14",
+      "hour": "20",
+      "minute": "43",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "乙",
+        "ground": "酉"
+      },
+      "month": {
+        "sky": "甲",
+        "ground": "申"
+      },
+      "day": {
+        "sky": "甲",
+        "ground": "戌"
+      },
+      "time": {
+        "sky": "甲",
+        "ground": "戌"
+      }
+    }
+  },
+  {
+    "description": "음력 2003년 8월 23일 14시 22분 여성",
+    "input": {
+      "year": "2003",
+      "month": "8",
+      "day": "23",
+      "hour": "14",
+      "minute": "22",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "癸",
+        "ground": "未"
+      },
+      "month": {
+        "sky": "辛",
+        "ground": "酉"
+      },
+      "day": {
+        "sky": "乙",
+        "ground": "未"
+      },
+      "time": {
+        "sky": "癸",
+        "ground": "未"
+      }
+    }
+  },
+  {
+    "description": "음력 2006년 2월 9일 11시 24분 남성",
+    "input": {
+      "year": "2006",
+      "month": "2",
+      "day": "9",
+      "hour": "11",
+      "minute": "24",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "丙",
+        "ground": "戌"
+      },
+      "month": {
+        "sky": "辛",
+        "ground": "卯"
+      },
+      "day": {
+        "sky": "丙",
+        "ground": "申"
+      },
+      "time": {
+        "sky": "癸",
+        "ground": "巳"
+      }
+    }
+  },
+  {
+    "description": "양력 2011년 9월 23일 22시 4분 남성",
+    "input": {
+      "year": "2011",
+      "month": "9",
+      "day": "23",
+      "hour": "22",
+      "minute": "4",
+      "gender": "남성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "辛",
+        "ground": "卯"
+      },
+      "month": {
+        "sky": "丁",
+        "ground": "酉"
+      },
+      "day": {
+        "sky": "辛",
+        "ground": "巳"
+      },
+      "time": {
+        "sky": "己",
+        "ground": "亥"
+      }
+    }
+  },
+  {
+    "description": "음력 1980년 3월 13일 18시 21분 여성",
+    "input": {
+      "year": "1980",
+      "month": "3",
+      "day": "13",
+      "hour": "18",
+      "minute": "21",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "庚",
+        "ground": "申"
+      },
+      "month": {
+        "sky": "庚",
+        "ground": "辰"
+      },
+      "day": {
+        "sky": "庚",
+        "ground": "午"
+      },
+      "time": {
+        "sky": "乙",
+        "ground": "酉"
+      }
+    }
+  },
+  {
+    "description": "양력 2024년 10월 12일 16시 58분 남성",
+    "input": {
+      "year": "2024",
+      "month": "10",
+      "day": "12",
+      "hour": "16",
+      "minute": "58",
+      "gender": "남성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "甲",
+        "ground": "辰"
+      },
+      "month": {
+        "sky": "甲",
+        "ground": "戌"
+      },
+      "day": {
+        "sky": "己",
+        "ground": "酉"
+      },
+      "time": {
+        "sky": "壬",
+        "ground": "申"
+      }
+    }
+  },
+  {
+    "description": "음력 2021년 7월 21일 8시 56분 남성",
+    "input": {
+      "year": "2021",
+      "month": "7",
+      "day": "21",
+      "hour": "8",
+      "minute": "56",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "辛",
+        "ground": "丑"
+      },
+      "month": {
+        "sky": "丙",
+        "ground": "申"
+      },
+      "day": {
+        "sky": "戊",
+        "ground": "申"
+      },
+      "time": {
+        "sky": "丙",
+        "ground": "辰"
+      }
+    }
+  },
+  {
+    "description": "양력 2021년 9월 6일 23시 8분 여성",
+    "input": {
+      "year": "2021",
+      "month": "9",
+      "day": "6",
+      "hour": "23",
+      "minute": "8",
+      "gender": "여성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "辛",
+        "ground": "丑"
+      },
+      "month": {
+        "sky": "丙",
+        "ground": "申"
+      },
+      "day": {
+        "sky": "丁",
+        "ground": "巳"
+      },
+      "time": {
+        "sky": "辛",
+        "ground": "亥"
+      }
+    }
+  },
+  {
+    "description": "양력 1972년 5월 5일 12시 44분 여성",
+    "input": {
+      "year": "1972",
+      "month": "5",
+      "day": "5",
+      "hour": "12",
+      "minute": "44",
+      "gender": "여성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "壬",
+        "ground": "子"
+      },
+      "month": {
+        "sky": "甲",
+        "ground": "辰"
+      },
+      "day": {
+        "sky": "丙",
+        "ground": "申"
+      },
+      "time": {
+        "sky": "甲",
+        "ground": "午"
+      }
+    }
+  },
+  {
+    "description": "음력 1991년 3월 21일 18시 45분 남성",
+    "input": {
+      "year": "1991",
+      "month": "3",
+      "day": "21",
+      "hour": "18",
+      "minute": "45",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "辛",
+        "ground": "未"
+      },
+      "month": {
+        "sky": "壬",
+        "ground": "辰"
+      },
+      "day": {
+        "sky": "乙",
+        "ground": "亥"
+      },
+      "time": {
+        "sky": "乙",
+        "ground": "酉"
+      }
+    }
+  },
+  {
+    "description": "음력 2014년 8월 27일 6시 2분 여성",
+    "input": {
+      "year": "2014",
+      "month": "8",
+      "day": "27",
+      "hour": "6",
+      "minute": "2",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "甲",
+        "ground": "午"
+      },
+      "month": {
+        "sky": "癸",
+        "ground": "酉"
+      },
+      "day": {
+        "sky": "甲",
+        "ground": "午"
+      },
+      "time": {
+        "sky": "丁",
+        "ground": "卯"
+      }
+    }
+  },
+  {
+    "description": "양력 1956년 8월 16일 12시 45분 남성",
+    "input": {
+      "year": "1956",
+      "month": "8",
+      "day": "16",
+      "hour": "12",
+      "minute": "45",
+      "gender": "남성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "丙",
+        "ground": "申"
+      },
+      "month": {
+        "sky": "丙",
+        "ground": "申"
+      },
+      "day": {
+        "sky": "乙",
+        "ground": "卯"
+      },
+      "time": {
+        "sky": "壬",
+        "ground": "午"
+      }
+    }
+  },
+  {
+    "description": "음력 1974년 12월 16일 13시 23분 여성",
+    "input": {
+      "year": "1974",
+      "month": "12",
+      "day": "16",
+      "hour": "13",
+      "minute": "23",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "甲",
+        "ground": "寅"
+      },
+      "month": {
+        "sky": "丁",
+        "ground": "丑"
+      },
+      "day": {
+        "sky": "癸",
+        "ground": "酉"
+      },
+      "time": {
+        "sky": "戊",
+        "ground": "午"
+      }
+    }
+  },
+  {
+    "description": "음력 1953년 2월 8일 4시 5분 여성",
+    "input": {
+      "year": "1953",
+      "month": "2",
+      "day": "8",
+      "hour": "4",
+      "minute": "5",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "癸",
+        "ground": "巳"
+      },
+      "month": {
+        "sky": "乙",
+        "ground": "卯"
+      },
+      "day": {
+        "sky": "壬",
+        "ground": "申"
+      },
+      "time": {
+        "sky": "壬",
+        "ground": "寅"
+      }
+    }
+  },
+  {
+    "description": "양력 1959년 8월 23일 12시 18분 남성",
+    "input": {
+      "year": "1959",
+      "month": "8",
+      "day": "23",
+      "hour": "12",
+      "minute": "18",
+      "gender": "남성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "己",
+        "ground": "亥"
+      },
+      "month": {
+        "sky": "壬",
+        "ground": "申"
+      },
+      "day": {
+        "sky": "丁",
+        "ground": "丑"
+      },
+      "time": {
+        "sky": "丙",
+        "ground": "午"
+      }
+    }
+  },
+  {
+    "description": "음력 2023년 9월 13일 2시 41분 여성",
+    "input": {
+      "year": "2023",
+      "month": "9",
+      "day": "13",
+      "hour": "2",
+      "minute": "41",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "癸",
+        "ground": "卯"
+      },
+      "month": {
+        "sky": "壬",
+        "ground": "戌"
+      },
+      "day": {
+        "sky": "戊",
+        "ground": "午"
+      },
+      "time": {
+        "sky": "癸",
+        "ground": "丑"
+      }
+    }
+  },
+  {
+    "description": "음력 1950년 8월 17일 19시 6분 여성",
+    "input": {
+      "year": "1950",
+      "month": "8",
+      "day": "17",
+      "hour": "19",
+      "minute": "6",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "庚",
+        "ground": "寅"
+      },
+      "month": {
+        "sky": "乙",
+        "ground": "酉"
+      },
+      "day": {
+        "sky": "丙",
+        "ground": "寅"
+      },
+      "time": {
+        "sky": "丁",
+        "ground": "酉"
+      }
+    }
+  },
+  {
+    "description": "양력 1960년 4월 15일 23시 50분 남성",
+    "input": {
+      "year": "1960",
+      "month": "4",
+      "day": "15",
+      "hour": "23",
+      "minute": "50",
+      "gender": "남성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "庚",
+        "ground": "子"
+      },
+      "month": {
+        "sky": "庚",
+        "ground": "辰"
+      },
+      "day": {
+        "sky": "甲",
+        "ground": "戌"
+      },
+      "time": {
+        "sky": "甲",
+        "ground": "子"
+      }
+    }
+  },
+  {
+    "description": "음력 1984년 10월 2일 16시 29분 남성",
+    "input": {
+      "year": "1984",
+      "month": "10",
+      "day": "2",
+      "hour": "16",
+      "minute": "29",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "甲",
+        "ground": "子"
+      },
+      "month": {
+        "sky": "甲",
+        "ground": "戌"
+      },
+      "day": {
+        "sky": "壬",
+        "ground": "辰"
+      },
+      "time": {
+        "sky": "戊",
+        "ground": "申"
+      }
+    }
+  },
+  {
+    "description": "음력 2002년 5월 14일 17시 40분 여성",
+    "input": {
+      "year": "2002",
+      "month": "5",
+      "day": "14",
+      "hour": "17",
+      "minute": "40",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "壬",
+        "ground": "午"
+      },
+      "month": {
+        "sky": "丙",
+        "ground": "午"
+      },
+      "day": {
+        "sky": "癸",
+        "ground": "亥"
+      },
+      "time": {
+        "sky": "辛",
+        "ground": "酉"
+      }
+    }
+  },
+  {
+    "description": "음력 2001년 1월 16일 7시 23분 남성",
+    "input": {
+      "year": "2001",
+      "month": "1",
+      "day": "16",
+      "hour": "7",
+      "minute": "23",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "辛",
+        "ground": "巳"
+      },
+      "month": {
+        "sky": "庚",
+        "ground": "寅"
+      },
+      "day": {
+        "sky": "壬",
+        "ground": "寅"
+      },
+      "time": {
+        "sky": "癸",
+        "ground": "卯"
+      }
+    }
+  },
+  {
+    "description": "양력 1981년 5월 23일 9시 17분 여성",
+    "input": {
+      "year": "1981",
+      "month": "5",
+      "day": "23",
+      "hour": "9",
+      "minute": "17",
+      "gender": "여성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "辛",
+        "ground": "酉"
+      },
+      "month": {
+        "sky": "癸",
+        "ground": "巳"
+      },
+      "day": {
+        "sky": "辛",
+        "ground": "丑"
+      },
+      "time": {
+        "sky": "壬",
+        "ground": "辰"
+      }
+    }
+  },
+  {
+    "description": "음력 1986년 1월 7일 11시 30분 여성",
+    "input": {
+      "year": "1986",
+      "month": "1",
+      "day": "7",
+      "hour": "11",
+      "minute": "30",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "丙",
+        "ground": "寅"
+      },
+      "month": {
+        "sky": "庚",
+        "ground": "寅"
+      },
+      "day": {
+        "sky": "庚",
+        "ground": "寅"
+      },
+      "time": {
+        "sky": "壬",
+        "ground": "午"
+      }
+    }
+  },
+  {
+    "description": "음력 2016년 7월 4일 9시 42분 여성",
+    "input": {
+      "year": "2016",
+      "month": "7",
+      "day": "4",
+      "hour": "9",
+      "minute": "42",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "丙",
+        "ground": "申"
+      },
+      "month": {
+        "sky": "乙",
+        "ground": "未"
+      },
+      "day": {
+        "sky": "庚",
+        "ground": "申"
+      },
+      "time": {
+        "sky": "辛",
+        "ground": "巳"
+      }
+    }
+  },
+  {
+    "description": "양력 1996년 9월 22일 6시 32분 남성",
+    "input": {
+      "year": "1996",
+      "month": "9",
+      "day": "22",
+      "hour": "6",
+      "minute": "32",
+      "gender": "남성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "丙",
+        "ground": "子"
+      },
+      "month": {
+        "sky": "丁",
+        "ground": "酉"
+      },
+      "day": {
+        "sky": "壬",
+        "ground": "戌"
+      },
+      "time": {
+        "sky": "癸",
+        "ground": "卯"
+      }
+    }
+  },
+  {
+    "description": "음력 2019년 2월 11일 5시 58분 여성",
+    "input": {
+      "year": "2019",
+      "month": "2",
+      "day": "11",
+      "hour": "5",
+      "minute": "58",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "己",
+        "ground": "亥"
+      },
+      "month": {
+        "sky": "丁",
+        "ground": "卯"
+      },
+      "day": {
+        "sky": "癸",
+        "ground": "丑"
+      },
+      "time": {
+        "sky": "乙",
+        "ground": "卯"
+      }
+    }
+  },
+  {
+    "description": "음력 2017년 5월 8일 3시 29분 남성",
+    "input": {
+      "year": "2017",
+      "month": "5",
+      "day": "8",
+      "hour": "3",
+      "minute": "29",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "丁",
+        "ground": "酉"
+      },
+      "month": {
+        "sky": "乙",
+        "ground": "巳"
+      },
+      "day": {
+        "sky": "庚",
+        "ground": "申"
+      },
+      "time": {
+        "sky": "丁",
+        "ground": "丑"
+      }
+    }
+  },
+  {
+    "description": "음력 1991년 7월 27일 1시 20분 여성",
+    "input": {
+      "year": "1991",
+      "month": "7",
+      "day": "27",
+      "hour": "1",
+      "minute": "20",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "辛",
+        "ground": "未"
+      },
+      "month": {
+        "sky": "丙",
+        "ground": "申"
+      },
+      "day": {
+        "sky": "戊",
+        "ground": "寅"
+      },
+      "time": {
+        "sky": "壬",
+        "ground": "子"
+      }
+    }
+  },
+  {
+    "description": "음력 1974년 2월 1일 18시 50분 남성",
+    "input": {
+      "year": "1974",
+      "month": "2",
+      "day": "1",
+      "hour": "18",
+      "minute": "50",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "甲",
+        "ground": "寅"
+      },
+      "month": {
+        "sky": "丙",
+        "ground": "寅"
+      },
+      "day": {
+        "sky": "甲",
+        "ground": "午"
+      },
+      "time": {
+        "sky": "癸",
+        "ground": "酉"
+      }
+    }
+  },
+  {
+    "description": "양력 1951년 1월 12일 12시 11분 남성",
+    "input": {
+      "year": "1951",
+      "month": "1",
+      "day": "12",
+      "hour": "12",
+      "minute": "11",
+      "gender": "남성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "庚",
+        "ground": "寅"
+      },
+      "month": {
+        "sky": "己",
+        "ground": "丑"
+      },
+      "day": {
+        "sky": "壬",
+        "ground": "子"
+      },
+      "time": {
+        "sky": "丙",
+        "ground": "午"
+      }
+    }
+  },
+  {
+    "description": "양력 1960년 7월 27일 7시 38분 남성",
+    "input": {
+      "year": "1960",
+      "month": "7",
+      "day": "27",
+      "hour": "7",
+      "minute": "38",
+      "gender": "남성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "庚",
+        "ground": "子"
+      },
+      "month": {
+        "sky": "癸",
+        "ground": "未"
+      },
+      "day": {
+        "sky": "丙",
+        "ground": "辰"
+      },
+      "time": {
+        "sky": "壬",
+        "ground": "辰"
+      }
+    }
+  },
+  {
+    "description": "양력 1965년 5월 22일 21시 33분 남성",
+    "input": {
+      "year": "1965",
+      "month": "5",
+      "day": "22",
+      "hour": "21",
+      "minute": "33",
+      "gender": "남성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "乙",
+        "ground": "巳"
+      },
+      "month": {
+        "sky": "辛",
+        "ground": "巳"
+      },
+      "day": {
+        "sky": "丙",
+        "ground": "子"
+      },
+      "time": {
+        "sky": "己",
+        "ground": "亥"
+      }
+    }
+  },
+  {
+    "description": "음력 1978년 4월 11일 6시 5분 남성",
+    "input": {
+      "year": "1978",
+      "month": "4",
+      "day": "11",
+      "hour": "6",
+      "minute": "5",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "戊",
+        "ground": "午"
+      },
+      "month": {
+        "sky": "丁",
+        "ground": "巳"
+      },
+      "day": {
+        "sky": "己",
+        "ground": "卯"
+      },
+      "time": {
+        "sky": "丁",
+        "ground": "卯"
+      }
+    }
+  },
+  {
+    "description": "음력 1956년 11월 6일 14시 24분 여성",
+    "input": {
+      "year": "1956",
+      "month": "11",
+      "day": "6",
+      "hour": "14",
+      "minute": "24",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "丙",
+        "ground": "申"
+      },
+      "month": {
+        "sky": "庚",
+        "ground": "子"
+      },
+      "day": {
+        "sky": "戊",
+        "ground": "申"
+      },
+      "time": {
+        "sky": "己",
+        "ground": "未"
+      }
+    }
+  },
+  {
+    "description": "음력 2022년 10월 26일 0시 1분 남성",
+    "input": {
+      "year": "2022",
+      "month": "10",
+      "day": "26",
+      "hour": "0",
+      "minute": "1",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "壬",
+        "ground": "寅"
+      },
+      "month": {
+        "sky": "辛",
+        "ground": "亥"
+      },
+      "day": {
+        "sky": "丙",
+        "ground": "子"
+      },
+      "time": {
+        "sky": "戊",
+        "ground": "子"
+      }
+    }
+  },
+  {
+    "description": "음력 1963년 7월 18일 19시 52분 여성",
+    "input": {
+      "year": "1963",
+      "month": "7",
+      "day": "18",
+      "hour": "19",
+      "minute": "52",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "癸",
+        "ground": "卯"
+      },
+      "month": {
+        "sky": "庚",
+        "ground": "申"
+      },
+      "day": {
+        "sky": "辛",
+        "ground": "亥"
+      },
+      "time": {
+        "sky": "戊",
+        "ground": "戌"
+      }
+    }
+  },
+  {
+    "description": "음력 1959년 2월 6일 17시 6분 남성",
+    "input": {
+      "year": "1959",
+      "month": "2",
+      "day": "6",
+      "hour": "17",
+      "minute": "6",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "己",
+        "ground": "亥"
+      },
+      "month": {
+        "sky": "丁",
+        "ground": "卯"
+      },
+      "day": {
+        "sky": "乙",
+        "ground": "未"
+      },
+      "time": {
+        "sky": "甲",
+        "ground": "申"
+      }
+    }
+  },
+  {
+    "description": "양력 1964년 1월 3일 13시 11분 여성",
+    "input": {
+      "year": "1964",
+      "month": "1",
+      "day": "3",
+      "hour": "13",
+      "minute": "11",
+      "gender": "여성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "癸",
+        "ground": "卯"
+      },
+      "month": {
+        "sky": "甲",
+        "ground": "子"
+      },
+      "day": {
+        "sky": "辛",
+        "ground": "亥"
+      },
+      "time": {
+        "sky": "甲",
+        "ground": "午"
+      }
+    }
+  },
+  {
+    "description": "양력 2016년 9월 8일 22시 54분 남성",
+    "input": {
+      "year": "2016",
+      "month": "9",
+      "day": "8",
+      "hour": "22",
+      "minute": "54",
+      "gender": "남성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "丙",
+        "ground": "申"
+      },
+      "month": {
+        "sky": "丁",
+        "ground": "酉"
+      },
+      "day": {
+        "sky": "癸",
+        "ground": "巳"
+      },
+      "time": {
+        "sky": "癸",
+        "ground": "亥"
+      }
+    }
+  },
+  {
+    "description": "음력 1974년 9월 26일 7시 55분 남성",
+    "input": {
+      "year": "1974",
+      "month": "9",
+      "day": "26",
+      "hour": "7",
+      "minute": "55",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "甲",
+        "ground": "寅"
+      },
+      "month": {
+        "sky": "乙",
+        "ground": "亥"
+      },
+      "day": {
+        "sky": "甲",
+        "ground": "寅"
+      },
+      "time": {
+        "sky": "戊",
+        "ground": "辰"
+      }
+    }
+  },
+  {
+    "description": "음력 1981년 8월 21일 1시 18분 남성",
+    "input": {
+      "year": "1981",
+      "month": "8",
+      "day": "21",
+      "hour": "1",
+      "minute": "18",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "辛",
+        "ground": "酉"
+      },
+      "month": {
+        "sky": "丁",
+        "ground": "酉"
+      },
+      "day": {
+        "sky": "己",
+        "ground": "亥"
+      },
+      "time": {
+        "sky": "甲",
+        "ground": "子"
+      }
+    }
+  },
+  {
+    "description": "양력 1964년 1월 13일 23시 10분 남성",
+    "input": {
+      "year": "1964",
+      "month": "1",
+      "day": "13",
+      "hour": "23",
+      "minute": "10",
+      "gender": "남성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "癸",
+        "ground": "卯"
+      },
+      "month": {
+        "sky": "乙",
+        "ground": "丑"
+      },
+      "day": {
+        "sky": "辛",
+        "ground": "酉"
+      },
+      "time": {
+        "sky": "己",
+        "ground": "亥"
+      }
+    }
+  },
+  {
+    "description": "음력 2015년 12월 11일 1시 10분 여성",
+    "input": {
+      "year": "2015",
+      "month": "12",
+      "day": "11",
+      "hour": "1",
+      "minute": "10",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "乙",
+        "ground": "未"
+      },
+      "month": {
+        "sky": "己",
+        "ground": "丑"
+      },
+      "day": {
+        "sky": "辛",
+        "ground": "丑"
+      },
+      "time": {
+        "sky": "戊",
+        "ground": "子"
+      }
+    }
+  },
+  {
+    "description": "음력 2016년 8월 20일 13시 12분 남성",
+    "input": {
+      "year": "2016",
+      "month": "8",
+      "day": "20",
+      "hour": "13",
+      "minute": "12",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "丙",
+        "ground": "申"
+      },
+      "month": {
+        "sky": "丁",
+        "ground": "酉"
+      },
+      "day": {
+        "sky": "乙",
+        "ground": "巳"
+      },
+      "time": {
+        "sky": "壬",
+        "ground": "午"
+      }
+    }
+  },
+  {
+    "description": "음력 2010년 9월 26일 23시 9분 남성",
+    "input": {
+      "year": "2010",
+      "month": "9",
+      "day": "26",
+      "hour": "23",
+      "minute": "9",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "庚",
+        "ground": "寅"
+      },
+      "month": {
+        "sky": "丙",
+        "ground": "戌"
+      },
+      "day": {
+        "sky": "丙",
+        "ground": "辰"
+      },
+      "time": {
+        "sky": "己",
+        "ground": "亥"
+      }
+    }
+  },
+  {
+    "description": "양력 2021년 4월 19일 0시 0분 여성",
+    "input": {
+      "year": "2021",
+      "month": "4",
+      "day": "19",
+      "hour": "0",
+      "minute": "0",
+      "gender": "여성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "辛",
+        "ground": "丑"
+      },
+      "month": {
+        "sky": "壬",
+        "ground": "辰"
+      },
+      "day": {
+        "sky": "丁",
+        "ground": "酉"
+      },
+      "time": {
+        "sky": "庚",
+        "ground": "子"
+      }
+    }
+  },
+  {
+    "description": "양력 1958년 12월 22일 21시 29분 남성",
+    "input": {
+      "year": "1958",
+      "month": "12",
+      "day": "22",
+      "hour": "21",
+      "minute": "29",
+      "gender": "남성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "戊",
+        "ground": "戌"
+      },
+      "month": {
+        "sky": "甲",
+        "ground": "子"
+      },
+      "day": {
+        "sky": "癸",
+        "ground": "酉"
+      },
+      "time": {
+        "sky": "壬",
+        "ground": "戌"
+      }
+    }
+  },
+  {
+    "description": "음력 1995년 3월 28일 22시 24분 여성",
+    "input": {
+      "year": "1995",
+      "month": "3",
+      "day": "28",
+      "hour": "22",
+      "minute": "24",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "乙",
+        "ground": "亥"
+      },
+      "month": {
+        "sky": "庚",
+        "ground": "辰"
+      },
+      "day": {
+        "sky": "戊",
+        "ground": "子"
+      },
+      "time": {
+        "sky": "癸",
+        "ground": "亥"
+      }
+    }
+  },
+  {
+    "description": "음력 1972년 2월 5일 5시 35분 남성",
+    "input": {
+      "year": "1972",
+      "month": "2",
+      "day": "5",
+      "hour": "5",
+      "minute": "35",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "壬",
+        "ground": "子"
+      },
+      "month": {
+        "sky": "癸",
+        "ground": "卯"
+      },
+      "day": {
+        "sky": "己",
+        "ground": "酉"
+      },
+      "time": {
+        "sky": "丁",
+        "ground": "卯"
+      }
+    }
+  },
+  {
+    "description": "음력 2015년 12월 15일 19시 5분 여성",
+    "input": {
+      "year": "2015",
+      "month": "12",
+      "day": "15",
+      "hour": "19",
+      "minute": "5",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "乙",
+        "ground": "未"
+      },
+      "month": {
+        "sky": "己",
+        "ground": "丑"
+      },
+      "day": {
+        "sky": "乙",
+        "ground": "巳"
+      },
+      "time": {
+        "sky": "乙",
+        "ground": "酉"
+      }
+    }
+  },
+  {
+    "description": "음력 1966년 12월 24일 4시 40분 남성",
+    "input": {
+      "year": "1966",
+      "month": "12",
+      "day": "24",
+      "hour": "4",
+      "minute": "40",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "丙",
+        "ground": "午"
+      },
+      "month": {
+        "sky": "辛",
+        "ground": "丑"
+      },
+      "day": {
+        "sky": "戊",
+        "ground": "戌"
+      },
+      "time": {
+        "sky": "甲",
+        "ground": "寅"
+      }
+    }
+  },
+  {
+    "description": "양력 1985년 9월 15일 13시 45분 남성",
+    "input": {
+      "year": "1985",
+      "month": "9",
+      "day": "15",
+      "hour": "13",
+      "minute": "45",
+      "gender": "남성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "乙",
+        "ground": "丑"
+      },
+      "month": {
+        "sky": "乙",
+        "ground": "酉"
+      },
+      "day": {
+        "sky": "丁",
+        "ground": "巳"
+      },
+      "time": {
+        "sky": "丁",
+        "ground": "未"
+      }
+    }
+  },
+  {
+    "description": "음력 1978년 6월 23일 19시 17분 여성",
+    "input": {
+      "year": "1978",
+      "month": "6",
+      "day": "23",
+      "hour": "19",
+      "minute": "17",
+      "gender": "여성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "戊",
+        "ground": "午"
+      },
+      "month": {
+        "sky": "己",
+        "ground": "未"
+      },
+      "day": {
+        "sky": "庚",
+        "ground": "寅"
+      },
+      "time": {
+        "sky": "乙",
+        "ground": "酉"
+      }
+    }
+  },
+  {
+    "description": "음력 1968년 5월 10일 13시 8분 남성",
+    "input": {
+      "year": "1968",
+      "month": "5",
+      "day": "10",
+      "hour": "13",
+      "minute": "8",
+      "gender": "남성",
+      "calendar": "음력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "戊",
+        "ground": "申"
+      },
+      "month": {
+        "sky": "丁",
+        "ground": "巳"
+      },
+      "day": {
+        "sky": "丙",
+        "ground": "午"
+      },
+      "time": {
+        "sky": "甲",
+        "ground": "午"
+      }
+    }
+  },
+  {
+    "description": "양력 2021년 9월 16일 19시 46분 남성",
+    "input": {
+      "year": "2021",
+      "month": "9",
+      "day": "16",
+      "hour": "19",
+      "minute": "46",
+      "gender": "남성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "辛",
+        "ground": "丑"
+      },
+      "month": {
+        "sky": "丁",
+        "ground": "酉"
+      },
+      "day": {
+        "sky": "丁",
+        "ground": "卯"
+      },
+      "time": {
+        "sky": "庚",
+        "ground": "戌"
+      }
+    }
+  },
+  {
+    "description": "양력 1966년 4월 9일 9시 12분 남성",
+    "input": {
+      "year": "1966",
+      "month": "4",
+      "day": "9",
+      "hour": "9",
+      "minute": "12",
+      "gender": "남성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "丙",
+        "ground": "午"
+      },
+      "month": {
+        "sky": "壬",
+        "ground": "辰"
+      },
+      "day": {
+        "sky": "戊",
+        "ground": "戌"
+      },
+      "time": {
+        "sky": "丙",
+        "ground": "辰"
+      }
+    }
+  },
+  {
+    "description": "양력 1991년 5월 26일 14시 49분 여성",
+    "input": {
+      "year": "1991",
+      "month": "5",
+      "day": "26",
+      "hour": "14",
+      "minute": "49",
+      "gender": "여성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "辛",
+        "ground": "未"
+      },
+      "month": {
+        "sky": "癸",
+        "ground": "巳"
+      },
+      "day": {
+        "sky": "丙",
+        "ground": "申"
+      },
+      "time": {
+        "sky": "乙",
+        "ground": "未"
+      }
+    }
+  },
+  {
+    "description": "양력 2022년 4월 4일 23시 15분 남성",
+    "input": {
+      "year": "2022",
+      "month": "4",
+      "day": "4",
+      "hour": "23",
+      "minute": "15",
+      "gender": "남성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "壬",
+        "ground": "寅"
+      },
+      "month": {
+        "sky": "癸",
+        "ground": "卯"
+      },
+      "day": {
+        "sky": "丁",
+        "ground": "亥"
+      },
+      "time": {
+        "sky": "辛",
+        "ground": "亥"
+      }
+    }
+  },
+  {
+    "description": "양력 1980년 8월 7일 18시 32분 남성",
+    "input": {
+      "year": "1980",
+      "month": "8",
+      "day": "7",
+      "hour": "18",
+      "minute": "32",
+      "gender": "남성",
+      "calendar": "양력",
+      "isLeapMonth": false
+    },
+    "expected": {
+      "year": {
+        "sky": "庚",
+        "ground": "申"
+      },
+      "month": {
+        "sky": "甲",
+        "ground": "申"
+      },
+      "day": {
+        "sky": "壬",
+        "ground": "子"
+      },
+      "time": {
+        "sky": "己",
+        "ground": "酉"
+      }
+    }
+  }
+]

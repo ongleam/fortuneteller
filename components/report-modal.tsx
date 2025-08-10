@@ -21,10 +21,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { submitReport } from '@/lib/actions/report';
+import { submitReport } from '@/lib/interfaces/actions/report';
 import { toast } from '@/components/toast';
-import { sendSlackMessage } from '@/lib/actions/slack';
-import { NOTION_SELECT_OPTIONS, ReportType } from '@/lib/types/notion';
+import { sendSlackMessage } from '@/lib/interfaces/actions/slack';
+import { NOTION_SELECT_OPTIONS, ReportType } from '@/lib/shared/types/notion';
 
 // SelectItem들을 위한 데이터 배열 정의
 const reportTypeOptions = [

@@ -2,7 +2,7 @@
 
 import { startTransition, useMemo, useOptimistic, useState } from 'react';
 
-import { saveChatModelAsCookie } from '@/lib/actions/chat';
+import { saveChatModelAsCookie } from '@/lib/interfaces/actions/chat';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { chatModels } from '@/config/models';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/shared/utils';
 
 import { CheckCircleFillIcon, ChevronDownIcon } from '@/components/icons';
 import { entitlementsByUserType } from '@/config/entitlements';

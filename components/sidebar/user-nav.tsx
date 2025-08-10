@@ -6,7 +6,7 @@ import type { User as SupabaseUser } from '@supabase/supabase-js';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { KakaoIcon } from '@/components/icons';
-import { createClient } from '@/lib/supabase/client';
+import { createClient } from '@/lib/infra/supabase/client';
 import { Button } from '@/components/ui/button';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import {
@@ -66,7 +66,10 @@ export function SidebarUserNav({ user }: { user: SupabaseUser | null }) {
         {!isMobile && (
           <SidebarMenu>
             <SidebarMenuItem>
-              <AuthButton text="Continue with Kakao account" onClick={() => router.push('/login')} />
+              <AuthButton
+                text="Continue with Kakao account"
+                onClick={() => router.push('/login')}
+              />
             </SidebarMenuItem>
           </SidebarMenu>
         )}

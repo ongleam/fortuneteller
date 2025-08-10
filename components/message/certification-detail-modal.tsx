@@ -12,7 +12,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Badge } from '@/components/ui/badge';
-import { normText } from '@/lib/utils/textPreprocess';
+import { normText } from '@/lib/shared/utils/textPreprocess';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 // KCTable에서 정의한 인터페이스 재사용 또는 임포트

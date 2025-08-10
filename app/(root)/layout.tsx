@@ -4,7 +4,7 @@ import { AppSidebar } from '@/components/sidebar';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 // import { auth } from '../(auth)/auth'; // NextAuth 코드 주석 처리
 import Script from 'next/script';
-import { createServerClient } from '@/lib/supabase/server';
+import { createServerClient } from '@/lib/infra/supabase/server';
 
 export const experimental_ppr = true;
 
