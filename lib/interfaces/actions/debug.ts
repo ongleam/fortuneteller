@@ -3,7 +3,12 @@
 import { getSajuPillars, getSajuPillarsReference } from '@/lib/core/saju/pillars';
 import { getPillarsTenStar } from '@/lib/core/saju/ten-stars';
 import { getFiveElements, getFiveElementsReference } from '@/lib/core/saju/five-elements';
-import type { BirthInput, SajuPillars, PillarsTenStar, FiveElements } from '@/lib/shared/types/saju';
+import type {
+  BirthInput,
+  SajuPillars,
+  PillarsTenStar,
+  FiveElements,
+} from '@/lib/shared/types/saju';
 
 export async function calculateSajuAction(birthInput: BirthInput): Promise<{
   local?: SajuPillars;
@@ -18,10 +23,10 @@ export async function calculateSajuAction(birthInput: BirthInput): Promise<{
     // 로컬 계산 (데이터베이스 기반)
     const localResult = await getSajuPillars(birthInput);
     console.log('[DEBUG] After getSajuPillars:', localResult);
-    
+
     let localTenStars: PillarsTenStar | undefined;
     let localFiveElements: FiveElements | undefined;
-    
+
     if (localResult) {
       try {
         localTenStars = getPillarsTenStar(localResult);
@@ -30,7 +35,7 @@ export async function calculateSajuAction(birthInput: BirthInput): Promise<{
         console.error('[ERROR] getPillarsTenStar failed:', tenStarError);
         localTenStars = undefined;
       }
-      
+
       try {
         localFiveElements = getFiveElements(localResult);
         console.log('[DEBUG] After getFiveElements:', localFiveElements);
@@ -44,7 +49,7 @@ export async function calculateSajuAction(birthInput: BirthInput): Promise<{
     const referenceResult = await getSajuPillarsReference(birthInput);
     let referenceTenStars: PillarsTenStar | undefined;
     let referenceFiveElements: FiveElements | undefined;
-    
+
     if (referenceResult) {
       try {
         referenceTenStars = getPillarsTenStar(referenceResult);
@@ -52,7 +57,7 @@ export async function calculateSajuAction(birthInput: BirthInput): Promise<{
         console.error('[ERROR] Reference getPillarsTenStar failed:', error);
         referenceTenStars = undefined;
       }
-      
+
       try {
         referenceFiveElements = getFiveElements(referenceResult);
       } catch (error) {
@@ -60,7 +65,7 @@ export async function calculateSajuAction(birthInput: BirthInput): Promise<{
         referenceFiveElements = undefined;
       }
     }
-    
+
     // Reference API에서 오행 데이터도 가져오기 시도
     try {
       const refFiveElementsFromAPI = await getFiveElementsReference(birthInput);
@@ -74,8 +79,10 @@ export async function calculateSajuAction(birthInput: BirthInput): Promise<{
     console.log('[DEBUG] birthInput:', birthInput);
     console.log('[DEBUG] localResult:', localResult);
     console.log('[DEBUG] localTenStars:', localTenStars);
+    console.log('[DEBUG] localFiveElements:', localFiveElements);
     console.log('[DEBUG] referenceResult:', referenceResult);
     console.log('[DEBUG] referenceTenStars:', referenceTenStars);
+    console.log('[DEBUG] referenceFiveElements:', referenceFiveElements);
 
     return {
       local: localResult,

@@ -2,7 +2,12 @@
 
 import { useState } from 'react';
 import { calculateSajuAction } from '@/lib/interfaces/actions/debug';
-import type { BirthInput, SajuPillars, PillarsTenStar, FiveElements } from '@/lib/shared/types/saju';
+import type {
+  BirthInput,
+  SajuPillars,
+  PillarsTenStar,
+  FiveElements,
+} from '@/lib/shared/types/saju';
 
 // 오행에 따른 색상을 반환하는 헬퍼 함수
 const getElementColor = (element: string | undefined): string => {
@@ -26,22 +31,21 @@ const getElementColor = (element: string | undefined): string => {
 const FiveElementsPentagon = ({ fiveElements }: { fiveElements?: FiveElements }) => {
   if (!fiveElements) {
     return (
-      <div className="rounded-lg border bg-gray-50 p-4 w-72 h-80 flex items-center justify-center">
+      <div className="flex h-80 w-72 items-center justify-center rounded-lg border bg-gray-50 p-4">
         <p className="text-gray-500">오행 데이터 로딩 중...</p>
       </div>
     );
   }
 
   const elements = [
-    { name: '화', value: fiveElements.fire, color: '#ef4444', angle: 0 },      // 위쪽 (12시)
-    { name: '토', value: fiveElements.earth, color: '#eab308', angle: 72 },    // 오른쪽 위 (2시)
-    { name: '금', value: fiveElements.metal, color: '#9ca3af', angle: 144 },   // 오른쪽 아래 (4시)
-    { name: '수', value: fiveElements.water, color: '#3b82f6', angle: 216 },   // 왼쪽 아래 (8시)
-    { name: '목', value: fiveElements.wood, color: '#22c55e', angle: 288 },    // 왼쪽 위 (10시)
+    { name: '화', value: fiveElements.fire, color: '#ef4444', angle: 0 }, // 위쪽 (12시)
+    { name: '토', value: fiveElements.earth, color: '#eab308', angle: 72 }, // 오른쪽 위 (2시)
+    { name: '금', value: fiveElements.metal, color: '#9ca3af', angle: 144 }, // 오른쪽 아래 (4시)
+    { name: '수', value: fiveElements.water, color: '#3b82f6', angle: 216 }, // 왼쪽 아래 (8시)
+    { name: '목', value: fiveElements.wood, color: '#22c55e', angle: 288 }, // 왼쪽 위 (10시)
   ];
 
   const total = elements.reduce((sum, el) => sum + el.value, 0);
-  const maxValue = Math.max(...elements.map(el => el.value), 1);
   const centerX = 130;
   const centerY = 140;
   const maxRadius = 80;
@@ -51,39 +55,43 @@ const FiveElementsPentagon = ({ fiveElements }: { fiveElements?: FiveElements })
     const radian = (angle - 90) * (Math.PI / 180); // -90도로 시작점을 위쪽으로
     return {
       x: centerX + radius * Math.cos(radian),
-      y: centerY + radius * Math.sin(radian)
+      y: centerY + radius * Math.sin(radian),
     };
   };
 
-  // 데이터 기반 5각형
-  const dataPoints = elements.map(el => {
-    const ratio = total > 0 ? el.value / maxValue : 0;
+  // 데이터 기반 5각형 - 3을 최대값으로 사용하여 시각적 표현 개선
+  const dataPoints = elements.map((el) => {
+    // 3개를 최대값으로 하여 비율 계산 (예: 2/3 = 0.67, 3/3 = 1.0)
+    // 3 이상인 경우도 최대 크기로 표시
+    const ratio = Math.min(el.value / 3, 1);
     return getPoint(el.angle, maxRadius * Math.max(ratio, 0.1)); // 최소 10% 크기 보장
   });
 
   // 라벨 위치 (꼭짓점에서 조금 더 바깥쪽)
-  const labelPoints = elements.map(el => getPoint(el.angle, maxRadius + 30));
+  const labelPoints = elements.map((el) => getPoint(el.angle, maxRadius + 30));
 
   return (
-    <div className="rounded-lg border bg-white p-3 w-72 h-80 flex flex-col items-center">
-      <h4 className="text-lg font-semibold text-gray-800 mb-2">오행 분포</h4>
-      
+    <div className="flex h-80 w-72 flex-col items-center rounded-lg border bg-white p-3">
+      <h4 className="mb-2 text-lg font-semibold text-gray-800">오행 분포</h4>
+
       <svg width="260" height="280" viewBox="0 0 260 280" className="flex-1">
         {/* 배경 그리드 5각형들 */}
         {[0.3, 0.5, 0.7, 1.0].map((ratio, i) => (
           <polygon
             key={i}
-            points={elements.map(el => {
-              const point = getPoint(el.angle, maxRadius * ratio);
-              return `${point.x},${point.y}`;
-            }).join(' ')}
+            points={elements
+              .map((el) => {
+                const point = getPoint(el.angle, maxRadius * ratio);
+                return `${point.x},${point.y}`;
+              })
+              .join(' ')}
             fill="none"
             stroke="#e5e7eb"
             strokeWidth="1"
             opacity="0.4"
           />
         ))}
-        
+
         {/* 중심에서 각 꼭짓점으로의 선 */}
         {elements.map((el, i) => {
           const point = getPoint(el.angle, maxRadius);
@@ -103,7 +111,7 @@ const FiveElementsPentagon = ({ fiveElements }: { fiveElements?: FiveElements })
 
         {/* 데이터 영역 */}
         <polygon
-          points={dataPoints.map(point => `${point.x},${point.y}`).join(' ')}
+          points={dataPoints.map((point) => `${point.x},${point.y}`).join(' ')}
           fill="url(#pentagonGradient)"
           stroke="#8b5cf6"
           strokeWidth="2.5"
@@ -113,8 +121,8 @@ const FiveElementsPentagon = ({ fiveElements }: { fiveElements?: FiveElements })
         {/* 그라데이션 정의 */}
         <defs>
           <linearGradient id="pentagonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.2"/>
-            <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.2"/>
+            <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.2" />
+            <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.2" />
           </linearGradient>
         </defs>
 
@@ -139,13 +147,7 @@ const FiveElementsPentagon = ({ fiveElements }: { fiveElements?: FiveElements })
           const point = labelPoints[i];
           return (
             <g key={i}>
-              <circle
-                cx={point.x}
-                cy={point.y}
-                r="20"
-                fill={el.color}
-                opacity="0.9"
-              />
+              <circle cx={point.x} cy={point.y} r="20" fill={el.color} opacity="0.9" />
               <text
                 x={point.x}
                 y={point.y - 3}
@@ -167,16 +169,11 @@ const FiveElementsPentagon = ({ fiveElements }: { fiveElements?: FiveElements })
         })}
 
         {/* 중심점 */}
-        <circle
-          cx={centerX}
-          cy={centerY}
-          r="4"
-          fill="#6b7280"
-        />
+        <circle cx={centerX} cy={centerY} r="4" fill="#6b7280" />
       </svg>
-      
+
       {/* 총합 표시 */}
-      <div className="text-center text-sm text-gray-600 mt-1">
+      <div className="mt-1 text-center text-sm text-gray-600">
         <span className="font-semibold">총합: {total}</span>
       </div>
     </div>
@@ -203,53 +200,49 @@ const FiveElementsDisplay = ({ fiveElements }: { fiveElements?: FiveElements }) 
   ];
 
   const total = elements.reduce((sum, el) => sum + el.value, 0);
-  const maxValue = Math.max(...elements.map(el => el.value));
+  const maxValue = Math.max(...elements.map((el) => el.value));
 
   return (
     <div className="rounded-lg border bg-white p-6 shadow-lg">
       <h4 className="mb-6 text-lg font-semibold text-gray-800">오행 분석</h4>
-      
+
       <div className="space-y-4">
         {elements.map((element) => {
           const percentage = total > 0 ? (element.value / total) * 100 : 0;
           const barWidth = maxValue > 0 ? (element.value / maxValue) * 100 : 0;
-          
+
           return (
             <div key={element.key} className="flex items-center space-x-4">
               {/* 오행 이름 */}
               <div className="w-8 text-center">
                 <span className="text-lg font-bold text-gray-700">{element.name}</span>
               </div>
-              
+
               {/* 진행 바 */}
               <div className="flex-1">
-                <div className="relative h-8 bg-gray-100 rounded-lg overflow-hidden">
-                  <div 
+                <div className="relative h-8 overflow-hidden rounded-lg bg-gray-100">
+                  <div
                     className={`h-full ${element.color} transition-all duration-300 ease-out`}
                     style={{ width: `${barWidth}%` }}
                   />
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-sm font-medium text-gray-700">
-                      {element.value}
-                    </span>
+                    <span className="text-sm font-medium text-gray-700">{element.value}</span>
                   </div>
                 </div>
               </div>
-              
+
               {/* 백분율 */}
               <div className="w-16 text-right">
-                <span className="text-sm text-gray-600">
-                  {percentage.toFixed(1)}%
-                </span>
+                <span className="text-sm text-gray-600">{percentage.toFixed(1)}%</span>
               </div>
             </div>
           );
         })}
       </div>
-      
+
       {/* 총합 */}
-      <div className="mt-6 pt-4 border-t">
-        <div className="flex justify-between items-center">
+      <div className="mt-6 border-t pt-4">
+        <div className="flex items-center justify-between">
           <span className="text-lg font-semibold text-gray-800">총합</span>
           <span className="text-lg font-bold text-purple-600">{total}</span>
         </div>
@@ -343,16 +336,16 @@ const SajuPillarsDisplay = ({
   const getTenStarKorean = (tenStar: string | undefined): string => {
     if (!tenStar) return '-';
     const tenStarMap: { [key: string]: string } = {
-      '比肩': '비견',
-      '劫財': '겁재',
-      '食神': '식신',
-      '傷官': '상관',
-      '偏財': '편재',
-      '正財': '정재',
-      '偏官': '편관',
-      '正官': '정관',
-      '偏印': '편인',
-      '正印': '정인',
+      比肩: '비견',
+      劫財: '겁재',
+      食神: '식신',
+      傷官: '상관',
+      偏財: '편재',
+      正財: '정재',
+      偏官: '편관',
+      正官: '정관',
+      偏印: '편인',
+      正印: '정인',
     };
     return tenStarMap[tenStar] || tenStar;
   };
@@ -364,10 +357,10 @@ const SajuPillarsDisplay = ({
         <div className="flex-shrink-0">
           <FiveElementsPentagon fiveElements={fiveElements} />
         </div>
-        
+
         {/* 오른쪽: 사주팔자 테이블 */}
         <div className="flex-1">
-          <div className="grid grid-cols-4 text-center text-gray-500 mb-4">
+          <div className="mb-4 grid grid-cols-4 text-center text-gray-500">
             {pillarOrder.map((p) => (
               <div key={p.key}>{p.name}</div>
             ))}
@@ -379,10 +372,10 @@ const SajuPillarsDisplay = ({
               {pillarOrder.map((p) => {
                 // Sky 십성 (천간에 해당)
                 const skyStar = tenStars?.[`${p.key}Sky` as keyof PillarsTenStar];
-                
+
                 return (
-                  <div key={p.key} className="bg-white border rounded-lg p-3 text-center shadow-sm">
-                    <div className="text-sm text-gray-700 font-medium">
+                  <div key={p.key} className="rounded-lg border bg-white p-3 text-center shadow-sm">
+                    <div className="text-sm font-medium text-gray-700">
                       {skyStar ? getTenStarKorean(skyStar) : '–'}
                     </div>
                   </div>
@@ -391,7 +384,7 @@ const SajuPillarsDisplay = ({
             </div>
           </div>
 
-          <div className="grid grid-cols-4 gap-4 my-4">
+          <div className="my-4 grid grid-cols-4 gap-4">
             {pillarOrder.map((p) => {
               const pillar = pillars[p.key];
               const stemInfo = getStemInfo(pillar.sky);
@@ -403,17 +396,17 @@ const SajuPillarsDisplay = ({
                   <div
                     className={`flex flex-col items-center justify-center rounded-lg p-4 shadow-md ${getElementColor(stemInfo?.fiveElement)}`}
                   >
-                    <div className="text-xs opacity-80 mb-1">{`${stemInfo?.fiveElementHanja} ${stemInfo?.fiveElement}`}</div>
+                    <div className="mb-1 text-xs opacity-80">{`${stemInfo?.fiveElementHanja} ${stemInfo?.fiveElement}`}</div>
                     <div className="text-4xl font-bold">{pillar.sky}</div>
-                    <div className="text-sm mt-1">{getHanjaSound(pillar.sky)}</div>
+                    <div className="mt-1 text-sm">{getHanjaSound(pillar.sky)}</div>
                   </div>
                   {/* 지지 */}
                   <div
                     className={`flex flex-col items-center justify-center rounded-lg p-4 shadow-md ${getElementColor(branchInfo?.fiveElement)}`}
                   >
-                    <div className="text-xs opacity-80 mb-1">{`${branchInfo?.fiveElementHanja} ${branchInfo?.fiveElement}`}</div>
+                    <div className="mb-1 text-xs opacity-80">{`${branchInfo?.fiveElementHanja} ${branchInfo?.fiveElement}`}</div>
                     <div className="text-4xl font-bold">{pillar.ground}</div>
-                    <div className="text-sm mt-1">{getHanjaSound(pillar.ground)}</div>
+                    <div className="mt-1 text-sm">{getHanjaSound(pillar.ground)}</div>
                   </div>
                 </div>
               );
@@ -426,10 +419,10 @@ const SajuPillarsDisplay = ({
               {pillarOrder.map((p) => {
                 // Ground 십성 (지지에 해당)
                 const groundStar = tenStars?.[`${p.key}Ground` as keyof PillarsTenStar];
-                
+
                 return (
-                  <div key={p.key} className="bg-white border rounded-lg p-3 text-center shadow-sm">
-                    <div className="text-sm text-gray-700 font-medium">
+                  <div key={p.key} className="rounded-lg border bg-white p-3 text-center shadow-sm">
+                    <div className="text-sm font-medium text-gray-700">
                       {groundStar ? getTenStarKorean(groundStar) : '–'}
                     </div>
                   </div>
@@ -451,7 +444,7 @@ export default function DebugPage() {
     year: '1995',
     month: '4',
     day: '25',
-    hour: '14',
+    hour: '10',
     minute: '30',
   });
 
@@ -471,10 +464,12 @@ export default function DebugPage() {
 
     try {
       const result = await calculateSajuAction(birthInput);
-      
+
       console.log('[CLIENT] Received result:', result);
       console.log('[CLIENT] localTenStars:', result.localTenStars);
       console.log('[CLIENT] referenceTenStars:', result.referenceTenStars);
+      console.log('[CLIENT] localFiveElements:', result.localFiveElements);
+      console.log('[CLIENT] referenceFiveElements:', result.referenceFiveElements);
 
       setSajuResult({
         ...result,
@@ -641,7 +636,11 @@ export default function DebugPage() {
               <h3 className="mb-4 text-xl font-semibold text-blue-600">
                 로컬 계산 (데이터베이스 기반)
               </h3>
-              <SajuPillarsDisplay pillars={sajuResult.local} tenStars={sajuResult.localTenStars} fiveElements={sajuResult.localFiveElements} />
+              <SajuPillarsDisplay
+                pillars={sajuResult.local}
+                tenStars={sajuResult.localTenStars}
+                fiveElements={sajuResult.localFiveElements}
+              />
               {!sajuResult.localTenStars && (
                 <p className="mt-2 text-sm text-orange-600">⚠️ 십성 계산 실패</p>
               )}

@@ -2,7 +2,7 @@
  * 오행 분석 모듈
  */
 
-import { getStemInfo, JIJANG_GAN } from './constants';
+import { getStemInfo, getGroundInfo, JIJANG_GAN } from './constants';
 import { fetchSaju } from './reference';
 import type { SajuPillars, FiveElements, BirthInput } from '../../shared/types/saju';
 import { normalizeCalendarType } from './calendar';
@@ -42,7 +42,7 @@ export async function getFiveElementsReference(
 }
 
 /**
- * 메인 오행 분석 함수
+ * 메인 오행 분석 함수 - UI 표시와 일치하도록 천간과 지지의 주된 오행만 카운트
  * @param pillars 사주 팔자 정보
  * @returns 오행 분석 결과
  */
@@ -65,7 +65,7 @@ export function getFiveElements(pillars: SajuPillars): FiveElements {
     }
   }
 
-  // 2. 지지 4개의 지장간 오행 카운트
+  // 2. 지지 4개의 주된 오행 카운트 (지장간이 아닌 지지 자체의 오행)
   const grounds = [
     pillars.year.ground,
     pillars.month.ground,
@@ -74,14 +74,26 @@ export function getFiveElements(pillars: SajuPillars): FiveElements {
   ];
 
   for (const ground of grounds) {
-    addGroundElements(elementCounts, ground);
+    addMainGroundElement(elementCounts, ground);
   }
 
   return elementCounts;
 }
 
 /**
- * 지지의 지장간을 분석하여 오행 카운트에 추가
+ * 지지의 주된 오행만 카운트 (UI 표시와 일치)
+ */
+export function addMainGroundElement(elementCounts: FiveElements, ground: string): void {
+  // constants.ts의 EARTHLY_BRANCHES에서 지지의 주된 오행을 가져옴
+  const groundInfo = getGroundInfo(ground);
+  
+  if (groundInfo) {
+    addElementCount(elementCounts, groundInfo.fiveElement);
+  }
+}
+
+/**
+ * 지지의 지장간을 분석하여 오행 카운트에 추가 (기존 방식, 참조용)
  */
 export function addGroundElements(elementCounts: FiveElements, ground: string): void {
   const jijangGan = JIJANG_GAN[ground as keyof typeof JIJANG_GAN];
