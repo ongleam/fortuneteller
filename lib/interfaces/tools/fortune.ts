@@ -3,7 +3,7 @@ import { tool } from 'ai';
 import { z } from 'zod';
 import { tools } from '@/config/prompts';
 import { getOrCreateProfileByUserKakaoId } from '@/lib/infra/db/queries';
-import { getSajuInfoCompatible } from '@/lib/core/saju';
+import { getSajuInfo } from '@/lib/core/saju';
 
 // 오늘 날짜 가져오기 함수
 function getToday() {
@@ -40,7 +40,7 @@ export const getTodayFortune = (kakao_user_id: string) =>
         }
 
         // 저장된 정보로 사주 조회
-        const sajuResult = getSajuInfoCompatible({
+        const sajuResult = getSajuInfo({
           name: profile.name || '',
           gender: profile.gender,
           calendar: profile.birth_type || '양력',
@@ -103,7 +103,7 @@ export const getYearFortune = (kakao_user_id: string) =>
         }
 
         // 저장된 정보로 사주 조회
-        const sajuResult = getSajuInfoCompatible({
+        const sajuResult = getSajuInfo({
           name: profile.name || '',
           gender: profile.gender,
           calendar: profile.birth_type || '양력',

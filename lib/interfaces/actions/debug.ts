@@ -1,35 +1,35 @@
 'use server';
 
-import { getSajuPillars, getSajuPillarsReference } from '@/lib/core/saju/pillars';
-import { getPillarsTenStar } from '@/lib/core/saju/ten-stars';
-import { getFiveElements, getFiveElementsReference } from '@/lib/core/saju/five-elements';
-import type {
-  BirthInput,
-  SajuPillars,
-  PillarsTenStar,
-  FiveElements,
-} from '@/lib/shared/types/saju';
+import { getFourPillars } from '@/lib/core/saju/four-pillars';
+import {
+  getReferenceFourPillars,
+  getReferenceTenStars,
+  getFiveElementsReference,
+} from '@/lib/core/saju/reference';
+import { getTenStars } from '@/lib/core/saju/ten-stars';
+import { getFiveElements } from '@/lib/core/saju/five-elements';
+import type { BirthInput, FourPillars, TenStars, FiveElements } from '@/lib/shared/types/saju';
 
 export async function calculateSajuAction(birthInput: BirthInput): Promise<{
-  local?: SajuPillars;
-  localTenStars?: PillarsTenStar;
+  local?: FourPillars;
+  localTenStars?: TenStars;
   localFiveElements?: FiveElements;
-  reference?: SajuPillars;
-  referenceTenStars?: PillarsTenStar;
+  reference?: FourPillars;
+  referenceTenStars?: TenStars;
   referenceFiveElements?: FiveElements;
   error?: string;
 }> {
   try {
     // 로컬 계산 (데이터베이스 기반)
-    const localResult = await getSajuPillars(birthInput);
+    const localResult = await getFourPillars(birthInput);
     console.log('[DEBUG] After getSajuPillars:', localResult);
 
-    let localTenStars: PillarsTenStar | undefined;
+    let localTenStars: TenStars | undefined;
     let localFiveElements: FiveElements | undefined;
 
     if (localResult) {
       try {
-        localTenStars = getPillarsTenStar(localResult);
+        localTenStars = getTenStars(localResult);
         console.log('[DEBUG] After getPillarsTenStar:', localTenStars);
       } catch (tenStarError) {
         console.error('[ERROR] getPillarsTenStar failed:', tenStarError);
@@ -46,34 +46,32 @@ export async function calculateSajuAction(birthInput: BirthInput): Promise<{
     }
 
     // Reference API 계산 (선택사항)
-    const referenceResult = await getSajuPillarsReference(birthInput);
-    let referenceTenStars: PillarsTenStar | undefined;
+    let referenceResult: FourPillars | undefined;
+    let referenceTenStars: TenStars | undefined;
     let referenceFiveElements: FiveElements | undefined;
 
-    if (referenceResult) {
-      try {
-        referenceTenStars = getPillarsTenStar(referenceResult);
-      } catch (error) {
-        console.error('[ERROR] Reference getPillarsTenStar failed:', error);
-        referenceTenStars = undefined;
-      }
-
-      try {
-        referenceFiveElements = getFiveElements(referenceResult);
-      } catch (error) {
-        console.error('[ERROR] Reference getFiveElements failed:', error);
-        referenceFiveElements = undefined;
-      }
+    try {
+      referenceResult = await getReferenceFourPillars(birthInput);
+      console.log('[DEBUG] Reference Four Pillars:', referenceResult);
+    } catch (error) {
+      console.error('[ERROR] getReferenceFourPillars failed:', error);
+      referenceResult = undefined;
     }
 
-    // Reference API에서 오행 데이터도 가져오기 시도
     try {
-      const refFiveElementsFromAPI = await getFiveElementsReference(birthInput);
-      if (refFiveElementsFromAPI) {
-        referenceFiveElements = refFiveElementsFromAPI;
-      }
+      referenceTenStars = await getReferenceTenStars(birthInput);
+      console.log('[DEBUG] Reference Ten Stars:', referenceTenStars);
     } catch (error) {
-      console.warn('[WARN] Reference API getFiveElementsReference failed:', error);
+      console.error('[ERROR] getReferenceTenStars failed:', error);
+      referenceTenStars = undefined;
+    }
+
+    try {
+      referenceFiveElements = await getFiveElementsReference(birthInput);
+      console.log('[DEBUG] Reference Five Elements:', referenceFiveElements);
+    } catch (error) {
+      console.error('[ERROR] getFiveElementsReference failed:', error);
+      referenceFiveElements = undefined;
     }
 
     console.log('[DEBUG] birthInput:', birthInput);

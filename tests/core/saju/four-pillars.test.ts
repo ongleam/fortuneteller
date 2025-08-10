@@ -1,4 +1,3 @@
-import { getTenStars } from '@/lib/core/saju/ten-stars';
 import { getFourPillars } from '@/lib/core/saju/four-pillars';
 import { BirthInput } from '@/lib/shared/types/saju';
 import Testset from '@/data/saju-testset.json';
@@ -35,34 +34,41 @@ jest.mock('@/lib/infra/db/queries', () => ({
   }),
 }));
 
-describe('십성 계산 테스트', () => {
+describe('사주 팔자 계산 테스트', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   test.each(Testset as TestCase[])(
-    '$description - 십성 계산',
+    '$description - 사주 팔자 계산',
     async ({ input, description, referenceData }) => {
-      // Reference 데이터에서 십성 정답 추출
-      const storedUnse = referenceData.saju?.fortuneList?.storedUnse;
-      if (!storedUnse) {
-        throw new Error(`Reference 데이터에서 십성 정보를 찾을 수 없습니다: ${description}`);
+      // Reference 데이터에서 정답 추출
+      const sajuData = referenceData.saju?.fortuneList?.saju;
+      if (!sajuData) {
+        throw new Error(`Reference 데이터에서 사주 정보를 찾을 수 없습니다: ${description}`);
       }
 
       const expected = {
-        yearSky: storedUnse.manseYearSkyRelation,
-        yearGround: storedUnse.manseYearGroundRelation,
-        monthSky: storedUnse.manseMonthSkyRelation,
-        monthGround: storedUnse.manseMonthGroundRelation,
-        daySky: storedUnse.manseDaySkyRelation,
-        dayGround: storedUnse.manseDayGroundRelation,
-        timeSky: storedUnse.manseTimeSkyRelation,
-        timeGround: storedUnse.manseTimeGroundRelation,
+        year: {
+          sky: sajuData.yearSky?.chinese || '甲',
+          ground: sajuData.yearGround?.chinese || '子',
+        },
+        month: {
+          sky: sajuData.monthSky?.chinese || '甲',
+          ground: sajuData.monthGround?.chinese || '子',
+        },
+        day: {
+          sky: sajuData.daySky?.chinese || '甲',
+          ground: sajuData.dayGround?.chinese || '子',
+        },
+        time: {
+          sky: sajuData.timeSky?.chinese || '甲',
+          ground: sajuData.timeGround?.chinese || '子',
+        },
       };
 
       // 로컬 계산 결과와 Reference 정답 비교
-      const pillars = await getFourPillars(input as BirthInput);
-      const localResult = getTenStars(pillars);
+      const localResult = await getFourPillars(input as BirthInput);
       expect(localResult).toEqual(expected);
     },
     30000

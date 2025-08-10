@@ -24,9 +24,9 @@ export function baseAgent({
     tools: {
       // updateUserProfile: updateUserProfile(kakao_user_id),
       getSaju: getSaju(),
-      getHarmony: getHarmony(kakao_user_id),
-      getTodayFortune: getTodayFortune(kakao_user_id),
-      getYearFortune: getYearFortune(kakao_user_id),
+      // getHarmony: getHarmony(kakao_user_id),
+      // getTodayFortune: getTodayFortune(kakao_user_id),
+      // getYearFortune: getYearFortune(kakao_user_id),
     },
   };
 }

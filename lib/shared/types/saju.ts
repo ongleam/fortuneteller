@@ -39,21 +39,22 @@ export interface BirthInput {
   isLeapMonth?: boolean;
 }
 
-// 사주 팔자
-export interface SajuPillar {
+//
+export interface Pillar {
   sky: string; // 천간
   ground: string; // 지지
 }
 
-export interface SajuPillars {
-  year: SajuPillar; // 년주
-  month: SajuPillar; // 월주
-  day: SajuPillar; // 일주
-  time: SajuPillar; // 시주
+// 사주(四柱)
+export interface FourPillars {
+  year: Pillar; // 년주
+  month: Pillar; // 월주
+  day: Pillar; // 일주
+  time: Pillar; // 시주
 }
 
-// 십성 분석
-export interface PillarsTenStar {
+// 십성(十星)
+export interface TenStars {
   yearSky: string; // 년간 십성
   yearGround: string; // 년지 십성
   monthSky: string; // 월간 십성
@@ -64,7 +65,7 @@ export interface PillarsTenStar {
   timeGround: string; // 시지 십성
 }
 
-// 오행 분석
+// 오행(五行)
 export interface FiveElements {
   wood: number; // 목
   fire: number; // 화
@@ -89,8 +90,8 @@ export type TopThreeSinsals = [string, string, string];
 // 단순화된 출력 구조 (권장)
 export interface SimplifiedSajuOutput {
   basic: BirthInput;
-  pillars: SajuPillars;
-  tenStars: PillarsTenStar;
+  pillars: FourPillars;
+  tenStars: TenStars;
   elements: FiveElements;
   fortune: FortuneInfo;
   sinsals: TopThreeSinsals;
@@ -99,8 +100,8 @@ export interface SimplifiedSajuOutput {
 // Core 계산 결과 (내부 사용)
 export interface SajuCoreResult {
   basic: BirthInput;
-  pillars: SajuPillars;
-  tenStars: PillarsTenStar;
+  pillars: FourPillars;
+  tenStars: TenStars;
   elements: FiveElements;
   fortune: FortuneInfo;
   sinsals: string[];

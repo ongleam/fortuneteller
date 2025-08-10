@@ -3,58 +3,12 @@
  */
 
 import { getStemInfo } from './constants';
-import { fetchSaju } from './reference';
-import type { SajuPillars, BirthInput, PillarsTenStar } from '@/lib/shared/types/saju';
-import { normalizeCalendarType } from './calendar';
-
-/**
- * Reference API를 사용한 정확한 십성 분석
- * @param birthInput 생년월일 정보
- * @returns 각 기둥 천간의 십성 정보
- */
-export async function getPillarsTenStarReference(
-  birthInput: BirthInput
-): Promise<PillarsTenStar | undefined> {
-  try {
-    const normalizedCalendar = normalizeCalendarType(birthInput.calendar);
-    const koreanCalendar = normalizedCalendar === 'solar' ? '양력' : '음력';
-    const result = await fetchSaju(
-      birthInput.name || '테스트',
-      birthInput.gender,
-      koreanCalendar,
-      birthInput.year,
-      birthInput.month,
-      birthInput.day,
-      birthInput.hour,
-      birthInput.minute,
-      birthInput.isLeapMonth
-    );
-
-    const storedUnse = result.saju?.fortuneList?.storedUnse;
-    if (!storedUnse) {
-      throw new Error('API 응답에서 storedUnse 정보를 찾을 수 없습니다.');
-    }
-
-    return {
-      yearSky: storedUnse.manseYearSkyRelation,
-      yearGround: storedUnse.manseYearGroundRelation,
-      monthSky: storedUnse.manseMonthSkyRelation,
-      monthGround: storedUnse.manseMonthGroundRelation,
-      daySky: storedUnse.manseDaySkyRelation,
-      dayGround: storedUnse.manseDayGroundRelation,
-      timeSky: storedUnse.manseTimeSkyRelation,
-      timeGround: storedUnse.manseTimeGroundRelation,
-    };
-  } catch (error) {
-    console.warn('[WARNING] 십성 Reference API 호출 실패, 백업 계산을 사용합니다.', error);
-    return undefined;
-  }
-}
+import type { FourPillars, TenStars } from '@/lib/shared/types/saju';
 
 /**
  * 사주 팔자 전체(천간, 지지)에 대한 십성 분석
  */
-export function getPillarsTenStar(pillars: SajuPillars): PillarsTenStar {
+export function getTenStars(pillars: FourPillars): TenStars {
   const daySky = pillars.day.sky; // 일간이 기준
 
   return {

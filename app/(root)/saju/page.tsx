@@ -2,12 +2,7 @@
 
 import { useState } from 'react';
 import { calculateSajuAction } from '@/lib/interfaces/actions/debug';
-import type {
-  BirthInput,
-  SajuPillars,
-  PillarsTenStar,
-  FiveElements,
-} from '@/lib/shared/types/saju';
+import type { BirthInput, FourPillars, TenStars, FiveElements } from '@/lib/shared/types/saju';
 
 // 오행에 따른 색상을 반환하는 헬퍼 함수
 const getElementColor = (element: string | undefined): string => {
@@ -257,11 +252,11 @@ const SajuPillarsDisplay = ({
   tenStars,
   fiveElements,
 }: {
-  pillars: SajuPillars;
-  tenStars?: PillarsTenStar;
+  pillars: FourPillars;
+  tenStars?: TenStars;
   fiveElements?: FiveElements;
 }) => {
-  const pillarOrder: Array<{ key: keyof SajuPillars; name: string }> = [
+  const pillarOrder: Array<{ key: keyof FourPillars; name: string }> = [
     { key: 'time', name: '시주' },
     { key: 'day', name: '일주' },
     { key: 'month', name: '월주' },
@@ -371,7 +366,7 @@ const SajuPillarsDisplay = ({
             <div className="grid grid-cols-4 gap-4">
               {pillarOrder.map((p) => {
                 // Sky 십성 (천간에 해당)
-                const skyStar = tenStars?.[`${p.key}Sky` as keyof PillarsTenStar];
+                const skyStar = tenStars?.[`${p.key}Sky` as keyof TenStars];
 
                 return (
                   <div key={p.key} className="rounded-lg border bg-white p-3 text-center shadow-sm">
@@ -418,7 +413,7 @@ const SajuPillarsDisplay = ({
             <div className="grid grid-cols-4 gap-4">
               {pillarOrder.map((p) => {
                 // Ground 십성 (지지에 해당)
-                const groundStar = tenStars?.[`${p.key}Ground` as keyof PillarsTenStar];
+                const groundStar = tenStars?.[`${p.key}Ground` as keyof TenStars];
 
                 return (
                   <div key={p.key} className="rounded-lg border bg-white p-3 text-center shadow-sm">
@@ -449,10 +444,10 @@ export default function DebugPage() {
   });
 
   const [sajuResult, setSajuResult] = useState<{
-    local?: SajuPillars;
-    reference?: SajuPillars;
-    localTenStars?: PillarsTenStar;
-    referenceTenStars?: PillarsTenStar;
+    local?: FourPillars;
+    reference?: FourPillars;
+    localTenStars?: TenStars;
+    referenceTenStars?: TenStars;
     localFiveElements?: FiveElements;
     referenceFiveElements?: FiveElements;
     error?: string;

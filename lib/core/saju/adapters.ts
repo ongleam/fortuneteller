@@ -7,8 +7,8 @@ import type {
   SimplifiedSajuOutput,
   FetchSajuCompatibleOutput,
   UiOptimizedSajuOutput,
-  SajuPillars,
-  PillarsTenStar,
+  FourPillars,
+  TenStars,
   FiveElements,
   FortuneInfo,
   TopThreeSinsals,
@@ -20,8 +20,8 @@ import type {
  */
 export function toSimpleFormat(data: {
   basic: BirthInput;
-  pillars: SajuPillars;
-  tenStars: PillarsTenStar;
+  pillars: FourPillars;
+  tenStars: TenStars;
   elements: FiveElements;
   fortune: FortuneInfo;
   sinsals: TopThreeSinsals;
@@ -41,8 +41,8 @@ export function toSimpleFormat(data: {
  */
 export function toFetchSajuFormat(data: {
   basic: BirthInput;
-  pillars: SajuPillars;
-  tenStars: PillarsTenStar;
+  pillars: FourPillars;
+  tenStars: TenStars;
   elements: FiveElements;
   fortune: FortuneInfo;
   sinsals: TopThreeSinsals;
@@ -196,8 +196,8 @@ export function toFetchSajuFormat(data: {
  */
 export function toUiFormat(data: {
   basic: BirthInput;
-  pillars: SajuPillars;
-  tenStars: PillarsTenStar;
+  pillars: FourPillars;
+  tenStars: TenStars;
   elements: FiveElements;
   fortune: FortuneInfo;
   sinsals: TopThreeSinsals;
@@ -425,7 +425,7 @@ export function getElementBalance(elements: FiveElements): string {
   return variance < 1 ? 'balanced' : 'imbalanced';
 }
 
-export function getTenStarsSummary(tenStars: PillarsTenStar): string {
+export function getTenStarsSummary(tenStars: TenStars): string {
   const stars = [tenStars.yearSky, tenStars.monthSky, tenStars.daySky, tenStars.timeSky];
   const uniqueStars = [...new Set(stars)];
   return `${uniqueStars.length}개 십성 (${uniqueStars.join(', ')})`;
@@ -466,8 +466,8 @@ export function getFortuneSummary(fortune: FortuneInfo): string {
 export class SajuAdapters {
   static toSimple(data: {
     basic: BirthInput;
-    pillars: SajuPillars;
-    tenStars: PillarsTenStar;
+    pillars: FourPillars;
+    tenStars: TenStars;
     elements: FiveElements;
     fortune: FortuneInfo;
     sinsals: TopThreeSinsals;
@@ -477,8 +477,8 @@ export class SajuAdapters {
 
   static toFetchSaju(data: {
     basic: BirthInput;
-    pillars: SajuPillars;
-    tenStars: PillarsTenStar;
+    pillars: FourPillars;
+    tenStars: TenStars;
     elements: FiveElements;
     fortune: FortuneInfo;
     sinsals: TopThreeSinsals;
@@ -488,8 +488,8 @@ export class SajuAdapters {
 
   static toUi(data: {
     basic: BirthInput;
-    pillars: SajuPillars;
-    tenStars: PillarsTenStar;
+    pillars: FourPillars;
+    tenStars: TenStars;
     elements: FiveElements;
     fortune: FortuneInfo;
     sinsals: TopThreeSinsals;
