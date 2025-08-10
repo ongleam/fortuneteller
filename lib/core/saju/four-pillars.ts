@@ -4,76 +4,14 @@
 
 import { HEAVENLY_STEMS, EARTHLY_BRANCHES, SIXTY_GAPJA, getStemIndex } from './constants';
 import { lunarToSolar, getSajuYear, getSajuMonth, normalizeCalendarType } from './calendar';
-import { fetchSaju } from './reference';
-import type { BirthInput, SajuPillars } from '@/lib/shared/types/saju';
-
-/**
- * Reference API를 사용한 정확한 사주 팔자 계산
- * @param birthInput 생년월일 정보
- * @returns 사주 팔자 정보
- */
-export async function getSajuPillarsReference(
-  birthInput: BirthInput
-): Promise<SajuPillars | undefined> {
-  try {
-    // Year padding 수정: 4자리로 정규화
-    let normalizedYear = birthInput.year;
-    if (normalizedYear.length <= 2) {
-      const year = parseInt(normalizedYear);
-      // 현재 연도 기준으로 세기 판단
-      if (year <= 30) {
-        normalizedYear = `20${normalizedYear.padStart(2, '0')}`;
-      } else {
-        normalizedYear = `19${normalizedYear.padStart(2, '0')}`;
-      }
-    }
-    normalizedYear = normalizedYear.padStart(4, '0');
-
-    const normalizedCalendar = normalizeCalendarType(birthInput.calendar);
-    const koreanCalendar = normalizedCalendar === 'solar' ? '양력' : '음력';
-
-    const result = await fetchSaju(
-      birthInput.name || '테스트',
-      birthInput.gender,
-      koreanCalendar,
-      normalizedYear,
-      birthInput.month.padStart(2, '0'),
-      birthInput.day.padStart(2, '0'),
-      birthInput.hour.padStart(2, '0'),
-      birthInput.minute?.padStart(2, '0')
-    );
-
-    const sajuData = result.saju.fortuneList.saju;
-
-    return {
-      year: {
-        sky: sajuData.yearSky?.chinese || '甲',
-        ground: sajuData.yearGround?.chinese || '子',
-      },
-      month: {
-        sky: sajuData.monthSky?.chinese || '甲',
-        ground: sajuData.monthGround?.chinese || '子',
-      },
-      day: {
-        sky: sajuData.daySky?.chinese || '甲',
-        ground: sajuData.dayGround?.chinese || '子',
-      },
-      time: {
-        sky: sajuData.timeSky?.chinese || '甲',
-        ground: sajuData.timeGround?.chinese || '子',
-      },
-    };
-  } catch (error) {
-    console.warn('Reference API 호출 실패, 백업 계산 사용:', error);
-  }
-}
+import type { BirthInput, FourPillars } from '@/lib/shared/types/saju';
 
 /**
  * 메인 사주 팔자 계산 함수
  * @param birthInput 생년월일 정보
  * @returns 사주 팔자 정보
  */
-export async function getSajuPillars(birthInput: BirthInput): Promise<SajuPillars> {
+export async function getFourPillars(birthInput: BirthInput): Promise<FourPillars> {
   // BirthInput 필드 매핑
   const year = parseInt(birthInput.year);
   const month = parseInt(birthInput.month);
@@ -229,7 +167,7 @@ export function getTimePillar(
  * @param pillars 사주 팔자 정보
  * @returns 유효성 여부
  */
-export function validatePillars(pillars: SajuPillars): boolean {
+export function validatePillars(pillars: FourPillars): boolean {
   const isValidSky = (sky: string) => HEAVENLY_STEMS.some((s) => s.chinese === sky);
   const isValidGround = (ground: string) => EARTHLY_BRANCHES.some((b) => b.chinese === ground);
 

@@ -150,7 +150,7 @@ export const LUNAR_MONTH_TABLE = [
   [1, 2, 1, 1, 2, 1, 1, 2, 2, 1, 2, 2],
 ];
 
-// 천간 (10개)
+// 천간(天干) - 10개
 export const HEAVENLY_STEMS = [
   { chinese: '甲', korean: '갑', fiveElement: '목', yangYin: '양' },
   { chinese: '乙', korean: '을', fiveElement: '목', yangYin: '음' },
@@ -164,7 +164,7 @@ export const HEAVENLY_STEMS = [
   { chinese: '癸', korean: '계', fiveElement: '수', yangYin: '음' },
 ] as const;
 
-// 지지 (12개)
+// 지지(地支) - 12개
 export const EARTHLY_BRANCHES = [
   { chinese: '子', korean: '자', fiveElement: '수', yangYin: '양' },
   { chinese: '丑', korean: '축', fiveElement: '토', yangYin: '음' },

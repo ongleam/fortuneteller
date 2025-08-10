@@ -1,59 +1,57 @@
 /**
  * 사주 어댑터 모듈 테스트
- * Reference API 데이터와 비교하여 정확성 검증
+ * Comprehensive testset을 사용하여 어댑터 기능 검증
  */
 
 import { toSimpleFormat, toFetchSajuFormat, toUiFormat } from '@/lib/core/saju/adapters';
-import { getSajuPillarsReference } from '@/lib/core/saju/pillars';
-import { getFiveElementsReference } from '@/lib/core/saju/five-elements';
-import { TopThreeSinsals } from '@/lib/shared/types/saju';
-import fs from 'fs';
-import path from 'path';
+import { TopThreeSinsals, BirthInput } from '@/lib/shared/types/saju';
+import { getFourPillars } from '@/lib/core/saju/four-pillars';
+import { getFiveElements } from '@/lib/core/saju/five-elements';
+import comprehensiveTestset from '@/data/saju-comprehensive-testset.json';
+import allSolarTerms from '@/data/solar_terms.json';
 
-// Reference 데이터 로드
-let referenceData: any[] = [];
-try {
-  const dataPath = path.join(__dirname, '../../fixtures/data/reference-data.json');
-  if (fs.existsSync(dataPath)) {
-    referenceData = JSON.parse(fs.readFileSync(dataPath, 'utf8'))
-      .filter((data: any) => data.reference !== null)
-      .slice(0, 3); // 처음 3개 케이스만 사용
-  }
-} catch (error) {
-  console.warn('Reference 데이터 로드 실패:', error);
-}
+const solarTermsData: Record<
+  string,
+  Record<string, { month: number; day: number; hour: number; minute: number }>
+> = allSolarTerms;
+
+const solarTermsArray = Object.entries(solarTermsData).flatMap(([year, terms]) =>
+  Object.entries(terms).map(([term_name, details]) => ({
+    id: 0,
+    year: parseInt(year),
+    term_name,
+    ...details,
+  }))
+);
+
+jest.mock('@/lib/infra/db/queries', () => ({
+  getSolarTermsByYear: jest.fn(async (year: number) => {
+    return solarTermsArray.filter((term) => term.year === year);
+  }),
+  getSolarTermByYearAndName: jest.fn(async (year: number, name: string) => {
+    return solarTermsArray.find((term) => term.year === year && term.term_name === name) || null;
+  },
+}));
+
+// Comprehensive testset에서 첫 3개 케이스만 사용
+const referenceData = comprehensiveTestset.slice(0, 3);
 
 describe('SajuAdapters', () => {
-  describe('Reference API 데이터와의 정확성 비교', () => {
-    if (referenceData.length === 0) {
-      test.skip('Reference 데이터가 없어 테스트를 건너뜁니다', () => {});
-      return;
-    }
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
+  describe('Comprehensive testset 데이터와의 어댑터 테스트', () => {
     referenceData.forEach((testData, index) => {
-      test(`케이스 ${index + 1}: ${testData.input.name} - Reference 어댑터 비교`, async () => {
-        const birthInput = {
-          name: testData.input.name,
-          gender: testData.input.gender,
-          calendar: testData.input.birthType === 'solar' ? '양력' : '음력',
-          year: testData.input.birthYear,
-          month: testData.input.birthMonth,
-          day: testData.input.birthDay,
-          hour: testData.input.birthTime,
-        };
+      test(`케이스 ${index + 1}: ${testData.description}`, async () => {
+        const input = testData.input as BirthInput;
 
-        // Reference API를 통해 정확한 데이터 수집
-        const pillars = await getSajuPillarsReference(birthInput);
-        const elements = await getFiveElementsReference(birthInput);
-
-        // 데이터가 undefined이면 테스트 스킵
-        if (!pillars || !elements) {
-          console.log(`  ⚠️  Pillars 또는 Elements 데이터가 없어 테스트를 건너뜁니다.`);
-          return;
-        }
+        // 로컬 계산으로 데이터 생성
+        const pillars = await getFourPillars(input);
+        const elements = getFiveElements(pillars);
 
         const mockData = {
-          basic: birthInput,
+          basic: input,
           pillars,
           elements,
           tenStars: {
@@ -86,33 +84,34 @@ describe('SajuAdapters', () => {
               branch: { chinese: '巳', korean: '사', fiveElement: '화' },
             },
           },
-          sinsals: testData.reference.sinsals.slice(0, 3) as TopThreeSinsals,
+          sinsals: ['역마살', '화개살', '천을귀인'] as TopThreeSinsals,
         };
 
-        console.log(`\n🔍 케이스 ${index + 1}: ${testData.input.name}`);
+        console.log(`\n🔍 케이스 ${index + 1}: ${testData.description}`);
 
         // Simple 형식 변환 테스트
         const simpleResult = toSimpleFormat(mockData);
         expect(simpleResult).toHaveProperty('basic');
         expect(simpleResult).toHaveProperty('pillars');
         expect(simpleResult).toHaveProperty('elements');
-        expect(simpleResult.basic.name).toBe(testData.input.name);
-        expect(simpleResult.pillars.year.sky).toBe(testData.reference.saju.year.stem.chinese);
+        expect(simpleResult.basic.name).toBe(input.name || '테스트');
+        expect(simpleResult.pillars.year.sky).toBe(pillars.year.sky);
 
         // FetchSaju 호환 형식 변환 테스트
         const fetchSajuResult = toFetchSajuFormat(mockData);
         expect(fetchSajuResult).toHaveProperty('name');
         expect(fetchSajuResult).toHaveProperty('saju');
         expect(fetchSajuResult).toHaveProperty('elements');
-        expect(fetchSajuResult.name).toBe(testData.input.name);
+        expect(fetchSajuResult.name).toBe(input.name || '테스트');
 
         // UI 형식 변환 테스트
         const uiResult = toUiFormat(mockData);
-        expect(uiResult).toHaveProperty('summary');
+        expect(uiResult).toHaveProperty('displayName');
         expect(uiResult).toHaveProperty('pillarsDisplay');
+        expect(uiResult).toHaveProperty('elementsChart');
 
         console.log(`✅ 모든 어댑터 형식이 올바른 구조를 가집니다!`);
-      }, 30000); // 30초 타임아웃
+      }, 30000);
     });
   });
 
@@ -126,6 +125,7 @@ describe('SajuAdapters', () => {
         month: '4',
         day: '25',
         hour: '8',
+        minute: '0',
         calendar: 'solar' as const,
       },
       pillars: {

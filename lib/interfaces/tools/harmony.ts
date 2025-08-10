@@ -3,7 +3,7 @@ import { tool } from 'ai';
 import { z } from 'zod';
 import { tools } from '@/config/prompts';
 import { getOrCreateProfileByUserKakaoId } from '@/lib/infra/db/queries';
-import { getSajuInfoCompatible } from '@/lib/core/saju';
+import { getSajuInfo } from '@/lib/core/saju';
 
 const HARMONY_PROMPTS = tools.harmony;
 
@@ -59,7 +59,7 @@ export const getHarmony = (kakao_user_id: string) =>
         }
 
         // 두 사람의 사주 분석 실행 (궁합 대신 기본 호환성 분석)
-        const userSaju = getSajuInfoCompatible({
+        const userSaju = getSajuInfo({
           name: userProfile.name,
           gender: userProfile.gender,
           calendar: userProfile.birth_type,
@@ -69,7 +69,7 @@ export const getHarmony = (kakao_user_id: string) =>
           hour: userProfile.birth_time || '12',
         });
 
-        const partnerSaju = getSajuInfoCompatible({
+        const partnerSaju = getSajuInfo({
           name,
           gender,
           calendar,

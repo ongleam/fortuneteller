@@ -62,3 +62,5 @@ tests/promptfoo/generated_config.yaml
 tests/promptfoo/results.json
 
 mcp.json
+
+data/*testset.json

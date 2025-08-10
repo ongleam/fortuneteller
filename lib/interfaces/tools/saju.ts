@@ -2,11 +2,7 @@ import { formattingErrorMessage } from '@/lib/shared/utils';
 import { tool } from 'ai';
 import { z } from 'zod';
 import { tools } from '@/config/prompts';
-import {
-  updateProfile as updateProfile,
-  getOrCreateProfileByUserKakaoId,
-} from '@/lib/infra/db/queries';
-import { getSajuInfoCompatible } from '@/lib/core/saju';
+import { getSajuInfo } from '@/lib/core/saju';
 
 const PROMPTS = tools.getSaju;
 
@@ -34,7 +30,7 @@ export const getSaju = () =>
         `[INFO] getSaju 호출: '${name}, ${gender}, ${calendar}, ${year}, ${month}, ${day}, ${hour}'`
       );
       try {
-        const sajuResult = getSajuInfoCompatible({
+        const sajuInfo = getSajuInfo({
           name,
           gender,
           calendar,
@@ -46,7 +42,7 @@ export const getSaju = () =>
 
         console.log(`[INFO] 저장된 정보로 사주 조회 완료: ${name}`);
 
-        return sajuResult;
+        return sajuInfo;
       } catch (error) {
         console.error('[ERROR] getUserSaju 실행 실패:', formattingErrorMessage(error));
         return {
