@@ -1,8 +1,25 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { calculateSajuAction } from '@/lib/interfaces/actions/debug';
 import type { BirthInput, FourPillars, TenStars, FiveElements } from '@/lib/shared/types/saju';
+
+// Custom hook for responsive detection
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
+  
+  return isMobile;
+}
 
 // 오행에 따른 색상을 반환하는 헬퍼 함수
 const getElementColor = (element: string | undefined): string => {
@@ -23,10 +40,12 @@ const getElementColor = (element: string | undefined): string => {
 };
 
 // 5각형 오행 차트 컴포넌트
-const FiveElementsPentagon = ({ fiveElements }: { fiveElements?: FiveElements }) => {
+const FiveElementsPentagon = ({ fiveElements, isMobile = false }: { fiveElements?: FiveElements; isMobile?: boolean }) => {
   if (!fiveElements) {
     return (
-      <div className="flex h-80 w-72 items-center justify-center rounded-lg border bg-gray-50 p-4">
+      <div className={`flex items-center justify-center rounded-lg border bg-gray-50 p-4 ${
+        isMobile ? 'h-64 w-full' : 'h-80 w-72'
+      }`}>
         <p className="text-gray-500">오행 데이터 로딩 중...</p>
       </div>
     );
@@ -41,9 +60,9 @@ const FiveElementsPentagon = ({ fiveElements }: { fiveElements?: FiveElements })
   ];
 
   const total = elements.reduce((sum, el) => sum + el.value, 0);
-  const centerX = 130;
-  const centerY = 140;
-  const maxRadius = 80;
+  const centerX = isMobile ? 120 : 130;
+  const centerY = isMobile ? 100 : 140;
+  const maxRadius = isMobile ? 60 : 80;
 
   // 5각형의 꼭짓점 계산
   const getPoint = (angle: number, radius: number) => {
@@ -63,13 +82,24 @@ const FiveElementsPentagon = ({ fiveElements }: { fiveElements?: FiveElements })
   });
 
   // 라벨 위치 (꼭짓점에서 조금 더 바깥쪽)
-  const labelPoints = elements.map((el) => getPoint(el.angle, maxRadius + 30));
+  const labelPoints = elements.map((el) => getPoint(el.angle, maxRadius + (isMobile ? 25 : 30)));
+
+  const svgSize = isMobile ? { width: 240, height: 200 } : { width: 260, height: 280 };
+  const viewBoxSize = isMobile ? '0 0 240 200' : '0 0 260 280';
 
   return (
-    <div className="flex h-80 w-72 flex-col items-center rounded-lg border bg-white p-3">
-      <h4 className="mb-2 text-lg font-semibold text-gray-800">오행 분포</h4>
+    <div className={`flex flex-col items-center rounded-lg border bg-white p-3 ${
+      isMobile ? 'w-full' : 'h-80 w-72'
+    }`}>
+      <h4 className={`mb-2 font-semibold text-gray-800 ${isMobile ? 'text-base' : 'text-lg'}`}>오행 분포</h4>
 
-      <svg width="260" height="280" viewBox="0 0 260 280" className="flex-1">
+      <svg 
+        width={svgSize.width} 
+        height={svgSize.height} 
+        viewBox={viewBoxSize}
+        className="flex-1"
+        style={{ maxWidth: '100%', height: 'auto' }}
+      >
         {/* 배경 그리드 5각형들 */}
         {[0.3, 0.5, 0.7, 1.0].map((ratio, i) => (
           <polygon
@@ -140,22 +170,23 @@ const FiveElementsPentagon = ({ fiveElements }: { fiveElements?: FiveElements })
         {/* 라벨 - 오행명과 점수만 표시 */}
         {elements.map((el, i) => {
           const point = labelPoints[i];
+          const circleRadius = isMobile ? 16 : 20;
           return (
             <g key={i}>
-              <circle cx={point.x} cy={point.y} r="20" fill={el.color} opacity="0.9" />
+              <circle cx={point.x} cy={point.y} r={circleRadius} fill={el.color} opacity="0.9" />
               <text
                 x={point.x}
-                y={point.y - 3}
+                y={point.y - (isMobile ? 2 : 3)}
                 textAnchor="middle"
-                className="fill-white text-sm font-bold"
+                className={`fill-white font-bold ${isMobile ? 'text-xs' : 'text-sm'}`}
               >
                 {el.name}
               </text>
               <text
                 x={point.x}
-                y={point.y + 10}
+                y={point.y + (isMobile ? 8 : 10)}
                 textAnchor="middle"
-                className="fill-white text-xs font-semibold"
+                className={`fill-white font-semibold ${isMobile ? 'text-xs' : 'text-xs'}`}
               >
                 {el.value}
               </text>
@@ -251,10 +282,12 @@ const SajuPillarsDisplay = ({
   pillars,
   tenStars,
   fiveElements,
+  isMobile = false,
 }: {
   pillars: FourPillars;
   tenStars?: TenStars;
   fiveElements?: FiveElements;
+  isMobile?: boolean;
 }) => {
   const pillarOrder: Array<{ key: keyof FourPillars; name: string }> = [
     { key: 'time', name: '시주' },
@@ -345,85 +378,163 @@ const SajuPillarsDisplay = ({
     return tenStarMap[tenStar] || tenStar;
   };
 
-  return (
-    <div className="rounded-lg border bg-white p-6 shadow-lg">
-      <div className="flex gap-6">
-        {/* 왼쪽: 5각형 오행 차트 */}
-        <div className="flex-shrink-0">
-          <FiveElementsPentagon fiveElements={fiveElements} />
-        </div>
+  if (isMobile) {
+    return (
+      <div className="space-y-4">
+        {/* 모바일: 5각형 오행 차트 */}
+        {fiveElements && <FiveElementsPentagon fiveElements={fiveElements} isMobile={isMobile} />}
 
-        {/* 오른쪽: 사주팔자 테이블 */}
-        <div className="flex-1">
-          <div className="mb-4 grid grid-cols-4 text-center text-gray-500">
+        {/* 모바일: 사주팔자 테이블 */}
+        <div className="rounded-lg border bg-white p-4 shadow-sm">
+          <h4 className="mb-4 text-center text-lg font-semibold text-gray-800">사주 팔자</h4>
+          
+          {/* 주차 이름 */}
+          <div className="mb-3 grid grid-cols-4 gap-2 text-center text-xs text-gray-500">
             {pillarOrder.map((p) => (
-              <div key={p.key}>{p.name}</div>
+              <div key={p.key} className="font-medium">{p.name}</div>
             ))}
           </div>
 
-          {/* 천간 십성 - 사주 팔자 위에 배치 */}
-          <div className="mb-3">
-            <div className="grid grid-cols-4 gap-4">
-              {pillarOrder.map((p) => {
-                // Sky 십성 (천간에 해당)
-                const skyStar = tenStars?.[`${p.key}Sky` as keyof TenStars];
-
-                return (
-                  <div key={p.key} className="rounded-lg border bg-white p-3 text-center shadow-sm">
-                    <div className="text-sm font-medium text-gray-700">
-                      {skyStar ? getTenStarKorean(skyStar) : '–'}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="my-4 grid grid-cols-4 gap-4">
+          {/* 천간 십성 */}
+          <div className="mb-2 grid grid-cols-4 gap-2">
             {pillarOrder.map((p) => {
-              const pillar = pillars[p.key];
-              const stemInfo = getStemInfo(pillar.sky);
-              const branchInfo = getBranchInfo(pillar.ground);
-
+              const skyStar = tenStars?.[`${p.key}Sky` as keyof TenStars];
               return (
-                <div key={p.key} className="space-y-3">
-                  {/* 천간 */}
-                  <div
-                    className={`flex flex-col items-center justify-center rounded-lg p-4 shadow-md ${getElementColor(stemInfo?.fiveElement)}`}
-                  >
-                    <div className="mb-1 text-xs opacity-80">{`${stemInfo?.fiveElementHanja} ${stemInfo?.fiveElement}`}</div>
-                    <div className="text-4xl font-bold">{pillar.sky}</div>
-                    <div className="mt-1 text-sm">{getHanjaSound(pillar.sky)}</div>
-                  </div>
-                  {/* 지지 */}
-                  <div
-                    className={`flex flex-col items-center justify-center rounded-lg p-4 shadow-md ${getElementColor(branchInfo?.fiveElement)}`}
-                  >
-                    <div className="mb-1 text-xs opacity-80">{`${branchInfo?.fiveElementHanja} ${branchInfo?.fiveElement}`}</div>
-                    <div className="text-4xl font-bold">{pillar.ground}</div>
-                    <div className="mt-1 text-sm">{getHanjaSound(pillar.ground)}</div>
+                <div key={p.key} className="rounded-lg bg-purple-50 p-2 text-center">
+                  <div className="text-xs font-medium text-purple-700">
+                    {skyStar ? getTenStarKorean(skyStar) : '–'}
                   </div>
                 </div>
               );
             })}
           </div>
 
-          {/* 지지 십성 - 사주 팔자 아래에 배치 */}
-          <div className="mt-3">
-            <div className="grid grid-cols-4 gap-4">
-              {pillarOrder.map((p) => {
-                // Ground 십성 (지지에 해당)
-                const groundStar = tenStars?.[`${p.key}Ground` as keyof TenStars];
+          {/* 사주 팔자 메인 */}
+          <div className="grid grid-cols-4 gap-2">
+            {pillarOrder.map((p) => {
+              const pillar = pillars[p.key];
+              const stemInfo = getStemInfo(pillar.sky);
+              const branchInfo = getBranchInfo(pillar.ground);
 
-                return (
-                  <div key={p.key} className="rounded-lg border bg-white p-3 text-center shadow-sm">
-                    <div className="text-sm font-medium text-gray-700">
-                      {groundStar ? getTenStarKorean(groundStar) : '–'}
-                    </div>
+              return (
+                <div key={p.key} className="space-y-1">
+                  {/* 천간 */}
+                  <div
+                    className={`rounded-lg p-3 text-center shadow-sm ${getElementColor(stemInfo?.fiveElement)}`}
+                  >
+                    <div className="text-xs opacity-80">{stemInfo?.fiveElementHanja} {stemInfo?.fiveElement}</div>
+                    <div className="text-2xl font-bold">{pillar.sky}</div>
+                    <div className="text-xs opacity-90">{getHanjaSound(pillar.sky)}</div>
                   </div>
-                );
-              })}
-            </div>
+                  {/* 지지 */}
+                  <div
+                    className={`rounded-lg p-3 text-center shadow-sm ${getElementColor(branchInfo?.fiveElement)}`}
+                  >
+                    <div className="text-xs opacity-80">{branchInfo?.fiveElementHanja} {branchInfo?.fiveElement}</div>
+                    <div className="text-2xl font-bold">{pillar.ground}</div>
+                    <div className="text-xs opacity-90">{getHanjaSound(pillar.ground)}</div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* 지지 십성 */}
+          <div className="mt-2 grid grid-cols-4 gap-2">
+            {pillarOrder.map((p) => {
+              const groundStar = tenStars?.[`${p.key}Ground` as keyof TenStars];
+              return (
+                <div key={p.key} className="rounded-lg bg-blue-50 p-2 text-center">
+                  <div className="text-xs font-medium text-blue-700">
+                    {groundStar ? getTenStarKorean(groundStar) : '–'}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 웹: 오각형과 테이블을 가로로 배치
+  return (
+    <div className="rounded-lg border bg-white p-6 shadow-sm">
+      <h4 className="mb-6 text-center text-xl font-semibold text-gray-800">사주 팔자 분석</h4>
+      
+      <div className="flex gap-8">
+        {/* 왼쪽: 5각형 오행 차트 */}
+        <div className="flex-shrink-0">
+          {fiveElements && <FiveElementsPentagon fiveElements={fiveElements} isMobile={false} />}
+        </div>
+
+        {/* 오른쪽: 사주팔자 테이블 */}
+        <div className="flex-1">
+          <h5 className="mb-4 text-center text-lg font-semibold text-gray-700">사주 팔자</h5>
+          
+          {/* 주차 이름 */}
+          <div className="mb-3 grid grid-cols-4 gap-3 text-center text-sm text-gray-500">
+            {pillarOrder.map((p) => (
+              <div key={p.key} className="font-medium">{p.name}</div>
+            ))}
+          </div>
+
+          {/* 천간 십성 */}
+          <div className="mb-3 grid grid-cols-4 gap-3">
+            {pillarOrder.map((p) => {
+              const skyStar = tenStars?.[`${p.key}Sky` as keyof TenStars];
+              return (
+                <div key={p.key} className="rounded-lg bg-purple-50 p-2 text-center">
+                  <div className="text-xs font-medium text-purple-700">
+                    {skyStar ? getTenStarKorean(skyStar) : '–'}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* 사주 팔자 메인 */}
+          <div className="grid grid-cols-4 gap-3">
+            {pillarOrder.map((p) => {
+              const pillar = pillars[p.key];
+              const stemInfo = getStemInfo(pillar.sky);
+              const branchInfo = getBranchInfo(pillar.ground);
+
+              return (
+                <div key={p.key} className="space-y-2">
+                  {/* 천간 */}
+                  <div
+                    className={`rounded-lg p-4 text-center shadow-sm ${getElementColor(stemInfo?.fiveElement)}`}
+                  >
+                    <div className="text-xs opacity-80">{stemInfo?.fiveElementHanja} {stemInfo?.fiveElement}</div>
+                    <div className="text-3xl font-bold">{pillar.sky}</div>
+                    <div className="text-sm opacity-90">{getHanjaSound(pillar.sky)}</div>
+                  </div>
+                  {/* 지지 */}
+                  <div
+                    className={`rounded-lg p-4 text-center shadow-sm ${getElementColor(branchInfo?.fiveElement)}`}
+                  >
+                    <div className="text-xs opacity-80">{branchInfo?.fiveElementHanja} {branchInfo?.fiveElement}</div>
+                    <div className="text-3xl font-bold">{pillar.ground}</div>
+                    <div className="text-sm opacity-90">{getHanjaSound(pillar.ground)}</div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* 지지 십성 */}
+          <div className="mt-3 grid grid-cols-4 gap-3">
+            {pillarOrder.map((p) => {
+              const groundStar = tenStars?.[`${p.key}Ground` as keyof TenStars];
+              return (
+                <div key={p.key} className="rounded-lg bg-blue-50 p-2 text-center">
+                  <div className="text-xs font-medium text-blue-700">
+                    {groundStar ? getTenStarKorean(groundStar) : '–'}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -432,6 +543,8 @@ const SajuPillarsDisplay = ({
 };
 
 export default function DebugPage() {
+  const isMobile = useIsMobile();
+  const [activeTab, setActiveTab] = useState<'local' | 'reference'>('local');
   const [birthInput, setBirthInput] = useState<BirthInput>({
     name: '테스트',
     gender: '남성',
@@ -484,109 +597,118 @@ export default function DebugPage() {
   };
 
   return (
-    <div className="container mx-auto max-w-4xl p-6">
-      <h1 className="mb-8 text-center text-3xl font-bold">사주 팔자 디버깅 도구</h1>
+    <div className={`container mx-auto p-4 ${isMobile ? 'max-w-md' : 'max-w-6xl'}`}>
+      <div className="mb-6 text-center">
+        <h1 className={`font-bold text-gray-900 ${isMobile ? 'text-2xl' : 'text-3xl'}`}>사주 팔자</h1>
+        {!isMobile && <p className="mt-1 text-sm text-gray-600">생년월일로 운명을 확인하세요</p>}
+      </div>
 
       {/* 입력 폼 */}
-      <div className="mb-8 rounded-lg border bg-white p-6 shadow-lg">
-        <h2 className="mb-6 text-xl font-semibold text-purple-600">생년월일 및 생시 입력</h2>
+      <div className={`mb-6 rounded-xl bg-white p-5 shadow-sm ${isMobile ? '' : 'md:max-w-4xl md:mx-auto'}`}>
+        <h2 className="mb-4 text-lg font-semibold text-purple-600">생년월일 입력</h2>
 
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className={`${isMobile ? 'space-y-4' : 'grid gap-4 md:grid-cols-3'}`}>
           {/* 기본 정보 */}
           <div className="space-y-4">
-            <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">이름</label>
-              <input
-                type="text"
-                value={birthInput.name}
-                onChange={(e) => setBirthInput((prev) => ({ ...prev, name: e.target.value }))}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                placeholder="이름"
-              />
+            <div className={isMobile ? 'grid grid-cols-2 gap-3' : ''}>
+              <div>
+                <label className="mb-1 block text-sm font-medium text-gray-700">이름</label>
+                <input
+                  type="text"
+                  value={birthInput.name}
+                  onChange={(e) => setBirthInput((prev) => ({ ...prev, name: e.target.value }))}
+                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  placeholder="이름"
+                />
+              </div>
+
+              <div>
+                <label className="mb-1 block text-sm font-medium text-gray-700">성별</label>
+                <select
+                  value={birthInput.gender}
+                  onChange={(e) =>
+                    setBirthInput((prev) => ({ ...prev, gender: e.target.value as '남성' | '여성' }))
+                  }
+                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                >
+                  <option value="남성">남성</option>
+                  <option value="여성">여성</option>
+                </select>
+              </div>
             </div>
 
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">성별</label>
-              <select
-                value={birthInput.gender}
-                onChange={(e) =>
-                  setBirthInput((prev) => ({ ...prev, gender: e.target.value as '남성' | '여성' }))
-                }
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              >
-                <option value="남성">남성</option>
-                <option value="여성">여성</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">양력/음력</label>
-              <select
-                value={birthInput.calendar}
-                onChange={(e) =>
-                  setBirthInput((prev) => ({
-                    ...prev,
-                    calendar: e.target.value as '양력' | '음력',
-                  }))
-                }
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              >
-                <option value="양력">양력</option>
-                <option value="음력">음력</option>
-              </select>
+              <label className="mb-1 block text-sm font-medium text-gray-700">달력</label>
+              <div className="flex rounded-lg border border-gray-300 p-1">
+                {(['양력', '음력'] as const).map((calendar) => (
+                  <button
+                    key={calendar}
+                    onClick={() => setBirthInput((prev) => ({ ...prev, calendar }))}
+                    className={`flex-1 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                      birthInput.calendar === calendar
+                        ? 'bg-purple-500 text-white'
+                        : 'text-gray-600 hover:bg-gray-100'
+                    }`}
+                  >
+                    {calendar}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
           {/* 생년월일 */}
           <div className="space-y-4">
-            <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">년도</label>
-              <input
-                type="number"
-                value={birthInput.year}
-                onChange={(e) => setBirthInput((prev) => ({ ...prev, year: e.target.value }))}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                placeholder="1995"
-                min="1900"
-                max="2100"
-              />
-            </div>
+            <div className="grid grid-cols-3 gap-3">
+              <div>
+                <label className="mb-1 block text-sm font-medium text-gray-700">년</label>
+                <input
+                  type="number"
+                  value={birthInput.year}
+                  onChange={(e) => setBirthInput((prev) => ({ ...prev, year: e.target.value }))}
+                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  placeholder="1995"
+                  min="1900"
+                  max="2100"
+                />
+              </div>
 
-            <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">월</label>
-              <input
-                type="number"
-                value={birthInput.month}
-                onChange={(e) => setBirthInput((prev) => ({ ...prev, month: e.target.value }))}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                placeholder="4"
-                min="1"
-                max="12"
-              />
-            </div>
+              <div>
+                <label className="mb-1 block text-sm font-medium text-gray-700">월</label>
+                <input
+                  type="number"
+                  value={birthInput.month}
+                  onChange={(e) => setBirthInput((prev) => ({ ...prev, month: e.target.value }))}
+                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  placeholder="4"
+                  min="1"
+                  max="12"
+                />
+              </div>
 
-            <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">일</label>
-              <input
-                type="number"
-                value={birthInput.day}
-                onChange={(e) => setBirthInput((prev) => ({ ...prev, day: e.target.value }))}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                placeholder="25"
-                min="1"
-                max="31"
-              />
+              <div>
+                <label className="mb-1 block text-sm font-medium text-gray-700">일</label>
+                <input
+                  type="number"
+                  value={birthInput.day}
+                  onChange={(e) => setBirthInput((prev) => ({ ...prev, day: e.target.value }))}
+                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  placeholder="25"
+                  min="1"
+                  max="31"
+                />
+              </div>
             </div>
           </div>
 
           {/* 생시 */}
           <div className="space-y-4">
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">생시 (시간)</label>
+              <label className="mb-1 block text-sm font-medium text-gray-700">생시</label>
               <select
                 value={`${birthInput.hour}:${birthInput.minute}`}
                 onChange={(e) => handleTimeChange(e.target.value)}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
               >
                 <option value="00:00">자시 (23:30 ~ 01:29)</option>
                 <option value="01:30">축시 (01:30 ~ 03:29)</option>
@@ -603,55 +725,130 @@ export default function DebugPage() {
               </select>
             </div>
 
-            <div className="pt-8">
-              <button
-                onClick={calculateSaju}
-                disabled={sajuResult.loading}
-                className="w-full rounded-md bg-purple-500 px-4 py-3 font-medium text-white transition-colors hover:bg-purple-600 disabled:bg-gray-400"
-              >
-                {sajuResult.loading ? '계산 중...' : '사주 팔자 계산'}
-              </button>
-            </div>
+            <button
+              onClick={calculateSaju}
+              disabled={sajuResult.loading}
+              className="w-full rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 font-semibold text-white shadow-md transition-all hover:shadow-lg active:scale-95 disabled:opacity-50"
+            >
+              {sajuResult.loading ? (
+                <div className="flex items-center justify-center space-x-2">
+                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+                  <span>계산 중...</span>
+                </div>
+              ) : (
+                '사주 팔자 확인하기'
+              )}
+            </button>
           </div>
         </div>
       </div>
 
-      {/* 결과 표시 */}
+      {/* 오류 메시지 */}
       {sajuResult.error && (
-        <div className="mb-8 rounded-lg border border-red-200 bg-red-50 p-6">
-          <h3 className="mb-2 text-lg font-semibold text-red-800">오류</h3>
-          <p className="text-red-600">{sajuResult.error}</p>
+        <div className="mb-6 rounded-xl border border-red-200 bg-red-50 p-4">
+          <h3 className="mb-2 font-semibold text-red-800">오류가 발생했습니다</h3>
+          <p className="text-sm text-red-600">{sajuResult.error}</p>
         </div>
       )}
 
+      {/* 결과 표시 */}
       {(sajuResult.local || sajuResult.reference) && (
-        <div className="space-y-6">
-          {sajuResult.local && (
+        <div>
+          {/* 탭 네비게이션 */}
+          {sajuResult.local && sajuResult.reference && (
+            <div className={`mb-4 flex rounded-xl bg-white p-1 shadow-sm ${
+              isMobile ? '' : 'md:max-w-md md:mx-auto'
+            }`}>
+              {(
+                [
+                  { key: 'local', label: '로컬 계산', color: 'blue' },
+                  { key: 'reference', label: 'Reference API', color: 'green' },
+                ] as const
+              ).map((tab) => (
+                <button
+                  key={tab.key}
+                  onClick={() => setActiveTab(tab.key)}
+                  className={`flex-1 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+                    activeTab === tab.key
+                      ? tab.color === 'blue'
+                        ? 'bg-blue-500 text-white'
+                        : 'bg-green-500 text-white'
+                      : 'text-gray-600 hover:bg-gray-100'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* 결과 컨텐츠 */}
+          {activeTab === 'local' && sajuResult.local && (
             <div>
-              <h3 className="mb-4 text-xl font-semibold text-blue-600">
-                로컬 계산 (데이터베이스 기반)
-              </h3>
+              <div className="mb-3 text-center">
+                <h3 className="text-lg font-semibold text-blue-600">로컬 계산 결과</h3>
+                <p className="text-xs text-gray-500">데이터베이스 기반</p>
+              </div>
               <SajuPillarsDisplay
                 pillars={sajuResult.local}
                 tenStars={sajuResult.localTenStars}
                 fiveElements={sajuResult.localFiveElements}
+                isMobile={isMobile}
               />
               {!sajuResult.localTenStars && (
-                <p className="mt-2 text-sm text-orange-600">⚠️ 십성 계산 실패</p>
+                <div className="mt-3 rounded-lg bg-orange-50 p-3 text-center">
+                  <p className="text-sm text-orange-600">⚠️ 십성 계산에 실패했습니다</p>
+                </div>
               )}
             </div>
           )}
-          {sajuResult.reference && (
+
+          {activeTab === 'reference' && sajuResult.reference && (
             <div>
-              <h3 className="mb-4 text-xl font-semibold text-green-600">Reference API 결과</h3>
+              <div className="mb-3 text-center">
+                <h3 className="text-lg font-semibold text-green-600">Reference API 결과</h3>
+                <p className="text-xs text-gray-500">외부 API 기반</p>
+              </div>
               <SajuPillarsDisplay
                 pillars={sajuResult.reference}
                 tenStars={sajuResult.referenceTenStars}
                 fiveElements={sajuResult.referenceFiveElements}
+                isMobile={isMobile}
               />
               {!sajuResult.referenceTenStars && (
-                <p className="mt-2 text-sm text-orange-600">⚠️ 십성 계산 실패</p>
+                <div className="mt-3 rounded-lg bg-orange-50 p-3 text-center">
+                  <p className="text-sm text-orange-600">⚠️ 십성 계산에 실패했습니다</p>
+                </div>
               )}
+            </div>
+          )}
+
+          {/* 단일 결과 표시 (탭이 없는 경우) */}
+          {sajuResult.local && !sajuResult.reference && (
+            <div>
+              <div className="mb-3 text-center">
+                <h3 className="text-lg font-semibold text-blue-600">사주 팔자 결과</h3>
+              </div>
+              <SajuPillarsDisplay
+                pillars={sajuResult.local}
+                tenStars={sajuResult.localTenStars}
+                fiveElements={sajuResult.localFiveElements}
+                isMobile={isMobile}
+              />
+            </div>
+          )}
+
+          {!sajuResult.local && sajuResult.reference && (
+            <div>
+              <div className="mb-3 text-center">
+                <h3 className="text-lg font-semibold text-green-600">사주 팔자 결과</h3>
+              </div>
+              <SajuPillarsDisplay
+                pillars={sajuResult.reference}
+                tenStars={sajuResult.referenceTenStars}
+                fiveElements={sajuResult.referenceFiveElements}
+                isMobile={isMobile}
+              />
             </div>
           )}
         </div>
