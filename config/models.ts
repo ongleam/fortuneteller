@@ -1,8 +1,7 @@
 export const modelConfig = {
   'chat-model': {
     provider: 'google',
-    // model: 'gemini-2.5-flash',
-    model: 'gemini-2.5-flash-lite-preview-06-17',
+    model: 'gemini-3-pro-preview',
     temperature: 1.0,
     // maxTokens: 1024,
   },
