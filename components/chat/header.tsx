@@ -13,11 +13,10 @@ import { useSidebar } from '@/components/ui/sidebar';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { type VisibilityType } from '@/components/chat/visibility-selector';
 import { useTheme } from 'next-themes';
-import { ReportModal } from '@/components/report-modal';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { UserProfile } from '@/components/sidebar/user-profile-modal';
-import { Database, MailIcon } from 'lucide-react';
+import { Database } from 'lucide-react';
 
 function PureChatHeader({
   chatId,
@@ -36,7 +35,6 @@ function PureChatHeader({
   const { open } = useSidebar();
   const { width: windowWidth } = useWindowSize();
   const [isClient, setIsClient] = useState(false);
-  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const isMobile = useIsMobile();
 
@@ -101,15 +99,6 @@ function PureChatHeader({
           <span>DB</span>
         </Button>
 
-        <Button
-          variant="ghost"
-          onClick={() => setIsReportModalOpen(true)}
-          className="flex items-center gap-1 px-2 py-1 text-sm font-bold text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-        >
-          <MailIcon className="h-4 w-4" />
-          <span>Feedback</span>
-        </Button>
-
         {/* 카카오 로그인 버튼 - 게스트 사용자에게만 표시 */}
         {/* {isGuest && (
           <Tooltip>
@@ -162,9 +151,6 @@ function PureChatHeader({
           </Tooltip>
         )}
       </div>
-
-      {/* ReportModal과 동일한 패턴으로 UserProfile 모달 사용 */}
-      <ReportModal isOpen={isReportModalOpen} onOpenChange={setIsReportModalOpen} chatId={chatId} />
 
       {isMobile && !isGuest && (
         <UserProfile

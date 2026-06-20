@@ -1,6 +1,5 @@
 import { Toaster } from 'sonner';
 import { Geist, Geist_Mono } from 'next/font/google';
-import { GoogleAnalytics } from '@next/third-parties/google';
 import { ThemeProvider } from '@/components/theme-provider';
 // import ClarityScript from '@/components/scripts/Clarity';
 import './globals.css';
@@ -58,9 +57,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-  const isProduction = process.env.NODE_ENV === 'production';
-
   return (
     <html
       lang="en"
@@ -91,7 +87,6 @@ export default async function RootLayout({
           <Toaster position="top-center" />
           {children}
         </ThemeProvider>
-        {isProduction && gaMeasurementId && <GoogleAnalytics gaId={gaMeasurementId} />}
         {/* <Analytics /> */}
       </body>
     </html>
