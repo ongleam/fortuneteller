@@ -1,6 +1,6 @@
 // lib/utils/embedding.ts
 import { vertex } from '@ai-sdk/google-vertex/edge';
-import { google } from '@ai-sdk/google';
+import { google } from '@/lib/shared/utils/google-provider';
 import { embed } from 'ai';
 
 export async function getVertexEmbedding(
