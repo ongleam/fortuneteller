@@ -3,7 +3,7 @@
   "version": "3.0.8",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo 2>&1 | tee logs/debug.txt",
+    "dev": "next dev --turbo 2>&1 | tee logs/server.log",
     "build": "next build",
     "vercel-build": "if [ \"$VERCEL_ENV\" = \"production\" ]; then tsx lib/infra/db/migrate.ts; fi && next build",
     "start": "next start",
@@ -103,5 +103,5 @@
     "tsx": "^4.19.1",
     "typescript": "^5.6.3"
   },
-  "packageManager": "pnpm@9.12.3"
+  "packageManager": "bun@1.3.8"
 }
