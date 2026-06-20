@@ -9,6 +9,8 @@ import { getFiveElements } from "./five-elements";
 import { getStemInfo, getGroundInfo } from "./constants";
 import { getHiddenStems, getTwelveFortune, getZodiac } from "./chart-extras";
 import { getFourSinsal } from "./sinsal";
+import { getDaeun } from "./daeun";
+import { computePoints } from "./points";
 import type { BirthInput, FourPillars, Pillar } from "./types";
 
 const STRONGEST_KO: Record<keyof ReturnType<typeof getFiveElements>, string> = {
@@ -63,6 +65,21 @@ export async function getSajuInfo(birthInput: BirthInput) {
   const zodiac = getZodiac(pillars.day.sky, pillars.day.ground);
   const sinsal = getFourSinsal(pillars);
 
+  // 대운(大運): 10년 단위 운의 흐름 · 점수(오행/십성 가중치).
+  const daeun = await getDaeun(birthInput);
+  const points = computePoints(pillars);
+
+  // 현재 시점 맥락: 올해 나이 기준 현재 대운 entry.
+  const birthYear = parseInt(birthInput.year, 10);
+  const currentYear = new Date().getFullYear();
+  const currentAge = Number.isFinite(birthYear) ? currentYear - birthYear + 1 : 0; // 세는나이 근사
+  const currentDaeun =
+    daeun.entries.length > 0
+      ? daeun.entries
+          .filter((e) => e.age <= currentAge)
+          .reduce((a, b) => (b.age > a.age ? b : a), daeun.entries[0])
+      : null;
+
   return {
     input: birthInput,
     pillars: {
@@ -92,6 +109,17 @@ export async function getSajuInfo(birthInput: BirthInput) {
         korean: STRONGEST_KO[weakest[0]],
         count: weakest[1],
       },
+    },
+    points,
+    daeun: {
+      startAge: daeun.startAge,
+      direction: daeun.direction,
+      entries: daeun.entries,
+    },
+    now: {
+      year: currentYear,
+      age: currentAge,
+      currentDaeun,
     },
   };
 }

@@ -8,45 +8,58 @@ import {
   saveChat,
   deleteChatById,
   getChatsByUserId,
-  getChatById,
-  updateChatVisiblityById,
   saveMessages,
   getMessagesByChatId,
   voteMessage,
   getVotesByChatId,
-  getMessageById,
-  deleteMessagesByChatIdAfterTimestamp,
-  getMessageCountByUserId,
-  // updateProfile,
 } from "@/lib/infra/supabase/queries";
 import { createClient } from "@/lib/infra/supabase/client";
 
 // 모킹 설정
+// PostgREST 빌더는 메서드 체이닝이 가능한 동시에 thenable(await 가능)이다.
+// 따라서 mock 은 모든 빌더 메서드에서 자기 자신을 반환하면서, await 시점에
+// 미리 설정한 결과로 resolve 되는 단일 인스턴스여야 한다.
+// queries.ts 는 모듈 로드 시점에 createClient() 를 한 번 호출해 보관하므로,
+// createClient 는 항상 같은 인스턴스를 돌려줘야 테스트와 구현이 동일 mock 을 공유한다.
 jest.mock("@/lib/infra/supabase/client", () => {
-  const createChainableMock = () => {
-    const mock: Record<string, jest.Mock> = {
-      from: jest.fn(() => mock),
-      select: jest.fn(() => mock),
-      insert: jest.fn(() => mock),
-      update: jest.fn(() => mock),
-      delete: jest.fn(() => mock),
-      eq: jest.fn(() => mock),
-      gt: jest.fn(() => mock),
-      gte: jest.fn(() => mock),
-      lt: jest.fn(() => mock),
-      ilike: jest.fn(() => mock),
-      in: jest.fn(() => mock),
-      order: jest.fn(() => mock),
-      limit: jest.fn(() => mock),
-      single: jest.fn(() => mock),
-      maybeSingle: jest.fn(() => mock),
-      rpc: jest.fn(() => mock),
-    };
-    return mock;
+  type QueryResult = { data: any; error: any };
+
+  let defaultResult: QueryResult = { data: null, error: null };
+  let resultQueue: QueryResult[] = [];
+
+  const mock: any = {
+    from: jest.fn(() => mock),
+    select: jest.fn(() => mock),
+    insert: jest.fn(() => mock),
+    update: jest.fn(() => mock),
+    delete: jest.fn(() => mock),
+    eq: jest.fn(() => mock),
+    gt: jest.fn(() => mock),
+    gte: jest.fn(() => mock),
+    lt: jest.fn(() => mock),
+    ilike: jest.fn(() => mock),
+    in: jest.fn(() => mock),
+    order: jest.fn(() => mock),
+    limit: jest.fn(() => mock),
+    single: jest.fn(() => mock),
+    maybeSingle: jest.fn(() => mock),
+    rpc: jest.fn(() => mock),
+    // 빌더를 await 하면 다음 결과(큐 우선, 없으면 기본값)로 resolve 된다.
+    then: (resolve: (value: QueryResult) => unknown) =>
+      resolve(resultQueue.length > 0 ? (resultQueue.shift() as QueryResult) : defaultResult),
+    // 단일 await 함수용: 기본 결과 설정 + 큐 초기화
+    __setResult: (result: QueryResult) => {
+      defaultResult = result;
+      resultQueue = [];
+    },
+    // 다중 await 함수용: await 순서대로 소비되는 결과 시퀀스 설정
+    __setResults: (results: QueryResult[]) => {
+      resultQueue = [...results];
+    },
   };
 
   return {
-    createClient: jest.fn(() => createChainableMock()),
+    createClient: jest.fn(() => mock),
   };
 });
 
@@ -56,6 +69,7 @@ describe("Supabase Queries", () => {
   beforeEach(() => {
     mockClient = createClient();
     jest.clearAllMocks();
+    mockClient.__setResult({ data: null, error: null });
   });
 
   describe("Profile 관련 쿼리", () => {
@@ -66,10 +80,7 @@ describe("Supabase Queries", () => {
         email: "test@example.com",
       };
 
-      mockClient.single.mockResolvedValue({
-        data: mockProfile,
-        error: null,
-      });
+      mockClient.__setResult({ data: mockProfile, error: null });
 
       const result = await getProfileByUserId("test-user-id");
 
@@ -86,10 +97,7 @@ describe("Supabase Queries", () => {
         email: "new@example.com",
       };
 
-      mockClient.select.mockResolvedValue({
-        data: [newProfile],
-        error: null,
-      });
+      mockClient.__setResult({ data: [newProfile], error: null });
 
       const result = await createProfile(newProfile.user_id, newProfile.name, newProfile.email);
 
@@ -115,10 +123,7 @@ describe("Supabase Queries", () => {
         channel: "web",
       };
 
-      mockClient.select.mockResolvedValue({
-        data: [{ id: "chat-id", ...chatData }],
-        error: null,
-      });
+      mockClient.__setResult({ data: [{ id: "chat-id", ...chatData }], error: null });
 
       const result = await saveChat({
         id: "chat-id",
@@ -137,10 +142,7 @@ describe("Supabase Queries", () => {
         { id: "chat2", title: "채팅 2" },
       ];
 
-      mockClient.order.mockResolvedValue({
-        data: mockChats,
-        error: null,
-      });
+      mockClient.__setResult({ data: mockChats, error: null });
 
       const result = await getChatsByUserId({
         id: "test-user",
@@ -153,14 +155,13 @@ describe("Supabase Queries", () => {
       expect(mockClient.select).toHaveBeenCalled();
       expect(mockClient.eq).toHaveBeenCalledWith("user_id", "test-user");
       expect(mockClient.order).toHaveBeenCalledWith("created_at", { ascending: false });
-      expect(result).toEqual(mockChats);
+      // 구현은 페이지네이션 메타와 함께 { chats, hasMore } 를 반환한다.
+      expect(result).toEqual({ chats: mockChats, hasMore: false });
     });
 
     test("deleteChatById - 채팅 삭제", async () => {
-      mockClient.eq.mockResolvedValue({
-        data: null,
-        error: null,
-      });
+      // votes/messages/chats 순으로 3회 await 하며, 마지막 chats 삭제는 data[0] 을 반환한다.
+      mockClient.__setResult({ data: [{ id: "chat-id" }], error: null });
 
       await deleteChatById({ id: "chat-id" });
 
@@ -181,10 +182,7 @@ describe("Supabase Queries", () => {
         },
       ];
 
-      mockClient.select.mockResolvedValue({
-        data: messages,
-        error: null,
-      });
+      mockClient.__setResult({ data: messages, error: null });
 
       const result = await saveMessages({ messages });
 
@@ -199,18 +197,15 @@ describe("Supabase Queries", () => {
         { id: "msg2", content: "메시지 2" },
       ];
 
-      mockClient.limit.mockResolvedValue({
-        data: mockMessages,
-        error: null,
-      });
+      mockClient.__setResult({ data: mockMessages, error: null });
 
       const result = await getMessagesByChatId({ id: "chat-id" });
 
       expect(mockClient.from).toHaveBeenCalledWith("messages");
       expect(mockClient.select).toHaveBeenCalled();
       expect(mockClient.eq).toHaveBeenCalledWith("chat_id", "chat-id");
-      expect(mockClient.order).toHaveBeenCalledWith("created_at", { ascending: false });
-      // limit은 기본 함수에서 처리됨
+      // 구현은 오래된 순(created_at ascending)으로 조회한다.
+      expect(mockClient.order).toHaveBeenCalledWith("created_at", { ascending: true });
       expect(result).toEqual(mockMessages);
     });
   });
@@ -222,10 +217,11 @@ describe("Supabase Queries", () => {
         is_upvoted: true,
       };
 
-      mockClient.select.mockResolvedValue({
-        data: [voteData],
-        error: null,
-      });
+      // 1) 기존 투표 조회 → 없음, 2) 새 투표 insert 결과
+      mockClient.__setResults([
+        { data: null, error: null },
+        { data: [voteData], error: null },
+      ]);
 
       const result = await voteMessage({
         chatId: "chat-id",
@@ -244,10 +240,7 @@ describe("Supabase Queries", () => {
         { message_id: "msg2", is_upvoted: false },
       ];
 
-      mockClient.eq.mockResolvedValue({
-        data: mockVotes,
-        error: null,
-      });
+      mockClient.__setResult({ data: mockVotes, error: null });
 
       const result = await getVotesByChatId({ id: "chat-id" });
 
@@ -262,10 +255,7 @@ describe("Supabase Queries", () => {
     test("쿼리 에러 시 예외 발생", async () => {
       const mockError = new Error("Database connection failed");
 
-      mockClient.single.mockResolvedValue({
-        data: null,
-        error: mockError,
-      });
+      mockClient.__setResult({ data: null, error: mockError });
 
       await expect(getProfileByUserId("invalid-id")).rejects.toThrow();
     });

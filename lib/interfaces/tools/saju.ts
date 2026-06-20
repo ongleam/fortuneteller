@@ -30,7 +30,7 @@ export const getSaju = () =>
         `[INFO] getSaju 호출: '${name}, ${gender}, ${calendar}, ${year}, ${month}, ${day}, ${hour}'`,
       );
       try {
-        const sajuInfo = getSajuInfo({
+        const sajuInfo = await getSajuInfo({
           name,
           gender,
           calendar,
