@@ -1,14 +1,6 @@
-import {
-  appendClientMessage,
-  appendResponseMessages,
-  createDataStreamResponse,
-  DataStreamWriter,
-  smoothStream,
-  streamText,
-  UIMessage,
-} from 'ai';
+import { smoothStream, stepCountIs, streamText, type UIMessage } from 'ai';
 import { baseAgent } from '../interfaces/agents/base';
-import { generateUUID, getTrailingMessageId } from '@/lib/shared/utils';
+import { generateUUID } from '@/lib/shared/utils';
 import { saveMessages } from '../infra/db/queries';
 import { isProductionEnvironment } from '../shared/constants';
 
@@ -16,71 +8,50 @@ const MAX_STEPS = 5;
 
 interface BaseStreamConfig {
   message: any;
-  messages: any[];
+  messages: UIMessage[];
   model: string;
   userId: string;
   chatId: string;
 }
 
-export function createToolCallingStream(modelConfig: BaseStreamConfig) {
-  return createDataStreamResponse({
-    execute: (dataStream: DataStreamWriter) => {
-      const { messages, model, userId, chatId, message } = modelConfig;
+export async function createToolCallingStream(streamConfig: BaseStreamConfig) {
+  const { messages, model, userId, chatId } = streamConfig;
 
-      // Select the agent based on the model
-      const agentConfig = baseAgent({ messages, model, kakao_user_id: userId });
+  // Select the agent based on the model
+  const agentConfig = await baseAgent({ messages, model, kakao_user_id: userId });
 
-      const result = streamText({
-        ...agentConfig,
-        maxSteps: MAX_STEPS,
-        experimental_transform: smoothStream({ chunking: 'word' }),
-        experimental_generateMessageId: generateUUID,
-        onFinish: async ({ response }) => {
-          if (userId) {
-            try {
-              const assistantId = getTrailingMessageId({
-                messages: response.messages.filter((message) => message.role === 'assistant'),
-              });
+  const result = streamText({
+    ...agentConfig,
+    stopWhen: stepCountIs(MAX_STEPS),
+    experimental_transform: smoothStream({ chunking: 'word' }),
+    experimental_telemetry: {
+      isEnabled: isProductionEnvironment,
+      functionId: 'stream-text',
+    },
+  });
 
-              if (!assistantId) {
-                throw new Error('No assistant message found!');
-              }
-
-              const [, assistantMessage] = appendResponseMessages({
-                messages: [message],
-                responseMessages: response.messages,
-              });
-              // console.log('response', response.messages);
-              // console.log('assistantMessage', assistantMessage);
-
-              await saveMessages({
-                messages: [
-                  {
-                    id: assistantId,
-                    chat_id: chatId,
-                    role: assistantMessage.role,
-                    parts: assistantMessage.parts,
-                    attachments: assistantMessage.experimental_attachments ?? [],
-                    created_at: new Date(),
-                  },
-                ],
-              });
-            } catch (_) {
-              console.error('Failed to save chat:', _);
-            }
-          }
-        },
-        experimental_telemetry: {
-          isEnabled: isProductionEnvironment,
-          functionId: 'stream-text',
-        },
-      });
-
-      result.consumeStream();
-
-      result.mergeIntoDataStream(dataStream, {
-        sendReasoning: false,
-      });
+  return result.toUIMessageStreamResponse({
+    originalMessages: messages,
+    generateMessageId: generateUUID,
+    sendReasoning: false,
+    onFinish: async ({ responseMessage }) => {
+      if (!userId) return;
+      try {
+        await saveMessages({
+          messages: [
+            {
+              id: responseMessage.id,
+              chat_id: chatId,
+              role: responseMessage.role,
+              parts: responseMessage.parts,
+              attachments: [],
+              created_at: new Date(),
+            },
+          ],
+        });
+      } catch (_) {
+        console.error('Failed to save chat:', _);
+      }
     },
     onError: (error) => {
       console.error('[ERROR] Failed to process chat request: ', error);

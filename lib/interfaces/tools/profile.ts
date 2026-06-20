@@ -9,7 +9,7 @@ const PROFILE_PROMPTS = tools.updateUserProfile;
 export const updateUserProfile = (kakao_user_id: string) =>
   tool({
     description: PROFILE_PROMPTS.description,
-    parameters: z.object({
+    inputSchema: z.object({
       name: z.string().describe(PROFILE_PROMPTS.parameters.name.description),
       gender: z.enum(['남성', '여성']).describe(PROFILE_PROMPTS.parameters.gender.description),
       calendar: z

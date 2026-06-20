@@ -3,8 +3,7 @@
  */
 
 import { getStemInfo as getSkyInfo, getGroundInfo, JIJANG_GAN } from './constants';
-import { getFiveElementsReference as getReferenceFiveElements } from './reference';
-import type { FourPillars, FiveElements, BirthInput } from '../../shared/types/saju';
+import type { FourPillars, FiveElements } from './types';
 
 /**
  * 메인 오행 분석 함수 - UI 표시와 일치하도록 천간과 지지의 주된 오행만 카운트
@@ -97,11 +96,3 @@ export function addElementCount(elementCounts: FiveElements, element: string): v
   }
 }
 
-/**
- * Reference API를 사용한 오행 분석 (재export)
- * @param birthInput 생년월일 정보
- * @returns 오행 분석 결과
- */
-export async function getFiveElementsReference(birthInput: BirthInput): Promise<FiveElements | undefined> {
-  return await getReferenceFiveElements(birthInput);
-}

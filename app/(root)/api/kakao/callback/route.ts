@@ -1,11 +1,4 @@
-import {
-  appendClientMessage,
-  appendResponseMessages,
-  generateText,
-  GenerateTextResult,
-  Message,
-  UIMessage,
-} from 'ai';
+import { generateText, GenerateTextResult, stepCountIs, UIMessage } from 'ai';
 import { baseAgent } from '@/lib/interfaces/agents/base';
 import { getKSTDateTime, measureExecutionTime, generateUUID } from '@/lib/shared/utils';
 // import { normText } from '@/lib/shared/utils/textPreprocess';
@@ -67,60 +60,35 @@ function getRandomQuickReplies() {
   return getRandomItems(DEFAULT_QUICK_REPLIES, 3);
 }
 
-// DB 메시지를 UI 메시지로 변환하는 함수
+// DB 메시지를 v6 UI 메시지로 변환하는 함수 (모델 입력용, text/file parts만 유지)
 function convertDBMessageToUIMessage(dbMessage: DBMessage): UIMessage {
-  // parts 배열에서 텍스트 콘텐츠 추출
-  let textContent = '';
-
-  // parts가 배열인지 확인하고 안전하게 접근
   const parts = Array.isArray(dbMessage.parts) ? dbMessage.parts : [];
-
-  if (parts.length > 0) {
-    // 텍스트 타입의 parts만 content로 사용
-    const textParts = parts.filter((part: any) => part.type === 'text');
-    textContent = textParts.map((part: any) => part.text).join('');
-  }
+  const safeParts = parts.filter(
+    (part: any) => part?.type === 'text' || part?.type === 'file'
+  ) as UIMessage['parts'];
 
   // role 타입 검증 및 변환
-  const validRoles = ['user', 'assistant', 'system', 'data'] as const;
-  const role = validRoles.includes(dbMessage.role as any)
-    ? (dbMessage.role as 'user' | 'assistant' | 'system' | 'data')
+  const validRoles = ['user', 'assistant', 'system'] as const;
+  const role = (validRoles as readonly string[]).includes(dbMessage.role)
+    ? (dbMessage.role as UIMessage['role'])
     : 'assistant'; // 기본값
 
-  // attachments 안전하게 처리
-  const attachments = Array.isArray(dbMessage.attachments) ? dbMessage.attachments : [];
-
-  const uiMessage: UIMessage = {
+  return {
     id: dbMessage.id,
-    role: role,
-    content: textContent,
-    parts: parts,
-    experimental_attachments: attachments,
-    createdAt: dbMessage.created_at ? new Date(dbMessage.created_at) : new Date(),
+    role,
+    parts: safeParts,
   };
-
-  // tool call이나 tool result가 있는 경우 content 필드를 제거하여 AI 라이브러리가 올바르게 처리하도록 함
-  const hasToolParts = parts.some(
-    (part: any) => part.type === 'tool-call' || part.type === 'tool-result'
-  );
-
-  if (hasToolParts && !textContent) {
-    // tool-call/tool-result만 있고 텍스트가 없는 경우 content 필드 제거
-    delete (uiMessage as any).content;
-  }
-
-  return uiMessage;
 }
 
 async function generateLLMResponse(
-  messages: Message[],
+  messages: UIMessage[],
   kakao_user_id: string
 ): Promise<GenerateTextResult<any, any>> {
   const startTime = Date.now();
   console.log(`[${getKSTDateTime()}] [API] LLM 처리 시작 -> id:${kakao_user_id}`);
 
   // 에이전트 설정
-  const agentConfig = baseAgent({ model: 'chat-model', messages, kakao_user_id });
+  const agentConfig = await baseAgent({ model: 'chat-model', messages, kakao_user_id });
 
   // console.log(JSON.stringify(agentConfig, null, 2));
   try {
@@ -129,7 +97,7 @@ async function generateLLMResponse(
       return (await Promise.race([
         generateText({
           ...agentConfig,
-          maxSteps: MAX_STEPS,
+          stopWhen: stepCountIs(MAX_STEPS),
         }),
         new Promise((_, reject) => {
           setTimeout(() => reject(new Error('LLM generation timeout')), LLM_TIMEOUT);
@@ -168,7 +136,6 @@ export async function POST(req: Request) {
       id: generateUUID(),
       role: 'user',
       parts: [{ type: 'text', text: userInput }],
-      content: userInput,
     };
 
     const dbMessages = await getMessagesByChatId({ id: chat.id, limit: MAX_PREVIOUS_MESSAGES });
@@ -176,10 +143,7 @@ export async function POST(req: Request) {
     // DB 메시지를 UI 메시지로 변환
     const previousMessages = dbMessages.map(convertDBMessageToUIMessage);
 
-    const messages = appendClientMessage({
-      messages: previousMessages,
-      message: userDBMessage,
-    });
+    const messages: UIMessage[] = [...previousMessages, userDBMessage];
 
     await saveMessages({
       messages: [
@@ -196,22 +160,16 @@ export async function POST(req: Request) {
 
     const llmResponse = await generateLLMResponse(messages, userId);
 
-    // 어시스턴트 메시지 생성
-    const [, assistantMessage] = appendResponseMessages({
-      messages: [userDBMessage],
-      responseMessages: llmResponse.response.messages,
-    });
-
-    // 어시스턴트 메시지 저장
-    if (assistantMessage) {
+    // 어시스턴트 메시지 저장 (텍스트 응답을 text part로 보존)
+    if (llmResponse.text) {
       await saveMessages({
         messages: [
           {
             chat_id: chat.id,
             id: generateUUID(),
-            role: assistantMessage.role,
-            parts: assistantMessage.parts,
-            attachments: assistantMessage.experimental_attachments ?? [],
+            role: 'assistant',
+            parts: [{ type: 'text', text: llmResponse.text }],
+            attachments: [],
             created_at: new Date(),
           },
         ],

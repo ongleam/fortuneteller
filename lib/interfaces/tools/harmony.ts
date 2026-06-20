@@ -10,7 +10,7 @@ const HARMONY_PROMPTS = tools.harmony;
 export const getHarmony = (kakao_user_id: string) =>
   tool({
     description: HARMONY_PROMPTS.getHarmony.description,
-    parameters: z.object({
+    inputSchema: z.object({
       name: z.string().describe(HARMONY_PROMPTS.getHarmony.parameters.name.description),
       gender: z
         .enum(['남성', '여성'])

@@ -6,11 +6,27 @@ import {
   saveChat,
   saveMessages,
 } from '@/lib/infra/db/queries';
-import { appendClientMessage } from 'ai';
+import type { UIMessage } from 'ai';
 import { generateTitleFromUserMessage } from '@/lib/interfaces/actions/chat';
 import { entitlementsByUserType } from '@/config/entitlements';
 import { postRequestBodySchema, type PostRequestBody } from '@/lib/core/chat/chat';
 import { createToolCallingStream } from '@/lib/response/create-tool-calling-stream';
+import type { DBMessage } from '@/lib/infra/db/schema';
+
+// Convert stored DB messages into v6 UIMessages for model input.
+// Only text/file parts are preserved to stay compatible with convertToModelMessages.
+function toUIMessage(dbMessage: DBMessage): UIMessage {
+  const parts = Array.isArray(dbMessage.parts) ? dbMessage.parts : [];
+  const safeParts = parts.filter(
+    (part: any) => part?.type === 'text' || part?.type === 'file'
+  ) as UIMessage['parts'];
+
+  return {
+    id: dbMessage.id,
+    role: dbMessage.role as UIMessage['role'],
+    parts: safeParts,
+  };
+}
 
 export const maxDuration = 60;
 import { createServerClient } from '@/lib/infra/supabase/server';
@@ -75,11 +91,7 @@ export async function POST(request: Request) {
 
     const previousMessages = await getMessagesByChatId({ id });
 
-    const messages = appendClientMessage({
-      // @ts-expect-error: todo add type conversion from DBMessage[] to UIMessage[]
-      messages: previousMessages,
-      message,
-    });
+    const messages: UIMessage[] = [...previousMessages.map(toUIMessage), message as UIMessage];
 
     await saveMessages({
       messages: [
@@ -88,12 +100,12 @@ export async function POST(request: Request) {
           id: message.id,
           role: 'user',
           parts: message.parts,
-          attachments: message.experimental_attachments ?? [],
+          attachments: [],
           created_at: new Date(),
         },
       ],
     });
-    return createToolCallingStream({
+    return await createToolCallingStream({
       message,
       messages,
       model: selectedChatModel,

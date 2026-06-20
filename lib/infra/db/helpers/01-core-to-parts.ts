@@ -3,7 +3,7 @@ import postgres from 'postgres';
 import { chat, message, vote } from '../schema';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { inArray } from 'drizzle-orm';
-import { appendResponseMessages, UIMessage } from 'ai';
+import { UIMessage } from 'ai';
 
 config({
   path: '.env.local',
@@ -88,14 +88,11 @@ async function createNewTable() {
         const [firstAssistantMessage] = assistantMessages;
 
         try {
-          const uiSection = appendResponseMessages({
-            messages: [userMessage],
-            // @ts-expect-error: message.content has different type
-            responseMessages: assistantMessages,
-            _internal: {
-              currentDate: () => firstAssistantMessage.createdAt ?? new Date(),
-            },
-          });
+          // NOTE: appendResponseMessages was removed in AI SDK v5+. This one-time
+          // migration script's DB inserts are already disabled below, so we keep the
+          // original section grouping as-is for type compatibility.
+          void firstAssistantMessage;
+          const uiSection = [userMessage, ...assistantMessages] as any[];
 
           const projectedUISection = uiSection
             .map((message) => {

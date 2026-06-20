@@ -3,7 +3,7 @@
  */
 
 import { getStemInfo } from './constants';
-import type { FourPillars, TenStars } from '@/lib/shared/types/saju';
+import type { FourPillars, TenStars } from './types';
 
 /**
  * 사주 팔자 전체(천간, 지지)에 대한 십성 분석

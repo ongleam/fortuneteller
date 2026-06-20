@@ -3,32 +3,37 @@
  * 음력은 그레고리력 기준으로 변환하여 사용한다
  */
 
-import { LUNAR_MONTH_TABLE, SOLAR_TERMS_BY_YEAR, SAJU_MONTH_MAPPING } from './constants';
-import { getSolarTermsByYear, getSolarTermByYearAndName } from '@/lib/infra/db/queries';
+import { SOLAR_TERMS_BY_YEAR, SAJU_MONTH_MAPPING } from "./constants";
+import { LUNAR_MONTH_TABLE } from "./lunar-table";
+import { getSolarTermsByYear, getSolarTermByYearAndName } from "./solar-terms";
 
 /**
  * 한글 달력 타입을 영어로 변환하는 유틸 함수
  * @param calendar 한글 또는 영어 달력 타입
  * @returns 영어 달력 타입 ('solar' | 'lunar')
  */
-export function normalizeCalendarType(calendar: string): 'solar' | 'lunar' {
+export function normalizeCalendarType(calendar: string): "solar" | "lunar" {
   const lowerCalendar = calendar.toLowerCase().trim();
 
   // 한글 → 영어 변환
-  if (lowerCalendar === '양력' || lowerCalendar === 'solar') {
-    return 'solar';
+  if (lowerCalendar === "양력" || lowerCalendar === "solar") {
+    return "solar";
   }
-  if (lowerCalendar === '음력' || lowerCalendar === 'lunar') {
-    return 'lunar';
+  if (lowerCalendar === "음력" || lowerCalendar === "lunar") {
+    return "lunar";
   }
 
   // 기본값: 양력
   console.warn(`알 수 없는 달력 타입: ${calendar}, 기본값 'solar' 사용`);
-  return 'solar';
+  return "solar";
 }
 
 // validation functions
-export function validateBirthDate(year: string, month: string, day: string): boolean {
+export function validateBirthDate(
+  year: string,
+  month: string,
+  day: string,
+): boolean {
   const y = parseInt(year);
   const m = parseInt(month);
   const d = parseInt(day);
@@ -41,7 +46,7 @@ export function validateBirthDate(year: string, month: string, day: string): boo
 }
 
 export function validateBirthTime(time: string): boolean {
-  const hour = parseInt(time.split(':')[0]);
+  const hour = parseInt(time.split(":")[0]);
   return hour >= 0 && hour <= 23;
 }
 
@@ -52,8 +57,8 @@ export function normalizeBirthInput(birthInput: any) {
     gender: birthInput.gender.toUpperCase(),
     calendar: birthInput.calendar.toUpperCase(),
     year: normalizeBirthYear(birthInput.year),
-    month: birthInput.month.padStart(2, '0'),
-    day: birthInput.day.padStart(2, '0'),
+    month: birthInput.month.padStart(2, "0"),
+    day: birthInput.day.padStart(2, "0"),
     hour: birthInput.hour,
   };
 }
@@ -89,7 +94,7 @@ export function normalizeBirthYear(yearString: string): string {
   }
 
   // 3자리 년도는 앞에 0을 붙임 (예: 995 -> 0995)
-  return yearString.padStart(4, '0');
+  return yearString.padStart(4, "0");
 }
 
 /**
@@ -170,7 +175,7 @@ export function lunarToSolar(
   year: number,
   month: number,
   day: number,
-  isLeapMonth?: boolean
+  isLeapMonth?: boolean,
 ): { year: number; month: number; day: number } | null {
   // isLeapMonth가 명시되지 않은 경우 자동 판단
   if (isLeapMonth === undefined) {
@@ -304,7 +309,10 @@ export function lunarToSolar(
         lunMonthDay = 30;
       }
     } else if (lunDay === lunMonthDay) {
-      if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] >= 3 && lunLeapMonth === 0) {
+      if (
+        LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] >= 3 &&
+        lunLeapMonth === 0
+      ) {
         lunDay = 1;
         lunLeapMonth = 1;
       } else {
@@ -319,13 +327,25 @@ export function lunarToSolar(
         lunMonthDay = 30;
       } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 3) {
         lunMonthDay = 29;
-      } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 4 && lunLeapMonth === 0) {
+      } else if (
+        LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 4 &&
+        lunLeapMonth === 0
+      ) {
         lunMonthDay = 29;
-      } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 4 && lunLeapMonth === 1) {
+      } else if (
+        LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 4 &&
+        lunLeapMonth === 1
+      ) {
         lunMonthDay = 30;
-      } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 5 && lunLeapMonth === 0) {
+      } else if (
+        LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 5 &&
+        lunLeapMonth === 0
+      ) {
         lunMonthDay = 30;
-      } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 5 && lunLeapMonth === 1) {
+      } else if (
+        LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 5 &&
+        lunLeapMonth === 1
+      ) {
         lunMonthDay = 29;
       } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 6) {
         lunMonthDay = 30;
@@ -469,7 +489,10 @@ export function solarToLunar(solarDate: Date): {
         lunMonthDay = 30;
       }
     } else if (lunDay === lunMonthDay) {
-      if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] >= 3 && lunLeapMonth === 0) {
+      if (
+        LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] >= 3 &&
+        lunLeapMonth === 0
+      ) {
         lunDay = 1;
         lunLeapMonth = 1;
       } else {
@@ -484,13 +507,25 @@ export function solarToLunar(solarDate: Date): {
         lunMonthDay = 30;
       } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 3) {
         lunMonthDay = 29;
-      } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 4 && lunLeapMonth === 0) {
+      } else if (
+        LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 4 &&
+        lunLeapMonth === 0
+      ) {
         lunMonthDay = 29;
-      } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 4 && lunLeapMonth === 1) {
+      } else if (
+        LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 4 &&
+        lunLeapMonth === 1
+      ) {
         lunMonthDay = 30;
-      } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 5 && lunLeapMonth === 0) {
+      } else if (
+        LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 5 &&
+        lunLeapMonth === 0
+      ) {
         lunMonthDay = 30;
-      } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 5 && lunLeapMonth === 1) {
+      } else if (
+        LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 5 &&
+        lunLeapMonth === 1
+      ) {
         lunMonthDay = 29;
       } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 6) {
         lunMonthDay = 30;
@@ -511,10 +546,16 @@ export async function getSajuYear(solarDate: Date): Promise<number> {
 
   try {
     // 데이터베이스에서 입춘 절기 조회
-    const lichun = await getSolarTermByYearAndName(year, '입춘');
+    const lichun = await getSolarTermByYearAndName(year, "입춘");
 
     if (lichun) {
-      const lichunDate = new Date(year, lichun.month - 1, lichun.day, lichun.hour, lichun.minute);
+      const lichunDate = new Date(
+        year,
+        lichun.month - 1,
+        lichun.day,
+        lichun.hour,
+        lichun.minute,
+      );
 
       if (solarDate < lichunDate) {
         return year - 1;
@@ -522,13 +563,21 @@ export async function getSajuYear(solarDate: Date): Promise<number> {
       return year;
     }
   } catch (error) {
-    console.warn(`Failed to get solar term data for year ${year}, using fallback`);
+    console.warn(
+      `Failed to get solar term data for year ${year}, using fallback`,
+    );
   }
 
   // 데이터베이스에 데이터가 없는 경우 상수에서 조회
   if (SOLAR_TERMS_BY_YEAR[year]) {
     const lichun = SOLAR_TERMS_BY_YEAR[year].입춘;
-    const lichunDate = new Date(year, lichun.month - 1, lichun.day, lichun.hour, lichun.minute);
+    const lichunDate = new Date(
+      year,
+      lichun.month - 1,
+      lichun.day,
+      lichun.hour,
+      lichun.minute,
+    );
 
     if (solarDate < lichunDate) {
       return year - 1;
@@ -562,26 +611,33 @@ export async function getSajuMonth(solarDate: Date): Promise<number> {
     const termsForPrevYear = await getSolarTermsByYear(year - 1);
     const allTerms = [...termsForPrevYear, ...termsForYear];
 
-    console.log('[DEBUG] allTerms:', allTerms);
     const findTermDate = (name: string, searchYear: number): Date | null => {
-      const term = allTerms.find((t) => t.year === searchYear && t.term_name === name);
+      const term = allTerms.find(
+        (t) => t.year === searchYear && t.term_name === name,
+      );
       if (!term) return null;
-      return new Date(term.year, term.month - 1, term.day, term.hour, term.minute);
+      return new Date(
+        term.year,
+        term.month - 1,
+        term.day,
+        term.hour,
+        term.minute,
+      );
     };
 
     const termNames = [
-      { sajuMonth: 1, name: '입춘' },
-      { sajuMonth: 2, name: '경칩' },
-      { sajuMonth: 3, name: '청명' },
-      { sajuMonth: 4, name: '입하' },
-      { sajuMonth: 5, name: '망종' },
-      { sajuMonth: 6, name: '소서' },
-      { sajuMonth: 7, name: '입추' },
-      { sajuMonth: 8, name: '백로' },
-      { sajuMonth: 9, name: '한로' },
-      { sajuMonth: 10, name: '입동' },
-      { sajuMonth: 11, name: '대설' },
-      { sajuMonth: 12, name: '소한' },
+      { sajuMonth: 1, name: "입춘" },
+      { sajuMonth: 2, name: "경칩" },
+      { sajuMonth: 3, name: "청명" },
+      { sajuMonth: 4, name: "입하" },
+      { sajuMonth: 5, name: "망종" },
+      { sajuMonth: 6, name: "소서" },
+      { sajuMonth: 7, name: "입추" },
+      { sajuMonth: 8, name: "백로" },
+      { sajuMonth: 9, name: "한로" },
+      { sajuMonth: 10, name: "입동" },
+      { sajuMonth: 11, name: "대설" },
+      { sajuMonth: 12, name: "소한" },
     ];
 
     const monthBoundaries = [
@@ -603,7 +659,9 @@ export async function getSajuMonth(solarDate: Date): Promise<number> {
     // Default to 축월 if no boundary matches (e.g. before any known terms)
     return 12;
   } catch (error) {
-    console.warn(`Failed to get solar terms data for year ${year}, using fallback`);
+    console.warn(
+      `Failed to get solar terms data for year ${year}, using fallback`,
+    );
     // Fallback logic remains unchanged
     const month = solarDate.getMonth() + 1;
     const day = solarDate.getDate();
@@ -642,7 +700,7 @@ function isDateInRange(
   month: number,
   day: number,
   startTerm: { sajuMonth: number; termMonth: number; termDay: number },
-  endTerm: { sajuMonth: number; termMonth: number; termDay: number }
+  endTerm: { sajuMonth: number; termMonth: number; termDay: number },
 ): boolean {
   const currentDate = month * 100 + day;
   const startDate = startTerm.termMonth * 100 + startTerm.termDay;

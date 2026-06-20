@@ -7,7 +7,7 @@ import { getChatById, getMessagesByChatId } from '@/lib/infra/db/queries';
 // import { DataStreamHandler } from '@/components/artifact/data-stream-handler';
 import { DEFAULT_CHAT_MODEL } from '@/config/models';
 import type { DBMessage } from '@/lib/infra/db/schema';
-import type { Attachment, UIMessage } from 'ai';
+import type { UIMessage } from 'ai';
 import { createServerClient } from '@/lib/infra/supabase/server';
 
 export default async function Page(props: { params: Promise<{ id: string }> }) {
@@ -47,10 +47,6 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
       id: message.id,
       parts: message.parts as UIMessage['parts'],
       role: message.role as UIMessage['role'],
-      // Note: content will soon be deprecated in @ai-sdk/react
-      content: '',
-      createdAt: message.created_at,
-      experimental_attachments: (message.attachments as Array<Attachment>) ?? [],
     }));
   }
 

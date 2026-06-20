@@ -1,6 +1,7 @@
 'use client';
 
 import { UseChatHelpers } from '@ai-sdk/react';
+import type { UIMessage } from 'ai';
 import { motion } from 'framer-motion';
 import { memo } from 'react';
 import { Button } from '@/components/ui/button';
@@ -8,10 +9,10 @@ import { useIsMobile } from '@/hooks/use-mobile';
 
 interface SuggestedActionsProps {
   chatId: string;
-  append: UseChatHelpers['append'];
+  sendMessage: UseChatHelpers<UIMessage>['sendMessage'];
 }
 
-function PureSuggestedActions({ chatId, append }: SuggestedActionsProps) {
+function PureSuggestedActions({ chatId, sendMessage }: SuggestedActionsProps) {
   const isMobile = useIsMobile();
 
   const suggestedActions = [
@@ -22,9 +23,11 @@ function PureSuggestedActions({ chatId, append }: SuggestedActionsProps) {
     },
 
     {
-      title: 'Will I become a tax resident in Korea if I stay for more than 183 days on the F-1-D visa?',
+      title:
+        'Will I become a tax resident in Korea if I stay for more than 183 days on the F-1-D visa?',
       label: 'Tax question',
-      action: 'Will I become a tax resident in Korea if I stay for more than 183 days on the F-1-D visa?',
+      action:
+        'Will I become a tax resident in Korea if I stay for more than 183 days on the F-1-D visa?',
     },
     // {
     //   title: 'What are the advantages',
@@ -58,9 +61,8 @@ function PureSuggestedActions({ chatId, append }: SuggestedActionsProps) {
             onClick={async () => {
               window.history.replaceState({}, '', `/chat/${chatId}`);
 
-              append({
-                role: 'user',
-                content: suggestedAction.action,
+              sendMessage({
+                text: suggestedAction.action,
               });
             }}
             className={`h-auto w-full flex-1 items-start justify-start gap-1 rounded-xl border text-left ${

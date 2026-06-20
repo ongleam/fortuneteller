@@ -7,7 +7,7 @@
  * and inserts it into the Supabase database.
  *
  * Usage:
- *   pnpm tsx scripts/insert-solar-terms.ts
+ *   bun tsx scripts/insert-solar-terms.ts
  */
 
 import { readFileSync } from 'fs';

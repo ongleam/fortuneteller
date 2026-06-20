@@ -9,11 +9,11 @@ import type { UseChatHelpers } from '@ai-sdk/react';
 
 interface MessagesProps {
   chatId: string;
-  status: UseChatHelpers['status'];
+  status: UseChatHelpers<UIMessage>['status'];
   votes: Array<Vote> | undefined;
   messages: Array<UIMessage>;
-  setMessages: UseChatHelpers['setMessages'];
-  reload: UseChatHelpers['reload'];
+  setMessages: UseChatHelpers<UIMessage>['setMessages'];
+  regenerate: UseChatHelpers<UIMessage>['regenerate'];
   isReadonly: boolean;
   isArtifactVisible: boolean;
 }
@@ -24,7 +24,7 @@ function PureMessages({
   votes,
   messages,
   setMessages,
-  reload,
+  regenerate,
   isReadonly,
 }: MessagesProps) {
   const [messagesContainerRef, messagesEndRef] = useScrollToBottom<HTMLDivElement>();
@@ -44,7 +44,7 @@ function PureMessages({
           isLoading={status === 'streaming' && messages.length - 1 === index}
           vote={votes ? votes.find((vote) => vote.message_id === message.id) : undefined}
           setMessages={setMessages}
-          reload={reload}
+          regenerate={regenerate}
           isReadonly={isReadonly}
         />
       ))}

@@ -27,15 +27,15 @@ const PurePreviewMessage = ({
   vote,
   isLoading,
   setMessages,
-  reload,
+  regenerate,
   isReadonly,
 }: {
   chatId: string;
   message: UIMessage;
   vote: Vote | undefined;
   isLoading: boolean;
-  setMessages: UseChatHelpers['setMessages'];
-  reload: UseChatHelpers['reload'];
+  setMessages: UseChatHelpers<UIMessage>['setMessages'];
+  regenerate: UseChatHelpers<UIMessage>['regenerate'];
   isReadonly: boolean;
 }) => {
   const [mode, setMode] = useState<'view' | 'edit'>('view');
@@ -68,22 +68,30 @@ const PurePreviewMessage = ({
           )}
 
           <div className="flex w-full flex-col gap-3 sm:gap-4">
-            {message.experimental_attachments && (
-              <div data-testid={`message-attachments`} className="flex flex-row justify-end gap-2">
-                {message.experimental_attachments.map((attachment) => (
-                  <PreviewAttachment key={attachment.url} attachment={attachment} />
-                ))}
-              </div>
-            )}
-
             {message.parts?.map((part, index) => {
               const { type } = part;
               const key = `message-${message.id}-part-${index}`;
 
-              if (type === 'reasoning') {
+              if (type === 'file') {
                 return (
-                  <MessageReasoning key={key} isLoading={isLoading} reasoning={part.reasoning} />
+                  <div
+                    key={key}
+                    data-testid={`message-attachments`}
+                    className="flex flex-row justify-end gap-2"
+                  >
+                    <PreviewAttachment
+                      attachment={{
+                        url: part.url,
+                        name: part.filename,
+                        contentType: part.mediaType,
+                      }}
+                    />
+                  </div>
                 );
+              }
+
+              if (type === 'reasoning') {
+                return <MessageReasoning key={key} isLoading={isLoading} reasoning={part.text} />;
               }
 
               if (type === 'text') {
@@ -132,15 +140,13 @@ const PurePreviewMessage = ({
                 }
               }
 
-              if (type === 'tool-invocation') {
-                const { toolInvocation } = part;
-                const { toolName, toolCallId, state } = toolInvocation;
+              // v6 tool parts are typed as `tool-${toolName}`.
+              if (type.startsWith('tool-')) {
+                const toolPart = part as any;
+                const toolName = type.slice('tool-'.length);
+                const { toolCallId, state } = toolPart;
 
-                // console.log(`[INFO] toolInvocation: `, part);
-
-                if (state === 'call') {
-                  const { args } = toolInvocation;
-                  // console.log('[INFO] args of `@/components/message.tsx`: ', args);
+                if (state === 'input-streaming' || state === 'input-available') {
                   return (
                     <div
                       key={toolCallId}
@@ -153,12 +159,12 @@ const PurePreviewMessage = ({
                   );
                 }
 
-                if (state === 'result') {
-                  const { result } = toolInvocation;
-                  // console.log(`[INFO] result: `, result);
+                if (state === 'output-available') {
                   return (
                     <div key={toolCallId}>
-                      {toolName === 'getWeather' ? <Weather weatherAtLocation={result} /> : null}
+                      {toolName === 'getWeather' ? (
+                        <Weather weatherAtLocation={toolPart.output} />
+                      ) : null}
                     </div>
                   );
                 }

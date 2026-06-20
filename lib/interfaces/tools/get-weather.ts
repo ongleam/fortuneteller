@@ -4,7 +4,7 @@ import { z } from 'zod';
 export const getWeather = tool({
   description:
     'Get the current weather at a location. If user only provides a `city` or `location` name, ALWAYSpredict the latitude and longitude from the city name.',
-  parameters: z.object({
+  inputSchema: z.object({
     latitude: z.number(),
     longitude: z.number(),
   }),

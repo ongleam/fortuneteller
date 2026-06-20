@@ -51,12 +51,10 @@ export async function generateRecommandQuestions({
     prompt: `
     - FAQ 질문: ${questions.length > 0 ? questions.join(', ') : '없음'}
     `,
-    output: 'object',
-    schema: z.array(
-      z.object({
-        messageText: z.string(),
-      })
-    ),
+    output: 'array',
+    schema: z.object({
+      messageText: z.string(),
+    }),
   });
 
   return object;

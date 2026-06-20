@@ -2,22 +2,29 @@
 
 import { deleteTrailingMessages } from '@/lib/interfaces/actions/chat';
 import { UseChatHelpers } from '@ai-sdk/react';
-import { Message } from 'ai';
+import { UIMessage } from 'ai';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { Button } from '../ui/button';
 import { Textarea } from '../ui/textarea';
 
 export type MessageEditorProps = {
-  message: Message;
+  message: UIMessage;
   setMode: Dispatch<SetStateAction<'view' | 'edit'>>;
-  setMessages: UseChatHelpers['setMessages'];
-  reload: UseChatHelpers['reload'];
+  setMessages: UseChatHelpers<UIMessage>['setMessages'];
+  regenerate: UseChatHelpers<UIMessage>['regenerate'];
 };
 
-export function MessageEditor({ message, setMode, setMessages, reload }: MessageEditorProps) {
+function getMessageText(message: UIMessage): string {
+  return message.parts
+    .filter((part) => part.type === 'text')
+    .map((part) => (part as { text: string }).text)
+    .join('');
+}
+
+export function MessageEditor({ message, setMode, setMessages, regenerate }: MessageEditorProps) {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  const [draftContent, setDraftContent] = useState<string>(message.content);
+  const [draftContent, setDraftContent] = useState<string>(getMessageText(message));
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -70,14 +77,12 @@ export function MessageEditor({ message, setMode, setMessages, reload }: Message
               id: message.id,
             });
 
-            // @ts-expect-error todo: support UIMessage in setMessages
             setMessages((messages) => {
               const index = messages.findIndex((m) => m.id === message.id);
 
               if (index !== -1) {
-                const updatedMessage = {
+                const updatedMessage: UIMessage = {
                   ...message,
-                  content: draftContent,
                   parts: [{ type: 'text', text: draftContent }],
                 };
 
@@ -88,7 +93,7 @@ export function MessageEditor({ message, setMode, setMessages, reload }: Message
             });
 
             setMode('view');
-            reload();
+            regenerate();
           }}
         >
           {isSubmitting ? '전송중...' : '전송'}

@@ -1,7 +1,10 @@
-import { CoreMessage, LanguageModelV1StreamPart } from 'ai';
+import { ModelMessage } from 'ai';
 import { TEST_PROMPTS } from './basic';
 
-export function compareMessages(firstMessage: CoreMessage, secondMessage: CoreMessage): boolean {
+// Loose stream-part shape for these (unused) test fixtures.
+type StreamPart = Record<string, any>;
+
+export function compareMessages(firstMessage: ModelMessage, secondMessage: ModelMessage): boolean {
   if (firstMessage.role !== secondMessage.role) return false;
 
   if (!Array.isArray(firstMessage.content) || !Array.isArray(secondMessage.content)) {
@@ -13,8 +16,8 @@ export function compareMessages(firstMessage: CoreMessage, secondMessage: CoreMe
   }
 
   for (let i = 0; i < firstMessage.content.length; i++) {
-    const item1 = firstMessage.content[i];
-    const item2 = secondMessage.content[i];
+    const item1 = firstMessage.content[i] as any;
+    const item2 = secondMessage.content[i] as any;
 
     if (item1.type !== item2.type) return false;
 
@@ -33,7 +36,7 @@ export function compareMessages(firstMessage: CoreMessage, secondMessage: CoreMe
   return true;
 }
 
-const textToDeltas = (text: string): LanguageModelV1StreamPart[] => {
+const textToDeltas = (text: string): StreamPart[] => {
   const deltas = text
     .split(' ')
     .map((char) => ({ type: 'text-delta' as const, textDelta: `${char} ` }));
@@ -41,7 +44,7 @@ const textToDeltas = (text: string): LanguageModelV1StreamPart[] => {
   return deltas;
 };
 
-const reasoningToDeltas = (text: string): LanguageModelV1StreamPart[] => {
+const reasoningToDeltas = (text: string): StreamPart[] => {
   const deltas = text
     .split(' ')
     .map((char) => ({ type: 'reasoning' as const, textDelta: `${char} ` }));
@@ -50,9 +53,9 @@ const reasoningToDeltas = (text: string): LanguageModelV1StreamPart[] => {
 };
 
 export const getResponseChunksByPrompt = (
-  prompt: CoreMessage[],
+  prompt: ModelMessage[],
   isReasoningEnabled: boolean = false
-): Array<LanguageModelV1StreamPart> => {
+): Array<StreamPart> => {
   const recentMessage = prompt.at(-1);
 
   if (!recentMessage) {

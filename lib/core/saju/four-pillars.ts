@@ -2,16 +2,29 @@
  * 사주 팔자 계산 모듈
  */
 
-import { HEAVENLY_STEMS, EARTHLY_BRANCHES, SIXTY_GAPJA, getStemIndex } from './constants';
-import { lunarToSolar, getSajuYear, getSajuMonth, normalizeCalendarType } from './calendar';
-import type { BirthInput, FourPillars } from '@/lib/shared/types/saju';
+import {
+  HEAVENLY_STEMS,
+  EARTHLY_BRANCHES,
+  SIXTY_GAPJA,
+  getStemIndex,
+} from "./constants";
+import {
+  lunarToSolar,
+  getSajuYear,
+  getSajuMonth,
+  normalizeCalendarType,
+} from "./calendar";
+import { applyTimeCorrections } from "./time-correction";
+import type { BirthInput, FourPillars } from "./types";
 
 /**
  * 메인 사주 팔자 계산 함수
  * @param birthInput 생년월일 정보
  * @returns 사주 팔자 정보
  */
-export async function getFourPillars(birthInput: BirthInput): Promise<FourPillars> {
+export async function getFourPillars(
+  birthInput: BirthInput,
+): Promise<FourPillars> {
   // BirthInput 필드 매핑
   const year = parseInt(birthInput.year);
   const month = parseInt(birthInput.month);
@@ -23,25 +36,39 @@ export async function getFourPillars(birthInput: BirthInput): Promise<FourPillar
 
   // 양력/음력 변환 처리 시 시간 정보 포함
   let solarDate: Date;
-  if (calendar === 'lunar') {
+  if (calendar === "lunar") {
     const converted = lunarToSolar(year, month, day, isLeapMonth);
     if (converted) {
-      solarDate = new Date(converted.year, converted.month - 1, converted.day, hour, minute);
+      solarDate = new Date(
+        converted.year,
+        converted.month - 1,
+        converted.day,
+        hour,
+        minute,
+      );
     } else {
-      throw new Error('Invalid lunar date');
+      throw new Error("Invalid lunar date");
     }
   } else {
     solarDate = new Date(year, month - 1, day, hour, minute);
   }
 
   // 사주 기준 년/월 계산 (절기 기준)
+  // 년/월 절기 SSOT 는 KST 시계 기준으로 들어있으므로 보정 전 시각으로 비교한다.
   const sajuYear = await getSajuYear(solarDate);
   const sajuMonth = await getSajuMonth(solarDate);
 
+  // 진태양시 보정: longitude offset + 한국 표준시 변경(1954-1961) + DST.
+  // 일주(자정 경계)·시주(30분 시지 경계)에만 영향.
+  const correctedDate = applyTimeCorrections(solarDate, birthInput.longitudeE);
+  const correctedHour = correctedDate.getHours();
+  const correctedMinute = correctedDate.getMinutes();
+
   // 일주 계산을 위한 날짜 결정 (야자시 고려)
-  let dayPillarDate = new Date(solarDate);
-  const totalMinutes = hour * 60 + minute;
-  if (totalMinutes >= 23 * 60 + 30) {
+  // 자시는 23:00 ~ 01:00 (정시 매핑). 23:00 이후는 다음 날 일주로 친다.
+  let dayPillarDate = new Date(correctedDate);
+  const totalMinutes = correctedHour * 60 + correctedMinute;
+  if (totalMinutes >= 23 * 60) {
     dayPillarDate.setDate(dayPillarDate.getDate() + 1);
   }
 
@@ -49,7 +76,11 @@ export async function getFourPillars(birthInput: BirthInput): Promise<FourPillar
   const yearPillar = getYearPillar(sajuYear);
   const monthPillar = getMonthPillar(sajuYear, sajuMonth);
   const dayPillar = getDayPillar(dayPillarDate);
-  const timePillar = getTimePillar(dayPillar, birthInput.hour, birthInput.minute);
+  const timePillar = getTimePillar(
+    dayPillar,
+    String(correctedHour),
+    String(correctedMinute),
+  );
 
   return {
     year: yearPillar,
@@ -78,7 +109,10 @@ export function getYearPillar(year: number) {
  * @param month 월
  * @returns 월주 정보
  */
-export function getMonthPillar(year: number, month: number): { sky: string; ground: string } {
+export function getMonthPillar(
+  year: number,
+  month: number,
+): { sky: string; ground: string } {
   const yearPillar = getYearPillar(year);
   const yearSkyIndex = getStemIndex(yearPillar.sky);
   const firstMonthStemMap = [2, 4, 6, 8, 0, 2, 4, 6, 8, 0];
@@ -99,23 +133,29 @@ export function getMonthPillar(year: number, month: number): { sky: string; grou
  * @returns 일주 정보
  */
 export function getDayPillar(date: Date): { sky: string; ground: string } {
-  const baseDate = new Date('1995-04-25T00:00:00');
-  const baseGapja = '丙戌';
+  // 일주는 율리우스 적일수(JDN)로 직접 계산한다. 60갑자 일주는 기원전부터
+  // 끊김 없이 이어진 연속 일수 카운트이므로, JDN + 사이클 위상 상수 하나로 결정된다.
+  //   - 위상 상수 49: 한국 사주 SSOT(forceteller)와 일치하도록 조정된 값.
+  //     기준 검증: 1995-04-25(양력) = 丙戌(60갑자 22). N=100 회귀 데이터셋
+  //     (src/skills/saju/benchmark/forceteller) 양력 86건의 일주에서 100% 일치.
+  //   - 정수 연산만 사용 → 타임존/밀리초 오차 없음.
+  const y = date.getFullYear();
+  const m = date.getMonth() + 1;
+  const d = date.getDate();
 
-  // getTimezoneOffset()을 고려하여 UTC 자정 기준으로 계산
-  const targetDate = new Date(date);
-  targetDate.setHours(0, 0, 0, 0);
-  baseDate.setHours(0, 0, 0, 0);
+  const a = Math.floor((14 - m) / 12);
+  const yy = y + 4800 - a;
+  const mm = m + 12 * a - 3;
+  const jdn =
+    d +
+    Math.floor((153 * mm + 2) / 5) +
+    365 * yy +
+    Math.floor(yy / 4) -
+    Math.floor(yy / 100) +
+    Math.floor(yy / 400) -
+    32045;
 
-  const diffTime = targetDate.getTime() - baseDate.getTime();
-  const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
-
-  const baseGapjaIndex = SIXTY_GAPJA.findIndex((g) => g === baseGapja);
-  if (baseGapjaIndex === -1) throw new Error(`기준 갑자를 찾을 수 없습니다: ${baseGapja}`);
-
-  let gapjaIndex = (baseGapjaIndex + diffDays) % 60;
-  if (gapjaIndex < 0) gapjaIndex += 60;
-
+  const gapjaIndex = (((jdn + 49) % 60) + 60) % 60;
   const gapja = SIXTY_GAPJA[gapjaIndex];
   return { sky: gapja[0], ground: gapja[1] };
 }
@@ -130,7 +170,7 @@ export function getDayPillar(date: Date): { sky: string; ground: string } {
 export function getTimePillar(
   dayPillar: { sky: string; ground: string },
   hourStr: string,
-  minuteStr?: string
+  minuteStr?: string,
 ) {
   const daySkyIndex = getStemIndex(dayPillar.sky);
   const hour = parseInt(hourStr, 10);
@@ -139,18 +179,21 @@ export function getTimePillar(
   const firstTimeSky = firstTimeSkyMap[daySkyIndex];
   const totalMinutes = hour * 60 + minute;
 
+  // 시지 매핑: 정시(2시간) 경계. 입력 시각은 진태양시 보정(longitude+KST+DST) 후 값.
+  // forceteller SSOT 알고리즘과 호환. 사용자 UI 의 30분 경계 표는 평상시(KST,no-DST)
+  // 한국 longitude 가정에서 정시 매핑+−23분 보정과 동등하도록 미리 더해진 표시용.
   let timeGroundIndex;
-  if (totalMinutes >= 23 * 60 + 30 || totalMinutes < 1 * 60 + 30) timeGroundIndex = 0;
-  else if (totalMinutes < 3 * 60 + 30) timeGroundIndex = 1;
-  else if (totalMinutes < 5 * 60 + 30) timeGroundIndex = 2;
-  else if (totalMinutes < 7 * 60 + 30) timeGroundIndex = 3;
-  else if (totalMinutes < 9 * 60 + 30) timeGroundIndex = 4;
-  else if (totalMinutes < 11 * 60 + 30) timeGroundIndex = 5;
-  else if (totalMinutes < 13 * 60 + 30) timeGroundIndex = 6;
-  else if (totalMinutes < 15 * 60 + 30) timeGroundIndex = 7;
-  else if (totalMinutes < 17 * 60 + 30) timeGroundIndex = 8;
-  else if (totalMinutes < 19 * 60 + 30) timeGroundIndex = 9;
-  else if (totalMinutes < 21 * 60 + 30) timeGroundIndex = 10;
+  if (totalMinutes >= 23 * 60 || totalMinutes < 1 * 60) timeGroundIndex = 0;
+  else if (totalMinutes < 3 * 60) timeGroundIndex = 1;
+  else if (totalMinutes < 5 * 60) timeGroundIndex = 2;
+  else if (totalMinutes < 7 * 60) timeGroundIndex = 3;
+  else if (totalMinutes < 9 * 60) timeGroundIndex = 4;
+  else if (totalMinutes < 11 * 60) timeGroundIndex = 5;
+  else if (totalMinutes < 13 * 60) timeGroundIndex = 6;
+  else if (totalMinutes < 15 * 60) timeGroundIndex = 7;
+  else if (totalMinutes < 17 * 60) timeGroundIndex = 8;
+  else if (totalMinutes < 19 * 60) timeGroundIndex = 9;
+  else if (totalMinutes < 21 * 60) timeGroundIndex = 10;
   else timeGroundIndex = 11;
 
   const timeOffset = timeGroundIndex;
@@ -168,8 +211,10 @@ export function getTimePillar(
  * @returns 유효성 여부
  */
 export function validatePillars(pillars: FourPillars): boolean {
-  const isValidSky = (sky: string) => HEAVENLY_STEMS.some((s) => s.chinese === sky);
-  const isValidGround = (ground: string) => EARTHLY_BRANCHES.some((b) => b.chinese === ground);
+  const isValidSky = (sky: string) =>
+    HEAVENLY_STEMS.some((s) => s.chinese === sky);
+  const isValidGround = (ground: string) =>
+    EARTHLY_BRANCHES.some((b) => b.chinese === ground);
 
   return (
     isValidSky(pillars.year.sky) &&

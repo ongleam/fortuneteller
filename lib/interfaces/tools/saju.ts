@@ -9,7 +9,7 @@ const PROMPTS = tools.getSaju;
 export const getSaju = () =>
   tool({
     description: PROMPTS.description,
-    parameters: z.object({
+    inputSchema: z.object({
       name: z.string().describe(PROMPTS.parameters.name.description),
       gender: z.enum(['남성', '여성']).describe(PROMPTS.parameters.gender.description),
       calendar: z

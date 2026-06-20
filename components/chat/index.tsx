@@ -5,7 +5,8 @@ import { ChatHeader } from '@/components/chat/header';
 import type { Vote } from '@/lib/infra/db/schema';
 import { fetcher, generateUUID } from '@/lib/shared/utils';
 import { useChat } from '@ai-sdk/react';
-import type { Attachment, UIMessage } from 'ai';
+import { DefaultChatTransport, type UIMessage } from 'ai';
+import type { Attachment } from '@/lib/shared/types/attachment';
 import type { User } from '@supabase/auth-js';
 import { useState } from 'react';
 import useSWR, { useSWRConfig } from 'swr';
@@ -33,28 +34,33 @@ export function Chat({
 }) {
   const { mutate } = useSWRConfig();
 
-  const { messages, setMessages, handleSubmit, input, setInput, append, status, stop, reload } =
-    useChat({
-      id,
-      initialMessages,
-      experimental_throttle: 100,
-      sendExtraMessageFields: true,
-      generateId: generateUUID,
-      experimental_prepareRequestBody: (body) => ({
-        id,
-        message: body.messages.at(-1),
-        selectedChatModel,
+  const [input, setInput] = useState('');
+
+  const { messages, setMessages, sendMessage, status, stop, regenerate } = useChat<UIMessage>({
+    id,
+    messages: initialMessages,
+    experimental_throttle: 100,
+    generateId: generateUUID,
+    transport: new DefaultChatTransport({
+      api: '/api/chat',
+      prepareSendMessagesRequest: ({ messages }) => ({
+        body: {
+          id,
+          message: messages.at(-1),
+          selectedChatModel,
+        },
       }),
-      onFinish: () => {
-        mutate(unstable_serialize(getChatHistoryPaginationKey));
-      },
-      onError: (error) => {
-        toast({
-          type: 'error',
-          description: error.message,
-        });
-      },
-    });
+    }),
+    onFinish: () => {
+      mutate(unstable_serialize(getChatHistoryPaginationKey));
+    },
+    onError: (error) => {
+      toast({
+        type: 'error',
+        description: error.message,
+      });
+    },
+  });
 
   const { data: votes } = useSWR<Array<Vote>>(
     messages.length >= 2 ? `/api/vote?chatId=${id}` : null,
@@ -81,7 +87,7 @@ export function Chat({
           votes={votes}
           messages={messages}
           setMessages={setMessages}
-          reload={reload}
+          regenerate={regenerate}
           isReadonly={isReadonly}
           isArtifactVisible={false}
         />
@@ -92,14 +98,13 @@ export function Chat({
               chatId={id}
               input={input}
               setInput={setInput}
-              handleSubmit={handleSubmit}
+              sendMessage={sendMessage}
               status={status}
               stop={stop}
               attachments={attachments}
               setAttachments={setAttachments}
               messages={messages}
               setMessages={setMessages}
-              append={append}
             />
           )}
         </form>

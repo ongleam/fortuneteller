@@ -20,7 +20,6 @@ if (!process.env.POSTGRES_URL) {
 
 console.log('🔗 Connecting to database:', process.env.POSTGRES_URL.replace(/:[^:@]*@/, ':****@'));
 
-// biome-ignore lint: Forbidden non-null assertion.
 const client = postgres(process.env.POSTGRES_URL!);
 export const db = drizzle(client);
 

@@ -20,7 +20,7 @@ const FORTUNE_PROMPTS = tools.fortune;
 export const getTodayFortune = (kakao_user_id: string) =>
   tool({
     description: FORTUNE_PROMPTS.getTodayFortune.description,
-    parameters: z.object({}),
+    inputSchema: z.object({}),
     execute: async () => {
       console.log(`[INFO] getTodayFortune 호출: kakao_user_id: ${kakao_user_id}`);
 
@@ -83,7 +83,7 @@ export const getTodayFortune = (kakao_user_id: string) =>
 export const getYearFortune = (kakao_user_id: string) =>
   tool({
     description: FORTUNE_PROMPTS.getYearFortune.description,
-    parameters: z.object({}),
+    inputSchema: z.object({}),
     execute: async () => {
       console.log(`[INFO] getYearFortune 호출: kakao_user_id: ${kakao_user_id}`);
 

@@ -1,16 +1,25 @@
 import 'server-only';
 
-import { and, asc, count, desc, eq, gt, gte, inArray, lt, sql, type SQL } from 'drizzle-orm';
+import { and, asc, count, desc, eq, gt, gte, inArray, lt, type SQL } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
-import { chat, message, profile, vote, solarTerm, type Chat, type DBMessage, type Profile, type SolarTerm } from './schema';
+import {
+  chat,
+  message,
+  profile,
+  vote,
+  solarTerm,
+  type Chat,
+  type DBMessage,
+  type Profile,
+  type SolarTerm,
+} from './schema';
 import { generateUUID } from '../../shared/utils';
 
 // Optionally, if not using email/pass login, you can
 // use the Drizzle adapter for Auth.js / NextAuth
 // https://authjs.dev/reference/adapter/drizzle
 
-// biome-ignore lint: Forbidden non-null assertion.
 const client = postgres(process.env.POSTGRES_URL!);
 export const db = drizzle(client);
 
@@ -442,7 +451,10 @@ export async function getSolarTermsByYear(year: number): Promise<SolarTerm[]> {
   }
 }
 
-export async function getSolarTermByYearAndName(year: number, termName: string): Promise<SolarTerm | null> {
+export async function getSolarTermByYearAndName(
+  year: number,
+  termName: string
+): Promise<SolarTerm | null> {
   try {
     const [result] = await db
       .select()
