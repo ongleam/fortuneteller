@@ -25,8 +25,8 @@
     "test:playwright": "export PLAYWRIGHT=True && pnpm exec playwright test"
   },
   "dependencies": {
-    "@ai-sdk/google": "^1.2.18",
-    "@ai-sdk/react": "^1.2.8",
+    "@ai-sdk/google": "^3.0.83",
+    "@ai-sdk/react": "^3.0.210",
     "@radix-ui/react-alert-dialog": "^1.1.2",
     "@radix-ui/react-avatar": "^1.1.9",
     "@radix-ui/react-dialog": "^1.1.2",
@@ -41,7 +41,7 @@
     "@supabase/auth-js": "^2.69.1",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.49.4",
-    "ai": "4.3.4",
+    "ai": "6.0.208",
     "axios": "^1.9.0",
     "bcrypt-ts": "^5.0.2",
     "class-variance-authority": "^0.7.0",
