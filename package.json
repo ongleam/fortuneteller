@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbo 2>&1 | tee logs/debug.txt",
-    "build": "tsx lib/infra/db/migrate && next build",
+    "build": "next build",
+    "vercel-build": "if [ \"$VERCEL_ENV\" = \"production\" ]; then tsx lib/infra/db/migrate.ts; fi && next build",
     "start": "next start",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "db:generate": "drizzle-kit generate",
