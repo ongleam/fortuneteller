@@ -11,15 +11,10 @@ module.exports = {
     '^.+\\.tsx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  testMatch: [
-    '<rootDir>/tests/**/*.test.ts',
-    '!<rootDir>/tests/e2e/**/*.test.ts'  // E2E 테스트는 Playwright로 실행
-  ],
-  collectCoverageFrom: [
-    'lib/**/*.ts',
-    '!lib/**/*.test.ts',
-    '!lib/**/*.d.ts'
-  ],
+  testMatch: ['<rootDir>/tests/**/*.test.ts'],
+  // E2E 테스트(tests/e2e)는 Playwright로 실행하므로 jest 수집에서 제외
+  testPathIgnorePatterns: ['/node_modules/', '<rootDir>/tests/e2e/'],
+  collectCoverageFrom: ['lib/**/*.ts', '!lib/**/*.test.ts', '!lib/**/*.d.ts'],
   coverageDirectory: 'coverage',
-  coverageReporters: ['text', 'lcov', 'html']
+  coverageReporters: ['text', 'lcov', 'html'],
 };

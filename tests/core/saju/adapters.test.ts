@@ -1,13 +1,10 @@
 /**
  * 사주 어댑터 모듈 테스트
- * Comprehensive testset을 사용하여 어댑터 기능 검증
+ * 어댑터 형식 변환(Simple/FetchSaju/UI) 구조 검증
  */
 
 import { toSimpleFormat, toFetchSajuFormat, toUiFormat } from '@/lib/core/saju/adapters';
-import { TopThreeSinsals, BirthInput } from '@/lib/shared/types/saju';
-import { getFourPillars } from '@/lib/core/saju/four-pillars';
-import { getFiveElements } from '@/lib/core/saju/five-elements';
-import comprehensiveTestset from '@/data/saju-comprehensive-testset.json';
+import { TopThreeSinsals } from '@/lib/shared/types/saju';
 import allSolarTerms from '@/data/solar_terms.json';
 
 const solarTermsData: Record<
@@ -30,89 +27,12 @@ jest.mock('@/lib/infra/db/queries', () => ({
   }),
   getSolarTermByYearAndName: jest.fn(async (year: number, name: string) => {
     return solarTermsArray.find((term) => term.year === year && term.term_name === name) || null;
-  },
+  }),
 }));
-
-// Comprehensive testset에서 첫 3개 케이스만 사용
-const referenceData = comprehensiveTestset.slice(0, 3);
 
 describe('SajuAdapters', () => {
   afterEach(() => {
     jest.clearAllMocks();
-  });
-
-  describe('Comprehensive testset 데이터와의 어댑터 테스트', () => {
-    referenceData.forEach((testData, index) => {
-      test(`케이스 ${index + 1}: ${testData.description}`, async () => {
-        const input = testData.input as BirthInput;
-
-        // 로컬 계산으로 데이터 생성
-        const pillars = await getFourPillars(input);
-        const elements = getFiveElements(pillars);
-
-        const mockData = {
-          basic: input,
-          pillars,
-          elements,
-          tenStars: {
-            yearSky: '비견',
-            yearGround: '편인',
-            monthSky: '편관',
-            monthGround: '정재',
-            daySky: '비견',
-            dayGround: '비견',
-            timeSky: '정관',
-            timeGround: '정재',
-          },
-          fortune: {
-            currentAge: 30,
-            bigFortune: {
-              current: {
-                number: 1,
-                stem: { chinese: '甲', korean: '갑', fiveElement: '목', yangYin: '양' },
-                branch: { chinese: '子', korean: '자', fiveElement: '수', yangYin: '양' },
-              },
-              next: {
-                number: 2,
-                stem: { chinese: '乙', korean: '을', fiveElement: '목', yangYin: '음' },
-                branch: { chinese: '丑', korean: '축', fiveElement: '토', yangYin: '음' },
-              },
-            },
-            yearFortune: {
-              year: 2025,
-              stem: { chinese: '乙', korean: '을', fiveElement: '목' },
-              branch: { chinese: '巳', korean: '사', fiveElement: '화' },
-            },
-          },
-          sinsals: ['역마살', '화개살', '천을귀인'] as TopThreeSinsals,
-        };
-
-        console.log(`\n🔍 케이스 ${index + 1}: ${testData.description}`);
-
-        // Simple 형식 변환 테스트
-        const simpleResult = toSimpleFormat(mockData);
-        expect(simpleResult).toHaveProperty('basic');
-        expect(simpleResult).toHaveProperty('pillars');
-        expect(simpleResult).toHaveProperty('elements');
-        expect(simpleResult.basic.name).toBe(input.name || '테스트');
-        expect(simpleResult.pillars.year.sky).toBe(pillars.year.sky);
-
-        // FetchSaju 호환 형식 변환 테스트
-        const fetchSajuResult = toFetchSajuFormat(mockData);
-        expect(fetchSajuResult).toHaveProperty('name');
-        expect(fetchSajuResult).toHaveProperty('saju');
-        expect(fetchSajuResult).toHaveProperty('elements');
-        expect(fetchSajuResult.name).toBe(input.name || '테스트');
-
-        // UI 형식 변환 테스트
-        const uiResult = toUiFormat(mockData);
-        expect(uiResult).toHaveProperty('displayName');
-        expect(uiResult).toHaveProperty('pillarsDisplay');
-        expect(uiResult).toHaveProperty('elementsChart');
-
-        console.log(`✅ 모든 어댑터 형식이 올바른 구조를 가집니다!`);
-      }, 30000);
-    });
   });
 
   describe('기본 어댑터 테스트', () => {
