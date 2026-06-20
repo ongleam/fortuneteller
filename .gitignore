@@ -50,16 +50,11 @@ test-results/
 tests/output
 tests/debug
 
-google_auth_key.json
 repomix-output.xml
 
 
 
 # tests 
-## promptfoo
-tests/promptfoo/output
-tests/promptfoo/generated_config.yaml
-tests/promptfoo/results.json
 
 mcp.json
 
