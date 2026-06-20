@@ -69,7 +69,4 @@ export const metadata: Metadata = {
   icons: siteConfig.icons,
   keywords: siteConfig.keywords,
   openGraph: siteOpenGraph,
-  other: {
-    'naver-site-verification': process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION!,
-  },
 };
