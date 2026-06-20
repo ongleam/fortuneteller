@@ -12,7 +12,6 @@ import {
   unique,
   uuid,
   varchar,
-  vector,
 } from 'drizzle-orm/pg-core';
 
 // 사용자 프로필 테이블 (Supabase auth.users와 연동)

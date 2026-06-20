@@ -28,7 +28,6 @@
   },
   "dependencies": {
     "@ai-sdk/google": "^1.2.18",
-    "@ai-sdk/google-vertex": "^2.2.18",
     "@ai-sdk/react": "^1.2.8",
     "@next/third-parties": "^15.3.2",
     "@notionhq/client": "^3.0.1",

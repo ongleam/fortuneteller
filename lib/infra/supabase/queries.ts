@@ -1,15 +1,10 @@
 import { createClient } from '@/lib/infra/supabase/client';
-import { getEmbedding } from '@/lib/shared/utils/embedding';
 import { Chat, DBMessage, Profile, Vote } from '../db/schema';
 
 export const runtime = 'edge';
 
 // 클라이언트 측에서 사용할 Supabase 인스턴스 생성
 const supabase = createClient();
-
-const DEFAULT_MATCH_THRESHOLD = 0.7;
-const DEFAULT_MATCH_COUNT = 5;
-const DEFAULT_CATEGORY_SIMILARITY_THRESHOLD = 0.5;
 
 // 프로필 쿼리
 

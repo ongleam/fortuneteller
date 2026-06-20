@@ -2,7 +2,6 @@ import {
   pgTable,
   uuid,
   text,
-  vector,
   timestamp,
   integer,
   jsonb,
