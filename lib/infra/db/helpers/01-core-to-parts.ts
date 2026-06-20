@@ -1,16 +1,16 @@
-import { config } from 'dotenv';
-import postgres from 'postgres';
-import { chat, message, vote } from '../schema';
-import { drizzle } from 'drizzle-orm/postgres-js';
-import { inArray } from 'drizzle-orm';
-import { UIMessage } from 'ai';
+import { config } from "dotenv";
+import postgres from "postgres";
+import { chat, message, vote } from "../schema";
+import { drizzle } from "drizzle-orm/postgres-js";
+import { inArray } from "drizzle-orm";
+import { UIMessage } from "ai";
 
 config({
-  path: '.env.local',
+  path: ".env.local",
 });
 
 if (!process.env.POSTGRES_URL) {
-  throw new Error('POSTGRES_URL environment variable is not set');
+  throw new Error("POSTGRES_URL environment variable is not set");
 }
 
 const client = postgres(process.env.POSTGRES_URL);
@@ -68,7 +68,7 @@ async function createNewTable() {
       for (const message of messages) {
         const { role } = message;
 
-        if (role === 'user' && messageSection.length > 0) {
+        if (role === "user" && messageSection.length > 0) {
           messageSections.push([...messageSection]);
           messageSection.length = 0;
         }
@@ -96,16 +96,16 @@ async function createNewTable() {
 
           const projectedUISection = uiSection
             .map((message) => {
-              if (message.role === 'user') {
+              if (message.role === "user") {
                 return {
                   id: message.id,
                   chatId: chat.id,
-                  parts: [{ type: 'text', text: message.content }],
+                  parts: [{ type: "text", text: message.content }],
                   role: message.role,
                   createdAt: message.createdAt,
                   attachments: [],
                 } as NewMessageInsert;
-              } else if (message.role === 'assistant') {
+              } else if (message.role === "assistant") {
                 return {
                   id: message.id,
                   chatId: chat.id,
@@ -123,7 +123,7 @@ async function createNewTable() {
           for (const msg of projectedUISection) {
             newMessagesToInsert.push(msg);
 
-            if (msg.role === 'assistant') {
+            if (msg.role === "assistant") {
               const voteByMessage = votes.find((v) => v.message_id === msg.id);
               if (voteByMessage) {
                 newVotesToInsert.push({
@@ -172,10 +172,10 @@ async function createNewTable() {
 
 createNewTable()
   .then(() => {
-    console.info('Script completed successfully');
+    console.info("Script completed successfully");
     process.exit(0);
   })
   .catch((error) => {
-    console.error('Script failed:', error);
+    console.error("Script failed:", error);
     process.exit(1);
   });

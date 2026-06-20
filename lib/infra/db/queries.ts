@@ -1,8 +1,8 @@
-import 'server-only';
+import "server-only";
 
-import { and, asc, count, desc, eq, gt, gte, inArray, lt, type SQL } from 'drizzle-orm';
-import { drizzle } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
+import { and, asc, count, desc, eq, gt, gte, inArray, lt, type SQL } from "drizzle-orm";
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
 import {
   chat,
   message,
@@ -13,8 +13,8 @@ import {
   type DBMessage,
   type Profile,
   type SolarTerm,
-} from './schema';
-import { generateUUID } from '../../shared/utils';
+} from "./schema";
+import { generateUUID } from "../../shared/utils";
 
 // Optionally, if not using email/pass login, you can
 // use the Drizzle adapter for Auth.js / NextAuth
@@ -29,7 +29,7 @@ export async function getProfileByUserId({ id }: { id: string }): Promise<Profil
     const [result] = await db.select().from(profile).where(eq(profile.user_id, id));
     return result;
   } catch (error) {
-    console.error('Failed to get profile by user id from database');
+    console.error("Failed to get profile by user id from database");
     throw error;
   }
 }
@@ -54,7 +54,7 @@ export async function createProfile({
 
     return newProfile;
   } catch (error) {
-    console.error('Failed to create profile in database');
+    console.error("Failed to create profile in database");
     throw error;
   }
 }
@@ -71,25 +71,25 @@ export async function updateProfile({
 }: {
   kakao_user_id: string;
   name?: string;
-  gender?: '남성' | '여성' | null;
-  birth_type?: '양력' | '음력' | null;
+  gender?: "남성" | "여성" | null;
+  birth_type?: "양력" | "음력" | null;
   birth_year?: number | null;
   birth_month?: number | null;
   birth_day?: number | null;
   birth_time?:
-    | '00'
-    | '02'
-    | '04'
-    | '06'
-    | '08'
-    | '10'
-    | '12'
-    | '14'
-    | '16'
-    | '18'
-    | '20'
-    | '22'
-    | '24'
+    | "00"
+    | "02"
+    | "04"
+    | "06"
+    | "08"
+    | "10"
+    | "12"
+    | "14"
+    | "16"
+    | "18"
+    | "20"
+    | "22"
+    | "24"
     | null;
 }) {
   try {
@@ -100,7 +100,7 @@ export async function updateProfile({
       .returning();
     return updatedProfile;
   } catch (error) {
-    console.error('Failed to update profile saju in database');
+    console.error("Failed to update profile saju in database");
     throw error;
   }
 }
@@ -130,7 +130,7 @@ export async function getOrCreateProfileByUserKakaoId({
 
     return newProfile;
   } catch (error) {
-    console.error('Failed `getOrCreateProfileByUserKakaoId`: ', error);
+    console.error("Failed `getOrCreateProfileByUserKakaoId`: ", error);
     throw error;
   }
 }
@@ -145,7 +145,7 @@ export async function saveChat({
   id: string;
   userId: string;
   title: string;
-  channel?: 'kakao' | 'web';
+  channel?: "kakao" | "web";
 }) {
   try {
     const [newChat] = await db
@@ -161,7 +161,7 @@ export async function saveChat({
       .returning();
     return newChat;
   } catch (error) {
-    console.error('Failed to save chat in database');
+    console.error("Failed to save chat in database");
     throw error;
   }
 }
@@ -174,7 +174,7 @@ export async function deleteChatById({ id }: { id: string }) {
     const [chatsDeleted] = await db.delete(chat).where(eq(chat.id, id)).returning();
     return chatsDeleted;
   } catch (error) {
-    console.error('Failed to delete chat by id from database');
+    console.error("Failed to delete chat by id from database");
     throw error;
   }
 }
@@ -234,7 +234,7 @@ export async function getChatsByUserId({
       hasMore,
     };
   } catch (error) {
-    console.error('Failed to get chats by user from database');
+    console.error("Failed to get chats by user from database");
     throw error;
   }
 }
@@ -244,7 +244,7 @@ export async function getChatById({ id }: { id: string }) {
     const [selectedChat] = await db.select().from(chat).where(eq(chat.id, id));
     return selectedChat;
   } catch (error) {
-    console.error('Failed to get chat by id from database');
+    console.error("Failed to get chat by id from database");
     throw error;
   }
 }
@@ -259,7 +259,7 @@ export async function getOrCreateKakaoChatByUserId({
   const existingChat = await db
     .select()
     .from(chat)
-    .where(and(eq(chat.user_id, userId), eq(chat.channel, 'kakao')))
+    .where(and(eq(chat.user_id, userId), eq(chat.channel, "kakao")))
     .orderBy(desc(chat.updated_at))
     .limit(1);
 
@@ -271,10 +271,10 @@ export async function getOrCreateKakaoChatByUserId({
     id: generateUUID(),
     userId,
     title,
-    channel: 'kakao',
+    channel: "kakao",
   });
 
-  console.log('newChat:', newChat);
+  console.log("newChat:", newChat);
 
   return newChat;
 }
@@ -284,12 +284,12 @@ export async function updateChatVisiblityById({
   visibility,
 }: {
   chat_id: string;
-  visibility: 'private' | 'public';
+  visibility: "private" | "public";
 }) {
   try {
     return await db.update(chat).set({ visibility }).where(eq(chat.id, chat_id));
   } catch (error) {
-    console.error('Failed to update chat visibility in database');
+    console.error("Failed to update chat visibility in database");
     throw error;
   }
 }
@@ -299,7 +299,7 @@ export async function saveMessages({ messages }: { messages: Array<DBMessage> })
   try {
     return await db.insert(message).values(messages);
   } catch (error) {
-    console.error('Failed to save messages in database', error);
+    console.error("Failed to save messages in database", error);
     throw error;
   }
 }
@@ -322,7 +322,7 @@ export async function getMessagesByChatId({ id, limit }: { id: string; limit?: n
       .where(eq(message.chat_id, id))
       .orderBy(asc(message.created_at));
   } catch (error) {
-    console.error('Failed to get messages by chat id from database', error);
+    console.error("Failed to get messages by chat id from database", error);
     throw error;
   }
 }
@@ -334,7 +334,7 @@ export async function voteMessage({
 }: {
   chatId: string;
   messageId: string;
-  type: 'up' | 'down';
+  type: "up" | "down";
 }) {
   try {
     const [existingVote] = await db
@@ -345,16 +345,16 @@ export async function voteMessage({
     if (existingVote) {
       return await db
         .update(vote)
-        .set({ is_upvoted: type === 'up' })
+        .set({ is_upvoted: type === "up" })
         .where(and(eq(vote.message_id, messageId), eq(vote.chat_id, chatId)));
     }
     return await db.insert(vote).values({
       chat_id: chatId,
       message_id: messageId,
-      is_upvoted: type === 'up',
+      is_upvoted: type === "up",
     });
   } catch (error) {
-    console.error('Failed to upvote message in database', error);
+    console.error("Failed to upvote message in database", error);
     throw error;
   }
 }
@@ -363,7 +363,7 @@ export async function getVotesByChatId({ id }: { id: string }) {
   try {
     return await db.select().from(vote).where(eq(vote.chat_id, id));
   } catch (error) {
-    console.error('Failed to get votes by chat id from database', error);
+    console.error("Failed to get votes by chat id from database", error);
     throw error;
   }
 }
@@ -372,7 +372,7 @@ export async function getMessageById({ id }: { id: string }) {
   try {
     return await db.select().from(message).where(eq(message.id, id));
   } catch (error) {
-    console.error('Failed to get message by id from database');
+    console.error("Failed to get message by id from database");
     throw error;
   }
 }
@@ -402,7 +402,7 @@ export async function deleteMessagesByChatIdAfterTimestamp({
         .where(and(eq(message.chat_id, chatId), inArray(message.id, messageIds)));
     }
   } catch (error) {
-    console.error('Failed to delete messages by id after timestamp from database');
+    console.error("Failed to delete messages by id after timestamp from database");
     throw error;
   }
 }
@@ -425,14 +425,14 @@ export async function getMessageCountByUserId({
         and(
           eq(chat.user_id, id),
           gte(message.created_at, twentyFourHoursAgo),
-          eq(message.role, 'user')
-        )
+          eq(message.role, "user"),
+        ),
       )
       .execute();
 
     return stats?.count ?? 0;
   } catch (error) {
-    console.error('Failed to get message count by user id for the last 24 hours from database');
+    console.error("Failed to get message count by user id for the last 24 hours from database");
     throw error;
   }
 }
@@ -446,14 +446,14 @@ export async function getSolarTermsByYear(year: number): Promise<SolarTerm[]> {
       .where(eq(solarTerm.year, year))
       .orderBy(asc(solarTerm.month), asc(solarTerm.day));
   } catch (error) {
-    console.error('Failed to get solar terms by year from database');
+    console.error("Failed to get solar terms by year from database");
     throw error;
   }
 }
 
 export async function getSolarTermByYearAndName(
   year: number,
-  termName: string
+  termName: string,
 ): Promise<SolarTerm | null> {
   try {
     const [result] = await db
@@ -463,16 +463,16 @@ export async function getSolarTermByYearAndName(
       .limit(1);
     return result || null;
   } catch (error) {
-    console.error('Failed to get solar term by year and name from database');
+    console.error("Failed to get solar term by year and name from database");
     throw error;
   }
 }
 
-export async function insertSolarTerms(solarTerms: Array<Omit<SolarTerm, 'id' | 'created_at'>>) {
+export async function insertSolarTerms(solarTerms: Array<Omit<SolarTerm, "id" | "created_at">>) {
   try {
     return await db.insert(solarTerm).values(solarTerms);
   } catch (error) {
-    console.error('Failed to insert solar terms into database');
+    console.error("Failed to insert solar terms into database");
     throw error;
   }
 }

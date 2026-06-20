@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export const Greeting = () => {
   const isMobile = useIsMobile();
@@ -14,7 +14,7 @@ export const Greeting = () => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 10 }}
         transition={{ delay: 0.5 }}
-        className={`${isMobile ? 'text-xl' : 'text-2xl'} font-semibold`}
+        className={`${isMobile ? "text-xl" : "text-2xl"} font-semibold`}
       >
         Hello!
       </motion.div>
@@ -23,7 +23,7 @@ export const Greeting = () => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 10 }}
         transition={{ delay: 0.6 }}
-        className={`${isMobile ? 'text-lg' : 'text-2xl'} text-zinc-500`}
+        className={`${isMobile ? "text-lg" : "text-2xl"} text-zinc-500`}
       >
         {`Ask me anything about Korean visa :)`}
       </motion.div>

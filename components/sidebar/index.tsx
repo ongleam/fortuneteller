@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import type { User } from '@supabase/auth-js';
-import { useRouter } from 'next/navigation';
-import { PlusIcon } from '@/components/icons';
-import { SidebarHistory } from '@/components/sidebar/history';
-import { SidebarUserNav } from '@/components/sidebar/user-nav';
-import { Button } from '@/components/ui/button';
+import type { User } from "@supabase/auth-js";
+import { useRouter } from "next/navigation";
+import { PlusIcon } from "@/components/icons";
+import { SidebarHistory } from "@/components/sidebar/history";
+import { SidebarUserNav } from "@/components/sidebar/user-nav";
+import { Button } from "@/components/ui/button";
 import {
   Sidebar,
   SidebarContent,
@@ -13,10 +13,10 @@ import {
   SidebarHeader,
   SidebarMenu,
   useSidebar,
-} from '@/components/ui/sidebar';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip';
+} from "@/components/ui/sidebar";
+import Link from "next/link";
+import Image from "next/image";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 export function AppSidebar({ user }: { user: User | undefined }) {
   const router = useRouter();
@@ -47,7 +47,7 @@ export function AppSidebar({ user }: { user: User | undefined }) {
                   className="h-fit p-1 sm:p-2"
                   onClick={() => {
                     setOpenMobile(false);
-                    router.push('/');
+                    router.push("/");
                     router.refresh();
                   }}
                 >

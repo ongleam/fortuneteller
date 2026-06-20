@@ -1,8 +1,8 @@
-import { smoothStream, stepCountIs, streamText, type UIMessage } from 'ai';
-import { baseAgent } from '../interfaces/agents/base';
-import { generateUUID } from '@/lib/shared/utils';
-import { saveMessages } from '../infra/db/queries';
-import { isProductionEnvironment } from '../shared/constants';
+import { smoothStream, stepCountIs, streamText, type UIMessage } from "ai";
+import { baseAgent } from "../interfaces/agents/base";
+import { generateUUID } from "@/lib/shared/utils";
+import { saveMessages } from "../infra/db/queries";
+import { isProductionEnvironment } from "../shared/constants";
 
 const MAX_STEPS = 5;
 
@@ -23,10 +23,10 @@ export async function createToolCallingStream(streamConfig: BaseStreamConfig) {
   const result = streamText({
     ...agentConfig,
     stopWhen: stepCountIs(MAX_STEPS),
-    experimental_transform: smoothStream({ chunking: 'word' }),
+    experimental_transform: smoothStream({ chunking: "word" }),
     experimental_telemetry: {
       isEnabled: isProductionEnvironment,
-      functionId: 'stream-text',
+      functionId: "stream-text",
     },
   });
 
@@ -50,12 +50,12 @@ export async function createToolCallingStream(streamConfig: BaseStreamConfig) {
           ],
         });
       } catch (_) {
-        console.error('Failed to save chat:', _);
+        console.error("Failed to save chat:", _);
       }
     },
     onError: (error) => {
-      console.error('[ERROR] Failed to process chat request: ', error);
-      return 'Oops, an error occurred!';
+      console.error("[ERROR] Failed to process chat request: ", error);
+      return "Oops, an error occurred!";
     },
   });
 }

@@ -1,12 +1,12 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 const textPartSchema = z.object({
-  type: z.enum(['text']),
+  type: z.enum(["text"]),
   text: z.string().min(1).max(2000),
 });
 
 const filePartSchema = z.object({
-  type: z.enum(['file']),
+  type: z.enum(["file"]),
   mediaType: z.string(),
   filename: z.string().optional(),
   url: z.string(),
@@ -18,10 +18,10 @@ export const postRequestBodySchema = z.object({
   id: z.string().uuid(),
   message: z.object({
     id: z.string().uuid(),
-    role: z.enum(['user']),
+    role: z.enum(["user"]),
     parts: z.array(partSchema),
   }),
-  selectedChatModel: z.enum(['chat-model', 'chat-model-reasoning']),
+  selectedChatModel: z.enum(["chat-model", "chat-model-reasoning"]),
 });
 
 export type PostRequestBody = z.infer<typeof postRequestBodySchema>;

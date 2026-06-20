@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 /**
  * 생성된 파일의 정보를 나타내는 인터페이스
@@ -17,12 +17,12 @@ export interface GeneratedFile {
  */
 export type ReasoningDetail =
   | {
-      type: 'text';
+      type: "text";
       text: string;
       signature?: string;
     }
   | {
-      type: 'redacted';
+      type: "redacted";
       data: string;
     };
 
@@ -50,7 +50,7 @@ export interface LanguageModelUsage {
 /**
  * 생성이 종료된 이유를 나타내는 타입
  */
-export type FinishReason = 'stop' | 'length' | 'content_filter' | 'tool_calls';
+export type FinishReason = "stop" | "length" | "content_filter" | "tool_calls";
 
 /**
  * 모델 제공자의 경고를 나타내는 타입
@@ -85,13 +85,13 @@ export interface LanguageModelResponseMetadata {
 /**
  * 응답 메시지의 역할을 나타내는 타입
  */
-export type MessageRole = 'assistant' | 'tool' | 'user' | 'system';
+export type MessageRole = "assistant" | "tool" | "user" | "system";
 
 /**
  * 응답 메시지의 콘텐츠 타입을 나타내는 타입
  */
 export type MessageContent = {
-  type: 'text' | 'tool-call' | 'tool-result';
+  type: "text" | "tool-call" | "tool-result";
   text?: string;
   toolCallId?: string;
   toolName?: string;

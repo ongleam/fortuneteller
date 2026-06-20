@@ -5,31 +5,31 @@ import {
   getMessagesByChatId,
   saveChat,
   saveMessages,
-} from '@/lib/infra/db/queries';
-import type { UIMessage } from 'ai';
-import { generateTitleFromUserMessage } from '@/lib/interfaces/actions/chat';
-import { entitlementsByUserType } from '@/config/entitlements';
-import { postRequestBodySchema, type PostRequestBody } from '@/lib/core/chat/chat';
-import { createToolCallingStream } from '@/lib/response/create-tool-calling-stream';
-import type { DBMessage } from '@/lib/infra/db/schema';
+} from "@/lib/infra/db/queries";
+import type { UIMessage } from "ai";
+import { generateTitleFromUserMessage } from "@/lib/interfaces/actions/chat";
+import { entitlementsByUserType } from "@/config/entitlements";
+import { postRequestBodySchema, type PostRequestBody } from "@/lib/core/chat/chat";
+import { createToolCallingStream } from "@/lib/response/create-tool-calling-stream";
+import type { DBMessage } from "@/lib/infra/db/schema";
 
 // Convert stored DB messages into v6 UIMessages for model input.
 // Only text/file parts are preserved to stay compatible with convertToModelMessages.
 function toUIMessage(dbMessage: DBMessage): UIMessage {
   const parts = Array.isArray(dbMessage.parts) ? dbMessage.parts : [];
   const safeParts = parts.filter(
-    (part: any) => part?.type === 'text' || part?.type === 'file'
-  ) as UIMessage['parts'];
+    (part: any) => part?.type === "text" || part?.type === "file",
+  ) as UIMessage["parts"];
 
   return {
     id: dbMessage.id,
-    role: dbMessage.role as UIMessage['role'],
+    role: dbMessage.role as UIMessage["role"],
     parts: safeParts,
   };
 }
 
 export const maxDuration = 60;
-import { createServerClient } from '@/lib/infra/supabase/server';
+import { createServerClient } from "@/lib/infra/supabase/server";
 
 export async function POST(request: Request) {
   let requestBody: PostRequestBody;
@@ -38,8 +38,8 @@ export async function POST(request: Request) {
     const json = await request.json();
     requestBody = postRequestBodySchema.parse(json);
   } catch (_) {
-    console.error('[ERROR] Invalid request body: ', _);
-    return new Response('Invalid request body', { status: 400 });
+    console.error("[ERROR] Invalid request body: ", _);
+    return new Response("Invalid request body", { status: 400 });
   }
 
   try {
@@ -54,12 +54,12 @@ export async function POST(request: Request) {
     const isAnonymous = user?.is_anonymous;
 
     if (!isAnonymous && !user) {
-      return new Response('Unauthorized', { status: 401 });
+      return new Response("Unauthorized", { status: 401 });
     }
 
     const entitlements = isAnonymous
-      ? entitlementsByUserType['guest']
-      : entitlementsByUserType['regular'];
+      ? entitlementsByUserType["guest"]
+      : entitlementsByUserType["regular"];
 
     const messageCount = await getMessageCountByUserId({
       id: user?.id,
@@ -68,10 +68,10 @@ export async function POST(request: Request) {
 
     if (messageCount > entitlements.maxMessagesPerDay) {
       return new Response(
-        'You have exceeded your maximum number of messages for the day! Please try again later.',
+        "You have exceeded your maximum number of messages for the day! Please try again later.",
         {
           status: 429,
-        }
+        },
       );
     }
 
@@ -85,7 +85,7 @@ export async function POST(request: Request) {
       await saveChat({ id, userId: user.id, title });
     } else {
       if (chat.user_id !== user.id) {
-        return new Response('Forbidden', { status: 403 });
+        return new Response("Forbidden", { status: 403 });
       }
     }
 
@@ -98,7 +98,7 @@ export async function POST(request: Request) {
         {
           chat_id: id,
           id: message.id,
-          role: 'user',
+          role: "user",
           parts: message.parts,
           attachments: [],
           created_at: new Date(),
@@ -113,8 +113,8 @@ export async function POST(request: Request) {
       chatId: id,
     });
   } catch (_) {
-    console.error('[ERROR] Failed to process chat request: ', _);
-    return new Response('An error occurred while processing your request!', {
+    console.error("[ERROR] Failed to process chat request: ", _);
+    return new Response("An error occurred while processing your request!", {
       status: 500,
     });
   }
@@ -122,32 +122,32 @@ export async function POST(request: Request) {
 
 export async function DELETE(request: Request) {
   const { searchParams } = new URL(request.url);
-  const id = searchParams.get('id');
+  const id = searchParams.get("id");
   const supabase = await createServerClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
   if (!id) {
-    return new Response('Not Found', { status: 404 });
+    return new Response("Not Found", { status: 404 });
   }
 
   if (!user) {
-    return new Response('Unauthorized', { status: 401 });
+    return new Response("Unauthorized", { status: 401 });
   }
 
   try {
     const chat = await getChatById({ id });
 
     if (chat.user_id !== user.id) {
-      return new Response('Forbidden', { status: 403 });
+      return new Response("Forbidden", { status: 403 });
     }
 
     const deletedChat = await deleteChatById({ id });
 
     return Response.json(deletedChat, { status: 200 });
   } catch (error) {
-    return new Response('An error occurred while processing your request!', {
+    return new Response("An error occurred while processing your request!", {
       status: 500,
     });
   }

@@ -7,10 +7,10 @@
  */
 
 export function normText(raw: string | undefined): string {
-  if (!raw) return '';
+  if (!raw) return "";
   return raw
-    .replace(/\n{2,}/g, '\n')
-    .replace(/[ \t]{2,}/g, ' ')
+    .replace(/\n{2,}/g, "\n")
+    .replace(/[ \t]{2,}/g, " ")
     .trim();
 }
 
@@ -21,14 +21,14 @@ export function normText(raw: string | undefined): string {
  * - 중첩된 태그도 처리
  */
 export function removeXmlTags(text: string): string {
-  if (!text) return '';
+  if (!text) return "";
 
   // XML 태그 제거 (속성이 있는 경우도 처리)
   return (
     text
-      .replace(/<[^>]+>([^<]*)<\/[^>]+>/g, '$1')
+      .replace(/<[^>]+>([^<]*)<\/[^>]+>/g, "$1")
       // 남은 단일 태그 제거
-      .replace(/<[^>]+>/g, '')
+      .replace(/<[^>]+>/g, "")
       // 연속된 공백 정리
       .trim()
   );
@@ -40,6 +40,6 @@ export function removeXmlTags(text: string): string {
  * - 불필요한 공백/개행 정리
  */
 export function preprocessXmlText(text: string | undefined): string {
-  if (!text) return '';
+  if (!text) return "";
   return normText(removeXmlTags(text));
 }

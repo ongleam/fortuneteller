@@ -1,24 +1,24 @@
 // components/sidebar/user-nav.tsx
-'use client';
+"use client";
 
-import { ChevronUp, Loader2, LogOut, Settings, User } from 'lucide-react';
-import type { User as SupabaseUser } from '@supabase/supabase-js';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { KakaoIcon } from '@/components/icons';
-import { createClient } from '@/lib/infra/supabase/client';
-import { Button } from '@/components/ui/button';
-import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
+import { ChevronUp, Loader2, LogOut, Settings, User } from "lucide-react";
+import type { User as SupabaseUser } from "@supabase/supabase-js";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { KakaoIcon } from "@/components/icons";
+import { createClient } from "@/lib/infra/supabase/client";
+import { Button } from "@/components/ui/button";
+import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { UserProfile } from './user-profile-modal';
-import { useIsMobile } from '@/hooks/use-mobile';
+} from "@/components/ui/dialog";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { UserProfile } from "./user-profile-modal";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function SidebarUserNav({ user }: { user: SupabaseUser | null }) {
   const router = useRouter();
@@ -54,7 +54,7 @@ export function SidebarUserNav({ user }: { user: SupabaseUser | null }) {
     return (
       <SidebarMenu>
         <SidebarMenuItem>
-          <AuthButton text="Login with Kakao" onClick={() => router.push('/login')} />
+          <AuthButton text="Login with Kakao" onClick={() => router.push("/login")} />
         </SidebarMenuItem>
       </SidebarMenu>
     );
@@ -68,7 +68,7 @@ export function SidebarUserNav({ user }: { user: SupabaseUser | null }) {
             <SidebarMenuItem>
               <AuthButton
                 text="Continue with Kakao account"
-                onClick={() => router.push('/login')}
+                onClick={() => router.push("/login")}
               />
             </SidebarMenuItem>
           </SidebarMenu>
@@ -78,13 +78,13 @@ export function SidebarUserNav({ user }: { user: SupabaseUser | null }) {
   }
 
   // 로그인된 영구 사용자
-  const displayName = user.user_metadata?.name || user.email || 'User';
+  const displayName = user.user_metadata?.name || user.email || "User";
   const displayAvatarUrl =
     user.user_metadata?.avatar_url || `https://avatar.vercel.sh/${user.email || user.id}`;
 
   // 이름 첫 글자 가져오기
   const getInitials = () => {
-    if (!displayName) return 'U';
+    if (!displayName) return "U";
     return displayName.charAt(0).toUpperCase();
   };
 
@@ -109,7 +109,7 @@ export function SidebarUserNav({ user }: { user: SupabaseUser | null }) {
             </Avatar>
           )}
           <span data-testid="user-email" className="truncate">
-            {isLoading ? 'Processing...' : displayName}
+            {isLoading ? "Processing..." : displayName}
           </span>
           <ChevronUp className="ml-auto" />
         </SidebarMenuButton>
@@ -119,7 +119,7 @@ export function SidebarUserNav({ user }: { user: SupabaseUser | null }) {
             name: displayName,
             email: user.email,
             image: displayAvatarUrl,
-            theme: (user.user_metadata?.theme as 'light' | 'dark' | 'system') || 'system',
+            theme: (user.user_metadata?.theme as "light" | "dark" | "system") || "system",
           }}
           isOpen={isProfileOpen}
           onOpenChange={setIsProfileOpen}

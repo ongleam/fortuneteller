@@ -1,36 +1,36 @@
-import { Toaster } from 'sonner';
-import { Geist, Geist_Mono } from 'next/font/google';
-import { ThemeProvider } from '@/components/theme-provider';
+import { Toaster } from "sonner";
+import { Geist, Geist_Mono } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
 // import ClarityScript from '@/components/scripts/Clarity';
-import './globals.css';
-import { metadata } from '@/config/site';
-import { AuthStateListener } from '@/components/auth/auth-state-listener';
+import "./globals.css";
+import { metadata } from "@/config/site";
+import { AuthStateListener } from "@/components/auth/auth-state-listener";
 // import { SpeedInsights } from '@vercel/speed-insights/next';
 // import { Analytics } from '@vercel/analytics/next';
 
 export { metadata };
 
 export const viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
   maximumScale: 1, // Disable auto-zoom on mobile Safari
-  viewportFit: 'cover',
+  viewportFit: "cover",
 };
 
 const geist = Geist({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-geist',
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-geist",
 });
 
 const geistMono = Geist_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-geist-mono',
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-geist-mono",
 });
 
-const LIGHT_THEME_COLOR = 'hsl(0 0% 100%)';
-const DARK_THEME_COLOR = 'hsl(240deg 10% 3.92%)';
+const LIGHT_THEME_COLOR = "hsl(0 0% 100%)";
+const DARK_THEME_COLOR = "hsl(240deg 10% 3.92%)";
 const THEME_COLOR_SCRIPT = `\
 (function() {
   var html = document.documentElement;
@@ -48,9 +48,6 @@ const THEME_COLOR_SCRIPT = `\
   observer.observe(html, { attributes: true, attributeFilter: ['class'] });
   updateThemeColor();
 })();`;
-
-
-
 
 export default async function RootLayout({
   children,

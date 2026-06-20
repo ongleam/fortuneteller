@@ -1,7 +1,7 @@
-import { createClient } from '@/lib/infra/supabase/client';
-import { Chat, DBMessage, Profile, Vote } from '../db/schema';
+import { createClient } from "@/lib/infra/supabase/client";
+import { Chat, DBMessage, Profile, Vote } from "../db/schema";
 
-export const runtime = 'edge';
+export const runtime = "edge";
 
 // 클라이언트 측에서 사용할 Supabase 인스턴스 생성
 const supabase = createClient();
@@ -12,9 +12,9 @@ export const getProfileByUserId = async (userId: string): Promise<Profile | null
   try {
     console.log(`[DB Query] 프로필 조회 시작: ${userId}`);
     const { data, error } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('user_id', userId)
+      .from("profiles")
+      .select("*")
+      .eq("user_id", userId)
       .single();
 
     if (error) {
@@ -25,7 +25,7 @@ export const getProfileByUserId = async (userId: string): Promise<Profile | null
     console.log(`[DB Query] 프로필 조회 성공: ${JSON.stringify(data)}`);
     return data;
   } catch (error) {
-    console.error('프로필 조회 오류:', error);
+    console.error("프로필 조회 오류:", error);
     throw error;
   }
 };
@@ -33,18 +33,18 @@ export const getProfileByUserId = async (userId: string): Promise<Profile | null
 export const createProfile = async (
   id: string,
   name: string,
-  avatar_url: string
+  avatar_url: string,
 ): Promise<Profile[] | null> => {
   try {
     const { data, error } = await supabase
-      .from('profiles')
+      .from("profiles")
       .insert({ user_id: id, name, avatar_url })
       .select();
 
     if (error) throw error;
     return data;
   } catch (error) {
-    console.error('프로필 생성 오류:', error);
+    console.error("프로필 생성 오류:", error);
     throw error;
   }
 };
@@ -62,7 +62,7 @@ export const saveChat = async ({
 }): Promise<Chat[] | null> => {
   try {
     const { data, error } = await supabase
-      .from('chats')
+      .from("chats")
       .insert({
         id,
         created_at: new Date(),
@@ -75,7 +75,7 @@ export const saveChat = async ({
     if (error) throw error;
     return data;
   } catch (error) {
-    console.error('채팅 저장 오류:', error);
+    console.error("채팅 저장 오류:", error);
     throw error;
   }
 };
@@ -83,20 +83,20 @@ export const saveChat = async ({
 export const deleteChatById = async ({ id }: { id: string }): Promise<Chat[] | null> => {
   try {
     // 트랜잭션 처리를 위해 순차적으로 삭제
-    const { error: voteError } = await supabase.from('votes').delete().eq('chat_id', id);
+    const { error: voteError } = await supabase.from("votes").delete().eq("chat_id", id);
 
     if (voteError) throw voteError;
 
-    const { error: messageError } = await supabase.from('messages').delete().eq('chat_id', id);
+    const { error: messageError } = await supabase.from("messages").delete().eq("chat_id", id);
 
     if (messageError) throw messageError;
 
-    const { data, error } = await supabase.from('chats').delete().eq('id', id).select();
+    const { data, error } = await supabase.from("chats").delete().eq("id", id).select();
 
     if (error) throw error;
     return data[0];
   } catch (error) {
-    console.error('채팅 삭제 오류:', error);
+    console.error("채팅 삭제 오류:", error);
     throw error;
   }
 };
@@ -115,38 +115,38 @@ export const getChatsByUserId = async ({
   try {
     const extendedLimit = limit + 1;
     let query = supabase
-      .from('chats')
-      .select('*')
-      .eq('user_id', id)
-      .order('created_at', { ascending: false })
+      .from("chats")
+      .select("*")
+      .eq("user_id", id)
+      .order("created_at", { ascending: false })
       .limit(extendedLimit);
 
     if (startingAfter) {
       // 시작 지점 찾기
       const { data: selectedChat } = await supabase
-        .from('chats')
-        .select('created_at')
-        .eq('id', startingAfter)
+        .from("chats")
+        .select("created_at")
+        .eq("id", startingAfter)
         .single();
 
       if (!selectedChat) {
         throw new Error(`Chat with id ${startingAfter} not found`);
       }
 
-      query = query.gt('created_at', selectedChat.created_at);
+      query = query.gt("created_at", selectedChat.created_at);
     } else if (endingBefore) {
       // 종료 지점 찾기
       const { data: selectedChat } = await supabase
-        .from('chats')
-        .select('created_at')
-        .eq('id', endingBefore)
+        .from("chats")
+        .select("created_at")
+        .eq("id", endingBefore)
         .single();
 
       if (!selectedChat) {
         throw new Error(`Chat with id ${endingBefore} not found`);
       }
 
-      query = query.lt('created_at', selectedChat.created_at);
+      query = query.lt("created_at", selectedChat.created_at);
     }
 
     const { data, error } = await query;
@@ -160,19 +160,19 @@ export const getChatsByUserId = async ({
       hasMore,
     };
   } catch (error) {
-    console.error('사용자별 채팅 조회 오류:', error);
+    console.error("사용자별 채팅 조회 오류:", error);
     throw error;
   }
 };
 
 export const getChatById = async ({ id }: { id: string }): Promise<Chat | null> => {
   try {
-    const { data, error } = await supabase.from('chats').select('*').eq('id', id).single();
+    const { data, error } = await supabase.from("chats").select("*").eq("id", id).single();
 
     if (error) throw error;
     return data;
   } catch (error) {
-    console.error('채팅 조회 오류:', error);
+    console.error("채팅 조회 오류:", error);
     throw error;
   }
 };
@@ -182,19 +182,19 @@ export const updateChatVisiblityById = async ({
   visibility,
 }: {
   chat_id: string;
-  visibility: 'private' | 'public';
+  visibility: "private" | "public";
 }): Promise<Chat[] | null> => {
   try {
     const { data, error } = await supabase
-      .from('chats')
+      .from("chats")
       .update({ visibility })
-      .eq('id', chat_id)
+      .eq("id", chat_id)
       .select();
 
     if (error) throw error;
     return data;
   } catch (error) {
-    console.error('채팅 가시성 업데이트 오류:', error);
+    console.error("채팅 가시성 업데이트 오류:", error);
     throw error;
   }
 };
@@ -207,12 +207,12 @@ export const saveMessages = async ({
   messages: Array<any>;
 }): Promise<DBMessage[] | null> => {
   try {
-    const { data, error } = await supabase.from('messages').insert(messages).select();
+    const { data, error } = await supabase.from("messages").insert(messages).select();
 
     if (error) throw error;
     return data;
   } catch (error) {
-    console.error('메시지 저장 오류:', error);
+    console.error("메시지 저장 오류:", error);
     throw error;
   }
 };
@@ -220,15 +220,15 @@ export const saveMessages = async ({
 export const getMessagesByChatId = async ({ id }: { id: string }): Promise<DBMessage[] | null> => {
   try {
     const { data, error } = await supabase
-      .from('messages')
-      .select('*')
-      .eq('chat_id', id)
-      .order('created_at', { ascending: true });
+      .from("messages")
+      .select("*")
+      .eq("chat_id", id)
+      .order("created_at", { ascending: true });
 
     if (error) throw error;
     return data;
   } catch (error) {
-    console.error('채팅별 메시지 조회 오류:', error);
+    console.error("채팅별 메시지 조회 오류:", error);
     throw error;
   }
 };
@@ -240,25 +240,25 @@ export const voteMessage = async ({
 }: {
   chatId: string;
   messageId: string;
-  type: 'up' | 'down';
+  type: "up" | "down";
 }): Promise<Vote[] | null> => {
   try {
     // 기존 투표 확인
     const { data: existingVote, error: selectError } = await supabase
-      .from('votes')
-      .select('*')
-      .eq('message_id', messageId)
+      .from("votes")
+      .select("*")
+      .eq("message_id", messageId)
       .single();
 
-    if (selectError && selectError.code !== 'PGRST116') throw selectError;
+    if (selectError && selectError.code !== "PGRST116") throw selectError;
 
     if (existingVote) {
       // 기존 투표 업데이트
       const { data, error } = await supabase
-        .from('votes')
-        .update({ is_upvoted: type === 'up' })
-        .eq('message_id', messageId)
-        .eq('chat_id', chatId)
+        .from("votes")
+        .update({ is_upvoted: type === "up" })
+        .eq("message_id", messageId)
+        .eq("chat_id", chatId)
         .select();
 
       if (error) throw error;
@@ -266,11 +266,11 @@ export const voteMessage = async ({
     } else {
       // 새 투표 추가
       const { data, error } = await supabase
-        .from('votes')
+        .from("votes")
         .insert({
           chat_id: chatId,
           message_id: messageId,
-          is_upvoted: type === 'up',
+          is_upvoted: type === "up",
         })
         .select();
 
@@ -278,31 +278,31 @@ export const voteMessage = async ({
       return data;
     }
   } catch (error) {
-    console.error('메시지 투표 오류:', error);
+    console.error("메시지 투표 오류:", error);
     throw error;
   }
 };
 
 export const getVotesByChatId = async ({ id }: { id: string }): Promise<Vote[] | null> => {
   try {
-    const { data, error } = await supabase.from('votes').select('*').eq('chat_id', id);
+    const { data, error } = await supabase.from("votes").select("*").eq("chat_id", id);
 
     if (error) throw error;
     return data;
   } catch (error) {
-    console.error('채팅별 투표 조회 오류:', error);
+    console.error("채팅별 투표 조회 오류:", error);
     throw error;
   }
 };
 
 export const getMessageById = async ({ id }: { id: string }): Promise<DBMessage[] | null> => {
   try {
-    const { data, error } = await supabase.from('messages').select('*').eq('id', id);
+    const { data, error } = await supabase.from("messages").select("*").eq("id", id);
 
     if (error) throw error;
     return data;
   } catch (error) {
-    console.error('메시지 조회 오류:', error);
+    console.error("메시지 조회 오류:", error);
     throw error;
   }
 };
@@ -317,10 +317,10 @@ export const deleteMessagesByChatIdAfterTimestamp = async ({
   try {
     // 삭제할 메시지 ID 찾기
     const { data: messagesToDelete, error: selectError } = await supabase
-      .from('messages')
-      .select('id')
-      .eq('chat_id', chatId)
-      .gte('created_at', timestamp.toISOString());
+      .from("messages")
+      .select("id")
+      .eq("chat_id", chatId)
+      .gte("created_at", timestamp.toISOString());
 
     if (selectError) throw selectError;
 
@@ -329,19 +329,19 @@ export const deleteMessagesByChatIdAfterTimestamp = async ({
 
       // 투표 삭제
       const { error: voteError } = await supabase
-        .from('votes')
+        .from("votes")
         .delete()
-        .eq('chat_id', chatId)
-        .in('message_id', messageIds);
+        .eq("chat_id", chatId)
+        .in("message_id", messageIds);
 
       if (voteError) throw voteError;
 
       // 메시지 삭제
       const { data, error } = await supabase
-        .from('messages')
+        .from("messages")
         .delete()
-        .eq('chat_id', chatId)
-        .in('id', messageIds)
+        .eq("chat_id", chatId)
+        .in("id", messageIds)
         .select();
 
       if (error) throw error;
@@ -350,7 +350,7 @@ export const deleteMessagesByChatIdAfterTimestamp = async ({
 
     return [];
   } catch (error) {
-    console.error('특정 시간 이후 메시지 삭제 오류:', error);
+    console.error("특정 시간 이후 메시지 삭제 오류:", error);
     throw error;
   }
 };
@@ -367,9 +367,9 @@ export const getMessageCountByUserId = async ({
 
     // 먼저 사용자의 채팅 ID들을 가져옵니다
     const { data: chats, error: chatError } = await supabase
-      .from('chats')
-      .select('id')
-      .eq('user_id', id);
+      .from("chats")
+      .select("id")
+      .eq("user_id", id);
 
     if (chatError) throw chatError;
 
@@ -383,16 +383,16 @@ export const getMessageCountByUserId = async ({
 
     // 이제 채팅 ID 배열로 메시지 수를 조회합니다
     const { count, error } = await supabase
-      .from('messages')
-      .select('*', { count: 'exact', head: true })
-      .eq('role', 'user')
-      .gte('created_at', twentyFourHoursAgo.toISOString())
-      .in('chat_id', chatIds);
+      .from("messages")
+      .select("*", { count: "exact", head: true })
+      .eq("role", "user")
+      .gte("created_at", twentyFourHoursAgo.toISOString())
+      .in("chat_id", chatIds);
 
     if (error) throw error;
     return count || 0;
   } catch (error) {
-    console.error('사용자별 메시지 카운트 오류:', error);
+    console.error("사용자별 메시지 카운트 오류:", error);
     throw error;
   }
 };

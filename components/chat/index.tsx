@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import { ChatHeader } from '@/components/chat/header';
+import { ChatHeader } from "@/components/chat/header";
 // import { useArtifactSelector } from '@/hooks/use-artifact';
-import type { Vote } from '@/lib/infra/db/schema';
-import { fetcher, generateUUID } from '@/lib/shared/utils';
-import { useChat } from '@ai-sdk/react';
-import { DefaultChatTransport, type UIMessage } from 'ai';
-import type { Attachment } from '@/lib/shared/types/attachment';
-import type { User } from '@supabase/auth-js';
-import { useState } from 'react';
-import useSWR, { useSWRConfig } from 'swr';
-import { unstable_serialize } from 'swr/infinite';
-import { Messages } from '@/components/message';
-import { MultimodalInput } from '@/components/chat/multimodal-input';
-import { getChatHistoryPaginationKey } from '@/components/sidebar/history';
-import { toast } from '@/components/toast';
-import type { VisibilityType } from '@/components/chat/visibility-selector';
+import type { Vote } from "@/lib/infra/db/schema";
+import { fetcher, generateUUID } from "@/lib/shared/utils";
+import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport, type UIMessage } from "ai";
+import type { Attachment } from "@/lib/shared/types/attachment";
+import type { User } from "@supabase/auth-js";
+import { useState } from "react";
+import useSWR, { useSWRConfig } from "swr";
+import { unstable_serialize } from "swr/infinite";
+import { Messages } from "@/components/message";
+import { MultimodalInput } from "@/components/chat/multimodal-input";
+import { getChatHistoryPaginationKey } from "@/components/sidebar/history";
+import { toast } from "@/components/toast";
+import type { VisibilityType } from "@/components/chat/visibility-selector";
 
 export function Chat({
   id,
@@ -34,7 +34,7 @@ export function Chat({
 }) {
   const { mutate } = useSWRConfig();
 
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
 
   const { messages, setMessages, sendMessage, status, stop, regenerate } = useChat<UIMessage>({
     id,
@@ -42,7 +42,7 @@ export function Chat({
     experimental_throttle: 100,
     generateId: generateUUID,
     transport: new DefaultChatTransport({
-      api: '/api/chat',
+      api: "/api/chat",
       prepareSendMessagesRequest: ({ messages }) => ({
         body: {
           id,
@@ -56,7 +56,7 @@ export function Chat({
     },
     onError: (error) => {
       toast({
-        type: 'error',
+        type: "error",
         description: error.message,
       });
     },
@@ -64,7 +64,7 @@ export function Chat({
 
   const { data: votes } = useSWR<Array<Vote>>(
     messages.length >= 2 ? `/api/vote?chatId=${id}` : null,
-    fetcher
+    fetcher,
   );
 
   const [attachments, setAttachments] = useState<Array<Attachment>>([]);

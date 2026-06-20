@@ -276,9 +276,7 @@ export function getAllCityCoords(): ReadonlyArray<CityCoord> {
  *
  * @returns longitudeE 또는 호출 실패 시 null
  */
-export async function fetchLongitudeByGeoNamesId(
-  id: number,
-): Promise<number | null> {
+export async function fetchLongitudeByGeoNamesId(id: number): Promise<number | null> {
   const username = process.env.GEONAMES_USERNAME;
   if (!username) return null;
   try {
@@ -298,8 +296,7 @@ export async function fetchLongitudeByGeoNamesId(
 /** 한국 표준시(UTC+8:30) 기간이면 +30, 아니면 0. */
 export function getHistoricalKstShiftMinutes(date: Date): number {
   const t = date.getTime();
-  if (t >= HISTORICAL_KST_PLUS_8H30_START && t < HISTORICAL_KST_PLUS_8H30_END)
-    return 30;
+  if (t >= HISTORICAL_KST_PLUS_8H30_START && t < HISTORICAL_KST_PLUS_8H30_END) return 30;
   return 0;
 }
 
@@ -318,8 +315,7 @@ export function getDstShiftMinutes(date: Date): number {
  */
 export function applyTimeCorrections(date: Date, longitudeE?: number): Date {
   let totalShiftMinutes = 0;
-  if (longitudeE !== undefined)
-    totalShiftMinutes += getLongitudeOffsetMinutes(longitudeE);
+  if (longitudeE !== undefined) totalShiftMinutes += getLongitudeOffsetMinutes(longitudeE);
   totalShiftMinutes += getHistoricalKstShiftMinutes(date);
   totalShiftMinutes += getDstShiftMinutes(date);
   return new Date(date.getTime() + totalShiftMinutes * 60 * 1000);

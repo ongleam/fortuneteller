@@ -1,8 +1,12 @@
-'use server';
+"use server";
 
-import { solarToLunar, lunarToSolar } from '@/lib/core/saju/calendar';
+import { solarToLunar, lunarToSolar } from "@/lib/core/saju/calendar";
 
-export async function convertSolarToLunarAction(year: number, month: number, day: number): Promise<{
+export async function convertSolarToLunarAction(
+  year: number,
+  month: number,
+  day: number,
+): Promise<{
   year: number;
   month: number;
   day: number;
@@ -12,16 +16,16 @@ export async function convertSolarToLunarAction(year: number, month: number, day
     const solarDate = new Date(year, month - 1, day);
     return solarToLunar(solarDate);
   } catch (error) {
-    console.error('Solar to lunar conversion error:', error);
+    console.error("Solar to lunar conversion error:", error);
     return null;
   }
 }
 
 export async function convertLunarToSolarAction(
-  year: number, 
-  month: number, 
-  day: number, 
-  isLeapMonth: boolean = false
+  year: number,
+  month: number,
+  day: number,
+  isLeapMonth: boolean = false,
 ): Promise<{
   year: number;
   month: number;
@@ -30,7 +34,7 @@ export async function convertLunarToSolarAction(
   try {
     return lunarToSolar(year, month, day, isLeapMonth);
   } catch (error) {
-    console.error('Lunar to solar conversion error:', error);
+    console.error("Lunar to solar conversion error:", error);
     return null;
   }
 }

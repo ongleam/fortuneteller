@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { useState, ReactNode, useRef, useCallback } from 'react';
-import { createClient } from '@/lib/infra/supabase/client';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
+import { useState, ReactNode, useRef, useCallback } from "react";
+import { createClient } from "@/lib/infra/supabase/client";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
+} from "@/components/ui/dialog";
 import {
   LogOut,
   Settings,
@@ -25,21 +25,21 @@ import {
   Loader2,
   Bell,
   Lock,
-} from 'lucide-react';
-import Link from 'next/link';
-import { Separator } from '@/components/ui/separator';
-import { toast } from '@/components/toast';
-import { useIsMobile } from '@/hooks/use-mobile';
-import { cn } from '@/lib/shared/utils';
-import { siteConfig } from '@/config/site';
-import { useTheme } from 'next-themes';
+} from "lucide-react";
+import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
+import { toast } from "@/components/toast";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/shared/utils";
+import { siteConfig } from "@/config/site";
+import { useTheme } from "next-themes";
 
 interface UserProfileProps {
   user?: {
     name?: string | null;
     email?: string | null;
     image?: string | null;
-    theme?: 'light' | 'dark' | 'system';
+    theme?: "light" | "dark" | "system";
   };
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
@@ -56,13 +56,13 @@ export function UserProfile({ user, isOpen, onOpenChange }: UserProfileProps) {
     try {
       const { error } = await supabase.auth.signOut();
       if (error) {
-        toast({ type: 'error', description: 'Logout failed.' });
+        toast({ type: "error", description: "Logout failed." });
       } else {
         onOpenChange(false);
-        window.location.href = '/';
+        window.location.href = "/";
       }
     } catch (error) {
-      toast({ type: 'error', description: 'An error occurred during logout.' });
+      toast({ type: "error", description: "An error occurred during logout." });
     } finally {
       setIsLoading(false);
     }
@@ -70,17 +70,17 @@ export function UserProfile({ user, isOpen, onOpenChange }: UserProfileProps) {
 
   // 테마 토글 처리
   const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
+    setTheme(theme === "dark" ? "light" : "dark");
   };
 
   // 테마 아이콘 표시
   const getThemeIcon = () => {
-    return theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />;
+    return theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />;
   };
 
   // 테마 이름 표시
   const getThemeName = () => {
-    return theme === 'dark' ? 'Dark Mode' : 'Light Mode';
+    return theme === "dark" ? "Dark Mode" : "Light Mode";
   };
 
   // 터치 영역을 넓게 하는 버튼 래퍼 컴포넌트
@@ -103,24 +103,24 @@ export function UserProfile({ user, isOpen, onOpenChange }: UserProfileProps) {
       onClick={onClick}
       disabled={disabled}
       className={cn(
-        'flex w-full items-center justify-between px-3 py-4 transition-colors',
-        'hover:bg-muted/50 focus:bg-muted/70 focus:outline-none active:bg-muted',
+        "flex w-full items-center justify-between px-3 py-4 transition-colors",
+        "hover:bg-muted/50 focus:bg-muted/70 focus:outline-none active:bg-muted",
         danger &&
-          'hover:bg-red-50 active:bg-red-100 dark:hover:bg-red-950/20 dark:active:bg-red-950/30',
-        disabled && 'cursor-not-allowed opacity-50'
+          "hover:bg-red-50 active:bg-red-100 dark:hover:bg-red-950/20 dark:active:bg-red-950/30",
+        disabled && "cursor-not-allowed opacity-50",
       )}
     >
       <div className="flex items-center gap-3">
         <div
           className={cn(
-            'flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full',
-            danger ? 'text-red-500' : 'text-muted-foreground',
-            'bg-muted/50'
+            "flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full",
+            danger ? "text-red-500" : "text-muted-foreground",
+            "bg-muted/50",
           )}
         >
           {icon}
         </div>
-        <span className={cn('text-sm font-medium', danger && 'text-red-500')}>{label}</span>
+        <span className={cn("text-sm font-medium", danger && "text-red-500")}>{label}</span>
       </div>
       {rightContent}
     </button>
@@ -155,8 +155,8 @@ export function UserProfile({ user, isOpen, onOpenChange }: UserProfileProps) {
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent
         className={cn(
-          'scrollbar-thin scrollbar-thumb-muted-foreground/20 scrollbar-track-transparent max-h-[90vh] overflow-y-auto',
-          isMobile ? 'w-full p-0 sm:max-w-full' : 'sm:max-w-2xl'
+          "scrollbar-thin scrollbar-thumb-muted-foreground/20 scrollbar-track-transparent max-h-[90vh] overflow-y-auto",
+          isMobile ? "w-full p-0 sm:max-w-full" : "sm:max-w-2xl",
         )}
       >
         <div className="flex flex-col">
@@ -203,7 +203,7 @@ export function UserProfile({ user, isOpen, onOpenChange }: UserProfileProps) {
             <div className="overflow-hidden rounded-lg border">
               <TouchableItem
                 icon={<LogOut className="h-5 w-5" />}
-                label={isLoading ? 'Processing...' : 'Logout'}
+                label={isLoading ? "Processing..." : "Logout"}
                 danger
                 disabled={isLoading}
                 onClick={handleLogout}

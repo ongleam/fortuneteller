@@ -15,12 +15,7 @@
 // 각 entry 에 십성 + 12운성 + 지장간 정보가 함께 들어간다.
 
 import { getFourPillars, getYearPillar } from "./four-pillars";
-import {
-  getStemInfo,
-  getGroundInfo,
-  getStemIndex,
-  SIXTY_GAPJA,
-} from "./constants";
+import { getStemInfo, getGroundInfo, getStemIndex, SIXTY_GAPJA } from "./constants";
 import { getHiddenStems, getTwelveFortune } from "./chart-extras";
 import { getTenStar, getMainSky } from "./ten-stars";
 import { applyTimeCorrections } from "./time-correction";
@@ -185,15 +180,11 @@ export async function getDaeun(
 
   // 보정된 시각으로 절기와의 일수 차이 계산.
   const solarBirth = getSolarBirth(birthInput);
-  const correctedBirth = applyTimeCorrections(
-    solarBirth,
-    birthInput.longitudeE,
-  );
+  const correctedBirth = applyTimeCorrections(solarBirth, birthInput.longitudeE);
   const { prev, next } = await getNearestSolarTerms(correctedBirth);
   // forceteller 룰: 일수는 절기일과 출생일의 *날짜 차이만* (시각 무시).
   // 통계 검증(N=10000): 보정 *전* 시각의 dayOf 가 보정 후보다 약간 정합률 높음.
-  const dayOf = (d: Date): number =>
-    new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+  const dayOf = (d: Date): number => new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
   const birthDay = dayOf(solarBirth);
 
   // 1차: 표준 방향. 순행=다음 절기, 역행=직전 절기까지의 일수.
@@ -218,12 +209,8 @@ export async function getDaeun(
   const firstAge = boundaryHit ? 0 : startAge;
 
   const dayStem = pillars.day.sky;
-  const monthGapjaIdx = sixtyGapjaIndex(
-    pillars.month.sky,
-    pillars.month.ground,
-  );
-  if (monthGapjaIdx < 0)
-    throw new Error("Invalid month pillar in 60-gapja lookup");
+  const monthGapjaIdx = sixtyGapjaIndex(pillars.month.sky, pillars.month.ground);
+  if (monthGapjaIdx < 0) throw new Error("Invalid month pillar in 60-gapja lookup");
 
   const entries: DaeunEntry[] = [];
   const solarYear = solarBirth.getFullYear();
@@ -272,20 +259,7 @@ export async function getDaeun(
   const baseYearPillar = getYearPillar(baseSajuYear);
   const firstMonthStem = YEAR_TO_FIRST_MONTH_STEM[baseYearPillar.sky];
   const baseFirstStemIdx = getStemIndex(firstMonthStem);
-  const monthBranches = [
-    "寅",
-    "卯",
-    "辰",
-    "巳",
-    "午",
-    "未",
-    "申",
-    "酉",
-    "戌",
-    "亥",
-    "子",
-    "丑",
-  ];
+  const monthBranches = ["寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥", "子", "丑"];
   const monthLuck: MonthLuckEntry[] = [];
   for (let i = 0; i < monthLuckCount; i++) {
     const total = monthLuckStart.month - 1 + i;

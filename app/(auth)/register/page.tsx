@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { redirect } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import React from "react";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from "@/components/ui/select";
 
 export default function RegisterPage() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -22,8 +22,8 @@ export default function RegisterPage() {
     // const formData = new FormData(event.currentTarget);
     // const data = Object.fromEntries(formData.entries());
     // console.log('Register form submitted (dummy action):', data);
-    alert('회원가입이 완료되었습니다.');
-    redirect('/api/login');
+    alert("회원가입이 완료되었습니다.");
+    redirect("/api/login");
   };
 
   return (
@@ -122,7 +122,7 @@ export default function RegisterPage() {
           </div>
 
           <div className="mt-6 text-center text-xs text-gray-500">
-            가입 시{' '}
+            가입 시{" "}
             <Link
               href="https://www.notion.so/ongleam/1ee0ab7fb18f80a69e18df2f8052b156"
               target="_blank"
@@ -131,7 +131,7 @@ export default function RegisterPage() {
             >
               개인정보처리방침
             </Link>
-            {' 및 '}
+            {" 및 "}
             <Link
               href="https://ongleam.notion.site/1ee0ab7fb18f802dba22f415dbd517c7"
               target="_blank"
@@ -149,7 +149,7 @@ export default function RegisterPage() {
         </form>
 
         <p className="mt-8 text-center text-sm text-gray-600">
-          이미 계정이 있으신가요?{' '}
+          이미 계정이 있으신가요?{" "}
           <Link href="/login" className="font-medium text-blue-600 hover:underline">
             로그인
           </Link>

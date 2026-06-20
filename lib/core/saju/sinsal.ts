@@ -60,10 +60,7 @@ export interface SinsalInfo {
   chinese: string;
 }
 
-function sinsalFor(
-  baseBranch: string,
-  targetBranch: string,
-): SinsalInfo | null {
+function sinsalFor(baseBranch: string, targetBranch: string): SinsalInfo | null {
   const kuepsal = KUEPSAL_BY_BASE[baseBranch];
   if (!kuepsal) return null;
   const ksIdx = BRANCH_ORDER.indexOf(kuepsal);

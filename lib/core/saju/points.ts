@@ -12,10 +12,7 @@ import type { BirthInput, FourPillars } from "./types";
 const POINT_UNIT = 13.75;
 const TOTAL_CHARS = 8;
 
-const ELEMENT_KO_TO_KEY: Record<
-  string,
-  "wood" | "fire" | "earth" | "metal" | "water"
-> = {
+const ELEMENT_KO_TO_KEY: Record<string, "wood" | "fire" | "earth" | "metal" | "water"> = {
   목: "wood",
   화: "fire",
   토: "earth",

@@ -1,9 +1,9 @@
-'use server';
+"use server";
 
-import { db } from '@/lib/infra/db/queries';
-import { profile as profileTable } from '@/lib/infra/db/schema';
-import { User } from '@supabase/auth-js';
-import { eq } from 'drizzle-orm';
+import { db } from "@/lib/infra/db/queries";
+import { profile as profileTable } from "@/lib/infra/db/schema";
+import { User } from "@supabase/auth-js";
+import { eq } from "drizzle-orm";
 
 // 중복 요청 방지를 위한 변수
 const processingProfiles = new Set<string>();
@@ -19,7 +19,7 @@ export async function upsertProfileFromSupabaseUser(supabaseUser: User) {
 
   if (!userId) {
     // console.error('[Action] upsertProfileFromSupabaseUser: Invalid Supabase user object.');
-    return { success: false, error: 'Invalid user data' };
+    return { success: false, error: "Invalid user data" };
   }
 
   // 이미 처리 중인 프로필인 경우 중복 요청 방지
@@ -82,7 +82,7 @@ export async function upsertProfileFromSupabaseUser(supabaseUser: User) {
     }
     return { success: true };
   } catch (error) {
-    console.error('Error upserting profile:', error);
+    console.error("Error upserting profile:", error);
     return { success: false, error: (error as Error).message };
   } finally {
     processingProfiles.delete(supabaseUser.id);

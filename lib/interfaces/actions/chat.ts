@@ -1,24 +1,24 @@
-'use server';
+"use server";
 
-import { generateObject, generateText, type UIMessage } from 'ai';
-import { cookies } from 'next/headers';
+import { generateObject, generateText, type UIMessage } from "ai";
+import { cookies } from "next/headers";
 import {
   deleteMessagesByChatIdAfterTimestamp,
   getMessageById,
   updateChatVisiblityById,
-} from '@/lib/infra/db/queries';
-import type { VisibilityType } from '@/components/chat/visibility-selector';
-import { myProvider } from '@/lib/shared/utils/registry';
-import { z } from 'zod';
+} from "@/lib/infra/db/queries";
+import type { VisibilityType } from "@/components/chat/visibility-selector";
+import { myProvider } from "@/lib/shared/utils/registry";
+import { z } from "zod";
 
 export async function saveChatModelAsCookie(model: string) {
   const cookieStore = await cookies();
-  cookieStore.set('chat-model', model);
+  cookieStore.set("chat-model", model);
 }
 
 export async function generateTitleFromUserMessage({ message }: { message: UIMessage }) {
   const { text: title } = await generateText({
-    model: myProvider.languageModel('title-model'),
+    model: myProvider.languageModel("title-model"),
     system: `\n
     - you will generate a short title based on the first message a user begins a conversation with
     - ensure it is not more than 40 characters long and written in Korean
@@ -38,7 +38,7 @@ export async function generateRecommandQuestions({
   questions: string[];
 }) {
   const { object } = await generateObject({
-    model: myProvider.languageModel('chat-model'),
+    model: myProvider.languageModel("chat-model"),
     system: `
     # Core Identity:
     당신은 질문 생성 어시스턴트입니다. 
@@ -49,9 +49,9 @@ export async function generateRecommandQuestions({
     - 만약 주어진 FAQ 질문이 없다면, empty array를 반환합니다.
     `,
     prompt: `
-    - FAQ 질문: ${questions.length > 0 ? questions.join(', ') : '없음'}
+    - FAQ 질문: ${questions.length > 0 ? questions.join(", ") : "없음"}
     `,
-    output: 'array',
+    output: "array",
     schema: z.object({
       messageText: z.string(),
     }),

@@ -1,15 +1,15 @@
-import { useChatVisibility } from '@/hooks/use-chat-visibility';
-import { Chat } from '@/lib/infra/db/schema';
-import Link from 'next/link';
-import { memo } from 'react';
-import { MoreHorizontalIcon, ShareIcon, TrashIcon } from '../icons';
+import { useChatVisibility } from "@/hooks/use-chat-visibility";
+import { Chat } from "@/lib/infra/db/schema";
+import Link from "next/link";
+import { memo } from "react";
+import { MoreHorizontalIcon, ShareIcon, TrashIcon } from "../icons";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '../ui/dropdown-menu';
-import { SidebarMenuAction, SidebarMenuButton, SidebarMenuItem } from '../ui/sidebar';
+} from "../ui/dropdown-menu";
+import { SidebarMenuAction, SidebarMenuButton, SidebarMenuItem } from "../ui/sidebar";
 
 const PureChatItem = ({
   chat,

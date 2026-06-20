@@ -1,5 +1,5 @@
-export type ModelProvider = 'openai' | 'anthropic' | 'google' | 'vertex' | 'xai' | 'togetherai';
-export type ModelType = 'chat' | 'reasoning' | 'title' | 'artifact' | 'image';
+export type ModelProvider = "openai" | "anthropic" | "google" | "vertex" | "xai" | "togetherai";
+export type ModelType = "chat" | "reasoning" | "title" | "artifact" | "image";
 
 export interface ModelConfig {
   provider: ModelProvider;

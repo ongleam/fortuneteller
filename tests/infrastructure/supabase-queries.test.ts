@@ -18,11 +18,11 @@ import {
   deleteMessagesByChatIdAfterTimestamp,
   getMessageCountByUserId,
   // updateProfile,
-} from '@/lib/infra/supabase/queries';
-import { createClient } from '@/lib/infra/supabase/client';
+} from "@/lib/infra/supabase/queries";
+import { createClient } from "@/lib/infra/supabase/client";
 
 // 모킹 설정
-jest.mock('@/lib/infra/supabase/client', () => {
+jest.mock("@/lib/infra/supabase/client", () => {
   const createChainableMock = () => {
     const mock: Record<string, jest.Mock> = {
       from: jest.fn(() => mock),
@@ -50,7 +50,7 @@ jest.mock('@/lib/infra/supabase/client', () => {
   };
 });
 
-describe('Supabase Queries', () => {
+describe("Supabase Queries", () => {
   let mockClient: any;
 
   beforeEach(() => {
@@ -58,12 +58,12 @@ describe('Supabase Queries', () => {
     jest.clearAllMocks();
   });
 
-  describe('Profile 관련 쿼리', () => {
-    test('getProfileByUserId - 프로필 조회', async () => {
+  describe("Profile 관련 쿼리", () => {
+    test("getProfileByUserId - 프로필 조회", async () => {
       const mockProfile = {
-        user_id: 'test-user-id',
-        name: '테스트 사용자',
-        email: 'test@example.com',
+        user_id: "test-user-id",
+        name: "테스트 사용자",
+        email: "test@example.com",
       };
 
       mockClient.single.mockResolvedValue({
@@ -71,19 +71,19 @@ describe('Supabase Queries', () => {
         error: null,
       });
 
-      const result = await getProfileByUserId('test-user-id');
+      const result = await getProfileByUserId("test-user-id");
 
-      expect(mockClient.from).toHaveBeenCalledWith('profiles');
+      expect(mockClient.from).toHaveBeenCalledWith("profiles");
       expect(mockClient.select).toHaveBeenCalled();
-      expect(mockClient.eq).toHaveBeenCalledWith('user_id', 'test-user-id');
+      expect(mockClient.eq).toHaveBeenCalledWith("user_id", "test-user-id");
       expect(result).toEqual(mockProfile);
     });
 
-    test('createProfile - 프로필 생성', async () => {
+    test("createProfile - 프로필 생성", async () => {
       const newProfile = {
-        user_id: 'new-user-id',
-        name: '새 사용자',
-        email: 'new@example.com',
+        user_id: "new-user-id",
+        name: "새 사용자",
+        email: "new@example.com",
       };
 
       mockClient.select.mockResolvedValue({
@@ -93,40 +93,48 @@ describe('Supabase Queries', () => {
 
       const result = await createProfile(newProfile.user_id, newProfile.name, newProfile.email);
 
-      expect(mockClient.from).toHaveBeenCalledWith('profiles');
-      expect(mockClient.insert).toHaveBeenCalledWith({ user_id: newProfile.user_id, name: newProfile.name, avatar_url: newProfile.email });
+      expect(mockClient.from).toHaveBeenCalledWith("profiles");
+      expect(mockClient.insert).toHaveBeenCalledWith({
+        user_id: newProfile.user_id,
+        name: newProfile.name,
+        avatar_url: newProfile.email,
+      });
       expect(result).toEqual([newProfile]);
     });
 
-    test.skip('updateProfile - 프로필 업데이트 (함수 미구현)', async () => {
+    test.skip("updateProfile - 프로필 업데이트 (함수 미구현)", async () => {
       // updateProfile 함수가 export되지 않음
     });
   });
 
-  describe('Chat 관련 쿼리', () => {
-    test('saveChat - 채팅 저장', async () => {
+  describe("Chat 관련 쿼리", () => {
+    test("saveChat - 채팅 저장", async () => {
       const chatData = {
-        user_id: 'test-user',
-        title: '테스트 채팅',
-        channel: 'web',
+        user_id: "test-user",
+        title: "테스트 채팅",
+        channel: "web",
       };
 
       mockClient.select.mockResolvedValue({
-        data: [{ id: 'chat-id', ...chatData }],
+        data: [{ id: "chat-id", ...chatData }],
         error: null,
       });
 
-      const result = await saveChat({ id: 'chat-id', userId: chatData.user_id, title: chatData.title });
+      const result = await saveChat({
+        id: "chat-id",
+        userId: chatData.user_id,
+        title: chatData.title,
+      });
 
-      expect(mockClient.from).toHaveBeenCalledWith('chats');
+      expect(mockClient.from).toHaveBeenCalledWith("chats");
       expect(mockClient.insert).toHaveBeenCalled();
-      expect(result).toEqual([{ id: 'chat-id', ...chatData }]);
+      expect(result).toEqual([{ id: "chat-id", ...chatData }]);
     });
 
-    test('getChatsByUserId - 사용자별 채팅 조회', async () => {
+    test("getChatsByUserId - 사용자별 채팅 조회", async () => {
       const mockChats = [
-        { id: 'chat1', title: '채팅 1' },
-        { id: 'chat2', title: '채팅 2' },
+        { id: "chat1", title: "채팅 1" },
+        { id: "chat2", title: "채팅 2" },
       ];
 
       mockClient.order.mockResolvedValue({
@@ -134,36 +142,41 @@ describe('Supabase Queries', () => {
         error: null,
       });
 
-      const result = await getChatsByUserId({ id: 'test-user', limit: 10, startingAfter: null, endingBefore: null });
+      const result = await getChatsByUserId({
+        id: "test-user",
+        limit: 10,
+        startingAfter: null,
+        endingBefore: null,
+      });
 
-      expect(mockClient.from).toHaveBeenCalledWith('chats');
+      expect(mockClient.from).toHaveBeenCalledWith("chats");
       expect(mockClient.select).toHaveBeenCalled();
-      expect(mockClient.eq).toHaveBeenCalledWith('user_id', 'test-user');
-      expect(mockClient.order).toHaveBeenCalledWith('created_at', { ascending: false });
+      expect(mockClient.eq).toHaveBeenCalledWith("user_id", "test-user");
+      expect(mockClient.order).toHaveBeenCalledWith("created_at", { ascending: false });
       expect(result).toEqual(mockChats);
     });
 
-    test('deleteChatById - 채팅 삭제', async () => {
+    test("deleteChatById - 채팅 삭제", async () => {
       mockClient.eq.mockResolvedValue({
         data: null,
         error: null,
       });
 
-      await deleteChatById({ id: 'chat-id' });
+      await deleteChatById({ id: "chat-id" });
 
-      expect(mockClient.from).toHaveBeenCalledWith('chats');
+      expect(mockClient.from).toHaveBeenCalledWith("chats");
       expect(mockClient.delete).toHaveBeenCalled();
-      expect(mockClient.eq).toHaveBeenCalledWith('id', 'chat-id');
+      expect(mockClient.eq).toHaveBeenCalledWith("id", "chat-id");
     });
   });
 
-  describe('Message 관련 쿼리', () => {
-    test('saveMessages - 메시지 저장', async () => {
+  describe("Message 관련 쿼리", () => {
+    test("saveMessages - 메시지 저장", async () => {
       const messages = [
         {
-          chat_id: 'chat-id',
-          role: 'user',
-          parts: [{ type: 'text', text: '테스트 메시지' }],
+          chat_id: "chat-id",
+          role: "user",
+          parts: [{ type: "text", text: "테스트 메시지" }],
           attachments: [],
         },
       ];
@@ -175,15 +188,15 @@ describe('Supabase Queries', () => {
 
       const result = await saveMessages({ messages });
 
-      expect(mockClient.from).toHaveBeenCalledWith('messages');
+      expect(mockClient.from).toHaveBeenCalledWith("messages");
       expect(mockClient.insert).toHaveBeenCalledWith(messages);
       expect(result).toEqual(messages);
     });
 
-    test('getMessagesByChatId - 채팅별 메시지 조회', async () => {
+    test("getMessagesByChatId - 채팅별 메시지 조회", async () => {
       const mockMessages = [
-        { id: 'msg1', content: '메시지 1' },
-        { id: 'msg2', content: '메시지 2' },
+        { id: "msg1", content: "메시지 1" },
+        { id: "msg2", content: "메시지 2" },
       ];
 
       mockClient.limit.mockResolvedValue({
@@ -191,21 +204,21 @@ describe('Supabase Queries', () => {
         error: null,
       });
 
-      const result = await getMessagesByChatId({ id: 'chat-id' });
+      const result = await getMessagesByChatId({ id: "chat-id" });
 
-      expect(mockClient.from).toHaveBeenCalledWith('messages');
+      expect(mockClient.from).toHaveBeenCalledWith("messages");
       expect(mockClient.select).toHaveBeenCalled();
-      expect(mockClient.eq).toHaveBeenCalledWith('chat_id', 'chat-id');
-      expect(mockClient.order).toHaveBeenCalledWith('created_at', { ascending: false });
+      expect(mockClient.eq).toHaveBeenCalledWith("chat_id", "chat-id");
+      expect(mockClient.order).toHaveBeenCalledWith("created_at", { ascending: false });
       // limit은 기본 함수에서 처리됨
       expect(result).toEqual(mockMessages);
     });
   });
 
-  describe('Vote 관련 쿼리', () => {
-    test('voteMessage - 메시지 투표', async () => {
+  describe("Vote 관련 쿼리", () => {
+    test("voteMessage - 메시지 투표", async () => {
       const voteData = {
-        message_id: 'msg-id',
+        message_id: "msg-id",
         is_upvoted: true,
       };
 
@@ -214,17 +227,21 @@ describe('Supabase Queries', () => {
         error: null,
       });
 
-      const result = await voteMessage({ chatId: 'chat-id', messageId: voteData.message_id, type: voteData.is_upvoted ? 'up' : 'down' });
+      const result = await voteMessage({
+        chatId: "chat-id",
+        messageId: voteData.message_id,
+        type: voteData.is_upvoted ? "up" : "down",
+      });
 
-      expect(mockClient.from).toHaveBeenCalledWith('votes');
+      expect(mockClient.from).toHaveBeenCalledWith("votes");
       expect(mockClient.insert).toHaveBeenCalled();
       expect(result).toEqual([voteData]);
     });
 
-    test('getVotesByChatId - 채팅별 투표 조회', async () => {
+    test("getVotesByChatId - 채팅별 투표 조회", async () => {
       const mockVotes = [
-        { message_id: 'msg1', is_upvoted: true },
-        { message_id: 'msg2', is_upvoted: false },
+        { message_id: "msg1", is_upvoted: true },
+        { message_id: "msg2", is_upvoted: false },
       ];
 
       mockClient.eq.mockResolvedValue({
@@ -232,25 +249,25 @@ describe('Supabase Queries', () => {
         error: null,
       });
 
-      const result = await getVotesByChatId({ id: 'chat-id' });
+      const result = await getVotesByChatId({ id: "chat-id" });
 
-      expect(mockClient.from).toHaveBeenCalledWith('votes');
+      expect(mockClient.from).toHaveBeenCalledWith("votes");
       expect(mockClient.select).toHaveBeenCalled();
-      expect(mockClient.eq).toHaveBeenCalledWith('chat_id', 'chat-id');
+      expect(mockClient.eq).toHaveBeenCalledWith("chat_id", "chat-id");
       expect(result).toEqual(mockVotes);
     });
   });
 
-  describe('에러 처리', () => {
-    test('쿼리 에러 시 예외 발생', async () => {
-      const mockError = new Error('Database connection failed');
+  describe("에러 처리", () => {
+    test("쿼리 에러 시 예외 발생", async () => {
+      const mockError = new Error("Database connection failed");
 
       mockClient.single.mockResolvedValue({
         data: null,
         error: mockError,
       });
 
-      await expect(getProfileByUserId('invalid-id')).rejects.toThrow();
+      await expect(getProfileByUserId("invalid-id")).rejects.toThrow();
     });
   });
 });

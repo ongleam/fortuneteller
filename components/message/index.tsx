@@ -1,19 +1,19 @@
-import type { UIMessage } from 'ai';
-import { PreviewMessage, ThinkingMessage } from './item';
-import { useScrollToBottom } from '../use-scroll-to-bottom';
-import { Greeting } from '@/components/chat/greeting';
-import { memo } from 'react';
-import type { Vote } from '@/lib/infra/db/schema';
-import equal from 'fast-deep-equal';
-import type { UseChatHelpers } from '@ai-sdk/react';
+import type { UIMessage } from "ai";
+import { PreviewMessage, ThinkingMessage } from "./item";
+import { useScrollToBottom } from "../use-scroll-to-bottom";
+import { Greeting } from "@/components/chat/greeting";
+import { memo } from "react";
+import type { Vote } from "@/lib/infra/db/schema";
+import equal from "fast-deep-equal";
+import type { UseChatHelpers } from "@ai-sdk/react";
 
 interface MessagesProps {
   chatId: string;
-  status: UseChatHelpers<UIMessage>['status'];
+  status: UseChatHelpers<UIMessage>["status"];
   votes: Array<Vote> | undefined;
   messages: Array<UIMessage>;
-  setMessages: UseChatHelpers<UIMessage>['setMessages'];
-  regenerate: UseChatHelpers<UIMessage>['regenerate'];
+  setMessages: UseChatHelpers<UIMessage>["setMessages"];
+  regenerate: UseChatHelpers<UIMessage>["regenerate"];
   isReadonly: boolean;
   isArtifactVisible: boolean;
 }
@@ -41,7 +41,7 @@ function PureMessages({
           key={message.id}
           chatId={chatId}
           message={message}
-          isLoading={status === 'streaming' && messages.length - 1 === index}
+          isLoading={status === "streaming" && messages.length - 1 === index}
           vote={votes ? votes.find((vote) => vote.message_id === message.id) : undefined}
           setMessages={setMessages}
           regenerate={regenerate}
@@ -49,9 +49,9 @@ function PureMessages({
         />
       ))}
 
-      {status === 'submitted' &&
+      {status === "submitted" &&
         messages.length > 0 &&
-        messages[messages.length - 1].role === 'user' && <ThinkingMessage />}
+        messages[messages.length - 1].role === "user" && <ThinkingMessage />}
 
       <div ref={messagesEndRef} className="min-h-[24px] min-w-[24px] shrink-0" />
     </div>

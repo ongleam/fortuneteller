@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import type { UIMessage } from 'ai';
-import type { Attachment } from '@/lib/shared/types/attachment';
-import clsx from 'clsx';
-import type React from 'react';
+import type { UIMessage } from "ai";
+import type { Attachment } from "@/lib/shared/types/attachment";
+import clsx from "clsx";
+import type React from "react";
 import {
   memo,
   useCallback,
@@ -13,17 +13,17 @@ import {
   type ChangeEvent,
   type Dispatch,
   type SetStateAction,
-} from 'react';
-import { toast } from 'sonner';
-import { useLocalStorage, useWindowSize } from 'usehooks-ts';
+} from "react";
+import { toast } from "sonner";
+import { useLocalStorage, useWindowSize } from "usehooks-ts";
 
-import type { UseChatHelpers } from '@ai-sdk/react';
-import equal from 'fast-deep-equal';
-import { ArrowUpIcon, PaperclipIcon, StopIcon } from '@/components/icons';
-import { PreviewAttachment } from '@/components/preview-attachment';
-import { SuggestedActions } from '@/components/chat/suggested-actions';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
+import type { UseChatHelpers } from "@ai-sdk/react";
+import equal from "fast-deep-equal";
+import { ArrowUpIcon, PaperclipIcon, StopIcon } from "@/components/icons";
+import { PreviewAttachment } from "@/components/preview-attachment";
+import { SuggestedActions } from "@/components/chat/suggested-actions";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
 function PureMultimodalInput({
   chatId,
@@ -41,13 +41,13 @@ function PureMultimodalInput({
   chatId: string;
   input: string;
   setInput: Dispatch<SetStateAction<string>>;
-  status: UseChatHelpers<UIMessage>['status'];
+  status: UseChatHelpers<UIMessage>["status"];
   stop: () => void;
   attachments: Array<Attachment>;
   setAttachments: Dispatch<SetStateAction<Array<Attachment>>>;
   messages: Array<UIMessage>;
-  setMessages: UseChatHelpers<UIMessage>['setMessages'];
-  sendMessage: UseChatHelpers<UIMessage>['sendMessage'];
+  setMessages: UseChatHelpers<UIMessage>["setMessages"];
+  sendMessage: UseChatHelpers<UIMessage>["sendMessage"];
   className?: string;
 }) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -61,25 +61,25 @@ function PureMultimodalInput({
 
   const adjustHeight = () => {
     if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = "auto";
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight + 2}px`;
     }
   };
 
   const resetHeight = () => {
     if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = '98px';
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height = "98px";
     }
   };
 
-  const [localStorageInput, setLocalStorageInput] = useLocalStorage('input', '');
+  const [localStorageInput, setLocalStorageInput] = useLocalStorage("input", "");
 
   useEffect(() => {
     if (textareaRef.current) {
       const domValue = textareaRef.current.value;
       // Prefer DOM value over localStorage to handle hydration
-      const finalValue = domValue || localStorageInput || '';
+      const finalValue = domValue || localStorageInput || "";
       setInput(finalValue);
       adjustHeight();
     }
@@ -100,21 +100,21 @@ function PureMultimodalInput({
   const [uploadQueue, setUploadQueue] = useState<Array<string>>([]);
 
   const submitForm = useCallback(() => {
-    window.history.replaceState({}, '', `/chat/${chatId}`);
+    window.history.replaceState({}, "", `/chat/${chatId}`);
 
     sendMessage({
       text: input,
       files: attachments.map((attachment) => ({
-        type: 'file' as const,
+        type: "file" as const,
         url: attachment.url,
-        mediaType: attachment.contentType ?? 'application/octet-stream',
+        mediaType: attachment.contentType ?? "application/octet-stream",
         filename: attachment.name,
       })),
     });
 
     setAttachments([]);
-    setInput('');
-    setLocalStorageInput('');
+    setInput("");
+    setLocalStorageInput("");
     resetHeight();
 
     if (width && width > 768) {
@@ -133,11 +133,11 @@ function PureMultimodalInput({
 
   const uploadFile = async (file: File) => {
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append("file", file);
 
     try {
-      const response = await fetch('/api/files/upload', {
-        method: 'POST',
+      const response = await fetch("/api/files/upload", {
+        method: "POST",
         body: formData,
       });
 
@@ -154,7 +154,7 @@ function PureMultimodalInput({
       const { error } = await response.json();
       toast.error(error);
     } catch (error) {
-      toast.error('Failed to upload file, please try again!');
+      toast.error("Failed to upload file, please try again!");
     }
   };
 
@@ -168,7 +168,7 @@ function PureMultimodalInput({
         const uploadPromises = files.map((file) => uploadFile(file));
         const uploadedAttachments = await Promise.all(uploadPromises);
         const successfullyUploadedAttachments = uploadedAttachments.filter(
-          (attachment) => attachment !== undefined
+          (attachment) => attachment !== undefined,
         );
 
         setAttachments((currentAttachments) => [
@@ -176,12 +176,12 @@ function PureMultimodalInput({
           ...successfullyUploadedAttachments,
         ]);
       } catch (error) {
-        console.error('Error uploading files!', error);
+        console.error("Error uploading files!", error);
       } finally {
         setUploadQueue([]);
       }
     },
-    [setAttachments]
+    [setAttachments],
   );
 
   return (
@@ -212,9 +212,9 @@ function PureMultimodalInput({
             <PreviewAttachment
               key={filename}
               attachment={{
-                url: '',
+                url: "",
                 name: filename,
-                contentType: '',
+                contentType: "",
               }}
               isUploading={true}
             />
@@ -229,17 +229,17 @@ function PureMultimodalInput({
         value={input}
         onChange={handleInput}
         className={clsx(
-          'max-h-[calc(50dvh)] min-h-[24px] resize-none overflow-hidden rounded-2xl bg-muted pb-10 !text-base dark:border-zinc-700 sm:max-h-[calc(75dvh)]',
-          className
+          "max-h-[calc(50dvh)] min-h-[24px] resize-none overflow-hidden rounded-2xl bg-muted pb-10 !text-base dark:border-zinc-700 sm:max-h-[calc(75dvh)]",
+          className,
         )}
         rows={2}
         autoFocus
         onKeyDown={(event) => {
-          if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) {
+          if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) {
             event.preventDefault();
 
-            if (status !== 'ready') {
-              toast.error('Please wait for the model to finish its response!');
+            if (status !== "ready") {
+              toast.error("Please wait for the model to finish its response!");
             } else {
               submitForm();
             }
@@ -253,7 +253,7 @@ function PureMultimodalInput({
       </div> */}
 
       <div className="absolute bottom-0 right-0 flex w-fit flex-row justify-end p-2">
-        {status === 'submitted' ? (
+        {status === "submitted" ? (
           <StopButton stop={stop} setMessages={setMessages} />
         ) : (
           <SendButton input={input} submitForm={submitForm} uploadQueue={uploadQueue} />
@@ -276,7 +276,7 @@ function PureAttachmentsButton({
   status,
 }: {
   fileInputRef: React.MutableRefObject<HTMLInputElement | null>;
-  status: UseChatHelpers<UIMessage>['status'];
+  status: UseChatHelpers<UIMessage>["status"];
 }) {
   return (
     <Button
@@ -286,7 +286,7 @@ function PureAttachmentsButton({
         event.preventDefault();
         fileInputRef.current?.click();
       }}
-      disabled={status !== 'ready'}
+      disabled={status !== "ready"}
       variant="ghost"
     >
       <PaperclipIcon size={14} />
@@ -301,7 +301,7 @@ function PureStopButton({
   setMessages,
 }: {
   stop: () => void;
-  setMessages: UseChatHelpers<UIMessage>['setMessages'];
+  setMessages: UseChatHelpers<UIMessage>["setMessages"];
 }) {
   return (
     <Button

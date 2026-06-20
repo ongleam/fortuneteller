@@ -1,24 +1,24 @@
-'use client';
+"use client";
 
-import { deleteTrailingMessages } from '@/lib/interfaces/actions/chat';
-import { UseChatHelpers } from '@ai-sdk/react';
-import { UIMessage } from 'ai';
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
-import { Button } from '../ui/button';
-import { Textarea } from '../ui/textarea';
+import { deleteTrailingMessages } from "@/lib/interfaces/actions/chat";
+import { UseChatHelpers } from "@ai-sdk/react";
+import { UIMessage } from "ai";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { Button } from "../ui/button";
+import { Textarea } from "../ui/textarea";
 
 export type MessageEditorProps = {
   message: UIMessage;
-  setMode: Dispatch<SetStateAction<'view' | 'edit'>>;
-  setMessages: UseChatHelpers<UIMessage>['setMessages'];
-  regenerate: UseChatHelpers<UIMessage>['regenerate'];
+  setMode: Dispatch<SetStateAction<"view" | "edit">>;
+  setMessages: UseChatHelpers<UIMessage>["setMessages"];
+  regenerate: UseChatHelpers<UIMessage>["regenerate"];
 };
 
 function getMessageText(message: UIMessage): string {
   return message.parts
-    .filter((part) => part.type === 'text')
+    .filter((part) => part.type === "text")
     .map((part) => (part as { text: string }).text)
-    .join('');
+    .join("");
 }
 
 export function MessageEditor({ message, setMode, setMessages, regenerate }: MessageEditorProps) {
@@ -35,7 +35,7 @@ export function MessageEditor({ message, setMode, setMessages, regenerate }: Mes
 
   const adjustHeight = () => {
     if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = "auto";
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight + 2}px`;
     }
   };
@@ -60,7 +60,7 @@ export function MessageEditor({ message, setMode, setMessages, regenerate }: Mes
           variant="outline"
           className="h-fit px-3 py-2"
           onClick={() => {
-            setMode('view');
+            setMode("view");
           }}
         >
           취소
@@ -83,7 +83,7 @@ export function MessageEditor({ message, setMode, setMessages, regenerate }: Mes
               if (index !== -1) {
                 const updatedMessage: UIMessage = {
                   ...message,
-                  parts: [{ type: 'text', text: draftContent }],
+                  parts: [{ type: "text", text: draftContent }],
                 };
 
                 return [...messages.slice(0, index), updatedMessage];
@@ -92,11 +92,11 @@ export function MessageEditor({ message, setMode, setMessages, regenerate }: Mes
               return messages;
             });
 
-            setMode('view');
+            setMode("view");
             regenerate();
           }}
         >
-          {isSubmitting ? '전송중...' : '전송'}
+          {isSubmitting ? "전송중..." : "전송"}
         </Button>
       </div>
     </div>

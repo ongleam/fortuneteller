@@ -2,8 +2,8 @@
  * 오행 분석 모듈
  */
 
-import { getStemInfo as getSkyInfo, getGroundInfo, JIJANG_GAN } from './constants';
-import type { FourPillars, FiveElements } from './types';
+import { getStemInfo as getSkyInfo, getGroundInfo, JIJANG_GAN } from "./constants";
+import type { FourPillars, FiveElements } from "./types";
 
 /**
  * 메인 오행 분석 함수 - UI 표시와 일치하도록 천간과 지지의 주된 오행만 카운트
@@ -78,21 +78,20 @@ export function addGroundElements(elementCounts: FiveElements, ground: string): 
  */
 export function addElementCount(elementCounts: FiveElements, element: string): void {
   switch (element) {
-    case '목':
+    case "목":
       elementCounts.wood += 1;
       break;
-    case '화':
+    case "화":
       elementCounts.fire += 1;
       break;
-    case '토':
+    case "토":
       elementCounts.earth += 1;
       break;
-    case '금':
+    case "금":
       elementCounts.metal += 1;
       break;
-    case '수':
+    case "수":
       elementCounts.water += 1;
       break;
   }
 }
-

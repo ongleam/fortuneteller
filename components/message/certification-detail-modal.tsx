@@ -1,5 +1,5 @@
 // components/certification-detail-modal.tsx
-'use client';
+"use client";
 
 import {
   Dialog,
@@ -8,12 +8,12 @@ import {
   DialogTitle,
   DialogFooter,
   DialogClose,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Badge } from '@/components/ui/badge';
-import { normText } from '@/lib/shared/utils/textPreprocess';
-import { useIsMobile } from '@/hooks/use-mobile';
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Badge } from "@/components/ui/badge";
+import { normText } from "@/lib/shared/utils/textPreprocess";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // KCTable에서 정의한 인터페이스 재사용 또는 임포트
 
@@ -23,7 +23,7 @@ interface CertificationDetailModalProps {
 }
 
 function createMarkup(htmlString?: string) {
-  if (!htmlString) return { __html: '' };
+  if (!htmlString) return { __html: "" };
 
   return { __html: htmlString };
 }
@@ -40,7 +40,7 @@ const DetailItem = ({ value, isHtml = false }: { value?: string; isHtml?: boolea
 };
 
 // 뱃지 렌더링 함수 (재사용 가능)
-function renderBadges(items?: string[], variant: 'secondary' | 'outline' = 'secondary') {
+function renderBadges(items?: string[], variant: "secondary" | "outline" = "secondary") {
   if (!items || items.length === 0) return null;
 
   return (
@@ -59,9 +59,9 @@ function renderIcReqBadges(ic_req?: string) {
   if (!ic_req) return null;
 
   const items = ic_req
-    .replace(/<br\s*\/?>/gi, '\n')
-    .split('\n')
-    .map((line) => line.replace(/^-\s*/, '').trim())
+    .replace(/<br\s*\/?>/gi, "\n")
+    .split("\n")
+    .map((line) => line.replace(/^-\s*/, "").trim())
     .filter(Boolean);
 
   return renderBadges(items);
@@ -72,7 +72,7 @@ function renderIcComBadges(ic_com?: string) {
   if (!ic_com) return null;
 
   const items = ic_com
-    .split(',')
+    .split(",")
     .map((item) => item.trim())
     .filter(Boolean);
 
@@ -80,7 +80,7 @@ function renderIcComBadges(ic_com?: string) {
 }
 
 // 세부내용 요약 렌더링 함수
-function renderDetailSummary(item: CertificationDetail['item']) {
+function renderDetailSummary(item: CertificationDetail["item"]) {
   const details: string[] = [];
 
   if (item.lc_cate1_con) {
@@ -102,18 +102,18 @@ function renderDetailSummary(item: CertificationDetail['item']) {
   }
 
   if (details.length === 0) return null;
-  return normText(details.join('\n'));
+  return normText(details.join("\n"));
 }
 
 // 구매대행 상태 뱃지 렌더링 함수
 function renderPurchaseAgencyStatus(status?: string) {
-  if (status === 'Y') {
+  if (status === "Y") {
     return (
       <span className="inline-block rounded-full border border-green-300 bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700">
         가능
       </span>
     );
-  } else if (status === 'N') {
+  } else if (status === "N") {
     return (
       <span className="inline-block rounded-full border border-red-300 bg-red-100 px-2 py-0.5 text-xs font-medium text-red-700">
         불가능
@@ -167,9 +167,9 @@ export function CertificationDetailModal({
   return (
     // Dialog의 open 상태와 onOpenChange를 통해 열고 닫기 제어
     <Dialog open={!!certification_detail} onOpenChange={(open: boolean) => !open && onClose()}>
-      <DialogContent className={`${isMobile ? 'p-4 sm:p-6' : 'sm:max-w-2xl'}`}>
+      <DialogContent className={`${isMobile ? "p-4 sm:p-6" : "sm:max-w-2xl"}`}>
         <DialogHeader>
-          <DialogTitle className={`${isMobile ? 'text-lg' : 'text-xl'}`}>
+          <DialogTitle className={`${isMobile ? "text-lg" : "text-xl"}`}>
             {`${item.gubun1} ${item.gubun2}`}
           </DialogTitle>
           <div className="flex flex-wrap items-center gap-1 pt-1 text-sm text-muted-foreground">
@@ -190,7 +190,7 @@ export function CertificationDetailModal({
         </DialogHeader>
         {/* 내용이 길어질 수 있으므로 ScrollArea 사용 */}
         <ScrollArea
-          className={`${isMobile ? 'max-h-[60vh]' : 'max-h-[70vh]'} ${isMobile ? 'pr-2' : 'pr-6'}`}
+          className={`${isMobile ? "max-h-[60vh]" : "max-h-[70vh]"} ${isMobile ? "pr-2" : "pr-6"}`}
           type="always"
         >
           {/* 높이 제한 및 스크롤 */}
@@ -258,7 +258,7 @@ export function CertificationDetailModal({
         </ScrollArea>
         <DialogFooter className="sm:justify-end">
           <DialogClose asChild>
-            <Button type="button" variant="secondary" className={isMobile ? 'w-full' : ''}>
+            <Button type="button" variant="secondary" className={isMobile ? "w-full" : ""}>
               닫기
             </Button>
           </DialogClose>

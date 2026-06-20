@@ -1,8 +1,8 @@
-import type { chatModels } from '@/config/models';
+import type { chatModels } from "@/config/models";
 
 interface Entitlements {
   maxMessagesPerDay: number;
-  availableChatModelIds: Array<(typeof chatModels)[number]['id']>;
+  availableChatModelIds: Array<(typeof chatModels)[number]["id"]>;
 }
 
 export const entitlementsByUserType: Record<string, Entitlements> = {
@@ -11,7 +11,7 @@ export const entitlementsByUserType: Record<string, Entitlements> = {
    */
   guest: {
     maxMessagesPerDay: 1000,
-    availableChatModelIds: ['chat-model', 'chat-model-reasoning'],
+    availableChatModelIds: ["chat-model", "chat-model-reasoning"],
   },
 
   /*
@@ -19,7 +19,7 @@ export const entitlementsByUserType: Record<string, Entitlements> = {
    */
   regular: {
     maxMessagesPerDay: 100,
-    availableChatModelIds: ['chat-model', 'chat-model-reasoning'],
+    availableChatModelIds: ["chat-model", "chat-model-reasoning"],
   },
 
   /*

@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import { ReactNode, useMemo, useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { ReactNode, useMemo, useState } from "react";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { cn } from '@/lib/shared/utils';
+} from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/shared/utils";
 
-import { CheckCircleFillIcon, ChevronDownIcon, GlobeIcon, LockIcon } from '../icons';
-import { useChatVisibility } from '@/hooks/use-chat-visibility';
+import { CheckCircleFillIcon, ChevronDownIcon, GlobeIcon, LockIcon } from "../icons";
+import { useChatVisibility } from "@/hooks/use-chat-visibility";
 
-export type VisibilityType = 'private' | 'public';
+export type VisibilityType = "private" | "public";
 
 const visibilities: Array<{
   id: VisibilityType;
@@ -22,15 +22,15 @@ const visibilities: Array<{
   icon: ReactNode;
 }> = [
   {
-    id: 'private',
-    label: 'Private',
-    description: 'Only you can access this chat',
+    id: "private",
+    label: "Private",
+    description: "Only you can access this chat",
     icon: <LockIcon />,
   },
   {
-    id: 'public',
-    label: 'Public',
-    description: 'Anyone with the link can access this chat',
+    id: "public",
+    label: "Public",
+    description: "Anyone with the link can access this chat",
     icon: <GlobeIcon />,
   },
 ];
@@ -52,7 +52,7 @@ export function VisibilitySelector({
 
   const selectedVisibility = useMemo(
     () => visibilities.find((visibility) => visibility.id === visibilityType),
-    [visibilityType]
+    [visibilityType],
   );
 
   return (
@@ -60,8 +60,8 @@ export function VisibilitySelector({
       <DropdownMenuTrigger
         asChild
         className={cn(
-          'w-fit data-[state=open]:bg-accent data-[state=open]:text-accent-foreground',
-          className
+          "w-fit data-[state=open]:bg-accent data-[state=open]:text-accent-foreground",
+          className,
         )}
       >
         <Button variant="outline" className="hidden md:flex md:h-[34px] md:px-2">

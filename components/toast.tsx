@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import React, { useEffect, useRef, useState, type ReactNode } from 'react';
-import { toast as sonnerToast } from 'sonner';
-import { CheckCircleFillIcon, WarningIcon } from './icons';
-import { cn } from '@/lib/shared/utils';
+import React, { useEffect, useRef, useState, type ReactNode } from "react";
+import { toast as sonnerToast } from "sonner";
+import { CheckCircleFillIcon, WarningIcon } from "./icons";
+import { cn } from "@/lib/shared/utils";
 
-const iconsByType: Record<'success' | 'error', ReactNode> = {
+const iconsByType: Record<"success" | "error", ReactNode> = {
   success: <CheckCircleFillIcon />,
   error: <WarningIcon />,
 };
 
-export function toast(props: Omit<ToastProps, 'id'>) {
+export function toast(props: Omit<ToastProps, "id">) {
   return sonnerToast.custom((id) => (
     <Toast id={id} type={props.type} description={props.description} />
   ));
@@ -45,14 +45,14 @@ function Toast(props: ToastProps) {
         data-testid="toast"
         key={id}
         className={cn(
-          'flex w-full flex-row gap-3 rounded-lg bg-zinc-100 p-3 toast-mobile:w-fit',
-          multiLine ? 'items-start' : 'items-center'
+          "flex w-full flex-row gap-3 rounded-lg bg-zinc-100 p-3 toast-mobile:w-fit",
+          multiLine ? "items-start" : "items-center",
         )}
       >
         <div
           data-type={type}
-          className={cn('data-[type=error]:text-red-600 data-[type=success]:text-green-600', {
-            'pt-1': multiLine,
+          className={cn("data-[type=error]:text-red-600 data-[type=success]:text-green-600", {
+            "pt-1": multiLine,
           })}
         >
           {iconsByType[type]}
@@ -67,6 +67,6 @@ function Toast(props: ToastProps) {
 
 interface ToastProps {
   id: string | number;
-  type: 'success' | 'error';
+  type: "success" | "error";
   description: string;
 }

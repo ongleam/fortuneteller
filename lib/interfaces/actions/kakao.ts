@@ -1,12 +1,12 @@
-import { KakaoUserProfile } from '@/lib/shared/types/kakao';
+import { KakaoUserProfile } from "@/lib/shared/types/kakao";
 
 export async function getKakaoUserInfo(accessToken: string): Promise<KakaoUserProfile> {
   try {
-    const response = await fetch('https://kapi.kakao.com/v2/user/me', {
-      method: 'GET',
+    const response = await fetch("https://kapi.kakao.com/v2/user/me", {
+      method: "GET",
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
       },
     });
 

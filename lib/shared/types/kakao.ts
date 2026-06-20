@@ -64,7 +64,7 @@ export interface KakaoSkillResponse {
           height?: number;
         };
         buttons?: Array<{
-          action: 'message' | 'webLink' | 'phone' | 'block' | 'share';
+          action: "message" | "webLink" | "phone" | "block" | "share";
           label: string;
           messageText?: string;
           webLinkUrl?: string;
@@ -73,7 +73,7 @@ export interface KakaoSkillResponse {
         }>;
       };
       carousel?: {
-        type: 'basicCard' | 'textCard' | 'listCard' | 'itemCard';
+        type: "basicCard" | "textCard" | "listCard" | "itemCard";
         items: Array<{
           title?: string;
           description?: string;
@@ -84,7 +84,7 @@ export interface KakaoSkillResponse {
             height?: number;
           };
           buttons?: Array<{
-            action: 'message' | 'webLink' | 'phone' | 'block' | 'share';
+            action: "message" | "webLink" | "phone" | "block" | "share";
             label: string;
             messageText?: string;
             webLinkUrl?: string;
@@ -111,7 +111,7 @@ export interface KakaoSkillResponse {
           imageUrl?: string;
         };
         buttons?: Array<{
-          action: 'message' | 'webLink' | 'phone' | 'block' | 'share';
+          action: "message" | "webLink" | "phone" | "block" | "share";
           label: string;
           messageText?: string;
           webLinkUrl?: string;
@@ -133,7 +133,7 @@ export interface KakaoSkillResponse {
           };
         }>;
         buttons?: Array<{
-          action: 'message' | 'webLink' | 'phone' | 'block' | 'share';
+          action: "message" | "webLink" | "phone" | "block" | "share";
           label: string;
           messageText?: string;
           webLinkUrl?: string;
@@ -159,7 +159,7 @@ export interface KakaoSkillResponse {
           title: string;
           description?: string;
         }>;
-        itemListAlignment?: 'left' | 'right';
+        itemListAlignment?: "left" | "right";
         itemListSummary?: {
           title: string;
           description: string;
@@ -167,7 +167,7 @@ export interface KakaoSkillResponse {
         title?: string;
         description?: string;
         buttons?: Array<{
-          action: 'message' | 'webLink' | 'phone' | 'block' | 'share';
+          action: "message" | "webLink" | "phone" | "block" | "share";
           label: string;
           messageText?: string;
           webLinkUrl?: string;
@@ -177,7 +177,7 @@ export interface KakaoSkillResponse {
       };
     }>;
     quickReplies?: Array<{
-      action: 'message' | 'block';
+      action: "message" | "block";
       label: string;
       messageText: string;
       blockId?: string;
@@ -194,7 +194,7 @@ export interface KakaoSkillResponse {
 }
 
 // 카카오 챗봇 버튼 액션 타입
-type KakaoButtonAction = 'message' | 'webLink' | 'phone' | 'block' | 'share';
+type KakaoButtonAction = "message" | "webLink" | "phone" | "block" | "share";
 
 // 카카오 챗봇 썸네일 타입
 interface KakaoThumbnail {
@@ -216,7 +216,7 @@ export interface KakaoButton {
 
 // 카카오 챗봇 퀵리플라이 타입
 export interface KakaoQuickReply {
-  action: 'message' | 'block';
+  action: "message" | "block";
   label: string;
   messageText: string;
   blockId?: string;

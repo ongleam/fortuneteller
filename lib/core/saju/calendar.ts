@@ -29,11 +29,7 @@ export function normalizeCalendarType(calendar: string): "solar" | "lunar" {
 }
 
 // validation functions
-export function validateBirthDate(
-  year: string,
-  month: string,
-  day: string,
-): boolean {
+export function validateBirthDate(year: string, month: string, day: string): boolean {
   const y = parseInt(year);
   const m = parseInt(month);
   const d = parseInt(day);
@@ -309,10 +305,7 @@ export function lunarToSolar(
         lunMonthDay = 30;
       }
     } else if (lunDay === lunMonthDay) {
-      if (
-        LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] >= 3 &&
-        lunLeapMonth === 0
-      ) {
+      if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] >= 3 && lunLeapMonth === 0) {
         lunDay = 1;
         lunLeapMonth = 1;
       } else {
@@ -327,25 +320,13 @@ export function lunarToSolar(
         lunMonthDay = 30;
       } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 3) {
         lunMonthDay = 29;
-      } else if (
-        LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 4 &&
-        lunLeapMonth === 0
-      ) {
+      } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 4 && lunLeapMonth === 0) {
         lunMonthDay = 29;
-      } else if (
-        LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 4 &&
-        lunLeapMonth === 1
-      ) {
+      } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 4 && lunLeapMonth === 1) {
         lunMonthDay = 30;
-      } else if (
-        LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 5 &&
-        lunLeapMonth === 0
-      ) {
+      } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 5 && lunLeapMonth === 0) {
         lunMonthDay = 30;
-      } else if (
-        LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 5 &&
-        lunLeapMonth === 1
-      ) {
+      } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 5 && lunLeapMonth === 1) {
         lunMonthDay = 29;
       } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 6) {
         lunMonthDay = 30;
@@ -489,10 +470,7 @@ export function solarToLunar(solarDate: Date): {
         lunMonthDay = 30;
       }
     } else if (lunDay === lunMonthDay) {
-      if (
-        LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] >= 3 &&
-        lunLeapMonth === 0
-      ) {
+      if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] >= 3 && lunLeapMonth === 0) {
         lunDay = 1;
         lunLeapMonth = 1;
       } else {
@@ -507,25 +485,13 @@ export function solarToLunar(solarDate: Date): {
         lunMonthDay = 30;
       } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 3) {
         lunMonthDay = 29;
-      } else if (
-        LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 4 &&
-        lunLeapMonth === 0
-      ) {
+      } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 4 && lunLeapMonth === 0) {
         lunMonthDay = 29;
-      } else if (
-        LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 4 &&
-        lunLeapMonth === 1
-      ) {
+      } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 4 && lunLeapMonth === 1) {
         lunMonthDay = 30;
-      } else if (
-        LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 5 &&
-        lunLeapMonth === 0
-      ) {
+      } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 5 && lunLeapMonth === 0) {
         lunMonthDay = 30;
-      } else if (
-        LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 5 &&
-        lunLeapMonth === 1
-      ) {
+      } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 5 && lunLeapMonth === 1) {
         lunMonthDay = 29;
       } else if (LUNAR_MONTH_TABLE[lunIndex][lunMonth - 1] === 6) {
         lunMonthDay = 30;
@@ -549,13 +515,7 @@ export async function getSajuYear(solarDate: Date): Promise<number> {
     const lichun = await getSolarTermByYearAndName(year, "입춘");
 
     if (lichun) {
-      const lichunDate = new Date(
-        year,
-        lichun.month - 1,
-        lichun.day,
-        lichun.hour,
-        lichun.minute,
-      );
+      const lichunDate = new Date(year, lichun.month - 1, lichun.day, lichun.hour, lichun.minute);
 
       if (solarDate < lichunDate) {
         return year - 1;
@@ -563,21 +523,13 @@ export async function getSajuYear(solarDate: Date): Promise<number> {
       return year;
     }
   } catch (error) {
-    console.warn(
-      `Failed to get solar term data for year ${year}, using fallback`,
-    );
+    console.warn(`Failed to get solar term data for year ${year}, using fallback`);
   }
 
   // 데이터베이스에 데이터가 없는 경우 상수에서 조회
   if (SOLAR_TERMS_BY_YEAR[year]) {
     const lichun = SOLAR_TERMS_BY_YEAR[year].입춘;
-    const lichunDate = new Date(
-      year,
-      lichun.month - 1,
-      lichun.day,
-      lichun.hour,
-      lichun.minute,
-    );
+    const lichunDate = new Date(year, lichun.month - 1, lichun.day, lichun.hour, lichun.minute);
 
     if (solarDate < lichunDate) {
       return year - 1;
@@ -612,17 +564,9 @@ export async function getSajuMonth(solarDate: Date): Promise<number> {
     const allTerms = [...termsForPrevYear, ...termsForYear];
 
     const findTermDate = (name: string, searchYear: number): Date | null => {
-      const term = allTerms.find(
-        (t) => t.year === searchYear && t.term_name === name,
-      );
+      const term = allTerms.find((t) => t.year === searchYear && t.term_name === name);
       if (!term) return null;
-      return new Date(
-        term.year,
-        term.month - 1,
-        term.day,
-        term.hour,
-        term.minute,
-      );
+      return new Date(term.year, term.month - 1, term.day, term.hour, term.minute);
     };
 
     const termNames = [
@@ -659,9 +603,7 @@ export async function getSajuMonth(solarDate: Date): Promise<number> {
     // Default to 축월 if no boundary matches (e.g. before any known terms)
     return 12;
   } catch (error) {
-    console.warn(
-      `Failed to get solar terms data for year ${year}, using fallback`,
-    );
+    console.warn(`Failed to get solar terms data for year ${year}, using fallback`);
     // Fallback logic remains unchanged
     const month = solarDate.getMonth() + 1;
     const day = solarDate.getDate();

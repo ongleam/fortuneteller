@@ -1,22 +1,22 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-import { memo, useEffect, useState } from 'react';
-import { useWindowSize } from 'usehooks-ts';
+import { useRouter } from "next/navigation";
+import { memo, useEffect, useState } from "react";
+import { useWindowSize } from "usehooks-ts";
 
-import { SidebarToggle } from '@/components/sidebar/toggle';
-import { Button } from '@/components/ui/button';
-import type { User } from '@supabase/auth-js';
-import { PlusIcon, MoonIcon, SunIcon, KakaoIcon } from '@/components/icons';
-import { useSidebar } from '@/components/ui/sidebar';
+import { SidebarToggle } from "@/components/sidebar/toggle";
+import { Button } from "@/components/ui/button";
+import type { User } from "@supabase/auth-js";
+import { PlusIcon, MoonIcon, SunIcon, KakaoIcon } from "@/components/icons";
+import { useSidebar } from "@/components/ui/sidebar";
 
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { type VisibilityType } from '@/components/chat/visibility-selector';
-import { useTheme } from 'next-themes';
-import { useIsMobile } from '@/hooks/use-mobile';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { UserProfile } from '@/components/sidebar/user-profile-modal';
-import { Database } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { type VisibilityType } from "@/components/chat/visibility-selector";
+import { useTheme } from "next-themes";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { UserProfile } from "@/components/sidebar/user-profile-modal";
+import { Database } from "lucide-react";
 
 function PureChatHeader({
   chatId,
@@ -48,13 +48,13 @@ function PureChatHeader({
   // 사용자 아바타 관련 데이터
 
   const isGuest = user?.is_anonymous === true;
-  const displayName = user?.user_metadata?.name || user.email || 'User';
+  const displayName = user?.user_metadata?.name || user.email || "User";
   const displayAvatarUrl =
     user?.user_metadata?.avatar_url || `https://avatar.vercel.sh/${user.email || user.id}`;
 
   // 이름 첫 글자 가져오기
   const getInitials = () => {
-    if (!displayName) return 'U';
+    if (!displayName) return "U";
     return displayName.charAt(0).toUpperCase();
   };
 
@@ -71,7 +71,7 @@ function PureChatHeader({
                 data-testid="new-chat-button"
                 className="px-2 md:h-fit md:px-2"
                 onClick={() => {
-                  router.push('/');
+                  router.push("/");
                   router.refresh();
                 }}
               >
@@ -90,8 +90,8 @@ function PureChatHeader({
           className="flex items-center gap-1 px-2 py-1 text-sm font-bold text-muted-foreground hover:bg-accent hover:text-accent-foreground"
           onClick={() =>
             window.open(
-              'https://docs.google.com/spreadsheets/d/1DEmdLc_khD_IpVa200SJta5ueNTMFF9rZidhOhDcGEk/edit?gid=0#gid=0',
-              '_blank'
+              "https://docs.google.com/spreadsheets/d/1DEmdLc_khD_IpVa200SJta5ueNTMFF9rZidhOhDcGEk/edit?gid=0#gid=0",
+              "_blank",
             )
           }
         >
@@ -158,7 +158,7 @@ function PureChatHeader({
             name: displayName,
             email: user.email,
             image: displayAvatarUrl,
-            theme: (user.user_metadata?.theme as 'light' | 'dark' | 'system') || 'system',
+            theme: (user.user_metadata?.theme as "light" | "dark" | "system") || "system",
           }}
           isOpen={isProfileOpen}
           onOpenChange={setIsProfileOpen}

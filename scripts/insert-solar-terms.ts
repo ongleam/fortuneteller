@@ -10,9 +10,9 @@
  *   bun tsx scripts/insert-solar-terms.ts
  */
 
-import { readFileSync } from 'fs';
-import { join } from 'path';
-import { insertSolarTerms, getSolarTermsByYear, getSolarTermByYearAndName } from './db-client';
+import { readFileSync } from "fs";
+import { join } from "path";
+import { insertSolarTerms, getSolarTermsByYear, getSolarTermByYearAndName } from "./db-client";
 
 interface SolarTermData {
   year: number;
@@ -38,11 +38,11 @@ interface SolarTermsByYear {
 
 async function insertSolarTermsData() {
   try {
-    console.log('🌅 Starting solar terms data insertion...');
+    console.log("🌅 Starting solar terms data insertion...");
 
     // Read JSON data file
-    const dataPath = join(process.cwd(), 'data', 'solar_terms.json');
-    const jsonData = readFileSync(dataPath, 'utf-8');
+    const dataPath = join(process.cwd(), "data", "solar_terms.json");
+    const jsonData = readFileSync(dataPath, "utf-8");
     const solarTermsByYear: SolarTermsByYear = JSON.parse(jsonData);
 
     // Convert new structure to flat array for database insertion
@@ -64,7 +64,9 @@ async function insertSolarTermsData() {
       }
     }
 
-    console.log(`📖 Read ${totalTerms} solar terms from JSON file across ${Object.keys(solarTermsByYear).length} years`);
+    console.log(
+      `📖 Read ${totalTerms} solar terms from JSON file across ${Object.keys(solarTermsByYear).length} years`,
+    );
 
     // Validate data structure
     for (const term of solarTermsData) {
@@ -80,13 +82,13 @@ async function insertSolarTermsData() {
       }
     }
 
-    console.log('✅ Data validation passed');
+    console.log("✅ Data validation passed");
 
     // Check for existing data and filter out duplicates
-    console.log('🔍 Checking for existing data...');
+    console.log("🔍 Checking for existing data...");
     const newDataToInsert: SolarTermData[] = [];
     const duplicates: SolarTermData[] = [];
-    
+
     for (const term of solarTermsData) {
       const existingTerm = await getSolarTermByYearAndName(term.year, term.term_name);
       if (existingTerm) {
@@ -98,7 +100,9 @@ async function insertSolarTermsData() {
     }
 
     if (duplicates.length > 0) {
-      console.log(`📝 Found ${duplicates.length} existing records, ${newDataToInsert.length} new records to insert`);
+      console.log(
+        `📝 Found ${duplicates.length} existing records, ${newDataToInsert.length} new records to insert`,
+      );
     } else {
       console.log(`📝 No existing data found, inserting all ${newDataToInsert.length} records`);
     }
@@ -106,7 +110,9 @@ async function insertSolarTermsData() {
     // Insert only new data
     if (newDataToInsert.length > 0) {
       await insertSolarTerms(newDataToInsert);
-      console.log(`🎉 Successfully inserted ${newDataToInsert.length} new solar terms into database`);
+      console.log(
+        `🎉 Successfully inserted ${newDataToInsert.length} new solar terms into database`,
+      );
     } else {
       console.log(`✅ No new data to insert - all records already exist in database`);
     }
@@ -118,10 +124,10 @@ async function insertSolarTermsData() {
           acc[term.year] = (acc[term.year] || 0) + 1;
           return acc;
         },
-        {} as Record<number, number>
+        {} as Record<number, number>,
       );
 
-      console.log('\n📊 Summary of inserted data by year:');
+      console.log("\n📊 Summary of inserted data by year:");
       Object.entries(yearGroups).forEach(([year, count]) => {
         console.log(`  ${year}: ${count} terms`);
       });
@@ -133,25 +139,29 @@ async function insertSolarTermsData() {
           acc[term.year] = (acc[term.year] || 0) + 1;
           return acc;
         },
-        {} as Record<number, number>
+        {} as Record<number, number>,
       );
 
-      console.log('\n📋 Summary of existing data by year:');
+      console.log("\n📋 Summary of existing data by year:");
       Object.entries(duplicateYearGroups).forEach(([year, count]) => {
         console.log(`  ${year}: ${count} terms (already exists)`);
       });
     }
 
-    console.log('\n🗂️  Available years in database after insertion:');
-    const allYears = [...new Set([...newDataToInsert.map(t => t.year), ...duplicates.map(t => t.year)])].sort();
-    allYears.forEach(year => {
-      const newCount = newDataToInsert.filter(t => t.year === year).length;
-      const existingCount = duplicates.filter(t => t.year === year).length;
+    console.log("\n🗂️  Available years in database after insertion:");
+    const allYears = [
+      ...new Set([...newDataToInsert.map((t) => t.year), ...duplicates.map((t) => t.year)]),
+    ].sort();
+    allYears.forEach((year) => {
+      const newCount = newDataToInsert.filter((t) => t.year === year).length;
+      const existingCount = duplicates.filter((t) => t.year === year).length;
       const totalCount = newCount + existingCount;
-      console.log(`  ${year}: ${totalCount} terms ${newCount > 0 ? `(${newCount} new)` : '(all existing)'}`);
+      console.log(
+        `  ${year}: ${totalCount} terms ${newCount > 0 ? `(${newCount} new)` : "(all existing)"}`,
+      );
     });
   } catch (error) {
-    console.error('❌ Failed to insert solar terms data:', error);
+    console.error("❌ Failed to insert solar terms data:", error);
     process.exit(1);
   }
 }
@@ -160,11 +170,11 @@ async function insertSolarTermsData() {
 if (require.main === module) {
   insertSolarTermsData()
     .then(() => {
-      console.log('\n✨ Solar terms data insertion completed successfully!');
+      console.log("\n✨ Solar terms data insertion completed successfully!");
       process.exit(0);
     })
     .catch((error) => {
-      console.error('\n💥 Solar terms data insertion failed:', error);
+      console.error("\n💥 Solar terms data insertion failed:", error);
       process.exit(1);
     });
 }

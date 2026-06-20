@@ -1,9 +1,9 @@
-import { cookies, headers } from 'next/headers';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { createServerClient } from '@/lib/infra/supabase/server';
-import { siteConfig } from '@/config/site';
-import { KakaoLoginButton } from '@/components/auth/kakao-login-button';
+import { cookies, headers } from "next/headers";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { createServerClient } from "@/lib/infra/supabase/server";
+import { siteConfig } from "@/config/site";
+import { KakaoLoginButton } from "@/components/auth/kakao-login-button";
 
 export default async function LandingPage() {
   const supabase = await createServerClient();
@@ -108,14 +108,15 @@ export default async function LandingPage() {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-purple-700/50 bg-gradient-to-br from-purple-800/50 to-indigo-800/50 p-8 text-center backdrop-blur-sm hover:border-purple-500/50 transition-all duration-300">
+            <div className="rounded-2xl border border-purple-700/50 bg-gradient-to-br from-purple-800/50 to-indigo-800/50 p-8 text-center backdrop-blur-sm transition-all duration-300 hover:border-purple-500/50">
               <div className="mb-4 text-5xl">📊</div>
               <h4 className="mb-4 text-2xl font-bold text-slate-300">사주팔자 분석</h4>
-              <p className="text-slate-400 mb-6">
-                생년월일과 시간을 바탕으로 정확한 사주팔자와 오행 분석을 제공합니다. 5각형 차트로 오행 분포를 시각화합니다.
+              <p className="mb-6 text-slate-400">
+                생년월일과 시간을 바탕으로 정확한 사주팔자와 오행 분석을 제공합니다. 5각형 차트로
+                오행 분포를 시각화합니다.
               </p>
               <Link href="/saju">
-                <Button className="w-full rounded-full bg-gradient-to-r from-purple-500 to-indigo-600 px-6 py-3 text-white font-semibold hover:from-purple-600 hover:to-indigo-700 transition-all duration-200 transform hover:scale-105">
+                <Button className="w-full transform rounded-full bg-gradient-to-r from-purple-500 to-indigo-600 px-6 py-3 font-semibold text-white transition-all duration-200 hover:scale-105 hover:from-purple-600 hover:to-indigo-700">
                   📊 사주팔자 분석하기
                 </Button>
               </Link>
@@ -133,14 +134,14 @@ export default async function LandingPage() {
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: '💕', title: '사랑운', desc: '연인과의 관계, 새로운 만남' },
-              { icon: '💰', title: '재물운', desc: '금전운, 투자, 사업운' },
-              { icon: '🏢', title: '직업운', desc: '승진, 이직, 새로운 기회' },
-              { icon: '🌿', title: '건강운', desc: '몸과 마음의 건강' },
-              { icon: '👨‍👩‍👧‍👦', title: '가족운', desc: '가족관계, 화목' },
-              { icon: '🎓', title: '학업운', desc: '시험, 학습, 성장' },
-              { icon: '🌈', title: '종합운', desc: '전반적인 운세' },
-              { icon: '🔯', title: '특별운', desc: '특별한 날의 운세' },
+              { icon: "💕", title: "사랑운", desc: "연인과의 관계, 새로운 만남" },
+              { icon: "💰", title: "재물운", desc: "금전운, 투자, 사업운" },
+              { icon: "🏢", title: "직업운", desc: "승진, 이직, 새로운 기회" },
+              { icon: "🌿", title: "건강운", desc: "몸과 마음의 건강" },
+              { icon: "👨‍👩‍👧‍👦", title: "가족운", desc: "가족관계, 화목" },
+              { icon: "🎓", title: "학업운", desc: "시험, 학습, 성장" },
+              { icon: "🌈", title: "종합운", desc: "전반적인 운세" },
+              { icon: "🔯", title: "특별운", desc: "특별한 날의 운세" },
             ].map((item, index) => (
               <div
                 key={index}

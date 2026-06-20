@@ -1,6 +1,6 @@
-import type { AssistantModelMessage, ToolModelMessage, UIMessage } from 'ai';
-import { type ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import type { AssistantModelMessage, ToolModelMessage, UIMessage } from "ai";
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 // import type { Document } from '@/lib/infra/db/schema';
 
 export function cn(...inputs: ClassValue[]) {
@@ -16,7 +16,7 @@ export const fetcher = async (url: string) => {
   const res = await fetch(url);
 
   if (!res.ok) {
-    const error = new Error('An error occurred while fetching the data.') as ApplicationError;
+    const error = new Error("An error occurred while fetching the data.") as ApplicationError;
 
     error.info = await res.json();
     error.status = res.status;
@@ -28,16 +28,16 @@ export const fetcher = async (url: string) => {
 };
 
 export function getLocalStorage(key: string) {
-  if (typeof window !== 'undefined') {
-    return JSON.parse(localStorage.getItem(key) || '[]');
+  if (typeof window !== "undefined") {
+    return JSON.parse(localStorage.getItem(key) || "[]");
   }
   return [];
 }
 
 export function generateUUID(): string {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
     const r = (Math.random() * 16) | 0;
-    const v = c === 'x' ? r : (r & 0x3) | 0x8;
+    const v = c === "x" ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
 }
@@ -46,7 +46,7 @@ type ResponseMessageWithoutId = ToolModelMessage | AssistantModelMessage;
 type ResponseMessage = ResponseMessageWithoutId & { id: string };
 
 export function getMostRecentUserMessage(messages: Array<UIMessage>) {
-  const userMessages = messages.filter((message) => message.role === 'user');
+  const userMessages = messages.filter((message) => message.role === "user");
   return userMessages.at(-1);
 }
 
@@ -74,7 +74,7 @@ export const formattingErrorMessage = (error: unknown) => {
   const errorMessage =
     error instanceof Error
       ? error.message
-      : typeof error === 'object'
+      : typeof error === "object"
         ? JSON.stringify(error)
         : String(error);
   return errorMessage;
@@ -83,7 +83,7 @@ export const formattingErrorMessage = (error: unknown) => {
 export function getKSTDateTime() {
   const now = new Date();
   const kstDate = new Date(now.getTime() + 9 * 60 * 60 * 1000); // UTC+9(한국 시간)
-  return kstDate.toISOString().replace('T', ' ').replace('Z', '').substring(0, 19);
+  return kstDate.toISOString().replace("T", " ").replace("Z", "").substring(0, 19);
 }
 export function formatObject(
   obj: any,
@@ -92,7 +92,7 @@ export function formatObject(
     colors?: boolean; // 색상 사용 여부 (기본값: false)
     maxArrayLength?: number; // 배열 최대 길이 (기본값: 10)
     compact?: boolean; // 출력을 한 줄로 압축할지 여부 (기본값: false)
-  } = {}
+  } = {},
 ): string {
   const defaultOptions = {
     depth: 2,
@@ -102,7 +102,7 @@ export function formatObject(
     ...options,
   };
 
-  return require('util').inspect(obj, defaultOptions);
+  return require("util").inspect(obj, defaultOptions);
 }
 
 /**
@@ -121,7 +121,7 @@ export function logObject(
     colors?: boolean;
     maxArrayLength?: number;
     compact?: boolean;
-  }
+  },
 ): void {
   console.log(`[${getKSTDateTime()}] [${label}] ${formatObject(obj, options)}`);
 }
@@ -131,7 +131,7 @@ const executionTimes = new Map<string, number>();
 // 실행 시간 측정 헬퍼 함수
 export const measureExecutionTime = async <T>(
   functionName: string,
-  fn: () => Promise<T>
+  fn: () => Promise<T>,
 ): Promise<T> => {
   const startTime = Date.now();
   console.log(`[${getKSTDateTime()}] [성능측정] ${functionName} 시작`);
@@ -153,8 +153,8 @@ export const measureExecutionTime = async <T>(
 };
 
 export const generateExecutionReport = () => {
-  console.log('\n[성능측정] 실행 시간 리포트');
-  console.log('========================');
+  console.log("\n[성능측정] 실행 시간 리포트");
+  console.log("========================");
   let totalTime = 0;
 
   // 실행 시간을 기준으로 내림차순 정렬
@@ -165,7 +165,7 @@ export const generateExecutionReport = () => {
     totalTime += duration;
   });
 
-  console.log('========================');
+  console.log("========================");
   console.log(`총 실행 시간: ${totalTime}ms`);
-  console.log('========================\n');
+  console.log("========================\n");
 };

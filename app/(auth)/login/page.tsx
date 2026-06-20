@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { useSearchParams } from 'next/navigation';
-import { useEffect, Suspense } from 'react';
-import { KakaoLoginButton } from '@/components/auth/kakao-login-button';
+import { useSearchParams } from "next/navigation";
+import { useEffect, Suspense } from "react";
+import { KakaoLoginButton } from "@/components/auth/kakao-login-button";
 
 function LoginContent() {
   const searchParams = useSearchParams();
 
   // URL에서 error_code 파라미터 처리
   useEffect(() => {
-    const errorCode = searchParams.get('error_code');
+    const errorCode = searchParams.get("error_code");
 
-    if (errorCode === 'identity_already_exists') {
-      console.log('이미 등록된 계정입니다. 기존 계정으로 로그인을 시도합니다.');
+    if (errorCode === "identity_already_exists") {
+      console.log("이미 등록된 계정입니다. 기존 계정으로 로그인을 시도합니다.");
     }
   }, [searchParams]);
 

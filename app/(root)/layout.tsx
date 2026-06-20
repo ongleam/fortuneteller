@@ -1,10 +1,10 @@
 // app/(chat)/layout.tsx
-import { cookies } from 'next/headers';
-import { AppSidebar } from '@/components/sidebar';
-import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
+import { cookies } from "next/headers";
+import { AppSidebar } from "@/components/sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 // import { auth } from '../(auth)/auth'; // NextAuth 코드 주석 처리
-import Script from 'next/script';
-import { createServerClient } from '@/lib/infra/supabase/server';
+import Script from "next/script";
+import { createServerClient } from "@/lib/infra/supabase/server";
 
 export const experimental_ppr = true;
 
@@ -18,7 +18,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  const isCollapsed = cookieStore.get('sidebar:state')?.value !== 'true';
+  const isCollapsed = cookieStore.get("sidebar:state")?.value !== "true";
 
   return (
     <>

@@ -267,18 +267,18 @@ bun test:all                # 모든 테스트 실행 (향후)
 
 ```javascript
 module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
-  setupFiles: ['<rootDir>/tests/setup.ts'], // 환경 변수 로드
+  preset: "ts-jest",
+  testEnvironment: "node",
+  setupFiles: ["<rootDir>/tests/setup.ts"], // 환경 변수 로드
   verbose: true,
   testTimeout: 10000,
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/$1', // 절대 경로 alias
+    "^@/(.*)$": "<rootDir>/$1", // 절대 경로 alias
   },
   transform: {
-    '^.+\\.tsx?$': 'ts-jest',
+    "^.+\\.tsx?$": "ts-jest",
   },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
   // 향후 추가 예정:
   // testMatch: ['<rootDir>/tests/**/*.test.ts'],
   // collectCoverageFrom: ['lib/**/*.ts', '!lib/**/*.test.ts'],

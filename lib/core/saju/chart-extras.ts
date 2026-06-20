@@ -2,12 +2,7 @@
 // 지장간(地藏干) · 12운성(運星) · 띠(생초) 정적 매핑.
 // 신살은 별도 모듈(sinsal.ts)에서 처리한다.
 
-import {
-  HEAVENLY_STEMS,
-  EARTHLY_BRANCHES,
-  getStemIndex,
-  getGroundIndex,
-} from "./constants";
+import { HEAVENLY_STEMS, EARTHLY_BRANCHES, getStemIndex, getGroundIndex } from "./constants";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 지장간(地藏干)
@@ -60,10 +55,7 @@ const TWELVE_FORTUNES_ORDER: ReadonlyArray<{
 // 양간 시작 지지(장생) 인덱스: 갑→亥(11), 병/무→寅(2), 경→巳(5), 임→申(8).
 // 음간은 같은 오행의 양간 + 6 (반대편) 또는 별도 표준 — 명리 표준: 음간 장생 위치
 //   을→午(6), 정/기→酉(9), 신→子(0), 계→卯(3).
-const STEM_FORTUNE_START: Record<
-  string,
-  { startBranchIdx: number; direction: 1 | -1 }
-> = {
+const STEM_FORTUNE_START: Record<string, { startBranchIdx: number; direction: 1 | -1 }> = {
   甲: { startBranchIdx: 11, direction: 1 }, // 亥 순행
   乙: { startBranchIdx: 6, direction: -1 }, // 午 역행
   丙: { startBranchIdx: 2, direction: 1 }, // 寅
@@ -134,10 +126,7 @@ export interface ZodiacInfo {
  * 띠(생초) 계산. forceteller `sexagenaryCycle` SSOT 와 호환되도록 **일주(日柱)** 기준.
  * (년주 기준이 아님 — 한국 사주 표준은 일주의 60갑자를 띠로 표시한다.)
  */
-export function getZodiac(
-  dayStem: string,
-  dayBranch: string,
-): ZodiacInfo | null {
+export function getZodiac(dayStem: string, dayBranch: string): ZodiacInfo | null {
   const stemIdx = getStemIndex(dayStem);
   const branchIdx = getGroundIndex(dayBranch);
   if (stemIdx < 0 || branchIdx < 0) return null;

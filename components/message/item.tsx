@@ -1,24 +1,24 @@
-'use client';
+"use client";
 
-import type { Vote } from '@/lib/infra/db/schema';
-import { cn } from '@/lib/shared/utils';
-import { UseChatHelpers } from '@ai-sdk/react';
-import type { UIMessage } from 'ai';
-import equal from 'fast-deep-equal';
-import { AnimatePresence, motion } from 'framer-motion';
-import { memo, useState } from 'react';
+import type { Vote } from "@/lib/infra/db/schema";
+import { cn } from "@/lib/shared/utils";
+import { UseChatHelpers } from "@ai-sdk/react";
+import type { UIMessage } from "ai";
+import equal from "fast-deep-equal";
+import { AnimatePresence, motion } from "framer-motion";
+import { memo, useState } from "react";
 // import { DocumentToolCall, DocumentToolResult } from '@/components/artifact/document';
 // import { DocumentPreview } from '@/components/artifact/document-preview';
-import { PencilEditIcon, SparklesIcon } from '@/components/icons';
-import { Markdown } from '@/components/markdown';
-import { MessageActions } from './actions';
-import { MessageReasoning } from './reasoning';
-import { PreviewAttachment } from '@/components/preview-attachment';
-import { Button } from '@/components/ui/button';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { Weather } from '@/components/weather';
-import { useIsMobile } from '@/hooks/use-mobile';
-import clsx from 'clsx';
+import { PencilEditIcon, SparklesIcon } from "@/components/icons";
+import { Markdown } from "@/components/markdown";
+import { MessageActions } from "./actions";
+import { MessageReasoning } from "./reasoning";
+import { PreviewAttachment } from "@/components/preview-attachment";
+import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Weather } from "@/components/weather";
+import { useIsMobile } from "@/hooks/use-mobile";
+import clsx from "clsx";
 
 //
 const PurePreviewMessage = ({
@@ -34,11 +34,11 @@ const PurePreviewMessage = ({
   message: UIMessage;
   vote: Vote | undefined;
   isLoading: boolean;
-  setMessages: UseChatHelpers<UIMessage>['setMessages'];
-  regenerate: UseChatHelpers<UIMessage>['regenerate'];
+  setMessages: UseChatHelpers<UIMessage>["setMessages"];
+  regenerate: UseChatHelpers<UIMessage>["regenerate"];
   isReadonly: boolean;
 }) => {
-  const [mode, setMode] = useState<'view' | 'edit'>('view');
+  const [mode, setMode] = useState<"view" | "edit">("view");
   const isMobile = useIsMobile();
 
   return (
@@ -52,14 +52,14 @@ const PurePreviewMessage = ({
       >
         <div
           className={cn(
-            'flex w-full gap-3 group-data-[role=user]/message:ml-auto group-data-[role=user]/message:max-w-2xl sm:gap-4',
+            "flex w-full gap-3 group-data-[role=user]/message:ml-auto group-data-[role=user]/message:max-w-2xl sm:gap-4",
             {
-              'w-full': mode === 'edit',
-              'group-data-[role=user]/message:w-fit': mode !== 'edit',
-            }
+              "w-full": mode === "edit",
+              "group-data-[role=user]/message:w-fit": mode !== "edit",
+            },
           )}
         >
-          {message.role === 'assistant' && !isMobile && (
+          {message.role === "assistant" && !isMobile && (
             <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-background ring-1 ring-border">
               <div className="translate-y-px">
                 <SparklesIcon size={14} />
@@ -72,7 +72,7 @@ const PurePreviewMessage = ({
               const { type } = part;
               const key = `message-${message.id}-part-${index}`;
 
-              if (type === 'file') {
+              if (type === "file") {
                 return (
                   <div
                     key={key}
@@ -90,17 +90,17 @@ const PurePreviewMessage = ({
                 );
               }
 
-              if (type === 'reasoning') {
+              if (type === "reasoning") {
                 return <MessageReasoning key={key} isLoading={isLoading} reasoning={part.text} />;
               }
 
-              if (type === 'text') {
-                if (mode === 'view') {
+              if (type === "text") {
+                if (mode === "view") {
                   // console.log('part', part);
 
                   // <Thinking></Thinking> 태그를 필터링하는 함수
                   const filterThinkingTags = (text: string) => {
-                    return text.replace(/<Thinking>[\s\S]*?<\/Thinking>/g, '');
+                    return text.replace(/<Thinking>[\s\S]*?<\/Thinking>/g, "");
                   };
 
                   // 필터링된 텍스트
@@ -108,7 +108,7 @@ const PurePreviewMessage = ({
 
                   return (
                     <div key={key} className="flex flex-row items-start gap-2">
-                      {message.role === 'user' && !isReadonly && (
+                      {message.role === "user" && !isReadonly && (
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Button
@@ -116,7 +116,7 @@ const PurePreviewMessage = ({
                               variant="ghost"
                               className="h-fit rounded-full px-2 text-muted-foreground opacity-0 group-hover/message:opacity-100"
                               onClick={() => {
-                                setMode('edit');
+                                setMode("edit");
                               }}
                             >
                               <PencilEditIcon />
@@ -128,9 +128,9 @@ const PurePreviewMessage = ({
 
                       <div
                         data-testid="message-content"
-                        className={cn('flex flex-col gap-3 sm:gap-4', {
-                          'rounded-xl bg-primary px-3 py-2 text-primary-foreground':
-                            message.role === 'user',
+                        className={cn("flex flex-col gap-3 sm:gap-4", {
+                          "rounded-xl bg-primary px-3 py-2 text-primary-foreground":
+                            message.role === "user",
                         })}
                       >
                         <Markdown>{filteredText}</Markdown>
@@ -141,28 +141,28 @@ const PurePreviewMessage = ({
               }
 
               // v6 tool parts are typed as `tool-${toolName}`.
-              if (type.startsWith('tool-')) {
+              if (type.startsWith("tool-")) {
                 const toolPart = part as any;
-                const toolName = type.slice('tool-'.length);
+                const toolName = type.slice("tool-".length);
                 const { toolCallId, state } = toolPart;
 
-                if (state === 'input-streaming' || state === 'input-available') {
+                if (state === "input-streaming" || state === "input-available") {
                   return (
                     <div
                       key={toolCallId}
                       className={clsx({
-                        skeleton: ['getWeather'].includes(toolName),
+                        skeleton: ["getWeather"].includes(toolName),
                       })}
                     >
-                      {toolName === 'getWeather' ? <Weather /> : null}
+                      {toolName === "getWeather" ? <Weather /> : null}
                     </div>
                   );
                 }
 
-                if (state === 'output-available') {
+                if (state === "output-available") {
                   return (
                     <div key={toolCallId}>
-                      {toolName === 'getWeather' ? (
+                      {toolName === "getWeather" ? (
                         <Weather weatherAtLocation={toolPart.output} />
                       ) : null}
                     </div>
@@ -197,7 +197,7 @@ export const PreviewMessage = memo(PurePreviewMessage, (prevProps, nextProps) =>
 });
 
 export const ThinkingMessage = () => {
-  const role = 'assistant';
+  const role = "assistant";
   const isMobile = useIsMobile();
 
   return (
@@ -210,10 +210,10 @@ export const ThinkingMessage = () => {
     >
       <div
         className={clsx(
-          'flex w-full gap-3 rounded-xl group-data-[role=user]/message:ml-auto group-data-[role=user]/message:w-fit group-data-[role=user]/message:max-w-2xl group-data-[role=user]/message:px-3 group-data-[role=user]/message:py-2 sm:gap-4',
+          "flex w-full gap-3 rounded-xl group-data-[role=user]/message:ml-auto group-data-[role=user]/message:w-fit group-data-[role=user]/message:max-w-2xl group-data-[role=user]/message:px-3 group-data-[role=user]/message:py-2 sm:gap-4",
           {
-            'group-data-[role=user]/message:bg-muted': true,
-          }
+            "group-data-[role=user]/message:bg-muted": true,
+          },
         )}
       >
         {!isMobile && (

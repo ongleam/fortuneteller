@@ -2,18 +2,8 @@
  * 사주 팔자 계산 모듈
  */
 
-import {
-  HEAVENLY_STEMS,
-  EARTHLY_BRANCHES,
-  SIXTY_GAPJA,
-  getStemIndex,
-} from "./constants";
-import {
-  lunarToSolar,
-  getSajuYear,
-  getSajuMonth,
-  normalizeCalendarType,
-} from "./calendar";
+import { HEAVENLY_STEMS, EARTHLY_BRANCHES, SIXTY_GAPJA, getStemIndex } from "./constants";
+import { lunarToSolar, getSajuYear, getSajuMonth, normalizeCalendarType } from "./calendar";
 import { applyTimeCorrections } from "./time-correction";
 import type { BirthInput, FourPillars } from "./types";
 
@@ -22,9 +12,7 @@ import type { BirthInput, FourPillars } from "./types";
  * @param birthInput 생년월일 정보
  * @returns 사주 팔자 정보
  */
-export async function getFourPillars(
-  birthInput: BirthInput,
-): Promise<FourPillars> {
+export async function getFourPillars(birthInput: BirthInput): Promise<FourPillars> {
   // BirthInput 필드 매핑
   const year = parseInt(birthInput.year);
   const month = parseInt(birthInput.month);
@@ -39,13 +27,7 @@ export async function getFourPillars(
   if (calendar === "lunar") {
     const converted = lunarToSolar(year, month, day, isLeapMonth);
     if (converted) {
-      solarDate = new Date(
-        converted.year,
-        converted.month - 1,
-        converted.day,
-        hour,
-        minute,
-      );
+      solarDate = new Date(converted.year, converted.month - 1, converted.day, hour, minute);
     } else {
       throw new Error("Invalid lunar date");
     }
@@ -76,11 +58,7 @@ export async function getFourPillars(
   const yearPillar = getYearPillar(sajuYear);
   const monthPillar = getMonthPillar(sajuYear, sajuMonth);
   const dayPillar = getDayPillar(dayPillarDate);
-  const timePillar = getTimePillar(
-    dayPillar,
-    String(correctedHour),
-    String(correctedMinute),
-  );
+  const timePillar = getTimePillar(dayPillar, String(correctedHour), String(correctedMinute));
 
   return {
     year: yearPillar,
@@ -109,10 +87,7 @@ export function getYearPillar(year: number) {
  * @param month 월
  * @returns 월주 정보
  */
-export function getMonthPillar(
-  year: number,
-  month: number,
-): { sky: string; ground: string } {
+export function getMonthPillar(year: number, month: number): { sky: string; ground: string } {
   const yearPillar = getYearPillar(year);
   const yearSkyIndex = getStemIndex(yearPillar.sky);
   const firstMonthStemMap = [2, 4, 6, 8, 0, 2, 4, 6, 8, 0];
@@ -211,10 +186,8 @@ export function getTimePillar(
  * @returns 유효성 여부
  */
 export function validatePillars(pillars: FourPillars): boolean {
-  const isValidSky = (sky: string) =>
-    HEAVENLY_STEMS.some((s) => s.chinese === sky);
-  const isValidGround = (ground: string) =>
-    EARTHLY_BRANCHES.some((b) => b.chinese === ground);
+  const isValidSky = (sky: string) => HEAVENLY_STEMS.some((s) => s.chinese === sky);
+  const isValidGround = (ground: string) => EARTHLY_BRANCHES.some((b) => b.chinese === ground);
 
   return (
     isValidSky(pillars.year.sky) &&

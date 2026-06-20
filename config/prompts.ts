@@ -1,4 +1,4 @@
-import { getHarmony } from '@/lib/interfaces/tools/harmony';
+import { getHarmony } from "@/lib/interfaces/tools/harmony";
 
 export const systemPrompts = {
   BASE_AGENT: `
@@ -45,31 +45,31 @@ export const tools = {
     `,
     parameters: {
       name: {
-        type: 'string',
-        description: '유저의 이름',
+        type: "string",
+        description: "유저의 이름",
       },
       gender: {
-        type: 'string',
-        description: '유저의 성별 (남성, 여성)',
+        type: "string",
+        description: "유저의 성별 (남성, 여성)",
       },
       calendar: {
-        type: 'string',
-        description: '유저의 생일 타입 (양력, 음력)',
+        type: "string",
+        description: "유저의 생일 타입 (양력, 음력)",
       },
       year: {
-        type: 'string',
-        description: '유저의 생년',
+        type: "string",
+        description: "유저의 생년",
       },
       month: {
-        type: 'string',
-        description: '유저의 생월',
+        type: "string",
+        description: "유저의 생월",
       },
       day: {
-        type: 'string',
-        description: '유저의 생일',
+        type: "string",
+        description: "유저의 생일",
       },
       hour: {
-        type: 'string',
+        type: "string",
         description: `유저의 생시. '00': 00:00 ~ 01:29, '02': 01:30 ~ 03:29, '04': 03:30 ~ 05:29, '06': 05:30 ~ 07:29, '08': 07:30 ~ 09:29, '10': 09:30 ~ 11:29, '12': 11:30 ~ 13:29, '14': 13:30 ~ 15:29, '16': 15:30 ~ 17:29, '18': 17:30 ~ 19:29, '20': 19:30 ~ 21:29, '22': 21:30 ~ 23:29, '24': 23:30 ~ 24:00`,
       },
     },
@@ -83,31 +83,31 @@ export const tools = {
     description: `유저의 사주를 조회할때 사용되는 툴이야. 유저가 이름, 성별, 생년월일을 입력해주면 유저의 사주를 조회해줘. 유저의 입력을 최대한 파라미터에 적합하게 변환해줘.`,
     parameters: {
       name: {
-        type: 'string',
-        description: '유저의 이름',
+        type: "string",
+        description: "유저의 이름",
       },
       gender: {
-        type: 'string',
-        description: '유저의 성별 (남성, 여성)',
+        type: "string",
+        description: "유저의 성별 (남성, 여성)",
       },
       calendar: {
-        type: 'string',
-        description: '유저의 생일 타입 (양력, 음력)',
+        type: "string",
+        description: "유저의 생일 타입 (양력, 음력)",
       },
       year: {
-        type: 'string',
-        description: '유저의 생년',
+        type: "string",
+        description: "유저의 생년",
       },
       month: {
-        type: 'string',
-        description: '유저의 생월',
+        type: "string",
+        description: "유저의 생월",
       },
       day: {
-        type: 'string',
-        description: '유저의 생일',
+        type: "string",
+        description: "유저의 생일",
       },
       hour: {
-        type: 'string',
+        type: "string",
         description: `유저의 생시. '00': 00:00 ~ 01:29, '02': 01:30 ~ 03:29, '04': 03:30 ~ 05:29, '06': 05:30 ~ 07:29, '08': 07:30 ~ 09:29, '10': 09:30 ~ 11:29, '12': 11:30 ~ 13:29, '14': 13:30 ~ 15:29, '16': 15:30 ~ 17:29, '18': 17:30 ~ 19:29, '20': 19:30 ~ 21:29, '22': 21:30 ~ 23:29, '24': 23:30 ~ 24:00`,
       },
     },
@@ -118,22 +118,22 @@ export const tools = {
       description: `두 사람의 연애 궁합을 봐주는 툴입니다. 두 사람의 사주 정보를 바탕으로 궁합을 분석하고 조언을 제공합니다. 유저가 입력한 정보가 parameters 형식에 안맞을 수 있으니 항상 검토하여 적합한 변수로 수정해주세요. 두사람의 궁합정도를 종합점수로 먼저 알려주세요 (100점 만점) 결과를 바탕으로 두 사람의 사주팔자와 음양오행, 십성을 보고 두 사람의 연애 궁합에 대해서 분석해줘. 또한 미래에 조심해야할 것과 미래에 가까이해야할 것 등 전반적으로 두 사람이 인생을 잘 살아가는 데 필요한 것을 조언해줘. 특히 재물운과 연애운은 아주 자세하게 봐줘.`,
       parameters: {
         name: {
-          description: '상대방의 이름',
+          description: "상대방의 이름",
         },
         gender: {
-          description: '상대방의 성별 (남성, 여성)',
+          description: "상대방의 성별 (남성, 여성)",
         },
         calendar: {
-          description: '상대방의 생일 타입 (양력, 음력)',
+          description: "상대방의 생일 타입 (양력, 음력)",
         },
         year: {
-          description: '상대방의 생년',
+          description: "상대방의 생년",
         },
         month: {
-          description: '상대방의 생월',
+          description: "상대방의 생월",
         },
         day: {
-          description: '상대방의 생일',
+          description: "상대방의 생일",
         },
         hour: {
           description: `상대방의 생시. '00': 00:00 ~ 01:29, '02': 01:30 ~ 03:29, '04': 03:30 ~ 05:29, '06': 05:30 ~ 07:29, '08': 07:30 ~ 09:29, '10': 09:30 ~ 11:29, '12': 11:30 ~ 13:29, '14': 13:30 ~ 15:29, '16': 15:30 ~ 17:29, '18': 17:30 ~ 19:29, '20': 19:30 ~ 21:29, '22': 21:30 ~ 23:29, '24': 23:30 ~ 24:00`,

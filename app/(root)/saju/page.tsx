@@ -1,62 +1,70 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { calculateSajuAction } from '@/lib/interfaces/actions/debug';
-import type { BirthInput, FourPillars, TenStars, FiveElements } from '@/lib/shared/types/saju';
+import { useState, useEffect } from "react";
+import { calculateSajuAction } from "@/lib/interfaces/actions/debug";
+import type { BirthInput, FourPillars, TenStars, FiveElements } from "@/lib/shared/types/saju";
 
 // Custom hook for responsive detection
 function useIsMobile() {
   const [isMobile, setIsMobile] = useState(false);
-  
+
   useEffect(() => {
     const checkIfMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkIfMobile();
-    window.addEventListener('resize', checkIfMobile);
-    return () => window.removeEventListener('resize', checkIfMobile);
+    window.addEventListener("resize", checkIfMobile);
+    return () => window.removeEventListener("resize", checkIfMobile);
   }, []);
-  
+
   return isMobile;
 }
 
 // 오행에 따른 색상을 반환하는 헬퍼 함수
 const getElementColor = (element: string | undefined): string => {
   switch (element) {
-    case '목':
-      return 'bg-blue-500 text-white';
-    case '화':
-      return 'bg-red-500 text-white';
-    case '토':
-      return 'bg-yellow-500 text-white';
-    case '금':
-      return 'bg-gray-400 text-white';
-    case '수':
-      return 'bg-gray-800 text-white';
+    case "목":
+      return "bg-blue-500 text-white";
+    case "화":
+      return "bg-red-500 text-white";
+    case "토":
+      return "bg-yellow-500 text-white";
+    case "금":
+      return "bg-gray-400 text-white";
+    case "수":
+      return "bg-gray-800 text-white";
     default:
-      return 'bg-gray-200 text-black';
+      return "bg-gray-200 text-black";
   }
 };
 
 // 5각형 오행 차트 컴포넌트
-const FiveElementsPentagon = ({ fiveElements, isMobile = false }: { fiveElements?: FiveElements; isMobile?: boolean }) => {
+const FiveElementsPentagon = ({
+  fiveElements,
+  isMobile = false,
+}: {
+  fiveElements?: FiveElements;
+  isMobile?: boolean;
+}) => {
   if (!fiveElements) {
     return (
-      <div className={`flex items-center justify-center rounded-lg border bg-gray-50 p-4 ${
-        isMobile ? 'h-64 w-full' : 'h-80 w-72'
-      }`}>
+      <div
+        className={`flex items-center justify-center rounded-lg border bg-gray-50 p-4 ${
+          isMobile ? "h-64 w-full" : "h-80 w-72"
+        }`}
+      >
         <p className="text-gray-500">오행 데이터 로딩 중...</p>
       </div>
     );
   }
 
   const elements = [
-    { name: '화', value: fiveElements.fire, color: '#ef4444', angle: 0 }, // 위쪽 (12시)
-    { name: '토', value: fiveElements.earth, color: '#eab308', angle: 72 }, // 오른쪽 위 (2시)
-    { name: '금', value: fiveElements.metal, color: '#9ca3af', angle: 144 }, // 오른쪽 아래 (4시)
-    { name: '수', value: fiveElements.water, color: '#3b82f6', angle: 216 }, // 왼쪽 아래 (8시)
-    { name: '목', value: fiveElements.wood, color: '#22c55e', angle: 288 }, // 왼쪽 위 (10시)
+    { name: "화", value: fiveElements.fire, color: "#ef4444", angle: 0 }, // 위쪽 (12시)
+    { name: "토", value: fiveElements.earth, color: "#eab308", angle: 72 }, // 오른쪽 위 (2시)
+    { name: "금", value: fiveElements.metal, color: "#9ca3af", angle: 144 }, // 오른쪽 아래 (4시)
+    { name: "수", value: fiveElements.water, color: "#3b82f6", angle: 216 }, // 왼쪽 아래 (8시)
+    { name: "목", value: fiveElements.wood, color: "#22c55e", angle: 288 }, // 왼쪽 위 (10시)
   ];
 
   const total = elements.reduce((sum, el) => sum + el.value, 0);
@@ -85,20 +93,24 @@ const FiveElementsPentagon = ({ fiveElements, isMobile = false }: { fiveElements
   const labelPoints = elements.map((el) => getPoint(el.angle, maxRadius + (isMobile ? 25 : 30)));
 
   const svgSize = isMobile ? { width: 240, height: 200 } : { width: 260, height: 280 };
-  const viewBoxSize = isMobile ? '0 0 240 200' : '0 0 260 280';
+  const viewBoxSize = isMobile ? "0 0 240 200" : "0 0 260 280";
 
   return (
-    <div className={`flex flex-col items-center rounded-lg border bg-white p-3 ${
-      isMobile ? 'w-full' : 'h-80 w-72'
-    }`}>
-      <h4 className={`mb-2 font-semibold text-gray-800 ${isMobile ? 'text-base' : 'text-lg'}`}>오행 분포</h4>
+    <div
+      className={`flex flex-col items-center rounded-lg border bg-white p-3 ${
+        isMobile ? "w-full" : "h-80 w-72"
+      }`}
+    >
+      <h4 className={`mb-2 font-semibold text-gray-800 ${isMobile ? "text-base" : "text-lg"}`}>
+        오행 분포
+      </h4>
 
-      <svg 
-        width={svgSize.width} 
-        height={svgSize.height} 
+      <svg
+        width={svgSize.width}
+        height={svgSize.height}
         viewBox={viewBoxSize}
         className="flex-1"
-        style={{ maxWidth: '100%', height: 'auto' }}
+        style={{ maxWidth: "100%", height: "auto" }}
       >
         {/* 배경 그리드 5각형들 */}
         {[0.3, 0.5, 0.7, 1.0].map((ratio, i) => (
@@ -109,7 +121,7 @@ const FiveElementsPentagon = ({ fiveElements, isMobile = false }: { fiveElements
                 const point = getPoint(el.angle, maxRadius * ratio);
                 return `${point.x},${point.y}`;
               })
-              .join(' ')}
+              .join(" ")}
             fill="none"
             stroke="#e5e7eb"
             strokeWidth="1"
@@ -136,7 +148,7 @@ const FiveElementsPentagon = ({ fiveElements, isMobile = false }: { fiveElements
 
         {/* 데이터 영역 */}
         <polygon
-          points={dataPoints.map((point) => `${point.x},${point.y}`).join(' ')}
+          points={dataPoints.map((point) => `${point.x},${point.y}`).join(" ")}
           fill="url(#pentagonGradient)"
           stroke="#8b5cf6"
           strokeWidth="2.5"
@@ -178,7 +190,7 @@ const FiveElementsPentagon = ({ fiveElements, isMobile = false }: { fiveElements
                 x={point.x}
                 y={point.y - (isMobile ? 2 : 3)}
                 textAnchor="middle"
-                className={`fill-white font-bold ${isMobile ? 'text-xs' : 'text-sm'}`}
+                className={`fill-white font-bold ${isMobile ? "text-xs" : "text-sm"}`}
               >
                 {el.name}
               </text>
@@ -186,7 +198,7 @@ const FiveElementsPentagon = ({ fiveElements, isMobile = false }: { fiveElements
                 x={point.x}
                 y={point.y + (isMobile ? 8 : 10)}
                 textAnchor="middle"
-                className={`fill-white font-semibold ${isMobile ? 'text-xs' : 'text-xs'}`}
+                className={`fill-white font-semibold ${isMobile ? "text-xs" : "text-xs"}`}
               >
                 {el.value}
               </text>
@@ -218,11 +230,11 @@ const FiveElementsDisplay = ({ fiveElements }: { fiveElements?: FiveElements }) 
   }
 
   const elements = [
-    { key: 'wood', name: '목', color: 'bg-green-500', value: fiveElements.wood },
-    { key: 'fire', name: '화', color: 'bg-red-500', value: fiveElements.fire },
-    { key: 'earth', name: '토', color: 'bg-yellow-600', value: fiveElements.earth },
-    { key: 'metal', name: '금', color: 'bg-gray-400', value: fiveElements.metal },
-    { key: 'water', name: '수', color: 'bg-blue-500', value: fiveElements.water },
+    { key: "wood", name: "목", color: "bg-green-500", value: fiveElements.wood },
+    { key: "fire", name: "화", color: "bg-red-500", value: fiveElements.fire },
+    { key: "earth", name: "토", color: "bg-yellow-600", value: fiveElements.earth },
+    { key: "metal", name: "금", color: "bg-gray-400", value: fiveElements.metal },
+    { key: "water", name: "수", color: "bg-blue-500", value: fiveElements.water },
   ];
 
   const total = elements.reduce((sum, el) => sum + el.value, 0);
@@ -290,53 +302,53 @@ const SajuPillarsDisplay = ({
   isMobile?: boolean;
 }) => {
   const pillarOrder: Array<{ key: keyof FourPillars; name: string }> = [
-    { key: 'time', name: '시주' },
-    { key: 'day', name: '일주' },
-    { key: 'month', name: '월주' },
-    { key: 'year', name: '년주' },
+    { key: "time", name: "시주" },
+    { key: "day", name: "일주" },
+    { key: "month", name: "월주" },
+    { key: "year", name: "년주" },
   ];
 
   const getHanjaSound = (hanja: string): string => {
     const hanjaMap: { [key: string]: string } = {
-      甲: '갑',
-      乙: '을',
-      丙: '병',
-      丁: '정',
-      戊: '무',
-      己: '기',
-      庚: '경',
-      辛: '신',
-      壬: '임',
-      癸: '계',
-      子: '자',
-      丑: '축',
-      寅: '인',
-      卯: '묘',
-      辰: '진',
-      巳: '사',
-      午: '오',
-      未: '미',
-      申: '신',
-      酉: '유',
-      戌: '술',
-      亥: '해',
+      甲: "갑",
+      乙: "을",
+      丙: "병",
+      丁: "정",
+      戊: "무",
+      己: "기",
+      庚: "경",
+      辛: "신",
+      壬: "임",
+      癸: "계",
+      子: "자",
+      丑: "축",
+      寅: "인",
+      卯: "묘",
+      辰: "진",
+      巳: "사",
+      午: "오",
+      未: "미",
+      申: "신",
+      酉: "유",
+      戌: "술",
+      亥: "해",
     };
-    return hanjaMap[hanja] || '';
+    return hanjaMap[hanja] || "";
   };
 
   // 천간 정보 조회 (로컬 구현)
   const getStemInfo = (chinese: string) => {
     const stems = [
-      { chinese: '甲', korean: '갑', fiveElement: '목', fiveElementHanja: '木', yangYin: '양' },
-      { chinese: '乙', korean: '을', fiveElement: '목', fiveElementHanja: '木', yangYin: '음' },
-      { chinese: '丙', korean: '병', fiveElement: '화', fiveElementHanja: '火', yangYin: '양' },
-      { chinese: '丁', korean: '정', fiveElement: '화', fiveElementHanja: '火', yangYin: '음' },
-      { chinese: '戊', korean: '무', fiveElement: '토', fiveElementHanja: '土', yangYin: '양' },
-      { chinese: '己', korean: '기', fiveElement: '토', fiveElementHanja: '土', yangYin: '음' },
-      { chinese: '庚', korean: '경', fiveElement: '금', fiveElementHanja: '金', yangYin: '양' },
-      { chinese: '辛', korean: '신', fiveElement: '금', fiveElementHanja: '金', yangYin: '음' },
-      { chinese: '壬', korean: '임', fiveElement: '수', fiveElementHanja: '水', yangYin: '양' },
-      { chinese: '癸', korean: '계', fiveElement: '수', fiveElementHanja: '水', yangYin: '음' },
+      { chinese: "甲", korean: "갑", fiveElement: "목", fiveElementHanja: "木", yangYin: "양" },
+      { chinese: "乙", korean: "을", fiveElement: "목", fiveElementHanja: "木", yangYin: "음" },
+      { chinese: "丙", korean: "병", fiveElement: "화", fiveElementHanja: "火", yangYin: "양" },
+      { chinese: "丁", korean: "정", fiveElement: "화", fiveElementHanja: "火", yangYin: "음" },
+      { chinese: "戊", korean: "무", fiveElement: "토", fiveElementHanja: "土", yangYin: "양" },
+      { chinese: "己", korean: "기", fiveElement: "토", fiveElementHanja: "土", yangYin: "음" },
+      { chinese: "庚", korean: "경", fiveElement: "금", fiveElementHanja: "金", yangYin: "양" },
+      { chinese: "辛", korean: "신", fiveElement: "금", fiveElementHanja: "金", yangYin: "음" },
+      { chinese: "壬", korean: "임", fiveElement: "수", fiveElementHanja: "水", yangYin: "양" },
+      { chinese: "癸", korean: "계", fiveElement: "수", fiveElementHanja: "水", yangYin: "음" },
     ];
     return stems.find((stem) => stem.chinese === chinese);
   };
@@ -344,36 +356,36 @@ const SajuPillarsDisplay = ({
   // 지지 정보 조회 (로컬 구현)
   const getBranchInfo = (chinese: string) => {
     const branches = [
-      { chinese: '子', korean: '자', fiveElement: '수', fiveElementHanja: '水', yangYin: '양' },
-      { chinese: '丑', korean: '축', fiveElement: '토', fiveElementHanja: '土', yangYin: '음' },
-      { chinese: '寅', korean: '인', fiveElement: '목', fiveElementHanja: '木', yangYin: '양' },
-      { chinese: '卯', korean: '묘', fiveElement: '목', fiveElementHanja: '木', yangYin: '음' },
-      { chinese: '辰', korean: '진', fiveElement: '토', fiveElementHanja: '土', yangYin: '양' },
-      { chinese: '巳', korean: '사', fiveElement: '화', fiveElementHanja: '火', yangYin: '음' },
-      { chinese: '午', korean: '오', fiveElement: '화', fiveElementHanja: '火', yangYin: '양' },
-      { chinese: '未', korean: '미', fiveElement: '토', fiveElementHanja: '土', yangYin: '음' },
-      { chinese: '申', korean: '신', fiveElement: '금', fiveElementHanja: '金', yangYin: '양' },
-      { chinese: '酉', korean: '유', fiveElement: '금', fiveElementHanja: '金', yangYin: '음' },
-      { chinese: '戌', korean: '술', fiveElement: '토', fiveElementHanja: '土', yangYin: '양' },
-      { chinese: '亥', korean: '해', fiveElement: '수', fiveElementHanja: '水', yangYin: '음' },
+      { chinese: "子", korean: "자", fiveElement: "수", fiveElementHanja: "水", yangYin: "양" },
+      { chinese: "丑", korean: "축", fiveElement: "토", fiveElementHanja: "土", yangYin: "음" },
+      { chinese: "寅", korean: "인", fiveElement: "목", fiveElementHanja: "木", yangYin: "양" },
+      { chinese: "卯", korean: "묘", fiveElement: "목", fiveElementHanja: "木", yangYin: "음" },
+      { chinese: "辰", korean: "진", fiveElement: "토", fiveElementHanja: "土", yangYin: "양" },
+      { chinese: "巳", korean: "사", fiveElement: "화", fiveElementHanja: "火", yangYin: "음" },
+      { chinese: "午", korean: "오", fiveElement: "화", fiveElementHanja: "火", yangYin: "양" },
+      { chinese: "未", korean: "미", fiveElement: "토", fiveElementHanja: "土", yangYin: "음" },
+      { chinese: "申", korean: "신", fiveElement: "금", fiveElementHanja: "金", yangYin: "양" },
+      { chinese: "酉", korean: "유", fiveElement: "금", fiveElementHanja: "金", yangYin: "음" },
+      { chinese: "戌", korean: "술", fiveElement: "토", fiveElementHanja: "土", yangYin: "양" },
+      { chinese: "亥", korean: "해", fiveElement: "수", fiveElementHanja: "水", yangYin: "음" },
     ];
     return branches.find((branch) => branch.chinese === chinese);
   };
 
   // 십성 한글 이름 변환
   const getTenStarKorean = (tenStar: string | undefined): string => {
-    if (!tenStar) return '-';
+    if (!tenStar) return "-";
     const tenStarMap: { [key: string]: string } = {
-      比肩: '비견',
-      劫財: '겁재',
-      食神: '식신',
-      傷官: '상관',
-      偏財: '편재',
-      正財: '정재',
-      偏官: '편관',
-      正官: '정관',
-      偏印: '편인',
-      正印: '정인',
+      比肩: "비견",
+      劫財: "겁재",
+      食神: "식신",
+      傷官: "상관",
+      偏財: "편재",
+      正財: "정재",
+      偏官: "편관",
+      正官: "정관",
+      偏印: "편인",
+      正印: "정인",
     };
     return tenStarMap[tenStar] || tenStar;
   };
@@ -387,11 +399,13 @@ const SajuPillarsDisplay = ({
         {/* 모바일: 사주팔자 테이블 */}
         <div className="rounded-lg border bg-white p-4 shadow-sm">
           <h4 className="mb-4 text-center text-lg font-semibold text-gray-800">사주 팔자</h4>
-          
+
           {/* 주차 이름 */}
           <div className="mb-3 grid grid-cols-4 gap-2 text-center text-xs text-gray-500">
             {pillarOrder.map((p) => (
-              <div key={p.key} className="font-medium">{p.name}</div>
+              <div key={p.key} className="font-medium">
+                {p.name}
+              </div>
             ))}
           </div>
 
@@ -402,7 +416,7 @@ const SajuPillarsDisplay = ({
               return (
                 <div key={p.key} className="rounded-lg bg-purple-50 p-2 text-center">
                   <div className="text-xs font-medium text-purple-700">
-                    {skyStar ? getTenStarKorean(skyStar) : '–'}
+                    {skyStar ? getTenStarKorean(skyStar) : "–"}
                   </div>
                 </div>
               );
@@ -422,7 +436,9 @@ const SajuPillarsDisplay = ({
                   <div
                     className={`rounded-lg p-3 text-center shadow-sm ${getElementColor(stemInfo?.fiveElement)}`}
                   >
-                    <div className="text-xs opacity-80">{stemInfo?.fiveElementHanja} {stemInfo?.fiveElement}</div>
+                    <div className="text-xs opacity-80">
+                      {stemInfo?.fiveElementHanja} {stemInfo?.fiveElement}
+                    </div>
                     <div className="text-2xl font-bold">{pillar.sky}</div>
                     <div className="text-xs opacity-90">{getHanjaSound(pillar.sky)}</div>
                   </div>
@@ -430,7 +446,9 @@ const SajuPillarsDisplay = ({
                   <div
                     className={`rounded-lg p-3 text-center shadow-sm ${getElementColor(branchInfo?.fiveElement)}`}
                   >
-                    <div className="text-xs opacity-80">{branchInfo?.fiveElementHanja} {branchInfo?.fiveElement}</div>
+                    <div className="text-xs opacity-80">
+                      {branchInfo?.fiveElementHanja} {branchInfo?.fiveElement}
+                    </div>
                     <div className="text-2xl font-bold">{pillar.ground}</div>
                     <div className="text-xs opacity-90">{getHanjaSound(pillar.ground)}</div>
                   </div>
@@ -446,7 +464,7 @@ const SajuPillarsDisplay = ({
               return (
                 <div key={p.key} className="rounded-lg bg-blue-50 p-2 text-center">
                   <div className="text-xs font-medium text-blue-700">
-                    {groundStar ? getTenStarKorean(groundStar) : '–'}
+                    {groundStar ? getTenStarKorean(groundStar) : "–"}
                   </div>
                 </div>
               );
@@ -461,7 +479,7 @@ const SajuPillarsDisplay = ({
   return (
     <div className="rounded-lg border bg-white p-6 shadow-sm">
       <h4 className="mb-6 text-center text-xl font-semibold text-gray-800">사주 팔자 분석</h4>
-      
+
       <div className="flex gap-8">
         {/* 왼쪽: 5각형 오행 차트 */}
         <div className="flex-shrink-0">
@@ -471,11 +489,13 @@ const SajuPillarsDisplay = ({
         {/* 오른쪽: 사주팔자 테이블 */}
         <div className="flex-1">
           <h5 className="mb-4 text-center text-lg font-semibold text-gray-700">사주 팔자</h5>
-          
+
           {/* 주차 이름 */}
           <div className="mb-3 grid grid-cols-4 gap-3 text-center text-sm text-gray-500">
             {pillarOrder.map((p) => (
-              <div key={p.key} className="font-medium">{p.name}</div>
+              <div key={p.key} className="font-medium">
+                {p.name}
+              </div>
             ))}
           </div>
 
@@ -486,7 +506,7 @@ const SajuPillarsDisplay = ({
               return (
                 <div key={p.key} className="rounded-lg bg-purple-50 p-2 text-center">
                   <div className="text-xs font-medium text-purple-700">
-                    {skyStar ? getTenStarKorean(skyStar) : '–'}
+                    {skyStar ? getTenStarKorean(skyStar) : "–"}
                   </div>
                 </div>
               );
@@ -506,7 +526,9 @@ const SajuPillarsDisplay = ({
                   <div
                     className={`rounded-lg p-4 text-center shadow-sm ${getElementColor(stemInfo?.fiveElement)}`}
                   >
-                    <div className="text-xs opacity-80">{stemInfo?.fiveElementHanja} {stemInfo?.fiveElement}</div>
+                    <div className="text-xs opacity-80">
+                      {stemInfo?.fiveElementHanja} {stemInfo?.fiveElement}
+                    </div>
                     <div className="text-3xl font-bold">{pillar.sky}</div>
                     <div className="text-sm opacity-90">{getHanjaSound(pillar.sky)}</div>
                   </div>
@@ -514,7 +536,9 @@ const SajuPillarsDisplay = ({
                   <div
                     className={`rounded-lg p-4 text-center shadow-sm ${getElementColor(branchInfo?.fiveElement)}`}
                   >
-                    <div className="text-xs opacity-80">{branchInfo?.fiveElementHanja} {branchInfo?.fiveElement}</div>
+                    <div className="text-xs opacity-80">
+                      {branchInfo?.fiveElementHanja} {branchInfo?.fiveElement}
+                    </div>
                     <div className="text-3xl font-bold">{pillar.ground}</div>
                     <div className="text-sm opacity-90">{getHanjaSound(pillar.ground)}</div>
                   </div>
@@ -530,7 +554,7 @@ const SajuPillarsDisplay = ({
               return (
                 <div key={p.key} className="rounded-lg bg-blue-50 p-2 text-center">
                   <div className="text-xs font-medium text-blue-700">
-                    {groundStar ? getTenStarKorean(groundStar) : '–'}
+                    {groundStar ? getTenStarKorean(groundStar) : "–"}
                   </div>
                 </div>
               );
@@ -544,16 +568,16 @@ const SajuPillarsDisplay = ({
 
 export default function DebugPage() {
   const isMobile = useIsMobile();
-  const [activeTab, setActiveTab] = useState<'local' | 'reference'>('local');
+  const [activeTab, setActiveTab] = useState<"local" | "reference">("local");
   const [birthInput, setBirthInput] = useState<BirthInput>({
-    name: '테스트',
-    gender: '남성',
-    calendar: '양력',
-    year: '1995',
-    month: '4',
-    day: '25',
-    hour: '10',
-    minute: '30',
+    name: "테스트",
+    gender: "남성",
+    calendar: "양력",
+    year: "1995",
+    month: "4",
+    day: "25",
+    hour: "10",
+    minute: "30",
   });
 
   const [sajuResult, setSajuResult] = useState<{
@@ -573,11 +597,11 @@ export default function DebugPage() {
     try {
       const result = await calculateSajuAction(birthInput);
 
-      console.log('[CLIENT] Received result:', result);
-      console.log('[CLIENT] localTenStars:', result.localTenStars);
-      console.log('[CLIENT] referenceTenStars:', result.referenceTenStars);
-      console.log('[CLIENT] localFiveElements:', result.localFiveElements);
-      console.log('[CLIENT] referenceFiveElements:', result.referenceFiveElements);
+      console.log("[CLIENT] Received result:", result);
+      console.log("[CLIENT] localTenStars:", result.localTenStars);
+      console.log("[CLIENT] referenceTenStars:", result.referenceTenStars);
+      console.log("[CLIENT] localFiveElements:", result.localFiveElements);
+      console.log("[CLIENT] referenceFiveElements:", result.referenceFiveElements);
 
       setSajuResult({
         ...result,
@@ -592,25 +616,29 @@ export default function DebugPage() {
   };
 
   const handleTimeChange = (value: string) => {
-    const [hour, minute] = value.split(':');
-    setBirthInput((prev) => ({ ...prev, hour, minute: minute || '0' }));
+    const [hour, minute] = value.split(":");
+    setBirthInput((prev) => ({ ...prev, hour, minute: minute || "0" }));
   };
 
   return (
-    <div className={`container mx-auto p-4 ${isMobile ? 'max-w-md' : 'max-w-6xl'}`}>
+    <div className={`container mx-auto p-4 ${isMobile ? "max-w-md" : "max-w-6xl"}`}>
       <div className="mb-6 text-center">
-        <h1 className={`font-bold text-gray-900 ${isMobile ? 'text-2xl' : 'text-3xl'}`}>사주 팔자</h1>
+        <h1 className={`font-bold text-gray-900 ${isMobile ? "text-2xl" : "text-3xl"}`}>
+          사주 팔자
+        </h1>
         {!isMobile && <p className="mt-1 text-sm text-gray-600">생년월일로 운명을 확인하세요</p>}
       </div>
 
       {/* 입력 폼 */}
-      <div className={`mb-6 rounded-xl bg-white p-5 shadow-sm ${isMobile ? '' : 'md:max-w-4xl md:mx-auto'}`}>
+      <div
+        className={`mb-6 rounded-xl bg-white p-5 shadow-sm ${isMobile ? "" : "md:mx-auto md:max-w-4xl"}`}
+      >
         <h2 className="mb-4 text-lg font-semibold text-purple-600">생년월일 입력</h2>
 
-        <div className={`${isMobile ? 'space-y-4' : 'grid gap-4 md:grid-cols-3'}`}>
+        <div className={`${isMobile ? "space-y-4" : "grid gap-4 md:grid-cols-3"}`}>
           {/* 기본 정보 */}
           <div className="space-y-4">
-            <div className={isMobile ? 'grid grid-cols-2 gap-3' : ''}>
+            <div className={isMobile ? "grid grid-cols-2 gap-3" : ""}>
               <div>
                 <label className="mb-1 block text-sm font-medium text-gray-700">이름</label>
                 <input
@@ -627,7 +655,10 @@ export default function DebugPage() {
                 <select
                   value={birthInput.gender}
                   onChange={(e) =>
-                    setBirthInput((prev) => ({ ...prev, gender: e.target.value as '남성' | '여성' }))
+                    setBirthInput((prev) => ({
+                      ...prev,
+                      gender: e.target.value as "남성" | "여성",
+                    }))
                   }
                   className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
                 >
@@ -640,14 +671,14 @@ export default function DebugPage() {
             <div>
               <label className="mb-1 block text-sm font-medium text-gray-700">달력</label>
               <div className="flex rounded-lg border border-gray-300 p-1">
-                {(['양력', '음력'] as const).map((calendar) => (
+                {(["양력", "음력"] as const).map((calendar) => (
                   <button
                     key={calendar}
                     onClick={() => setBirthInput((prev) => ({ ...prev, calendar }))}
                     className={`flex-1 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
                       birthInput.calendar === calendar
-                        ? 'bg-purple-500 text-white'
-                        : 'text-gray-600 hover:bg-gray-100'
+                        ? "bg-purple-500 text-white"
+                        : "text-gray-600 hover:bg-gray-100"
                     }`}
                   >
                     {calendar}
@@ -736,7 +767,7 @@ export default function DebugPage() {
                   <span>계산 중...</span>
                 </div>
               ) : (
-                '사주 팔자 확인하기'
+                "사주 팔자 확인하기"
               )}
             </button>
           </div>
@@ -756,13 +787,15 @@ export default function DebugPage() {
         <div>
           {/* 탭 네비게이션 */}
           {sajuResult.local && sajuResult.reference && (
-            <div className={`mb-4 flex rounded-xl bg-white p-1 shadow-sm ${
-              isMobile ? '' : 'md:max-w-md md:mx-auto'
-            }`}>
+            <div
+              className={`mb-4 flex rounded-xl bg-white p-1 shadow-sm ${
+                isMobile ? "" : "md:mx-auto md:max-w-md"
+              }`}
+            >
               {(
                 [
-                  { key: 'local', label: '로컬 계산', color: 'blue' },
-                  { key: 'reference', label: 'Reference API', color: 'green' },
+                  { key: "local", label: "로컬 계산", color: "blue" },
+                  { key: "reference", label: "Reference API", color: "green" },
                 ] as const
               ).map((tab) => (
                 <button
@@ -770,10 +803,10 @@ export default function DebugPage() {
                   onClick={() => setActiveTab(tab.key)}
                   className={`flex-1 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
                     activeTab === tab.key
-                      ? tab.color === 'blue'
-                        ? 'bg-blue-500 text-white'
-                        : 'bg-green-500 text-white'
-                      : 'text-gray-600 hover:bg-gray-100'
+                      ? tab.color === "blue"
+                        ? "bg-blue-500 text-white"
+                        : "bg-green-500 text-white"
+                      : "text-gray-600 hover:bg-gray-100"
                   }`}
                 >
                   {tab.label}
@@ -783,7 +816,7 @@ export default function DebugPage() {
           )}
 
           {/* 결과 컨텐츠 */}
-          {activeTab === 'local' && sajuResult.local && (
+          {activeTab === "local" && sajuResult.local && (
             <div>
               <div className="mb-3 text-center">
                 <h3 className="text-lg font-semibold text-blue-600">로컬 계산 결과</h3>
@@ -803,7 +836,7 @@ export default function DebugPage() {
             </div>
           )}
 
-          {activeTab === 'reference' && sajuResult.reference && (
+          {activeTab === "reference" && sajuResult.reference && (
             <div>
               <div className="mb-3 text-center">
                 <h3 className="text-lg font-semibold text-green-600">Reference API 결과</h3>
