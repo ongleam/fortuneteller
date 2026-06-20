@@ -50,7 +50,6 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith('/api/inngest') ||
     pathname.startsWith('/api/kakao') ||
     pathname.startsWith('/api/test-chat') ||
-    pathname.startsWith('/api/queries/embedding') ||
     pathname.startsWith('/_next/') ||
     pathname.includes('.') // 정적 파일 (이미지, CSS 등)
   ) {

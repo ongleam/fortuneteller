@@ -1,4 +1,4 @@
-import { google } from '@ai-sdk/google';
+import { google } from '@/lib/shared/utils/google-provider';
 import { modelConfig } from '@/config/models';
 import { customProvider, extractReasoningMiddleware, wrapLanguageModel } from 'ai';
 
