@@ -11,6 +11,15 @@
 
 This is a Next.js 15 fortune-telling/saju (Korean traditional fortune-telling) chatbot application that integrates with Kakao chatbot API.
 
+> **모노레포 전환 진행 중 (target: 사주팔자 소개팅).** bun workspaces 기반 모노레포로 재편 중이다. 배포 가능한 앱은 `apps/*`(web·kakao·ios·android), 공유 코드는 `packages/*`에 둔다. 완료 상태:
+>
+> - **`apps/web`(`@fortuneteller/web`)** — 소개팅 웹앱(이전 완료).
+> - **`apps/kakao`(`@fortuneteller/kakao`)** — Kakao 챗봇 라우트(`/api/kakao` + callback) 분리 완료. _배포·웹훅 URL 전환은 별도 ops 단계_ (`apps/kakao/README.md`).
+> - **`packages/core`(`@fortuneteller/core`)** — 공유 백엔드(AI 에이전트·tools·Drizzle DB·Supabase·도메인 액션·config) 추출 완료. web·kakao가 `@/lib`·`@/config` alias로 소비.
+> - **`packages/saju`(`@fortuneteller/saju`)** — 사주 계산 엔진(추출 완료).
+>
+> 루트는 순수 워크스페이스 루트(글롭 + 위임 스크립트 + 공용 prettier)다. 데이터 저장소는 당분간 Postgres를 유지하며 이후 Firebase(Auth/FCM/Firestore)로 이전 예정이다.
+
 ## Key Components
 
 **Core Architecture:**
@@ -31,21 +40,46 @@ This is a Next.js 15 fortune-telling/saju (Korean traditional fortune-telling) c
 
 **Current Implementation (도메인 중심 아키텍처 적용 완료):**
 
-**lib/ 구조:**
+**모노레포 최상위 구조 (전환 중):**
+
+```
+fortuneteller/
+├── apps/                    # 배포 가능한 앱 (apps/README.md 참조)
+│   ├── web/                # ✅ Next.js 소개팅 웹앱 (@fortuneteller/web)
+│   │   ├── app/ components/ data/ hooks/ public/ scripts/ tests/
+│   │   ├── next.config.ts · tailwind.config.ts · drizzle.config.ts
+│   │   ├── jest.config.js · playwright.config.ts · tsconfig.json
+│   │   └── package.json    #   앱 의존성·스크립트(dev/build/db:*/test)
+│   ├── kakao/              # ✅ Kakao 챗봇 (@fortuneteller/kakao)
+│   │   ├── app/api/kakao/{route.ts, callback/route.ts}
+│   │   └── next.config.ts · tsconfig.json · package.json (포트 3001)
+│   ├── ios/                #   🔜 Swift / SwiftUI
+│   └── android/            #   🔜 Kotlin / Compose
+├── packages/
+│   ├── core/               # ✅ 공유 백엔드 (@fortuneteller/core)
+│   │   ├── lib/            #    interfaces(agents·tools·actions)·infra(db·supabase)·shared·response
+│   │   └── config/         #    prompts·models·site·entitlements
+│   └── saju/               # ✅ 사주 엔진 (@fortuneteller/saju, 순수 TS·무의존)
+│       └── src/            #    lib/core/saju 에서 추출. output-types.ts 포함
+├── services/
+│   └── functions/          # 🔜 Firebase Cloud Functions (네이티브용 computeSaju 등)
+├── docs/ · CLAUDE.md · turbo.json
+├── bun.lock                # 단일 락파일(워크스페이스 전체)
+└── package.json            # 워크스페이스 루트: globs + 위임 스크립트 + prettier
+```
+
+- 워크스페이스: `bun` workspaces (`["apps/*", "packages/*"]`). 루트 스크립트는 `bun --filter`로 각 워크스페이스에 위임한다. (`turbo`는 미설치 — `turbo.json`은 향후용)
+- **공유 코드 소비 방식:** `apps/web`·`apps/kakao`는 `@/lib/*`·`@/config/*` alias를 `packages/core`로, `@fortuneteller/saju`를 `packages/saju/src`로 매핑한다 — tsconfig `paths` + Next.js `transpilePackages` + (web) jest `moduleNameMapper` 3곳에 동일하게 설정. 덕분에 패키지로 옮긴 코드의 `@/lib`·`@/config` import를 **한 줄도 고치지 않고** 그대로 쓴다.
+- `packages/core`는 자신이 import하는 npm 의존성(ai·zod·drizzle-orm·postgres·@supabase/\*·@ai-sdk/google 등)을 **직접 선언**한다(패키지 위생). `@fortuneteller/saju`를 의존한다.
+- DB 마이그레이션: 스키마/마이그레이션은 `packages/core/lib/infra/db`에 있고, `migrate.ts`는 실행 CWD와 무관하게 모듈 기준으로 migrations 폴더를 찾는다. drizzle 설정·`db:*` 스크립트는 `apps/web`이 소유하며 패키지 경로(`../../packages/core/...`)를 가리킨다.
+- 아래 `lib/` 구조는 이제 **`packages/core/lib/`** 기준이다(과거 `apps/web/lib`에서 이전). `tests/`는 여전히 `apps/web/tests/`에 있다.
+
+**lib/ 구조 (`packages/core/lib/`):**
 
 ```
 lib/
 ├── core/                    # 핵심 비즈니스 로직
-│   ├── saju/               # 사주 도메인 (✅ 완료)
-│   │   ├── adapters.ts     # 출력 형식 어댑터
-│   │   ├── calendar.ts     # 달력 변환 유틸리티
-│   │   ├── constants.ts    # 사주 상수 및 매핑
-│   │   ├── five-elements.ts # 오행 분석
-│   │   ├── fortunes.ts     # 운세 계산
-│   │   ├── index.ts        # 메인 진입점
-│   │   ├── pillars.ts      # 사주 팔자 계산
-│   │   ├── sinsals.ts      # 신살 분석
-│   │   └── ten-stars.ts    # 십성 계산
+│   ├── saju/               # ⛔ packages/saju (@fortuneteller/saju) 로 이전 완료
 │   ├── chat/               # 채팅 도메인
 │   │   └── chat.ts
 │   └── profile/            # 프로필 도메인

@@ -1,0 +1,68 @@
+"use client";
+
+import type { User } from "@supabase/auth-js";
+import { useRouter } from "next/navigation";
+import { PlusIcon } from "@/components/icons";
+import { SidebarHistory } from "@/components/sidebar/history";
+import { SidebarUserNav } from "@/components/sidebar/user-nav";
+import { Button } from "@/components/ui/button";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarMenu,
+  useSidebar,
+} from "@/components/ui/sidebar";
+import Link from "next/link";
+import Image from "next/image";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+
+export function AppSidebar({ user }: { user: User | undefined }) {
+  const router = useRouter();
+  const { setOpenMobile } = useSidebar();
+
+  return (
+    <Sidebar className="group-data-[side=left]:border-r-0">
+      <SidebarHeader>
+        <SidebarMenu>
+          <div className="flex flex-row items-center justify-between">
+            <Link
+              href="/"
+              onClick={() => {
+                setOpenMobile(false);
+              }}
+              className="flex flex-row items-center"
+            >
+              <Image src="/images/logo.png" alt="NomadLink Logo" width={24} height={24} />
+              <span className="hover:bg-muted cursor-pointer rounded-md px-2 text-lg font-semibold">
+                NomadLink Korea
+              </span>
+            </Link>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  type="button"
+                  className="h-fit p-1 sm:p-2"
+                  onClick={() => {
+                    setOpenMobile(false);
+                    router.push("/");
+                    router.refresh();
+                  }}
+                >
+                  <PlusIcon />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent align="end">New chat</TooltipContent>
+            </Tooltip>
+          </div>
+        </SidebarMenu>
+      </SidebarHeader>
+      <SidebarContent>
+        <SidebarHistory user={user} />
+      </SidebarContent>
+      {/* <SidebarFooter>{user && <SidebarUserNav user={user} />}</SidebarFooter> */}
+    </Sidebar>
+  );
+}
