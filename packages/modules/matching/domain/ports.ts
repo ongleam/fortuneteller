@@ -40,7 +40,7 @@ export interface MatchRepository {
     score: number;
   }): Promise<void>;
   /** 양쪽 좋아요가 모두 찼을 때 matched_at 을 세팅한다. */
-  setMatched(args: { userAId: string; userBId: string; matchedAt: Date }): Promise<void>;
+  updateMatchedAt(args: { userAId: string; userBId: string; matchedAt: Date }): Promise<void>;
 }
 
 /** matching 모듈 UoW 가 제공하는 repo 번들. */

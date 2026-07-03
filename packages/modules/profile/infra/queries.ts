@@ -64,9 +64,31 @@ export async function updateDatingProfile({
   data: DatingProfileFields;
 }): Promise<Profile | null> {
   try {
+    // 허용 컬럼만 명시적으로 추린다 — mass-assignment 방지(RLS 꺼짐 보완).
+    // 크래프트된 호출이 name·avatar_url·user_kakao_id·theme·user_id 등을 못 쓰게 한다.
+    const allowed: (keyof DatingProfileFields)[] = [
+      "gender",
+      "birth_type",
+      "birth_year",
+      "birth_month",
+      "birth_day",
+      "birth_time",
+      "bio",
+      "region",
+      "photo_urls",
+      "pref_gender",
+      "pref_age_min",
+      "pref_age_max",
+      "status",
+    ];
+    const patch: Partial<DatingProfileFields> = {};
+    for (const key of allowed) {
+      if (data[key] !== undefined) (patch as Record<string, unknown>)[key] = data[key];
+    }
+
     const [updated] = await db
       .update(profile)
-      .set({ ...data, updated_at: new Date() })
+      .set({ ...patch, updated_at: new Date() })
       .where(eq(profile.user_id, userId))
       .returning();
     return updated ?? null;

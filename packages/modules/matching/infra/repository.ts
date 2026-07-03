@@ -54,29 +54,24 @@ export function createMatchRepository(tx: DbClient): MatchRepository {
     },
 
     async upsertLike({ userAId, userBId, side, likedAt, score }) {
-      const existing = await tx
-        .select()
-        .from(matchTable)
-        .where(and(eq(matchTable.user_a_id, userAId), eq(matchTable.user_b_id, userBId)))
-        .limit(1);
-
-      if (existing.length === 0) {
-        await tx.insert(matchTable).values({
+      // 원자적 upsert — 동시 상호 좋아요가 PK 를 경합해도 한쪽이 유실되지 않는다.
+      // 최초 insert 만 score 를 기록하고, 충돌 시 해당 쪽 *_liked_at 만 갱신한다.
+      await tx
+        .insert(matchTable)
+        .values({
           user_a_id: userAId,
           user_b_id: userBId,
           score,
           a_liked_at: side === "a" ? likedAt : null,
           b_liked_at: side === "b" ? likedAt : null,
+        })
+        .onConflictDoUpdate({
+          target: [matchTable.user_a_id, matchTable.user_b_id],
+          set: side === "a" ? { a_liked_at: likedAt } : { b_liked_at: likedAt },
         });
-        return;
-      }
-      await tx
-        .update(matchTable)
-        .set(side === "a" ? { a_liked_at: likedAt } : { b_liked_at: likedAt })
-        .where(and(eq(matchTable.user_a_id, userAId), eq(matchTable.user_b_id, userBId)));
     },
 
-    async setMatched({ userAId, userBId, matchedAt }) {
+    async updateMatchedAt({ userAId, userBId, matchedAt }) {
       await tx
         .update(matchTable)
         .set({ matched_at: matchedAt })

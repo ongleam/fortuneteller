@@ -5,9 +5,6 @@ import { solarToLunar, lunarToSolar } from "../domain/services/calendar";
 import { computeHarmony } from "../domain/services/harmony";
 import type { BirthInput } from "../domain/value-objects";
 
-export { computeHarmony } from "../domain/services/harmony";
-export type { HarmonyResult } from "../domain/services/harmony";
-
 /** 입력받은 생년월일시로 사주를 계산한다. */
 export function computeSaju(input: BirthInput) {
   return getSajuInfo(input);

@@ -21,7 +21,8 @@ async function likeUserHandler(
 
   const { userAId, userBId, actorSide } = toCanonicalPair(actorId, targetId);
   const now = new Date();
-  let matched = false;
+  let matched = false; // 현재 두 사람이 매칭 상태인가(이번 요청 이후 기준)
+  let newlyMatched = false; // 이번 좋아요로 새로 성립했는가(이벤트 발행 조건)
 
   try {
     await uow(async (repos) => {
@@ -42,15 +43,17 @@ async function likeUserHandler(
 
       await repos.matchRepo.upsertLike({ userAId, userBId, side: actorSide, likedAt: now, score });
 
-      // 양쪽 *_liked_at 이 모두 찼고 아직 미성립이면 매칭 성립.
+      // 양쪽 *_liked_at 이 모두 차면 매칭 상태. 아직 미성립이면 이번에 성립시킨다.
       const updated = await repos.matchRepo.getMatch({ userAId, userBId });
-      if (updated && updated.a_liked_at && updated.b_liked_at && !updated.matched_at) {
-        await repos.matchRepo.setMatched({ userAId, userBId, matchedAt: now });
-        matched = true;
+      const bothLiked = Boolean(updated?.a_liked_at && updated?.b_liked_at);
+      if (bothLiked && updated && !updated.matched_at) {
+        await repos.matchRepo.updateMatchedAt({ userAId, userBId, matchedAt: now });
+        newlyMatched = true;
       }
+      matched = bothLiked; // 재-좋아요 등으로 이미 성립돼 있어도 현재 상태를 반영
     });
 
-    if (matched) uow.addEvent(MatchCreated({ userAId, userBId }));
+    if (newlyMatched) uow.addEvent(MatchCreated({ userAId, userBId }));
     return { success: true, matched };
   } catch (error) {
     return { success: false, matched: false, error: (error as Error).message };
