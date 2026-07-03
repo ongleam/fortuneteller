@@ -1,36 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getKSTDateTime } from "@fortuneteller/shared/utils";
 import { KakaoRequestBody, KakaoSkillResponse } from "@fortuneteller/shared/types/kakao";
-import { siteConfig } from "@fortuneteller/config/site";
 
 import axios from "axios";
 
-// Vercel 환경에 따른 콜백 URL 설정
-const getBackgroundTaskUrl = () => {
-  // 로컬 개발 환경
-  if (process.env.NODE_ENV === "development") {
-    return `${siteConfig.urls.local}/api/kakao/callback`;
-  }
-
-  // Vercel 환경
-  switch (process.env.VERCEL_ENV) {
-    case "production":
-      return `${siteConfig.urls.production}/api/kakao/callback`; // 실제 프로덕션 도메인
-    case "preview":
-      return `${siteConfig.urls.development}/api/kakao/callback`; // 프리뷰/개발 도메인
-    default:
-      // VERCEL_ENV가 없는 경우 (로컬 환경 등)
-      return `${siteConfig.urls.local}/api/kakao/callback`;
-  }
-};
-
 const TIMEOUT_MS = 1000;
 
-const backgroundTaskUrl = getBackgroundTaskUrl();
+// self-call로 백그라운드 invocation을 띄운다. Vercel(서버리스)에선 자기 배포의 공개 URL이,
+// 로컬 dev에선 루프백이 필요하다. request origin은 ngrok 뒤에서 https://localhost 로 깨지므로 쓰지 않는다.
+const backgroundTaskUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}/api/kakao/callback`
+  : `http://localhost:${process.env.PORT ?? 3000}/api/kakao/callback`;
 
 export async function POST(request: NextRequest) {
-  // let requestBody: KakaoRequestBody;
-
   try {
     const body: KakaoRequestBody = await request.json();
 
