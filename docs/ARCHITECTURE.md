@@ -11,255 +11,166 @@
 
 This is a Next.js 15 fortune-telling/saju (Korean traditional fortune-telling) chatbot application that integrates with Kakao chatbot API.
 
-> **모노레포 전환 진행 중 (target: 사주팔자 소개팅).** bun workspaces 기반 모노레포로 재편 중이다. 배포 가능한 앱은 `apps/*`(web·kakao·ios·android), 공유 코드는 `packages/*`에 둔다. 완료 상태:
+> **ongleam형 DDD 모노레포.** bun workspaces 기반. **`apps/web`이 유일 배포 앱**(Vercel)이자 얇은 어댑터 레이어이고, 비즈니스 로직은 `packages/modules/<도메인>`, 기반 관심사는 concern별 패키지에 둔다.
 >
-> - **`apps/web`(`@fortuneteller/web`)** — 소개팅 웹앱(이전 완료).
-> - **`apps/kakao`(`@fortuneteller/kakao`)** — Kakao 챗봇 라우트(`/api/kakao` + callback) 분리 완료. _배포·웹훅 URL 전환은 별도 ops 단계_ (`apps/kakao/README.md`).
-> - **`packages/core`(`@fortuneteller/core`)** — 공유 백엔드(AI 에이전트·tools·Drizzle DB·Supabase·도메인 액션·config) 추출 완료. web·kakao가 `@/lib`·`@/config` alias로 소비.
-> - **`packages/saju`(`@fortuneteller/saju`)** — 사주 계산 엔진(추출 완료).
+> - **`apps/web`(`@fortuneteller/web`)** — 유일 배포 앱. `src/{app,actions,tools,agents,lib,components,hooks}` 어댑터 레이어. 카카오 엔드포인트(`/api/kakao` + callback)를 흡수했다(구 `apps/kakao` 제거).
+> - **`packages/modules`(`@fortuneteller/modules`)** — 도메인 모듈 `fortune·profile·chat`. 각 모듈은 `domain/`(순수)·`application/`(handlers·views·dtos). fortune/domain 이 사주 계산 엔진(구 `@fortuneteller/saju` 흡수).
+> - **`packages/db`(`@fortuneteller/db`)** — Drizzle 스키마·쿼리·마이그레이션.
+> - **`packages/clients`(`@fortuneteller/clients`)** — 도메인-무지 외부 클라이언트(Supabase·Gemini).
+> - **`packages/config`(`@fortuneteller/config`)** — 프롬프트·모델·사이트·엔타이틀먼트 (순수 데이터). provider 조립(registry)은 앱이 소유.
+> - **`packages/shared`(`@fortuneteller/shared`)** — 공유 커널(타입·유틸·상수). leaf.
 >
-> 루트는 순수 워크스페이스 루트(글롭 + 위임 스크립트 + 공용 prettier)다. 데이터 저장소는 당분간 Postgres를 유지하며 이후 Firebase(Auth/FCM/Firestore)로 이전 예정이다.
+> 의존성 방향: **`apps/web → modules → {clients, db, config, shared}`**. `shared`·`domain` 은 leaf. 규칙은 `tests/architecture/`(bun test, `bun run test:arch`)가 강제한다. 데이터 저장소는 당분간 Postgres(Supabase)를 유지한다.
 
-## Key Components
+## Layering & Naming Convention (레이어·네이밍 규칙)
 
-**Core Architecture:**
+> Clean Architecture / DDD 링을 레포 위치에 매핑한다. **네이밍 중의성 해소**를 위해 "adapter"는 폴더명이 아니라 *역할*로만 쓰고, 링마다 고유 이름을 부여한다.
 
-- Next.js App Router with grouped routes: `(auth)` and `(root)`
-- Supabase for database with Postgres
-- Drizzle ORM for type-safe database operations
-- AI SDK for LLM integration with tools
+| CA 링                                      | 정체                                                         | 레포 위치                                         |
+| ------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------- |
+| Entities / Use Cases                       | 순수 도메인·유스케이스 + ports(인터페이스)                   | `packages/modules/<domain>/{domain, application}` |
+| Interface Adapters — **inbound** (driving) | controller·delivery. use-case를 *호출*한다. **얇게 유지**    | `apps/<app>/src/{actions, tools, app/api/*}`      |
+| Interface Adapters — **outbound** (driven) | 도메인 port 구현체(repository·gateway 조립). 컨텍스트에 종속 | `packages/modules/<domain>/infra`                 |
+| Frameworks & Drivers                       | 도메인-무지 공유 기술 클라이언트(벤더 SDK 래퍼)              | `packages/clients/<system>`                       |
+| Primary datastore                          | 앱 자체 Postgres(Drizzle 스키마·마이그레이션)                | `packages/db`                                     |
 
-**Main Features:**
+**네이밍 규칙:**
 
-- Saju (사주) fortune-telling with birth data analysis
-- Kakao chatbot integration with skill responses
-- User profile management and chat history
-- AI agent with specialized tools for fortune-telling
+- **`packages/clients/<system>`** — 여러 모듈이 공유하는 외부 시스템 클라이언트. 도메인을 모른다. subpath export. **구 `packages/infra`에서 리네임 완료. 현 점유자: supabase✅, gemini✅.** 추출 후보: kakao. (aifortunedoctor·geonames·open-meteo 는 fortune 단독 소비라 `packages/clients` 대신 `fortune/infra` 에 둠 — 다중 소비자 생기면 clients 로 승격.)
+- **provider 조립(composition root)** — `config`(inner)는 DAG상 `clients`(outer)를 import할 수 없으므로, `modelConfig`(config) + `google`(clients/gemini)를 묶는 `myProvider` registry는 **`apps/web/src/lib/registry.ts`(앱)**가 소유한다. `chat` 모듈 handler는 model을 **주입받는다**(inbound adapter `actions/chat.ts`가 `myProvider.languageModel(...)`을 넘김) — 모듈이 registry를 직접 import하지 않는다.
+- **`packages/modules/<domain>/infra`** — 그 바운디드 컨텍스트의 **outbound/driven adapter** 계층. `domain`의 port를 `clients`·`db`(또는 inline HTTP)로 구현한다. 재사용 불가(컨텍스트 전용). _현 점유자: `fortune/infra`(saju-reference-client·weather-client·geonames-client) — 외부 I/O 를 `domain`·`application` 에서 격리 완료._
+- **`apps/*`의 actions·tools·routes** = **inbound/driving adapter**(presentation). 마샬링만 하고 로직은 `application`으로.
+- "adapter"는 역할 명칭일 뿐 폴더로 만들지 않는다. inbound는 apps, outbound는 `modules/*/infra`.
+- **중의성 해소 핵심:** 공유 기술 계층과 컨텍스트 infra 계층이 같은 단어(`infra`)라 혼동되던 문제를, 공유 계층을 **`packages/clients`로 리네임**하여 해소했다. `infra`는 오직 모듈의 driven-adapter 계층 이름으로만 쓴다.
 
 ## Directory Structure
 
-**Current Implementation (도메인 중심 아키텍처 적용 완료):**
-
-**모노레포 최상위 구조 (전환 중):**
+**모노레포 최상위:**
 
 ```
 fortuneteller/
-├── apps/                    # 배포 가능한 앱 (apps/README.md 참조)
-│   ├── web/                # ✅ Next.js 소개팅 웹앱 (@fortuneteller/web)
-│   │   ├── app/ components/ data/ hooks/ public/ scripts/ tests/
-│   │   ├── next.config.ts · tailwind.config.ts · drizzle.config.ts
-│   │   ├── jest.config.js · playwright.config.ts · tsconfig.json
-│   │   └── package.json    #   앱 의존성·스크립트(dev/build/db:*/test)
-│   ├── kakao/              # ✅ Kakao 챗봇 (@fortuneteller/kakao)
-│   │   ├── app/api/kakao/{route.ts, callback/route.ts}
-│   │   └── next.config.ts · tsconfig.json · package.json (포트 3001)
-│   ├── ios/                #   🔜 Swift / SwiftUI
-│   └── android/            #   🔜 Kotlin / Compose
+├── apps/
+│   └── web/                    # ✅ 유일 배포 앱 (@fortuneteller/web) — kakao 챗봇 포함
+│       ├── src/
+│       │   ├── app/            # App Router (아래 라우트 그룹 참조)
+│       │   ├── actions/        # inbound adapter — "use server" 서버 액션
+│       │   ├── tools/          # inbound adapter — AI SDK tool 정의(LLM에 use-case 노출)
+│       │   ├── agents/         # AI 에이전트 설정 (base.ts)
+│       │   ├── lib/            # 프레임워크 글루 · registry.ts(provider 조립 = composition root)
+│       │   ├── components/ hooks/ data/
+│       ├── tests/              # jest(core/infrastructure/interfaces/shared) + playwright(e2e)
+│       ├── drizzle.config.ts   # db:* 스크립트 소유 (packages/db 경로 지정)
+│       ├── next.config.ts · tailwind.config.ts · jest.config.js · playwright.config.ts
+│       └── package.json
 ├── packages/
-│   ├── core/               # ✅ 공유 백엔드 (@fortuneteller/core)
-│   │   ├── lib/            #    interfaces(agents·tools·actions)·infra(db·supabase)·shared·response
-│   │   └── config/         #    prompts·models·site·entitlements
-│   └── saju/               # ✅ 사주 엔진 (@fortuneteller/saju, 순수 TS·무의존)
-│       └── src/            #    lib/core/saju 에서 추출. output-types.ts 포함
-├── services/
-│   └── functions/          # 🔜 Firebase Cloud Functions (네이티브용 computeSaju 등)
+│   ├── shared/                 # ✅ 공유 커널 (@fortuneteller/shared) — leaf, 워크스페이스 무의존
+│   ├── config/                 # ✅ 런타임 설정 (@fortuneteller/config)  → shared
+│   ├── db/                     # ✅ 데이터 접근 (@fortuneteller/db)      → shared
+│   ├── clients/                # ✅ 외부 클라이언트 (@fortuneteller/clients) — Supabase
+│   └── modules/                # ✅ 도메인 모듈 (@fortuneteller/modules) — fortune·profile·chat
+├── tests/architecture/         # 레이어 의존성 규칙 테스트 (bun run test:arch)
 ├── docs/ · CLAUDE.md · turbo.json
-├── bun.lock                # 단일 락파일(워크스페이스 전체)
-└── package.json            # 워크스페이스 루트: globs + 위임 스크립트 + prettier
+├── bun.lock                    # 단일 락파일(워크스페이스 전체)
+└── package.json                # 워크스페이스 루트: globs + 위임 스크립트 + prettier
 ```
 
-- 워크스페이스: `bun` workspaces (`["apps/*", "packages/*"]`). 루트 스크립트는 `bun --filter`로 각 워크스페이스에 위임한다. (`turbo`는 미설치 — `turbo.json`은 향후용)
-- **공유 코드 소비 방식:** `apps/web`·`apps/kakao`는 `@/lib/*`·`@/config/*` alias를 `packages/core`로, `@fortuneteller/saju`를 `packages/saju/src`로 매핑한다 — tsconfig `paths` + Next.js `transpilePackages` + (web) jest `moduleNameMapper` 3곳에 동일하게 설정. 덕분에 패키지로 옮긴 코드의 `@/lib`·`@/config` import를 **한 줄도 고치지 않고** 그대로 쓴다.
-- `packages/core`는 자신이 import하는 npm 의존성(ai·zod·drizzle-orm·postgres·@supabase/\*·@ai-sdk/google 등)을 **직접 선언**한다(패키지 위생). `@fortuneteller/saju`를 의존한다.
-- DB 마이그레이션: 스키마/마이그레이션은 `packages/core/lib/infra/db`에 있고, `migrate.ts`는 실행 CWD와 무관하게 모듈 기준으로 migrations 폴더를 찾는다. drizzle 설정·`db:*` 스크립트는 `apps/web`이 소유하며 패키지 경로(`../../packages/core/...`)를 가리킨다.
-- 아래 `lib/` 구조는 이제 **`packages/core/lib/`** 기준이다(과거 `apps/web/lib`에서 이전). `tests/`는 여전히 `apps/web/tests/`에 있다.
+- 워크스페이스: `bun` workspaces (`["apps/*", "packages/*"]`). 루트 스크립트는 `bun --filter`로 위임. (`turbo`는 미설치 — `turbo.json`은 향후용)
+- 소비 방식: 앱·패키지는 `@fortuneteller/<pkg>/<subpath>` 로 서로를 import한다(각 패키지 `exports: {"./*": "./*.ts"}`). tsconfig `paths` + Next.js `transpilePackages`로 매핑.
+- DB 마이그레이션: 스키마·마이그레이션은 `packages/db`에 있고 `migrate.ts`는 실행 CWD와 무관하게 모듈 기준으로 migrations 폴더를 찾는다. drizzle 설정·`db:*` 스크립트는 `apps/web`이 소유하며 패키지 경로(`../../packages/db/...`)를 가리킨다.
 
-**lib/ 구조 (`packages/core/lib/`):**
+**`apps/web/src/app` 라우트 그룹:**
 
 ```
-lib/
-├── core/                    # 핵심 비즈니스 로직
-│   ├── saju/               # ⛔ packages/saju (@fortuneteller/saju) 로 이전 완료
-│   ├── chat/               # 채팅 도메인
-│   │   └── chat.ts
-│   └── profile/            # 프로필 도메인
-├── infra/         # 외부 의존성 및 데이터 접근 계층
-│   ├── db/                 # 데이터베이스 스키마, 마이그레이션
-│   │   ├── migrate.ts
-│   │   ├── queries.ts
-│   │   ├── schema.ts
-│   │   └── migrations/
-│   ├── supabase/           # Supabase 클라이언트 및 쿼리
-│   │   ├── client.ts
-│   │   ├── queries.ts
-│   │   └── server.ts
-│   └── notion/             # Notion API 통합
-│       └── client.ts
-├── interfaces/             # 어댑터 계층 (외부 인터페이스)
-│   ├── tools/              # AI 도구 (AI SDK 통합)
-│   │   ├── saju.ts
-│   │   ├── fortune.ts
-│   │   ├── harmony.ts
-│   │   ├── profile.ts
-│   │   ├── get-weather.ts
-│   │   └── test.ts
-│   ├── actions/            # 서버 액션 (Next.js)
-│   │   ├── chat.ts
-│   │   ├── kakao.ts
-│   │   ├── profile.ts
-│   │   ├── report.ts
-│   │   └── slack.ts
-│   └── agents/             # AI 에이전트 설정
-│       └── base.ts
-├── shared/                 # 공통 유틸리티 및 공유 리소스
-│   ├── types/              # TypeScript 타입 정의
-│   │   ├── ai.ts
-│   │   ├── kakao.ts
-│   │   ├── models.ts
-│   │   ├── notion.ts
-│   │   ├── saju.ts
-│   │   └── certifcationDetail.ts
-│   ├── constants/          # 애플리케이션 상수
-│   │   └── index.ts
-│   └── utils/              # 순수 유틸리티 함수
-│       ├── index.ts
-│       ├── db.ts
-│       ├── embedding.ts
-│       ├── errorHandler.ts
-│       ├── registry.ts
-│       ├── text.ts
-│       └── textPreprocess.ts
-└── response/               # 응답 처리 및 포맷팅
-    └── create-tool-calling-stream.ts
+app/
+├── (auth)/
+│   ├── login/ · register/               # 로그인·회원가입 페이지
+│   └── api/auth/kakao/route.ts          # Kakao OAuth 콜백(Supabase 세션 교환)
+├── (root)/
+│   ├── page.tsx · chat/[id]/ · saju/    # 메인 채팅·사주 페이지
+│   └── api/{chat, history, vote}/route.ts
+├── (debug)/debug/calendar/              # 디버그 페이지
+├── api/kakao/{route.ts, callback/route.ts}   # Kakao 챗봇 스킬 콜백(백그라운드 처리)
+└── layout.tsx
 ```
 
-**tests/ 구조:**
+**`packages/modules` 구조 (도메인별 DDD 레이어):**
 
 ```
-tests/
-├── core/                   # Core 모듈 테스트
-│   └── saju/               # 사주 모듈 테스트 (✅ 완료)
-│       ├── adapters.test.ts
-│       ├── calendar.test.ts
-│       ├── five-elements.test.ts
-│       ├── index.test.ts
-│       ├── pillars.test.ts
-│       └── ten-stars.test.ts
-├── infra/         # infra 테스트
-│   └── supabase-queries.test.ts
-├── interfaces/             # Interfaces 테스트
-│   ├── tools-saju.test.ts
-│   └── actions-chat.test.ts
-├── shared/                 # Shared 유틸리티 테스트
-│   ├── utils.test.ts
-│   └── types.test.ts
-├── e2e/                    # E2E 테스트 (Playwright)
-│   ├── chat.test.ts
-│   ├── db.test.ts
-│   ├── reasoning.test.ts
-│   └── session.test.ts
-├── fixtures/               # 테스트 공통 파일들
-│   ├── setup.ts
-│   ├── helpers.ts
-│   ├── fixtures.ts
-│   └── data/
-├── pages/                  # Playwright 페이지 객체
-└── prompts/                # 테스트용 프롬프트
+modules/
+├── fortune/                    # 사주 엔진 + 운세 도메인
+│   ├── domain/                 # 순수 계산(무 I/O): four-pillars·five-elements·ten-stars·sinsal·
+│   │   │                       #   daeun·calendar·solar-terms·fortunes·time-correction 등
+│   │   ├── value-objects.ts    #   입력·결과 타입(구 types.ts + output-types.ts 통합)
+│   │   └── ports.ts            #   외부 I/O 계약(SajuReferenceClient·WeatherClient)
+│   ├── infra/                  # outbound adapter — domain ports 구현(외부 I/O 격리)
+│   │   ├── saju-reference-client.ts  #   외부 사주 API(aifortunedoctor)
+│   │   ├── weather-client.ts         #   날씨(open-meteo)
+│   │   └── geonames-client.ts        #   좌표 조회(geonames)
+│   └── application/            # handlers(use-cases)·views
+├── profile/application/        # handlers·views (프로필 CRUD)
+└── chat/application/           # handlers·dtos  ⚠️ getKakaoUserInfo(kakao API) 포함
 ```
 
-**이전 구조 (마이그레이션 완료):**
+**나머지 패키지 파일 구성:**
 
 ```
-lib/
-├── core/                    # 핵심 비즈니스 로직 (도메인별 분리)
-│   ├── saju/               # 사주 도메인: 계산 로직, 유효성 검증, 변환 로직
-│   ├── chat/               # 채팅 도메인: 메시지 처리, 세션 관리
-│   └── profile/            # 프로필 도메인: 사용자 정보, 설정 관리
-├── infra/         # 외부 의존성 및 데이터 접근 계층
-│   ├── db/                 # 데이터베이스 스키마, 마이그레이션
-│   ├── supabase/           # Supabase 클라이언트 및 쿼리
-│   └── notion/             # Notion API 통합
-├── interfaces/             # 어댑터 계층 (외부 인터페이스)
-│   ├── tools/              # AI 도구 (AI SDK 통합)
-│   ├── actions/            # 서버 액션 (Next.js)
-│   └── agents/             # AI 에이전트 설정
-├── shared/                 # 공통 유틸리티 및 공유 리소스
-│   ├── types/              # TypeScript 타입 정의
-│   ├── constants/          # 애플리케이션 상수
-│   └── utils/              # 순수 유틸리티 함수
-└── response/               # 응답 처리 및 포맷팅
+shared/    types/ (ai·chat·kakao·models·attachment·certifcationDetail) · constants/ · utils/ (index·db·text·textPreprocess)
+config/    prompts.ts · models.ts · registry.ts(provider 조립) · site.ts · entitlements.ts
+db/        schema.ts · queries.ts(server-only) · migrate.ts · migrations/ · helpers/
+clients/   supabase/{client, server, queries}.ts · gemini/client.ts
 ```
 
-**마이그레이션 원칙:**
+> ⚠️ 표시는 [Layering & Naming Convention](#layering--naming-convention-레이어네이밍-규칙)에 따라 `packages/clients` 또는 모듈 `infra`로 추출 예정인 외부 I/O 코드다.
 
-- 도메인별 응집성: 관련 기능을 같은 도메인 폴더에 배치
-- 의존성 방향: core ← infra, interfaces → core
-- 관심사 분리: 비즈니스 로직과 인프라 코드 분리
-- 확장성: 새로운 도메인이나 기능 추가 시 명확한 배치 위치
+**패키지 의존성 방향 (안쪽 ← 바깥쪽):**
+
+```
+shared (leaf)
+  ↑
+  ├── config      (→ shared)
+  └── db          (→ shared)
+        ↑
+        ├── clients   (→ db)
+        └── modules   (→ shared, config, db)
+              ↑
+              apps/web (→ shared, config, db, clients, modules)
+```
+
+원칙: 도메인별 응집성 · 의존성은 항상 안쪽(도메인)을 향한다 · 비즈니스 로직과 인프라 코드 분리. (`tests/architecture/`가 강제)
 
 ## Important APIs
 
 **Kakao Integration:**
 
-- `/api/kakao/callback` - Handles Kakao chatbot responses with background processing and timeout handling
-- Processes user messages through AI agent and returns formatted responses
-- Manages chat history and user profiles with `user_kakao_id` integration
-- Supports quick replies and interactive UI elements
-- Background task processing with configurable callback URLs
-- Message format conversion between DB and UI structures
+- `/api/kakao` + `/api/kakao/callback` — Kakao 챗봇 스킬 콜백. 백그라운드 처리 + 타임아웃(1000ms), quick replies·인터랙티브 UI 지원, DB↔UI 메시지 포맷 변환, `user_kakao_id` 연동.
+- `/api/auth/kakao` — Kakao 로그인 OAuth 콜백(Supabase 세션 교환 + 카카오 프로필 조회).
 
-**Fortune-telling Tools:**
+**Fortune-telling Tools** (`apps/web/src/tools/*`, `packages/modules/fortune`):
 
-- `getSaju()` - Takes user birth data and returns saju analysis (can accept user input parameters or use stored profile)
-- `getUserSaju()` - Retrieves stored saju information for existing users
-- `updateSajuProfile()` - Updates/stores user birth data and saju information in profile
-- `getTodayFortune()` - Daily fortune based on stored user profile
-- `getYearFortune()` - Yearly fortune predictions
-- `getHarmony()` - Analyzes compatibility between two people based on their saju information
-- Tools expect Korean format dates and gender (`남성`/`여성`)
-- Tools support both kakao_user_id for Kakao integration and standalone usage
+- `getSaju()` — 생년월일 입력(또는 저장된 프로필)으로 사주 분석
+- `getUserSaju()` — 저장된 사주 조회 · `updateSajuProfile()` — 생년월일·사주 저장
+- `getTodayFortune()` / `getYearFortune()` — 일일·연간 운세
+- `getHarmony()` — 두 사람 사주 궁합 분석
+- 도구는 한국어 날짜·성별(`남성`/`여성`) 포맷을 기대하며, kakao_user_id 연동과 단독 사용 모두 지원.
 
 ## Database Schema
 
-Key tables managed through Drizzle:
+Drizzle로 관리하는 주요 테이블 (`packages/db/schema.ts`):
 
-- `profiles` - User profiles with birth data for saju calculations, includes `user_kakao_id` for Kakao integration
-- `chats` - Chat conversations with `channel` field for different communication channels
-- `messages` - Chat messages with parts/attachments structure
-- `votes` - User interaction tracking
+- `profiles` — 사주 계산용 생년월일 프로필. Kakao 연동용 `user_kakao_id` 포함
+- `chats` — 대화. 채널 구분용 `channel` 필드
+- `messages` — parts/attachments 구조의 메시지
+- `votes` — 사용자 상호작용(up/down) 추적
 
-## @lib and @tests/ Structure
+## Tests
 
-- **@lib 구조 (예정):**
+```
+tests/architecture/            # 루트 — 레이어 의존성 규칙 강제 (bun run test:arch)
+apps/web/tests/
+├── core · infrastructure · interfaces · shared   # (jest) 단위/통합
+├── kakao-api.test.ts                              # kakao 콜백 통합
+├── e2e/                                           # (playwright) chat·db·reasoning·session
+└── fixtures/ · pages/ · prompts/ · stubs/         # 테스트 지원
+```
 
-  - `core/`: 핵심 비즈니스 로직 도메인별 분리
-    - `saju/`: 사주 계산, 유효성 검증
-    - `chat/`: 메시지 처리, 세션 관리
-    - `profile/`: 사용자 정보, 설정 관리
-  - `infra/`: 외부 의존성 및 데이터 접근 계층
-    - `db/`: 데이터베이스 스키마, 마이그레이션
-    - `supabase/`: Supabase 클라이언트 및 쿼리
-  - `interfaces/`: 어댑터 계층
-    - `tools/`: AI 도구 (AI SDK 통합)
-    - `actions/`: 서버 액션 (Next.js)
-    - `agents/`: AI 에이전트 설정
-  - `shared/`: 공통 유틸리티
-    - `types/`: TypeScript 타입 정의
-    - `constants/`: 애플리케이션 상수
-    - `utils/`: 순수 유틸리티 함수
-
-- **@tests/ 구조 (현재 상태):**
-  - `unit/`: 단위 테스트 (Jest)
-    - `core/`: 비즈니스 로직 테스트
-      - `saju/`: 사주 모듈 테스트
-    - `infra/`: 인프라 레이어 테스트
-    - `shared/`: 공유 유틸리티 테스트
-  - `integration/`: 통합 테스트
-    - `routes/`: API 라우트 테스트
-    - `models/`: AI 모델 통합 테스트
-  - `e2e/`: E2E 테스트 (Playwright)
-  - `pages/`: Playwright 페이지 객체
-  - `prompts/`: 프롬프트 테스트 유틸리티
-  - `fixtures.ts`: 테스트 고정값
-  - `helpers.ts`: 테스트 헬퍼 함수
-  - `setup.ts`: 테스트 환경 설정
+- 실행: `bun test`(jest) · `bun run test:arch`(아키텍처 규칙) · `bun test:playwright`(e2e). 상세 스크립트·게이트는 `CLAUDE.md` 참조.

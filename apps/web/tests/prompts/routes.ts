@@ -1,4 +1,4 @@
-import { generateUUID } from "@/lib/shared/utils";
+import { generateUUID } from "@fortuneteller/shared/utils";
 
 export const TEST_PROMPTS = {
   SKY: {
