@@ -38,6 +38,44 @@ export async function createProfile({
   }
 }
 
+/** 소개팅 프로필 편집 필드 (전부 optional — 넘어온 것만 갱신). */
+export interface DatingProfileFields {
+  gender?: "남성" | "여성" | null;
+  birth_type?: "양력" | "음력" | null;
+  birth_year?: number | null;
+  birth_month?: number | null;
+  birth_day?: number | null;
+  birth_time?: Profile["birth_time"];
+  bio?: string | null;
+  region?: string | null;
+  photo_urls?: string[];
+  pref_gender?: "남성" | "여성" | "무관";
+  pref_age_min?: number | null;
+  pref_age_max?: number | null;
+  status?: "draft" | "active" | "hidden";
+}
+
+/** 세션 유저(userId)의 소개팅 프로필을 갱신한다. userId 는 어댑터가 세션에서 강제 주입. */
+export async function updateDatingProfile({
+  userId,
+  data,
+}: {
+  userId: string;
+  data: DatingProfileFields;
+}): Promise<Profile | null> {
+  try {
+    const [updated] = await db
+      .update(profile)
+      .set({ ...data, updated_at: new Date() })
+      .where(eq(profile.user_id, userId))
+      .returning();
+    return updated ?? null;
+  } catch (error) {
+    console.error("Failed to update dating profile in database");
+    throw error;
+  }
+}
+
 export async function getOrCreateProfileByUserKakaoId({
   user_kakao_id,
 }: {

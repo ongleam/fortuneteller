@@ -32,6 +32,21 @@ export const profile = pgTable("profiles", {
   birth_time: varchar("birth_time", {
     enum: ["00", "02", "04", "06", "08", "10", "12", "14", "16", "18", "20", "22", "24"],
   }),
+
+  // 소개팅 프로필 필드 (전부 nullable/기본값 — 기존 행 보존).
+  bio: text("bio"),
+  region: varchar("region", { length: 40 }),
+  photo_urls: jsonb("photo_urls").$type<string[]>().default([]).notNull(),
+  pref_gender: varchar("pref_gender", { enum: ["남성", "여성", "무관"] })
+    .default("무관")
+    .notNull(),
+  pref_age_min: integer("pref_age_min"),
+  pref_age_max: integer("pref_age_max"),
+  // draft=미완성(비노출) active=노출 hidden=숨김. 기본 draft라 옵트인 전 비노출.
+  status: varchar("status", { enum: ["draft", "active", "hidden"] })
+    .default("draft")
+    .notNull(),
+
   created_at: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   updated_at: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
 });
@@ -87,3 +102,24 @@ export const vote = pgTable(
   },
 );
 export type Vote = InferSelectModel<typeof vote>;
+
+// 매칭 테이블 — 각 행 = 두 유저 쌍(canonical 정렬)의 관계 상태.
+// 별도 likes 테이블 없음. 방향은 어느 쪽 *_liked_at 이 찼는가로 표현한다.
+export const match = pgTable(
+  "matches",
+  {
+    user_a_id: uuid("user_a_id")
+      .notNull()
+      .references(() => profile.user_id), // canonical: min(user_id)
+    user_b_id: uuid("user_b_id")
+      .notNull()
+      .references(() => profile.user_id), // canonical: max(user_id)
+    a_liked_at: timestamp("a_liked_at", { withTimezone: true }), // a가 b를 좋아요한 시점
+    b_liked_at: timestamp("b_liked_at", { withTimezone: true }), // b가 a를 좋아요한 시점
+    matched_at: timestamp("matched_at", { withTimezone: true }), // 양쪽 다 차면 세팅 = 매칭 성립
+    score: integer("score").notNull(), // computeHarmony 궁합 점수
+    created_at: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (t) => ({ pk: primaryKey({ columns: [t.user_a_id, t.user_b_id] }) }),
+);
+export type Match = InferSelectModel<typeof match>;
