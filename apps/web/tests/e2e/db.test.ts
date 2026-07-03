@@ -1,5 +1,5 @@
-import { getProfileByUserId } from "@/lib/infra/supabase/queries";
-import { createClient } from "@/lib/infra/supabase/client";
+import { getProfileByUserId } from "@fortuneteller/modules/profile/infra/queries";
+import { createClient } from "@fortuneteller/clients/supabase/client";
 
 describe("Database Integration Tests", () => {
   // 실제 Supabase 클라이언트 사용
@@ -35,7 +35,7 @@ describe("Database Integration Tests", () => {
   describe("Profile Queries", () => {
     it("should create and retrieve a profile", async () => {
       // 프로필 조회
-      const profile = await getProfileByUserId(testProfile.user_id);
+      const profile = await getProfileByUserId({ id: testProfile.user_id });
 
       // 결과 검증
       expect(profile).not.toBeNull();
@@ -51,7 +51,7 @@ describe("Database Integration Tests", () => {
     const consoleSpy = jest.spyOn(console, "log");
 
     // 프로필 조회
-    await getProfileByUserId(testProfile.user_id);
+    await getProfileByUserId({ id: testProfile.user_id });
 
     // 로그 확인
     expect(consoleSpy).toHaveBeenCalled();

@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { chatModels } from "@/config/models";
+import { chatModels } from "@fortuneteller/config/models";
 import { expect, type Page } from "@playwright/test";
 
 export class ChatPage {

@@ -6,7 +6,7 @@ describe("Shared Types", () => {
   describe("Saju 타입 정의", () => {
     test("BirthInput 타입 구조", async () => {
       try {
-        const sajuTypes = await import("@fortuneteller/saju/output-types");
+        const sajuTypes = await import("@fortuneteller/modules/fortune/domain/value-objects");
 
         // BirthInput 타입 사용 예시
         const validBirthInput = {
@@ -34,7 +34,7 @@ describe("Shared Types", () => {
   describe("AI 타입 정의", () => {
     test("AI 관련 타입 구조", async () => {
       try {
-        const aiTypes = await import("@/lib/shared/types/ai");
+        const aiTypes = await import("@fortuneteller/shared/types/ai");
 
         // AI 메시지 구조 예시
         const mockMessage = {
@@ -56,7 +56,7 @@ describe("Shared Types", () => {
   describe("Kakao 타입 정의", () => {
     test("KakaoSkillResponse 타입 구조", async () => {
       try {
-        const kakaoTypes = await import("@/lib/shared/types/kakao");
+        const kakaoTypes = await import("@fortuneteller/shared/types/kakao");
 
         // Kakao 스킬 응답 구조 예시
         const mockKakaoResponse = {

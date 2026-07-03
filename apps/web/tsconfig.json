@@ -19,11 +19,12 @@
       }
     ],
     "paths": {
-      "@/lib/*": ["../../packages/core/lib/*"],
-      "@/config/*": ["../../packages/core/config/*"],
-      "@/*": ["./*"],
-      "@fortuneteller/saju": ["../../packages/saju/src/index.ts"],
-      "@fortuneteller/saju/*": ["../../packages/saju/src/*.ts"]
+      "@/*": ["./src/*"],
+      "@fortuneteller/modules/*": ["../../packages/modules/*"],
+      "@fortuneteller/shared/*": ["../../packages/shared/*"],
+      "@fortuneteller/config/*": ["../../packages/config/*"],
+      "@fortuneteller/db/*": ["../../packages/db/*"],
+      "@fortuneteller/clients/*": ["../../packages/clients/*"]
     }
   },
   "include": [
@@ -32,9 +33,11 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "next.config.js",
-    "../../packages/saju/src/**/*.ts",
-    "../../packages/core/lib/**/*.ts",
-    "../../packages/core/config/**/*.ts"
+    "../../packages/modules/**/*.ts",
+    "../../packages/shared/**/*.ts",
+    "../../packages/config/**/*.ts",
+    "../../packages/db/**/*.ts",
+    "../../packages/clients/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }
