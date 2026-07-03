@@ -86,19 +86,16 @@ export async function updateDatingProfile({
       if (data[key] !== undefined) (patch as Record<string, unknown>)[key] = data[key];
     }
 
-    // 공개(active) 전환은 필수 필드(성별·생년월일)를 서버에서 강제한다 — 폼/UI 를 신뢰하지 않는다.
-    // 미완성 프로필이 active 로 추천 피드에 노출(나이 없음·궁합 0)되는 것을 막는다.
-    if (patch.status === "active") {
-      const [current] = await db.select().from(profile).where(eq(profile.user_id, userId)).limit(1);
-      const effective = { ...current, ...patch };
-      if (
-        !effective.gender ||
-        !effective.birth_year ||
-        !effective.birth_month ||
-        !effective.birth_day
-      ) {
-        throw new Error("프로필 공개(active)에는 성별과 생년월일이 필요합니다.");
-      }
+    // 공개(active) 상태는 필수 필드(성별·생년월일)를 서버에서 강제한다 — 폼/UI 를 신뢰하지 않는다.
+    // patch 로 status 를 안 보내도(이미 active), birth_year/gender 를 null 로 지우는 우회를 막기 위해
+    // 병합된 '유효 상태(effective)'로 판정한다. 미완성 active 가 추천 피드에 노출되는 것을 차단.
+    const [current] = await db.select().from(profile).where(eq(profile.user_id, userId)).limit(1);
+    const effective = { ...current, ...patch };
+    if (
+      effective.status === "active" &&
+      (!effective.gender || !effective.birth_year || !effective.birth_month || !effective.birth_day)
+    ) {
+      throw new Error("프로필 공개(active)에는 성별과 생년월일이 필요합니다.");
     }
 
     const [updated] = await db
