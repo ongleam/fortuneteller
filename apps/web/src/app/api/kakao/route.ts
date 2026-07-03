@@ -6,11 +6,12 @@ import axios from "axios";
 
 const TIMEOUT_MS = 1000;
 
-// self-call로 백그라운드 invocation을 띄운다. Vercel(서버리스)에선 자기 배포의 공개 URL이,
-// 로컬 dev에선 루프백이 필요하다. request origin은 ngrok 뒤에서 https://localhost 로 깨지므로 쓰지 않는다.
-const backgroundTaskUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}/api/kakao/callback`
-  : `http://localhost:${process.env.PORT ?? 3000}/api/kakao/callback`;
+// self-call로 백그라운드 invocation을 띄운다. 반드시 "공개" 도메인(APP_URL)이어야 한다.
+// VERCEL_URL(배포 전용 URL)은 Deployment Protection에 막혀 401이라 콜백이 실행되지 않는다.
+// APP_URL 미설정 시(로컬 dev) 루프백으로 폴백한다.
+const backgroundTaskUrl = `${
+  process.env.APP_URL ?? `http://localhost:${process.env.PORT ?? 3000}`
+}/api/kakao/callback`;
 
 export async function POST(request: NextRequest) {
   try {
