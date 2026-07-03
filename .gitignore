@@ -60,3 +60,6 @@ mcp.json
 
 data/*testset.json
 .temp
+
+# playwright/e2e artifacts (screenshots, traces)
+**/e2e/artifacts/
