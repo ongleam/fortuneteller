@@ -18,6 +18,7 @@ export function normalizeText(text: string): string {
 
 export function removeMarkdown(text: string): string {
   return text
+    .replace(/^[ \t]*([-*_])(?:[ \t]*\1){2,}[ \t]*$/gm, "") // 수평선(---, ***, ___) 제거 — 볼드/리스트보다 먼저
     .replace(/\*\*(.*?)\*\*/g, "$1") // 볼드체 제거
     .replace(/\*(.*?)\*/g, "$1") // 이탤릭체 제거
     .replace(/`(.*?)`/g, "$1") // 인라인 코드 제거
