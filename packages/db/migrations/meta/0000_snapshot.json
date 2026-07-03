@@ -62,12 +62,8 @@
           "name": "chats_user_id_profiles_user_id_fk",
           "tableFrom": "chats",
           "tableTo": "profiles",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "user_id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["user_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -132,12 +128,8 @@
           "name": "matches_user_a_id_profiles_user_id_fk",
           "tableFrom": "matches",
           "tableTo": "profiles",
-          "columnsFrom": [
-            "user_a_id"
-          ],
-          "columnsTo": [
-            "user_id"
-          ],
+          "columnsFrom": ["user_a_id"],
+          "columnsTo": ["user_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -145,12 +137,8 @@
           "name": "matches_user_b_id_profiles_user_id_fk",
           "tableFrom": "matches",
           "tableTo": "profiles",
-          "columnsFrom": [
-            "user_b_id"
-          ],
-          "columnsTo": [
-            "user_id"
-          ],
+          "columnsFrom": ["user_b_id"],
+          "columnsTo": ["user_id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -158,10 +146,7 @@
       "compositePrimaryKeys": {
         "matches_user_a_id_user_b_id_pk": {
           "name": "matches_user_a_id_user_b_id_pk",
-          "columns": [
-            "user_a_id",
-            "user_b_id"
-          ]
+          "columns": ["user_a_id", "user_b_id"]
         }
       },
       "uniqueConstraints": {},
@@ -218,12 +203,8 @@
           "name": "messages_chat_id_chats_id_fk",
           "tableFrom": "messages",
           "tableTo": "chats",
-          "columnsFrom": [
-            "chat_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["chat_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -372,9 +353,7 @@
         "profiles_user_kakao_id_unique": {
           "name": "profiles_user_kakao_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "user_kakao_id"
-          ]
+          "columns": ["user_kakao_id"]
         }
       },
       "policies": {},
@@ -410,12 +389,8 @@
           "name": "votes_chat_id_chats_id_fk",
           "tableFrom": "votes",
           "tableTo": "chats",
-          "columnsFrom": [
-            "chat_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["chat_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -423,12 +398,8 @@
           "name": "votes_message_id_messages_id_fk",
           "tableFrom": "votes",
           "tableTo": "messages",
-          "columnsFrom": [
-            "message_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["message_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -436,10 +407,7 @@
       "compositePrimaryKeys": {
         "votes_chat_id_message_id_pk": {
           "name": "votes_chat_id_message_id_pk",
-          "columns": [
-            "chat_id",
-            "message_id"
-          ]
+          "columns": ["chat_id", "message_id"]
         }
       },
       "uniqueConstraints": {},
