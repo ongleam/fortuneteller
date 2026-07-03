@@ -1,8 +1,9 @@
+import { describe, test, expect } from "bun:test";
 /**
  * Saju AI 도구 테스트
  */
 
-import { getSaju } from "@/lib/interfaces/tools/saju";
+import { getSaju } from "@/tools/saju";
 
 describe("SajuAITool", () => {
   describe("도구 생성 및 구조", () => {

@@ -1,3 +1,4 @@
+import { describe, test, expect } from "bun:test";
 /**
  * Chat Actions 테스트
  */
@@ -6,7 +7,7 @@ describe("ChatActions", () => {
   describe("채팅 액션 구조 테스트", () => {
     test("채팅 액션 모듈 import 가능", async () => {
       try {
-        const chatActions = await import("@/lib/interfaces/actions/chat");
+        const chatActions = await import("@/actions/chat");
         expect(chatActions).toBeDefined();
         console.log("✅ Chat Actions 모듈 import 성공");
       } catch (error) {

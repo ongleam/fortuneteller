@@ -1,0 +1,27 @@
+{
+  "name": "@fortuneteller/db",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "데이터 접근 계층 — Drizzle 스키마·쿼리·마이그레이션. shared 에만 의존한다.",
+  "exports": {
+    "./*": "./*.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fortuneteller/shared": "workspace:*",
+    "ai": "6.0.208",
+    "dotenv": "^16.4.7",
+    "drizzle-orm": "^0.45.2",
+    "postgres": "^3.4.4",
+    "server-only": "^0.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.8.6",
+    "drizzle-kit": "^0.31.10",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3"
+  }
+}
