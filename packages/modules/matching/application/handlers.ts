@@ -47,7 +47,22 @@ async function likeUserHandler(
       const updated = await repos.matchRepo.getMatch({ userAId, userBId });
       const bothLiked = Boolean(updated?.a_liked_at && updated?.b_liked_at);
       if (bothLiked && updated && !updated.matched_at) {
-        await repos.matchRepo.updateMatchedAt({ userAId, userBId, matchedAt: now });
+        // 성립 시점에 점수를 (재)계산 — 최초 좋아요가 생년월일 미입력 상태(score=0)였어도 교정한다.
+        let finalScore = updated.score;
+        const { a, b } = await repos.matchRepo.getSajuProfiles({ userAId, userBId });
+        if (a && b) {
+          try {
+            finalScore = (await computeProfileHarmony(a, b)).score;
+          } catch {
+            /* 계산 실패 시 기존 점수 유지 */
+          }
+        }
+        await repos.matchRepo.updateMatchedAt({
+          userAId,
+          userBId,
+          matchedAt: now,
+          score: finalScore,
+        });
         newlyMatched = true;
       }
       matched = bothLiked; // 재-좋아요 등으로 이미 성립돼 있어도 현재 상태를 반영

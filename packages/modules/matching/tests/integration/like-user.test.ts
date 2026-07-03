@@ -67,10 +67,10 @@ function makeFakeUow(store: Map<string, MatchRow>): UnitOfWork<MatchingRepos> {
         b_liked_at: side === "b" ? likedAt : existing.b_liked_at,
       });
     },
-    async updateMatchedAt({ userAId, userBId, matchedAt }) {
+    async updateMatchedAt({ userAId, userBId, matchedAt, score }) {
       const k = keyOf(userAId, userBId);
       const existing = store.get(k);
-      if (existing) store.set(k, { ...existing, matched_at: matchedAt });
+      if (existing) store.set(k, { ...existing, matched_at: matchedAt, score });
     },
   };
   return withEventBuffer<MatchingRepos>((fn) => fn({ matchRepo: repo }));

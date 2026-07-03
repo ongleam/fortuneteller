@@ -2,6 +2,7 @@ import type { InferSelectModel } from "drizzle-orm";
 import {
   boolean,
   foreignKey,
+  index,
   integer,
   json,
   jsonb,
@@ -120,6 +121,10 @@ export const match = pgTable(
     score: integer("score").notNull(), // computeHarmony 궁합 점수
     created_at: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   },
-  (t) => ({ pk: primaryKey({ columns: [t.user_a_id, t.user_b_id] }) }),
+  (t) => ({
+    pk: primaryKey({ columns: [t.user_a_id, t.user_b_id] }),
+    // PK 는 user_a_id 선행이라 user_b_id 단독 조회(역방향 쌍 lookup)를 못 탄다 → 별도 인덱스.
+    userBIdx: index("matches_user_b_id_idx").on(t.user_b_id),
+  }),
 );
 export type Match = InferSelectModel<typeof match>;

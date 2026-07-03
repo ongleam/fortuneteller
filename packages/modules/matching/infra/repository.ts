@@ -71,10 +71,10 @@ export function createMatchRepository(tx: DbClient): MatchRepository {
         });
     },
 
-    async updateMatchedAt({ userAId, userBId, matchedAt }) {
+    async updateMatchedAt({ userAId, userBId, matchedAt, score }) {
       await tx
         .update(matchTable)
-        .set({ matched_at: matchedAt })
+        .set({ matched_at: matchedAt, score })
         .where(and(eq(matchTable.user_a_id, userAId), eq(matchTable.user_b_id, userBId)));
     },
   };

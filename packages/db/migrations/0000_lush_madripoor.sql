@@ -23,6 +23,8 @@ CREATE TABLE IF NOT EXISTS "matches" (
 	CONSTRAINT "matches_user_a_id_user_b_id_pk" PRIMARY KEY("user_a_id","user_b_id")
 );
 --> statement-breakpoint
+-- PK(user_a_id 선행)로 못 타는 user_b_id 단독 역방향 조회용 인덱스.
+CREATE INDEX IF NOT EXISTS "matches_user_b_id_idx" ON "matches" ("user_b_id");--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "messages" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"chat_id" uuid NOT NULL,
