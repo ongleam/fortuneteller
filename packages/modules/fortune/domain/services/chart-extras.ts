@@ -2,7 +2,7 @@
 // 지장간(地藏干) · 12운성(運星) · 띠(생초) 정적 매핑.
 // 신살은 별도 모듈(sinsal.ts)에서 처리한다.
 
-import { HEAVENLY_STEMS, EARTHLY_BRANCHES, getStemIndex, getGroundIndex } from "./constants";
+import { HEAVENLY_STEMS, EARTHLY_BRANCHES, getStemIndex, getGroundIndex } from "../enums";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 지장간(地藏干)

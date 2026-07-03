@@ -16,7 +16,6 @@ import { MessageReasoning } from "./reasoning";
 import { PreviewAttachment } from "@/components/preview-attachment";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { Weather } from "@/components/weather";
 import { useIsMobile } from "@/hooks/use-mobile";
 import clsx from "clsx";
 
@@ -135,36 +134,6 @@ const PurePreviewMessage = ({
                       >
                         <Markdown>{filteredText}</Markdown>
                       </div>
-                    </div>
-                  );
-                }
-              }
-
-              // v6 tool parts are typed as `tool-${toolName}`.
-              if (type.startsWith("tool-")) {
-                const toolPart = part as any;
-                const toolName = type.slice("tool-".length);
-                const { toolCallId, state } = toolPart;
-
-                if (state === "input-streaming" || state === "input-available") {
-                  return (
-                    <div
-                      key={toolCallId}
-                      className={clsx({
-                        skeleton: ["getWeather"].includes(toolName),
-                      })}
-                    >
-                      {toolName === "getWeather" ? <Weather /> : null}
-                    </div>
-                  );
-                }
-
-                if (state === "output-available") {
-                  return (
-                    <div key={toolCallId}>
-                      {toolName === "getWeather" ? (
-                        <Weather weatherAtLocation={toolPart.output} />
-                      ) : null}
                     </div>
                   );
                 }

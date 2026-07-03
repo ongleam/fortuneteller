@@ -3,7 +3,7 @@
  * 음력은 그레고리력 기준으로 변환하여 사용한다
  */
 
-import { SOLAR_TERMS_BY_YEAR, SAJU_MONTH_MAPPING } from "./constants";
+import { SOLAR_TERMS_BY_YEAR, SAJU_MONTH_MAPPING } from "../enums";
 import { LUNAR_MONTH_TABLE } from "./lunar-table";
 import { getSolarTermsByYear, getSolarTermByYearAndName } from "./solar-terms";
 

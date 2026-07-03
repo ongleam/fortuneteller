@@ -6,12 +6,12 @@
 import { getFourPillars } from "./four-pillars";
 import { getTenStars } from "./ten-stars";
 import { getFiveElements } from "./five-elements";
-import { getStemInfo, getGroundInfo } from "./constants";
+import { getStemInfo, getGroundInfo } from "../enums";
 import { getHiddenStems, getTwelveFortune, getZodiac } from "./chart-extras";
 import { getFourSinsal } from "./sinsal";
 import { getDaeun } from "./daeun";
 import { computePoints } from "./points";
-import type { BirthInput, FourPillars, Pillar } from "./value-objects";
+import type { BirthInput, FourPillars, Pillar } from "../value-objects";
 
 const STRONGEST_KO: Record<keyof ReturnType<typeof getFiveElements>, string> = {
   wood: "목",

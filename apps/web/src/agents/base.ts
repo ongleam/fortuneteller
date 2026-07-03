@@ -6,14 +6,10 @@ import { baseAgent as chatBaseAgent } from "@fortuneteller/modules/chat/applicat
 import { aiClient } from "@fortuneteller/modules/chat/infra/ai-client";
 import type { UIMessage } from "ai";
 import { getSaju } from "@/tools/saju";
-// import { updateUserProfile } from "@/tools/profile";
-// import { getHarmony } from "@/tools/harmony";
-// import { getTodayFortune, getYearFortune } from "@/tools/fortune";
 
 export function baseAgent({
   messages,
   model,
-  kakao_user_id: _kakao_user_id,
 }: {
   messages: UIMessage[];
   model: string;
@@ -27,11 +23,7 @@ export function baseAgent({
     maxOutputTokens: config?.maxTokens,
     temperature: config?.temperature,
     tools: {
-      // updateUserProfile: updateUserProfile(_kakao_user_id),
       getSaju: getSaju(),
-      // getHarmony: getHarmony(_kakao_user_id),
-      // getTodayFortune: getTodayFortune(_kakao_user_id),
-      // getYearFortune: getYearFortune(_kakao_user_id),
     },
   });
 }

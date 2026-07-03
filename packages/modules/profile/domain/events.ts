@@ -2,11 +2,6 @@
 // bus 가 등록된 이벤트 핸들러로 cascade 한다(구독자는 필요 시 bootstrap 에서 등록).
 import { createEvent } from "@fortuneteller/shared/domain/message";
 
-export const SajuProfileUpdated = createEvent("profile.SajuProfileUpdated")<{
-  kakaoUserId: string;
-}>();
-export type SajuProfileUpdated = ReturnType<typeof SajuProfileUpdated>;
-
 export const ProfileUpserted = createEvent("profile.ProfileUpserted")<{
   userId: string;
 }>();

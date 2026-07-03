@@ -22,6 +22,20 @@ import {
 } from "./utils.ts";
 
 const MODULE_ALLOWED_DIRS = ["domain", "application", "infra", "tests"];
+// @principle — domain 은 ongleam DDD vocab 파일만 허용(타입·데이터·계약). 계산 로직·서비스는
+// application 으로, 외부 I/O 는 infra 로 나간다. domain 은 이 7종 파일명 외 아무것도 두지 않는다.
+const DOMAIN_ALLOWED_FILES = [
+  "commands",
+  "entities",
+  "enums",
+  "errors",
+  "events",
+  "ports",
+  "value-objects",
+];
+// domain 루트 파일은 vocab 7종만. 도메인 서비스(계산 등 무상태 비즈니스 로직)는
+// `services/` 서브폴더에 둔다(rich domain — anemic 방지). 그 외 서브디렉토리는 불허.
+const DOMAIN_ALLOWED_DIRS = ["services"];
 const MODULES = getModules();
 
 // ==================== Structure ====================
@@ -53,6 +67,23 @@ describe("packages/modules — 구조", () => {
           .map((f) => path.relative(MODULES_SRC, f));
         expect(bad, `tests/ 밖 테스트:\n${bad.join("\n")}`).toEqual([]);
       });
+
+      it(`domain/ 루트는 ${DOMAIN_ALLOWED_FILES.join("·")}.ts + services/ 만 허용`, () => {
+        const domainRoot = path.join(moduleRoot, "domain");
+        if (!fs.existsSync(domainRoot)) return;
+        const bad = fs
+          .readdirSync(domainRoot, { withFileTypes: true })
+          .filter((e) =>
+            e.isFile()
+              ? !DOMAIN_ALLOWED_FILES.includes(e.name.replace(/\.ts$/, ""))
+              : !DOMAIN_ALLOWED_DIRS.includes(e.name),
+          )
+          .map((e) => e.name);
+        expect(
+          bad,
+          `${m}/domain 에 허용 안 된 항목(도메인 서비스→services/, 외부 I/O→infra): ${bad.join(", ")}`,
+        ).toEqual([]);
+      });
     });
   }
 });
@@ -82,7 +113,14 @@ const DAG: { from: LayerType; disallow: LayerType[] }[] = [
   },
   {
     from: "pkg-config",
-    disallow: ["module-domain", "module-application", "module-infra", "pkg-db", "pkg-clients", "app"],
+    disallow: [
+      "module-domain",
+      "module-application",
+      "module-infra",
+      "pkg-db",
+      "pkg-clients",
+      "app",
+    ],
   },
   {
     from: "pkg-db",

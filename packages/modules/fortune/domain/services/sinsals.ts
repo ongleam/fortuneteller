@@ -2,7 +2,7 @@
  * 신살 계산 모듈
  */
 
-import type { FourPillars } from "./value-objects";
+import type { FourPillars } from "../value-objects";
 
 /**
  * 사주 팔자를 기준으로 신살 분석

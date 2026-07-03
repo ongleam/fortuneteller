@@ -2,8 +2,8 @@
  * 십성 계산 모듈
  */
 
-import { getStemInfo } from "./constants";
-import type { FourPillars, TenStars } from "./value-objects";
+import { getStemInfo } from "../enums";
+import type { FourPillars, TenStars } from "../value-objects";
 
 /**
  * 사주 팔자 전체(천간, 지지)에 대한 십성 분석

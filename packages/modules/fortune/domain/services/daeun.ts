@@ -15,12 +15,12 @@
 // 각 entry 에 십성 + 12운성 + 지장간 정보가 함께 들어간다.
 
 import { getFourPillars, getYearPillar } from "./four-pillars";
-import { getStemInfo, getGroundInfo, getStemIndex, SIXTY_GAPJA } from "./constants";
+import { getStemInfo, getGroundInfo, getStemIndex, SIXTY_GAPJA } from "../enums";
 import { getHiddenStems, getTwelveFortune } from "./chart-extras";
 import { getTenStar, getMainSky } from "./ten-stars";
 import { applyTimeCorrections } from "./time-correction";
 import { lunarToSolar, normalizeCalendarType, getSajuYear } from "./calendar";
-import type { BirthInput } from "./value-objects";
+import type { BirthInput } from "../value-objects";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 

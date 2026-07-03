@@ -2,8 +2,8 @@
  * 오행 분석 모듈
  */
 
-import { getStemInfo as getSkyInfo, getGroundInfo, JIJANG_GAN } from "./constants";
-import type { FourPillars, FiveElements } from "./value-objects";
+import { getStemInfo as getSkyInfo, getGroundInfo, JIJANG_GAN } from "../enums";
+import type { FourPillars, FiveElements } from "../value-objects";
 
 /**
  * 메인 오행 분석 함수 - UI 표시와 일치하도록 천간과 지지의 주된 오행만 카운트

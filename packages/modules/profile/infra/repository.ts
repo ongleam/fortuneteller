@@ -3,34 +3,10 @@ import type { DbClient } from "@fortuneteller/db/client";
 import { profile as profileTable } from "@fortuneteller/db/schema";
 import { eq } from "drizzle-orm";
 import type { ProfileRepository } from "@fortuneteller/modules/profile/domain/ports";
-import type {
-  SajuProfile,
-  UpdateSajuProfileInput,
-} from "@fortuneteller/modules/profile/domain/value-objects";
 
 /** tx(트랜잭션)에 바인딩된 ProfileRepository 를 만든다. */
 export function createProfileRepository(tx: DbClient): ProfileRepository {
   return {
-    async updateSajuProfile(
-      kakaoUserId: string,
-      input: UpdateSajuProfileInput,
-    ): Promise<SajuProfile> {
-      const [updated] = await tx
-        .update(profileTable)
-        .set({
-          name: input.name,
-          gender: input.gender,
-          birth_type: input.calendar,
-          birth_year: parseInt(input.year),
-          birth_month: parseInt(input.month),
-          birth_day: parseInt(input.day),
-          birth_time: input.hour || null,
-        })
-        .where(eq(profileTable.user_kakao_id, kakaoUserId))
-        .returning();
-      return updated as SajuProfile;
-    },
-
     async upsertProfile(args): Promise<void> {
       const now = new Date();
       const existing = await tx

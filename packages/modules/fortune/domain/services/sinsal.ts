@@ -6,7 +6,7 @@
 //   - 년주 신살 = 일지 기준 (자기 자신이 base 가 되는 모순 회피)
 // 12신살은 삼합(三合) 그룹의 겁살 위치에서 12지지 순서로 매핑된다.
 
-import type { FourPillars } from "./value-objects";
+import type { FourPillars } from "../value-objects";
 
 const BRANCH_ORDER: ReadonlyArray<string> = [
   "子",

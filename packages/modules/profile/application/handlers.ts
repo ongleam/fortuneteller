@@ -1,16 +1,10 @@
 // profile 커맨드 핸들러 — bus 에 등록되어 UoW(트랜잭션)+repo 로 쓰기를 처리한다.
 import { createCommandEntry } from "@fortuneteller/shared/application/message-bus";
 import type { UnitOfWork } from "@fortuneteller/shared/application/unit-of-work";
-import {
-  UpdateSajuProfile,
-  UpsertProfileFromAuthUser,
-} from "@fortuneteller/modules/profile/domain/commands";
-import { SajuProfileUpdated, ProfileUpserted } from "@fortuneteller/modules/profile/domain/events";
+import { UpsertProfileFromAuthUser } from "@fortuneteller/modules/profile/domain/commands";
+import { ProfileUpserted } from "@fortuneteller/modules/profile/domain/events";
 import type { AuthUser, ProfileRepos } from "@fortuneteller/modules/profile/domain/ports";
-import type {
-  SajuProfile,
-  UpsertProfileResult,
-} from "@fortuneteller/modules/profile/domain/value-objects";
+import type { UpsertProfileResult } from "@fortuneteller/modules/profile/domain/value-objects";
 import { profileUowFactory } from "@fortuneteller/modules/profile/infra/unit-of-work";
 
 // upsert 중복 요청 방지(in-flight 가드).
@@ -31,17 +25,6 @@ function deriveProfileIdentity(authUser: AuthUser): { name: string; avatarUrl: s
       `Guest-${authUser.id.substring(0, 6)}`,
     avatarUrl: (md.avatar_url as string) || (md.picture as string) || null,
   };
-}
-
-async function updateSajuProfileHandler(
-  cmd: UpdateSajuProfile,
-  uow: UnitOfWork<ProfileRepos>,
-): Promise<SajuProfile> {
-  const updated = await uow((repos) =>
-    repos.profileRepo.updateSajuProfile(cmd.kakaoUserId, cmd.input),
-  );
-  uow.addEvent(SajuProfileUpdated({ kakaoUserId: cmd.kakaoUserId }));
-  return updated;
 }
 
 async function upsertProfileHandler(
@@ -66,6 +49,5 @@ async function upsertProfileHandler(
 
 /** profile 모듈 커맨드 핸들러 레지스트리 — bootstrap 이 bus 에 조립한다. */
 export const profileCommandHandlers = {
-  [UpdateSajuProfile.type]: createCommandEntry(profileUowFactory, updateSajuProfileHandler),
   [UpsertProfileFromAuthUser.type]: createCommandEntry(profileUowFactory, upsertProfileHandler),
 };

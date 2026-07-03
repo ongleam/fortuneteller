@@ -5,9 +5,9 @@
 // 1단위 = 13.75 점 (= 110 / 8) 으로 환산해 점수·퍼센트·평가(description)를 낸다.
 
 import { getFourPillars } from "./four-pillars";
-import { getStemInfo } from "./constants";
+import { getStemInfo } from "../enums";
 import { getTenStar, getMainSky } from "./ten-stars";
-import type { BirthInput, FourPillars } from "./value-objects";
+import type { BirthInput, FourPillars } from "../value-objects";
 
 const POINT_UNIT = 13.75;
 const TOTAL_CHARS = 8;

@@ -270,8 +270,6 @@ export function getAllCityCoords(): ReadonlyArray<CityCoord> {
   return KOREAN_CITIES;
 }
 
-// 동적 좌표 조회(GeoNames REST API)는 외부 I/O 라 infra/geonames-client.ts 로 추출됨.
-
 /** 한국 표준시(UTC+8:30) 기간이면 +30, 아니면 0. */
 export function getHistoricalKstShiftMinutes(date: Date): number {
   const t = date.getTime();

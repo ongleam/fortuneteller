@@ -2,10 +2,10 @@
  * 사주 팔자 계산 모듈
  */
 
-import { HEAVENLY_STEMS, EARTHLY_BRANCHES, SIXTY_GAPJA, getStemIndex } from "./constants";
+import { HEAVENLY_STEMS, EARTHLY_BRANCHES, SIXTY_GAPJA, getStemIndex } from "../enums";
 import { lunarToSolar, getSajuYear, getSajuMonth, normalizeCalendarType } from "./calendar";
 import { applyTimeCorrections } from "./time-correction";
-import type { BirthInput, FourPillars } from "./value-objects";
+import type { BirthInput, FourPillars } from "../value-objects";
 
 /**
  * 메인 사주 팔자 계산 함수

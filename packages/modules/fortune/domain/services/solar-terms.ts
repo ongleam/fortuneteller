@@ -6,7 +6,7 @@
 //
 // generatedAt: 2026-05-30T13:40:33.427Z
 
-import type { SolarTerm } from "./value-objects";
+import type { SolarTerm } from "../value-objects";
 
 type RawTerm = { month: number; day: number; hour: number; minute: number };
 type RawTable = Record<string, Record<string, RawTerm>>;

@@ -2,7 +2,7 @@
  * 달력 변환 모듈 테스트
  */
 
-import { normalizeBirthYear } from "@fortuneteller/modules/fortune/domain/calendar";
+import { normalizeBirthYear } from "@fortuneteller/modules/fortune/domain/services/calendar";
 
 describe("CalendarConverter", () => {
   describe("년도 정규화", () => {
