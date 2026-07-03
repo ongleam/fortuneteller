@@ -4,8 +4,8 @@
  */
 
 import { SOLAR_TERMS_BY_YEAR, SAJU_MONTH_MAPPING } from "../enums";
-import { LUNAR_MONTH_TABLE } from "./lunar-table";
-import { getSolarTermsByYear, getSolarTermByYearAndName } from "./solar-terms";
+import { LUNAR_MONTH_TABLE } from "../data/lunar-table";
+import { getSolarTermsByYear, getSolarTermByYearAndName } from "../data/solar-terms";
 
 /**
  * 한글 달력 타입을 영어로 변환하는 유틸 함수

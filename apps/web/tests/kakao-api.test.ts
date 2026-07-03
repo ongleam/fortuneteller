@@ -1,61 +1,57 @@
-import axios from "axios";
+import { describe, it, expect, beforeEach, mock } from "bun:test";
 import { removeMarkdown } from "@fortuneteller/shared/utils/text";
 import {
   createKakaoRequestBody,
   createCallbackTaskBody,
   createPostRequest,
+  createMockLanguageModel,
 } from "./fixtures/kakao-fixtures";
 
 // ---------------------------------------------------------------------------
-// 외부 의존성 모킹 — 실제 외부 응답을 받아오지 않고 빠르게 시뮬레이션한다.
+// 외부 의존성 모킹 (bun mock.module) — 실제 외부/DB/LLM 호출 없이 결정적으로 시뮬레이션.
+// mock.module 은 이후 동적 import 되는 라우트에 적용된다.
 // ---------------------------------------------------------------------------
-
-// 1) 아웃바운드 HTTP: 백그라운드 디스패치(/api/kakao) + 카카오 콜백 전송(/callback)
-jest.mock("axios", () => ({
-  __esModule: true,
-  default: { post: jest.fn() },
-}));
-
-// 2) LLM(Google): baseAgent 가 돌려주는 모델을 mock 모델로 대체.
-//    mockLLMText 를 테스트마다 바꿔 LLM 응답을 시뮬레이션한다.
 let mockLLMText = "";
-jest.mock("@/agents/base", () => ({
-  baseAgent: jest.fn(async () => ({
-    model: require("./fixtures/kakao-fixtures").createMockLanguageModel(mockLLMText),
+const mockPost = mock(async () => ({ data: {} }));
+const mockCreateMessages = mock(async () => undefined);
+const mockGetProfile = mock(async () => ({ user_id: "test-user-id" }));
+
+mock.module("axios", () => ({ default: { post: mockPost }, post: mockPost }));
+mock.module("@/agents/base", () => ({
+  baseAgent: mock(async () => ({
+    model: createMockLanguageModel(mockLLMText),
     system: "test-system",
     messages: [{ role: "user", content: "test" }],
     tools: {},
   })),
 }));
-
-// 3) DB(dev/prod 공유 DB): 실제 쓰기를 막고 결정적 값으로 대체.
-jest.mock("@fortuneteller/modules/chat/infra/queries", () => ({
-  getOrCreateKakaoChatByUserId: jest.fn(async () => ({ id: "test-chat-id" })),
-  getMessagesByChatId: jest.fn(async () => []),
-  createMessages: jest.fn(async () => undefined),
+mock.module("@fortuneteller/modules/chat/infra/queries", () => ({
+  getOrCreateKakaoChatByUserId: mock(async () => ({ id: "test-chat-id" })),
+  getMessagesByChatId: mock(async () => []),
+  createMessages: mockCreateMessages,
 }));
-jest.mock("@fortuneteller/modules/profile/infra/queries", () => ({
-  getOrCreateProfileByUserKakaoId: jest.fn(async () => ({ user_id: "test-user-id" })),
+mock.module("@fortuneteller/modules/profile/infra/queries", () => ({
+  getOrCreateProfileByUserKakaoId: mockGetProfile,
 }));
 
-import * as queries from "@fortuneteller/modules/chat/infra/queries";
-import * as profileQueries from "@fortuneteller/modules/profile/infra/queries";
-import { POST as kakaoPost } from "@/app/api/kakao/route";
-import { POST as callbackPost } from "@/app/api/kakao/callback/route";
-
-const mockedPost = (axios as unknown as { post: jest.Mock }).post;
+const { POST: kakaoPost } = await import("@/app/api/kakao/route");
+const { POST: callbackPost } = await import("@/app/api/kakao/callback/route");
 
 beforeEach(() => {
-  jest.clearAllMocks();
-  mockedPost.mockResolvedValue({ data: {} });
+  mockPost.mockClear();
+  mockCreateMessages.mockClear();
+  mockGetProfile.mockClear();
+  mockPost.mockResolvedValue({ data: {} });
+  mockGetProfile.mockResolvedValue({ user_id: "test-user-id" });
   mockLLMText = "";
 });
 
 describe("POST /api/kakao (진입 라우트)", () => {
   it("유효한 발화 → useCallback 응답을 반환하고 콜백 라우트로 백그라운드 디스패치한다", async () => {
     const body = createKakaoRequestBody({ utterance: "안녕", userId: "u1" });
-
-    const res = await kakaoPost(createPostRequest("http://localhost:3000/api/kakao", body) as any);
+    const res = await kakaoPost(
+      createPostRequest("http://localhost:3000/api/kakao", body) as never,
+    );
     const json = await res.json();
 
     expect(res.status).toBe(200);
@@ -63,8 +59,8 @@ describe("POST /api/kakao (진입 라우트)", () => {
     expect(json.useCallback).toBe(true);
     expect(json.data.message).toContain("답변");
 
-    expect(mockedPost).toHaveBeenCalledTimes(1);
-    expect(mockedPost).toHaveBeenCalledWith(
+    expect(mockPost).toHaveBeenCalledTimes(1);
+    expect(mockPost).toHaveBeenCalledWith(
       "http://localhost:3000/api/kakao/callback",
       { callbackUrl: "https://kakao.test/callback", userMessage: "안녕", userId: "u1" },
       expect.objectContaining({ timeout: 1000 }),
@@ -75,12 +71,14 @@ describe("POST /api/kakao (진입 라우트)", () => {
     const body = createKakaoRequestBody();
     body.userRequest.utterance = "";
 
-    const res = await kakaoPost(createPostRequest("http://localhost:3000/api/kakao", body) as any);
+    const res = await kakaoPost(
+      createPostRequest("http://localhost:3000/api/kakao", body) as never,
+    );
     const json = await res.json();
 
     expect(res.status).toBe(200);
     expect(json.template.outputs[0].simpleText.text).toContain("오류");
-    expect(mockedPost).not.toHaveBeenCalled();
+    expect(mockPost).not.toHaveBeenCalled();
   });
 });
 
@@ -97,22 +95,18 @@ describe("POST /api/kakao/callback (생성 라우트)", () => {
     expect(res.status).toBe(200);
     expect(json.success).toBe(true);
 
-    // 카카오 콜백으로 전송된 스킬 응답 검증 (마크다운이 제거된 평문이어야 함)
-    expect(mockedPost).toHaveBeenCalledTimes(1);
-    const [calledUrl, payload] = mockedPost.mock.calls[0];
+    expect(mockPost).toHaveBeenCalledTimes(1);
+    const [calledUrl, payload] = mockPost.mock.calls[0] as [string, any];
     expect(calledUrl).toBe("https://kakao.test/callback");
     expect(payload.version).toBe("2.0");
     expect(payload.template.outputs[0].simpleText.text).toBe(removeMarkdown(mockLLMText));
     expect(payload.template.outputs[0].simpleText.text).not.toContain("**");
 
-    // user + assistant 메시지 저장 (총 2회)
-    expect(queries.createMessages).toHaveBeenCalledTimes(2);
+    expect(mockCreateMessages).toHaveBeenCalledTimes(2);
   });
 
   it("처리 중 예외 발생 → 콜백을 전송하지 않고 500을 반환한다", async () => {
-    (profileQueries.getOrCreateProfileByUserKakaoId as jest.Mock).mockRejectedValueOnce(
-      new Error("db down"),
-    );
+    mockGetProfile.mockRejectedValueOnce(new Error("db down"));
     const body = createCallbackTaskBody();
 
     const res = await callbackPost(
@@ -122,6 +116,6 @@ describe("POST /api/kakao/callback (생성 라우트)", () => {
 
     expect(res.status).toBe(500);
     expect(json.success).toBe(false);
-    expect(mockedPost).not.toHaveBeenCalled();
+    expect(mockPost).not.toHaveBeenCalled();
   });
 });

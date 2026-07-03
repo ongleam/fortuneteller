@@ -1,3 +1,4 @@
+import { describe, test, expect } from "bun:test";
 /**
  * Saju AI 도구 테스트
  */

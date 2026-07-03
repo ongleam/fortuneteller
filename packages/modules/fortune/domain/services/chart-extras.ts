@@ -3,6 +3,7 @@
 // 신살은 별도 모듈(sinsal.ts)에서 처리한다.
 
 import { HEAVENLY_STEMS, EARTHLY_BRANCHES, getStemIndex, getGroundIndex } from "../enums";
+import type { ZodiacInfo } from "../value-objects";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 지장간(地藏干)
@@ -110,17 +111,6 @@ const ELEMENT_TO_COLOR: Record<string, string> = {
   금: "하얀",
   수: "검은",
 };
-
-export interface ZodiacInfo {
-  /** 60갑자 한글 (예: "계묘") */
-  gapjaKorean: string;
-  /** 동물 (예: "토끼") */
-  animal: string;
-  /** 색 (예: "검은") */
-  color: string;
-  /** 표시 문자열 (예: "계묘(검은 토끼)") */
-  display: string;
-}
 
 /**
  * 띠(생초) 계산. forceteller `sexagenaryCycle` SSOT 와 호환되도록 **일주(日柱)** 기준.

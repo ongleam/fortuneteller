@@ -7,11 +7,15 @@
     "packages/*"
   ],
   "scripts": {
+    "symlink": "bun run scripts/symlink.ts",
     "dev": "bun --filter '@fortuneteller/web' dev",
     "build": "bun --filter '@fortuneteller/web' build",
     "start": "bun --filter '@fortuneteller/web' start",
     "typecheck": "bun --filter '*' typecheck",
-    "test": "bun --filter '@fortuneteller/web' test",
+    "test": "bun run test:arch && bun run test:shared && bun run test:modules && bun run test:web",
+    "test:web": "bun --filter '@fortuneteller/web' test",
+    "test:modules": "bun --filter '@fortuneteller/modules' test",
+    "test:shared": "bun --filter '@fortuneteller/shared' test",
     "test:arch": "bun test tests/architecture",
     "test:playwright": "bun --filter '@fortuneteller/web' test:playwright",
     "db:generate": "bun --filter '@fortuneteller/web' db:generate",

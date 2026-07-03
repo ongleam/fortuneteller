@@ -7,7 +7,7 @@
 import { getFourPillars } from "./four-pillars";
 import { getStemInfo } from "../enums";
 import { getTenStar, getMainSky } from "./ten-stars";
-import type { BirthInput, FourPillars } from "../value-objects";
+import type { BirthInput, FourPillars, ElementPoint, TenStarPoint, PointsResult } from "../value-objects";
 
 const POINT_UNIT = 13.75;
 const TOTAL_CHARS = 8;
@@ -66,28 +66,6 @@ function describeCount(count: number): string {
   return "과다";
 }
 
-export interface ElementPoint {
-  key: "wood" | "fire" | "earth" | "metal" | "water";
-  korean: string;
-  chinese: string;
-  point: number;
-  percent: number;
-  count: number;
-  description: string;
-}
-
-export interface TenStarPoint {
-  korean: string;
-  chinese: string;
-  point: number;
-  percent: number;
-  count: number;
-}
-
-export interface PointsResult {
-  elements: ElementPoint[];
-  tenStars: TenStarPoint[];
-}
 
 /** 8자(천간 4 + 지지 본기 4)를 모은다. 일간 포함. */
 function getEightChars(pillars: FourPillars): string[] {

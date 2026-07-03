@@ -63,3 +63,90 @@ export interface SolarTerm {
   hour: number;
   minute: number;
 }
+
+// === 계산 파생 값 객체 (도메인 서비스가 산출) ===
+
+// 띠(zodiac) 정보
+export interface ZodiacInfo {
+  gapjaKorean: string;
+  animal: string;
+  color: string;
+  display: string;
+}
+
+// 대운/연운/월운
+export interface DaeunEntry {
+  sky: string;
+  ground: string;
+  gapja: string;
+  gapjaKorean: string;
+  skyElement: string;
+  groundElement: string;
+  tenStarSky: string;
+  tenStarGround: string;
+  twelveFortune: { korean: string; chinese: string } | null;
+  hiddenStems: ReadonlyArray<string>;
+  age: number;
+  year: number;
+}
+export interface YearLuckEntry extends DaeunEntry {}
+export interface MonthLuckEntry extends DaeunEntry {
+  month: number;
+}
+export interface DaeunResult {
+  startAge: number;
+  direction: "순행" | "역행";
+  isForward: boolean;
+  entries: DaeunEntry[];
+  yearLuck: YearLuckEntry[];
+  monthLuck: MonthLuckEntry[];
+}
+export interface DaeunOptions {
+  yearLuckStart?: number;
+  monthLuckStart?: { year: number; month: number };
+  yearLuckCount?: number;
+  monthLuckCount?: number;
+}
+
+// 점수(오행·십성 가중치)
+export interface ElementPoint {
+  key: "wood" | "fire" | "earth" | "metal" | "water";
+  korean: string;
+  chinese: string;
+  point: number;
+  percent: number;
+  count: number;
+  description: string;
+}
+export interface TenStarPoint {
+  korean: string;
+  chinese: string;
+  point: number;
+  percent: number;
+  count: number;
+}
+export interface PointsResult {
+  elements: ElementPoint[];
+  tenStars: TenStarPoint[];
+}
+
+// 신살(神煞)
+export interface SinsalInfo {
+  korean: string;
+  chinese: string;
+}
+export interface FourSinsal {
+  year: SinsalInfo | null;
+  month: SinsalInfo | null;
+  day: SinsalInfo | null;
+  time: SinsalInfo | null;
+}
+
+// 도시 좌표 (진태양시 보정용)
+export interface CityCoord {
+  geoNamesId: number;
+  korean: string;
+  english: string;
+  longitudeE: number;
+  latitudeN: number;
+}

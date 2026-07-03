@@ -66,9 +66,12 @@ export function createMockLanguageModel(text: string): MockLanguageModelV3 {
 
 /** POST 핸들러에 넘길 Request 객체를 만든다. */
 export function createPostRequest(url: string, body: unknown): Request {
-  return new Request(url, {
+  const req = new Request(url, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(body),
   });
+  // 라우트가 NextRequest.nextUrl.origin 을 읽으므로 테스트에서도 채워준다.
+  (req as unknown as { nextUrl: URL }).nextUrl = new URL(url);
+  return req;
 }

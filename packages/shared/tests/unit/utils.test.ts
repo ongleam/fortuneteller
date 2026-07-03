@@ -1,8 +1,9 @@
+import { describe, test, expect } from "bun:test";
 /**
  * 공유 유틸리티 함수들 테스트
  */
 
-import { generateUUID, getKSTDateTime, measureExecutionTime } from "@fortuneteller/shared/utils";
+import { generateUUID, getKSTDateTime, measureExecutionTime } from "../../utils";
 
 describe("Shared Utils", () => {
   describe("UUID 생성", () => {
@@ -60,7 +61,7 @@ describe("Shared Utils", () => {
   describe("에러 처리 유틸리티", () => {
     test("formattingErrorMessage 함수 테스트", async () => {
       try {
-        const { formattingErrorMessage } = await import("@fortuneteller/shared/utils");
+        const { formattingErrorMessage } = await import("../../utils");
 
         const testError = new Error("테스트 에러");
         const formatted = formattingErrorMessage(testError);
@@ -78,7 +79,7 @@ describe("Shared Utils", () => {
   describe("텍스트 처리 유틸리티", () => {
     test("removeMarkdown 함수 테스트", async () => {
       try {
-        const { removeMarkdown } = await import("@fortuneteller/shared/utils/text");
+        const { removeMarkdown } = await import("../../utils/text");
 
         const markdownText = "# 제목\n\n**굵은 글씨** 및 *기울임*";
         const cleanText = removeMarkdown(markdownText);

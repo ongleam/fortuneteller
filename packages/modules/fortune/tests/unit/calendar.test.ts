@@ -2,17 +2,18 @@
  * 달력 변환 모듈 테스트
  */
 
-import { normalizeBirthYear } from "@fortuneteller/modules/fortune/domain/services/calendar";
+import { describe, test, expect, beforeAll, afterAll, setSystemTime } from "bun:test";
+import { normalizeBirthYear } from "../../domain/services/calendar";
 
 describe("CalendarConverter", () => {
   describe("년도 정규화", () => {
     // 2자리 년도 → 세기 판정은 현재 년도(+20) 기준이라 시간 의존적이다.
     // 경계값(44/45/46)을 결정적으로 검증하기 위해 기준 시각을 2025년으로 고정한다.
     beforeAll(() => {
-      jest.useFakeTimers().setSystemTime(new Date("2025-06-15"));
+      setSystemTime(new Date("2025-06-15"));
     });
     afterAll(() => {
-      jest.useRealTimers();
+      setSystemTime();
     });
 
     test("2자리 년도 변환 로직", () => {

@@ -35,7 +35,8 @@ const DOMAIN_ALLOWED_FILES = [
 ];
 // domain 루트 파일은 vocab 7종만. 도메인 서비스(계산 등 무상태 비즈니스 로직)는
 // `services/` 서브폴더에 둔다(rich domain — anemic 방지). 그 외 서브디렉토리는 불허.
-const DOMAIN_ALLOWED_DIRS = ["services"];
+// services/ = 도메인 서비스(계산 함수), data/ = 대량 참조 데이터(만세력·음력표 등).
+const DOMAIN_ALLOWED_DIRS = ["services", "data"];
 const MODULES = getModules();
 
 // ==================== Structure ====================

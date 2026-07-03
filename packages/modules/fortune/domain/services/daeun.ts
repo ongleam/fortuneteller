@@ -20,7 +20,14 @@ import { getHiddenStems, getTwelveFortune } from "./chart-extras";
 import { getTenStar, getMainSky } from "./ten-stars";
 import { applyTimeCorrections } from "./time-correction";
 import { lunarToSolar, normalizeCalendarType, getSajuYear } from "./calendar";
-import type { BirthInput } from "../value-objects";
+import type {
+  BirthInput,
+  DaeunEntry,
+  YearLuckEntry,
+  MonthLuckEntry,
+  DaeunResult,
+  DaeunOptions,
+} from "../value-objects";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
@@ -102,7 +109,7 @@ async function getNearestSolarTerms(solarBirth: Date): Promise<{
 }> {
   const y = solarBirth.getFullYear();
   const candidates: Array<{ date: Date; name: string }> = [];
-  const { getSolarTermsByYear } = await import("./solar-terms");
+  const { getSolarTermsByYear } = await import("../data/solar-terms");
   for (const yr of [y - 1, y, y + 1]) {
     const terms = getSolarTermsByYear(yr);
     for (const t of terms) {
@@ -126,45 +133,6 @@ async function getNearestSolarTerms(solarBirth: Date): Promise<{
   return { prev, next };
 }
 
-export interface DaeunEntry {
-  sky: string;
-  ground: string;
-  gapja: string;
-  gapjaKorean: string;
-  skyElement: string;
-  groundElement: string;
-  tenStarSky: string;
-  tenStarGround: string;
-  twelveFortune: { korean: string; chinese: string } | null;
-  hiddenStems: ReadonlyArray<string>;
-  age: number;
-  year: number;
-}
-
-export interface YearLuckEntry extends DaeunEntry {}
-export interface MonthLuckEntry extends DaeunEntry {
-  month: number;
-}
-
-export interface DaeunResult {
-  startAge: number;
-  direction: "순행" | "역행";
-  isForward: boolean;
-  entries: DaeunEntry[];
-  yearLuck: YearLuckEntry[];
-  monthLuck: MonthLuckEntry[];
-}
-
-export interface DaeunOptions {
-  /** 연운/월운 시작 양력 연도. 생략 시 startAge + 출생연 (= 첫 대운 시작 해). */
-  yearLuckStart?: number;
-  /** 월운 시작 (연, 월). 생략 시 (yearLuckStart, 1). */
-  monthLuckStart?: { year: number; month: number };
-  /** 연운 개수 (기본 10). */
-  yearLuckCount?: number;
-  /** 월운 개수 (기본 12). */
-  monthLuckCount?: number;
-}
 
 export async function getDaeun(
   birthInput: BirthInput,
