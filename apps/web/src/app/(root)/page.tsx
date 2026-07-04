@@ -315,8 +315,8 @@ export default async function LandingPage() {
               <p>대표자: 허빈</p>
               <p>사업자등록번호: 325-81-03598</p>
               <p>통신판매업신고번호: 제 2025-서울서대문-0486 호</p>
-              <p>주소: 서울 서대문구 이화여대길 52, 이화 스타트업 오픈 스페이스 1층</p>
-              <p>문의: contact@ongleam.site</p>
+              <p>주소: 서울특별시 동작구 상도로55길 6 (상도동) 테크 스테이션</p>
+              <p>문의: contact@ongleam.com</p>
             </div>
             <div className="mb-3 flex justify-center gap-6 text-sm">
               <Link
