@@ -6,6 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { updateDatingProfile } from "@/actions/profile";
+import { brandColors } from "@/components/brand/theme";
+
+const { ink: INK, seal: SEAL, sub: SUB } = brandColors;
 
 export interface ProfileEditInitial {
   gender: string | null;
@@ -39,11 +42,11 @@ const BIRTH_TIMES = [
   "24",
 ] as const;
 
+// 한지 위 입력창 — 크림 바탕에 먹 글씨(가독성 보장).
 const selectClass =
-  "mt-1 w-full rounded-md border border-slate-600 bg-slate-800 px-3 py-2 text-white";
-
-// 다크 배경 위 입력창 — 흰 글씨/흰 배경(안 보임) 방지: 명시적 색 지정.
-const fieldClass = "mt-1 border-slate-600 bg-slate-800 text-white placeholder:text-slate-400";
+  "mt-1 w-full rounded-none border px-3 py-2 border-[#a8842c] bg-[#f6efdd] text-[#241c12]";
+const fieldClass =
+  "mt-1 rounded-none border-[#a8842c] bg-[#f6efdd] text-[#241c12] placeholder:text-[#9c8a6a]";
 
 function toNum(v: string): number | null {
   const n = parseInt(v, 10);
@@ -103,8 +106,13 @@ export function ProfileEditForm({ initial }: { initial: ProfileEditInitial }) {
     >
       {flash && (
         <div
-          className="rounded-xl border border-rose-500/40 bg-rose-500/10 px-4 py-3 text-center text-rose-200"
+          className="px-4 py-3 text-center"
           data-testid="profile-flash"
+          style={{
+            border: `1px solid ${SEAL}`,
+            backgroundColor: "rgba(156,43,31,0.06)",
+            color: INK,
+          }}
         >
           {flash}
         </div>
@@ -229,8 +237,10 @@ export function ProfileEditForm({ initial }: { initial: ProfileEditInitial }) {
         />
       </div>
 
-      <fieldset className="rounded-xl border border-slate-700 p-4">
-        <legend className="px-2 text-sm text-slate-400">상대 선호</legend>
+      <fieldset className="p-4" style={{ border: `1px solid ${brandColors.line}` }}>
+        <legend className="px-2 text-sm" style={{ color: SUB }}>
+          상대 선호
+        </legend>
         <div className="grid gap-4 sm:grid-cols-3">
           <div>
             <Label htmlFor="prefGender">선호 성별</Label>
@@ -284,16 +294,17 @@ export function ProfileEditForm({ initial }: { initial: ProfileEditInitial }) {
           <option value="active">공개 (추천에 노출)</option>
           <option value="hidden">숨김</option>
         </select>
-        <p className="mt-1 text-xs text-slate-500">
-          공개로 설정해야 다른 사람의 추천 피드에 노출됩니다.
+        <p className="mt-1 text-xs" style={{ color: SUB }}>
+          공개로 바꿔야 다른 분의 추천에 나와요. (성별·생년월일이 있어야 공개돼요.)
         </p>
       </div>
 
       <Button
         type="submit"
         disabled={isPending}
-        className="w-full rounded-full bg-gradient-to-r from-rose-500 to-pink-600 py-3 text-lg font-bold text-white hover:from-rose-600 hover:to-pink-700"
+        className="w-full rounded-none py-3 text-lg font-bold"
         data-testid="profile-save"
+        style={{ backgroundColor: SEAL, color: "#f7ecd6" }}
       >
         {isPending ? "저장 중..." : "프로필 저장"}
       </Button>

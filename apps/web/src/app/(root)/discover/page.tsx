@@ -5,6 +5,10 @@ import { getRecommendations } from "@fortuneteller/modules/matching/infra/querie
 import { getProfileByUserId } from "@fortuneteller/modules/profile/infra/queries";
 import { DiscoverFeed } from "@/components/matching/discover-feed";
 import { Button } from "@/components/ui/button";
+import { brandColors } from "@/components/brand/theme";
+import { BrandMark, BrushRule, ParchmentShell, Seal } from "@/components/brand/elements";
+
+const { ink: INK, seal: SEAL, sub: SUB } = brandColors;
 
 export default async function DiscoverPage() {
   const supabase = await createServerClient();
@@ -18,35 +22,68 @@ export default async function DiscoverPage() {
   const candidates = await getRecommendations({ userId: user.id });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-gray-800 to-black px-4 py-10 text-white sm:px-6 lg:px-8">
-      <div className="mx-auto mb-8 flex max-w-5xl items-center justify-between">
-        <h1 className="bg-gradient-to-r from-rose-200 to-rose-400 bg-clip-text text-3xl font-bold text-transparent">
-          궁합 추천
-        </h1>
+    <ParchmentShell>
+      <header className="mx-auto flex max-w-5xl items-center justify-between px-6 py-6">
+        <Link href="/">
+          <BrandMark size={28} />
+        </Link>
         <div className="flex gap-2">
           <Link href="/matches">
-            <Button variant="outline" className="rounded-full border-rose-500 text-rose-200">
+            <Button
+              variant="outline"
+              className="rounded-none border-2 bg-transparent"
+              style={{ borderColor: INK, color: INK }}
+            >
               매칭 목록
             </Button>
           </Link>
           <Link href="/profile/edit">
-            <Button variant="outline" className="rounded-full border-slate-500 text-slate-200">
+            <Button
+              variant="outline"
+              className="rounded-none border-2 bg-transparent"
+              style={{ borderColor: INK, color: INK }}
+            >
               프로필
             </Button>
           </Link>
         </div>
-      </div>
+      </header>
+      <div className="mx-auto h-px max-w-5xl" style={{ backgroundColor: brandColors.line }} />
 
-      {needsProfile && (
-        <div className="mx-auto mb-8 max-w-5xl rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-amber-200">
-          프로필을 완성하고 공개(active)로 설정하면 다른 사람의 추천에도 노출됩니다.{" "}
-          <Link href="/profile/edit" className="underline">
-            프로필 편집하기
-          </Link>
+      <section className="mx-auto max-w-5xl px-6 py-10">
+        <div className="mb-8 flex items-center gap-3">
+          <Seal char="緣" size={40} />
+          <div>
+            <p className="text-sm tracking-[0.3em]" style={{ color: SUB }}>
+              宮合
+            </p>
+            <h1 className="text-3xl font-extrabold" style={{ color: INK }}>
+              궁합 추천
+            </h1>
+          </div>
         </div>
-      )}
+        <div className="mb-8 h-3 w-40">
+          <BrushRule color={INK} className="h-full w-full" />
+        </div>
 
-      <DiscoverFeed candidates={candidates} />
-    </div>
+        {needsProfile && (
+          <div
+            className="mb-8 px-5 py-4"
+            style={{
+              border: `1px solid ${SEAL}`,
+              backgroundColor: "rgba(156,43,31,0.06)",
+              color: INK,
+            }}
+          >
+            프로필을 완성하고 공개로 바꾸면, 다른 분의 추천에도 나와요.{" "}
+            <Link href="/profile/edit" className="font-bold underline" style={{ color: SEAL }}>
+              프로필 적기
+            </Link>
+          </div>
+        )}
+
+        <DiscoverFeed candidates={candidates} />
+      </section>
+    </ParchmentShell>
   );
 }
