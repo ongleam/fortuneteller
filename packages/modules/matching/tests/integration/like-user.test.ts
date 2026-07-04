@@ -131,4 +131,37 @@ describe("likeUserHandler — 더블옵트인", () => {
     expect(result.success).toBe(false);
     expect(store.size).toBe(0);
   });
+
+  it("전체 사이클: 한쪽만 좋아요면 미매칭, 양쪽이면 실제로 매칭된다", async () => {
+    const store = new Map<string, MatchRow>();
+
+    // 1) A 가 B 를 좋아요 — 아직 매칭 아님(단방향).
+    const first = await like(store, USER_A, USER_B);
+    expect(first.result.matched).toBe(false);
+    expect(store.get(keyOf(USER_A, USER_B))!.matched_at).toBeNull();
+    expect(first.events.some((e) => e.type === MatchCreated.type)).toBe(false);
+
+    // 2) B 가 A 를 좋아요 — 이제 실제로 매칭 성립.
+    const second = await like(store, USER_B, USER_A);
+    expect(second.result.matched).toBe(true);
+    const row = store.get(keyOf(USER_A, USER_B))!;
+    expect(row.matched_at).not.toBeNull();
+
+    // MatchCreated 이벤트의 짝은 canonical(min, max) 순서여야 한다.
+    const created = second.events.find((e) => e.type === MatchCreated.type);
+    expect(created).toBeDefined();
+    expect(created!.userAId).toBe(USER_A);
+    expect(created!.userBId).toBe(USER_B);
+  });
+
+  it("이미 매칭된 뒤 다시 좋아요해도 매칭 상태 유지·중복 이벤트 없음", async () => {
+    const store = new Map<string, MatchRow>();
+    await like(store, USER_A, USER_B);
+    await like(store, USER_B, USER_A); // 여기서 성립 + MatchCreated 1회
+
+    const again = await like(store, USER_A, USER_B); // 재-좋아요
+    expect(again.result.matched).toBe(true); // 현재 매칭 상태 반영
+    expect(again.events.some((e) => e.type === MatchCreated.type)).toBe(false); // 중복 발행 없음
+    expect(store.get(keyOf(USER_A, USER_B))!.matched_at).not.toBeNull();
+  });
 });
