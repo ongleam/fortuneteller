@@ -54,6 +54,10 @@ export interface KakaoSkillResponse {
       simpleText?: {
         text: string;
       };
+      simpleImage?: {
+        imageUrl: string;
+        altText: string;
+      };
       basicCard?: {
         title?: string;
         description?: string;

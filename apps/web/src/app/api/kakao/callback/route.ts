@@ -115,6 +115,19 @@ async function generateLLMResponse(
   }
 }
 
+// generateText 결과의 모든 step 툴 결과에서 getIdealTypeImage 가 성공 반환한 imageUrl 을 찾는다.
+function extractIdealTypeImageUrl(result: GenerateTextResult<any, any>): string | null {
+  const steps = (result as any).steps ?? [];
+  for (const step of steps) {
+    for (const tr of step.toolResults ?? []) {
+      if (tr.toolName !== "getIdealTypeImage") continue;
+      const output = tr.output ?? tr.result; // AI SDK 버전에 따라 필드명 차이 방어
+      if (output?.success && output?.imageUrl) return output.imageUrl as string;
+    }
+  }
+  return null;
+}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -176,14 +189,26 @@ export async function POST(req: Request) {
       });
     }
 
+    // getIdealTypeImage 툴이 생성한 이미지가 있으면 simpleImage 로 대화창에 인라인 렌더한다.
+    const idealTypeImageUrl = extractIdealTypeImageUrl(llmResponse);
+
+    const outputs: NonNullable<KakaoSkillResponse["template"]>["outputs"] = [];
+    if (llmResponse.text) {
+      outputs.push({ simpleText: { text: removeMarkdown(llmResponse.text) } });
+    }
+    if (idealTypeImageUrl) {
+      outputs.push({ simpleImage: { imageUrl: idealTypeImageUrl, altText: "당신의 이상형" } });
+    }
+    if (outputs.length === 0) {
+      outputs.push({
+        simpleText: { text: "죄송해요, 응답을 만들지 못했어요. 다시 시도해 주세요." },
+      });
+    }
+
     let response: KakaoSkillResponse = {
       version: "2.0",
       template: {
-        outputs: [
-          {
-            simpleText: { text: removeMarkdown(llmResponse.text) },
-          },
-        ],
+        outputs,
         // quickReplies: getRandomQuickReplies(),
       },
     };

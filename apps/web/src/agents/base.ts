@@ -6,6 +6,7 @@ import { baseAgent as chatBaseAgent } from "@fortuneteller/modules/chat/applicat
 import { aiClient } from "@fortuneteller/modules/chat/infra/ai-client";
 import type { UIMessage } from "ai";
 import { getSaju } from "@/tools/saju";
+import { getIdealTypeImage } from "@/tools/ideal-type";
 
 export function baseAgent({
   messages,
@@ -24,6 +25,7 @@ export function baseAgent({
     temperature: config?.temperature,
     tools: {
       getSaju: getSaju(),
+      getIdealTypeImage: getIdealTypeImage(),
     },
   });
 }
