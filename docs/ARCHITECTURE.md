@@ -148,6 +148,7 @@ shared (leaf)
 **Fortune-telling Tools** (`apps/web/src/tools/*`, `packages/modules/fortune`):
 
 - `getSaju()` — 생년월일 입력(또는 저장된 프로필)으로 사주 분석
+- `getIdealTypeImage()` — 사주 부족 오행을 보완하는 '이상형' 이미지 생성(gemini-2.5-flash-image) → public Supabase Storage(`ideal-types` 버킷) 업로드 → 공개 URL 반환. 카카오는 `simpleImage` 로 대화창에 인라인 렌더.
 - `getUserSaju()` — 저장된 사주 조회 · `updateSajuProfile()` — 생년월일·사주 저장
 - `getTodayFortune()` / `getYearFortune()` — 일일·연간 운세
 - `getHarmony()` — 두 사람 사주 궁합 분석
