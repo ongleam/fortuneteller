@@ -7,10 +7,12 @@ import {
 } from "@fortuneteller/shared/application/message-bus";
 import { profileCommandHandlers } from "@fortuneteller/modules/profile/application/handlers";
 import { chatCommandHandlers } from "@fortuneteller/modules/chat/application/handlers";
+import { matchingCommandHandlers } from "@fortuneteller/modules/matching/application/handlers";
 
 const commandHandlers: CommandHandlers = {
   ...profileCommandHandlers,
   ...chatCommandHandlers,
+  ...matchingCommandHandlers,
 };
 
 const eventHandlers: EventHandlers = {};

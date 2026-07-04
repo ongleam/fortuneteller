@@ -52,6 +52,15 @@ There are exactly two stages: **dev** and **prod**.
 >
 > **아키텍처가 변경될 때마다 반드시 `docs/ARCHITECTURE.md`를 함께 업데이트해야 합니다.**
 
+## Brand Identity
+
+> **브랜드·UI 아이덴티티(색·글꼴·모티프·말투)의 SSOT는 [`docs/BRAND.md`](docs/BRAND.md)입니다.**
+>
+> 점순이는 **조선풍 먹(墨)·한지(양피지)·붓글씨** 톤의 사주 궁합 소개팅입니다. 랜딩·소개팅 화면(`/`, `/discover`, `/matches`, `/profile/edit`)의 시각 디자인과 카피는 모두 이 문서를 따릅니다.
+> 코드 토큰은 [`apps/web/src/components/brand/theme.ts`](apps/web/src/components/brand/theme.ts), 공용 요소는 [`elements.tsx`](apps/web/src/components/brand/elements.tsx)에 있습니다 — 색·글꼴을 하드코딩하지 말고 이 모듈을 쓰세요.
+>
+> **브랜드가 바뀔 때마다 반드시 `docs/BRAND.md`와 `theme.ts`를 함께 업데이트해야 합니다.**
+
 ### Development Notes
 
 - Uses `bun` as package manager
