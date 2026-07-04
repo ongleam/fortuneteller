@@ -42,6 +42,9 @@ const BIRTH_TIMES = [
 const selectClass =
   "mt-1 w-full rounded-md border border-slate-600 bg-slate-800 px-3 py-2 text-white";
 
+// 다크 배경 위 입력창 — 흰 글씨/흰 배경(안 보임) 방지: 명시적 색 지정.
+const fieldClass = "mt-1 border-slate-600 bg-slate-800 text-white placeholder:text-slate-400";
+
 function toNum(v: string): number | null {
   const n = parseInt(v, 10);
   return Number.isFinite(n) ? n : null;
@@ -145,7 +148,7 @@ export function ProfileEditForm({ initial }: { initial: ProfileEditInitial }) {
             value={birthYear}
             onChange={(e) => setBirthYear(e.target.value)}
             placeholder="1990"
-            className="mt-1"
+            className={fieldClass}
             data-testid="birth-year"
           />
         </div>
@@ -157,7 +160,7 @@ export function ProfileEditForm({ initial }: { initial: ProfileEditInitial }) {
             value={birthMonth}
             onChange={(e) => setBirthMonth(e.target.value)}
             placeholder="5"
-            className="mt-1"
+            className={fieldClass}
             data-testid="birth-month"
           />
         </div>
@@ -169,7 +172,7 @@ export function ProfileEditForm({ initial }: { initial: ProfileEditInitial }) {
             value={birthDay}
             onChange={(e) => setBirthDay(e.target.value)}
             placeholder="15"
-            className="mt-1"
+            className={fieldClass}
             data-testid="birth-day"
           />
         </div>
@@ -197,7 +200,7 @@ export function ProfileEditForm({ initial }: { initial: ProfileEditInitial }) {
           value={region}
           onChange={(e) => setRegion(e.target.value)}
           placeholder="서울"
-          className="mt-1"
+          className={fieldClass}
           data-testid="region"
         />
       </div>
@@ -209,7 +212,7 @@ export function ProfileEditForm({ initial }: { initial: ProfileEditInitial }) {
           value={bio}
           onChange={(e) => setBio(e.target.value)}
           placeholder="나를 소개해주세요"
-          className="mt-1"
+          className={fieldClass}
           rows={4}
           data-testid="bio"
         />
@@ -222,7 +225,7 @@ export function ProfileEditForm({ initial }: { initial: ProfileEditInitial }) {
           value={photoUrls}
           onChange={(e) => setPhotoUrls(e.target.value)}
           placeholder="https://... , https://..."
-          className="mt-1"
+          className={fieldClass}
         />
       </div>
 
@@ -251,7 +254,7 @@ export function ProfileEditForm({ initial }: { initial: ProfileEditInitial }) {
               value={prefAgeMin}
               onChange={(e) => setPrefAgeMin(e.target.value)}
               placeholder="20"
-              className="mt-1"
+              className={fieldClass}
             />
           </div>
           <div>
@@ -262,7 +265,7 @@ export function ProfileEditForm({ initial }: { initial: ProfileEditInitial }) {
               value={prefAgeMax}
               onChange={(e) => setPrefAgeMax(e.target.value)}
               placeholder="40"
-              className="mt-1"
+              className={fieldClass}
             />
           </div>
         </div>
