@@ -14,7 +14,7 @@ This is a Next.js 15 fortune-telling/saju (Korean traditional fortune-telling) c
 > **ongleam형 DDD 모노레포.** bun workspaces 기반. **`apps/web`이 유일 배포 앱**(Vercel)이자 얇은 어댑터 레이어이고, 비즈니스 로직은 `packages/modules/<도메인>`, 기반 관심사는 concern별 패키지에 둔다.
 >
 > - **`apps/web`(`@fortuneteller/web`)** — 유일 배포 앱. `src/{app,actions,tools,agents,lib,components,hooks}` 어댑터 레이어. 카카오 엔드포인트(`/api/kakao` + callback)를 흡수했다(구 `apps/kakao` 제거).
-> - **`packages/modules`(`@fortuneteller/modules`)** — 도메인 모듈 `fortune·profile·chat`. 각 모듈은 `domain/`(순수)·`application/`(handlers·views·dtos). fortune/domain 이 사주 계산 엔진(구 `@fortuneteller/saju` 흡수).
+> - **`packages/modules`(`@fortuneteller/modules`)** — 도메인 모듈 `fortune·profile·chat·matching`. 각 모듈은 `domain/`(순수)·`application/`(handlers·views·dtos)·`infra/`(driven adapter). fortune/domain 이 사주 계산 엔진(구 `@fortuneteller/saju` 흡수)이며 `domain/services/harmony.ts` 가 규칙 기반 궁합(computeHarmony)을 소유한다. `matching` 은 사주 소개팅의 좋아요·더블옵트인 매칭 상태를 소유한다(궁합 순 추천 = SQL 필터 + computeHarmony 정렬).
 > - **`packages/db`(`@fortuneteller/db`)** — Drizzle 스키마·쿼리·마이그레이션.
 > - **`packages/clients`(`@fortuneteller/clients`)** — 도메인-무지 외부 클라이언트(Supabase·Gemini).
 > - **`packages/config`(`@fortuneteller/config`)** — 프롬프트·모델·사이트·엔타이틀먼트 (순수 데이터). provider 조립(registry)은 앱이 소유.
@@ -67,7 +67,7 @@ fortuneteller/
 │   ├── config/                 # ✅ 런타임 설정 (@fortuneteller/config)  → shared
 │   ├── db/                     # ✅ 데이터 접근 (@fortuneteller/db)      → shared
 │   ├── clients/                # ✅ 외부 클라이언트 (@fortuneteller/clients) — Supabase
-│   └── modules/                # ✅ 도메인 모듈 (@fortuneteller/modules) — fortune·profile·chat
+│   └── modules/                # ✅ 도메인 모듈 (@fortuneteller/modules) — fortune·profile·chat·matching
 ├── tests/architecture/         # 레이어 의존성 규칙 테스트 (bun run test:arch)
 ├── docs/ · CLAUDE.md · turbo.json
 ├── bun.lock                    # 단일 락파일(워크스페이스 전체)
@@ -158,10 +158,18 @@ shared (leaf)
 
 Drizzle로 관리하는 주요 테이블 (`packages/db/schema.ts`):
 
-- `profiles` — 사주 계산용 생년월일 프로필. Kakao 연동용 `user_kakao_id` 포함
+- `profiles` — 사주 계산용 생년월일 프로필 + 소개팅 필드(`bio·region·photo_urls·pref_gender·pref_age_min/max·status`). `status` 기본 `draft`(옵트인 — active 전 비노출). Kakao 연동용 `user_kakao_id` 포함
 - `chats` — 대화. 채널 구분용 `channel` 필드
 - `messages` — parts/attachments 구조의 메시지
 - `votes` — 사용자 상호작용(up/down) 추적
+- `matches` — 사주 소개팅 매칭. 각 행 = canonical 정렬된 두 유저 쌍의 관계 상태(`a_liked_at·b_liked_at·matched_at·score`). 별도 likes 테이블 없이 `*_liked_at` 컬럼으로 좋아요 방향을, 양쪽이 모두 차면 `matched_at` 으로 성립을 표현(더블옵트인)
+
+### 소개팅 라우트 (matching)
+
+- `/discover` — 궁합순 추천 피드 + 좋아요 (`actions/matching.ts` → `bus.handle(LikeUser)`)
+- `/matches` — 매칭 성립 상대 목록
+- `/profile/edit` — 소개팅 프로필 편집(생년월일·bio·지역·선호·공개 상태)
+- 모든 조회는 서버 액션에서 세션 유저(`getUser()`)를 강제 주입해 접근제어(RLS 꺼짐 보완)
 
 ## Tests
 

@@ -38,6 +38,78 @@ export async function createProfile({
   }
 }
 
+/** 소개팅 프로필 편집 필드 (전부 optional — 넘어온 것만 갱신). */
+export interface DatingProfileFields {
+  gender?: "남성" | "여성" | null;
+  birth_type?: "양력" | "음력" | null;
+  birth_year?: number | null;
+  birth_month?: number | null;
+  birth_day?: number | null;
+  birth_time?: Profile["birth_time"];
+  bio?: string | null;
+  region?: string | null;
+  photo_urls?: string[];
+  pref_gender?: "남성" | "여성" | "무관";
+  pref_age_min?: number | null;
+  pref_age_max?: number | null;
+  status?: "draft" | "active" | "hidden";
+}
+
+/** 세션 유저(userId)의 소개팅 프로필을 갱신한다. userId 는 어댑터가 세션에서 강제 주입. */
+export async function updateDatingProfile({
+  userId,
+  data,
+}: {
+  userId: string;
+  data: DatingProfileFields;
+}): Promise<Profile | null> {
+  try {
+    // 허용 컬럼만 명시적으로 추린다 — mass-assignment 방지(RLS 꺼짐 보완).
+    // 크래프트된 호출이 name·avatar_url·user_kakao_id·theme·user_id 등을 못 쓰게 한다.
+    const allowed: (keyof DatingProfileFields)[] = [
+      "gender",
+      "birth_type",
+      "birth_year",
+      "birth_month",
+      "birth_day",
+      "birth_time",
+      "bio",
+      "region",
+      "photo_urls",
+      "pref_gender",
+      "pref_age_min",
+      "pref_age_max",
+      "status",
+    ];
+    const patch: Partial<DatingProfileFields> = {};
+    for (const key of allowed) {
+      if (data[key] !== undefined) (patch as Record<string, unknown>)[key] = data[key];
+    }
+
+    // 공개(active) 상태는 필수 필드(성별·생년월일)를 서버에서 강제한다 — 폼/UI 를 신뢰하지 않는다.
+    // patch 로 status 를 안 보내도(이미 active), birth_year/gender 를 null 로 지우는 우회를 막기 위해
+    // 병합된 '유효 상태(effective)'로 판정한다. 미완성 active 가 추천 피드에 노출되는 것을 차단.
+    const [current] = await db.select().from(profile).where(eq(profile.user_id, userId)).limit(1);
+    const effective = { ...current, ...patch };
+    if (
+      effective.status === "active" &&
+      (!effective.gender || !effective.birth_year || !effective.birth_month || !effective.birth_day)
+    ) {
+      throw new Error("프로필 공개(active)에는 성별과 생년월일이 필요합니다.");
+    }
+
+    const [updated] = await db
+      .update(profile)
+      .set({ ...patch, updated_at: new Date() })
+      .where(eq(profile.user_id, userId))
+      .returning();
+    return updated ?? null;
+  } catch (error) {
+    console.error("Failed to update dating profile in database");
+    throw error;
+  }
+}
+
 export async function getOrCreateProfileByUserKakaoId({
   user_kakao_id,
 }: {
