@@ -128,6 +128,21 @@ function extractIdealTypeImageUrl(result: GenerateTextResult<any, any>): string 
   return null;
 }
 
+// 이번 턴에 특정 툴이 호출됐는지 확인한다.
+function wasToolCalled(result: GenerateTextResult<any, any>, toolName: string): boolean {
+  const steps = (result as any).steps ?? [];
+  return steps.some((step: any) =>
+    (step.toolResults ?? []).some((tr: any) => tr.toolName === toolName),
+  );
+}
+
+// 사주 풀이 직후 노출하는 quick reply — 탭하면 이상형 이미지 생성이 트리거된다.
+const IDEAL_TYPE_QUICK_REPLY = {
+  action: "message" as const,
+  label: "이상형 이미지 만들어줘",
+  messageText: "내 사주풀이와 적합한 이상형을 보여줘",
+};
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -205,11 +220,14 @@ export async function POST(req: Request) {
       });
     }
 
+    // 사주 풀이가 이뤄진 턴(이미지 생성 턴 제외)에만 이상형 이미지 quick reply 노출.
+    const showIdealTypeQuickReply = wasToolCalled(llmResponse, "getSaju") && !idealTypeImageUrl;
+
     let response: KakaoSkillResponse = {
       version: "2.0",
       template: {
         outputs,
-        // quickReplies: getRandomQuickReplies(),
+        ...(showIdealTypeQuickReply ? { quickReplies: [IDEAL_TYPE_QUICK_REPLY] } : {}),
       },
     };
 
